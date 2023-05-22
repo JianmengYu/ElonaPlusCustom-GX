@@ -315,6 +315,9 @@
 			txt lang("「これでも食らうがいい" + _yo(2) + "」", cnvtalk("Eat this!"))
 			if ( rnd(2) == 0 ) {
 				repeat 28
+					/********** GARFU CUSTOM - BEGINNING **********/ // Stops trick or treaters from lighting fires at your house.
+					break
+					/********** GARFU CUSTOM - ENDING **********/
 					tlocx = cdata(CDATA_X, tc) + rnd(3) - rnd(3)
 					tlocy = cdata(CDATA_Y, tc) - rnd(3) + rnd(3)
 					if ( tlocx < 0 | tlocy < 0 | tlocx >= mdata(MDATA_WIDTH) | tlocy >= mdata(MDATA_HEIGHT) ) {
@@ -686,6 +689,9 @@
 		if ( chatval == 2 ) {
 			txt lang("「これでも食らうがいい" + _yo(2) + "」", cnvtalk("Eat this!"))
 			repeat 28
+				/********** GARFU CUSTOM - BEGINNING **********/ // Stops trick or treaters from lighting fires at your house.
+				break
+				/********** GARFU CUSTOM - ENDING **********/
 				tlocx = cdata(CDATA_X, tc) + rnd(3) - rnd(3)
 				tlocy = cdata(CDATA_Y, tc) - rnd(3) + rnd(3)
 				if ( tlocx < 0 | tlocy < 0 | tlocx >= mdata(MDATA_WIDTH) | tlocy >= mdata(MDATA_HEIGHT) ) {
@@ -5141,7 +5147,9 @@
 			if ( chatval == 1 ) {
 				p = gdata(GDATA_SISTER_KILLED)
 				repeat gdata(GDATA_SISTER_REWARD) + 1, 1
-					p += limit(cnt, 1, 10)
+					/********** GARFU CUSTOM **********/ // Reduced little girl quest requirements (Halved, so 1,1,1,2,2,3,3 etc.)
+					// p += limit(cnt, 1, 10)
+					p += limit(cnt/2, 1, 10)
 				loop
 				if ( gdata(GDATA_SISTER_SAVED) >= p ) {
 					chatMore lang("報酬、そうね。リトルたちが、あなたのために街で落し物を集めてきたのよ。好きなものを選んでちょうだい。あなたが貴重なものを無くした時のために、保留しておいてもいいわ。", "That's right... your reward. The Little Sisters have been picking things up for you that people have lost in town. Please, take whatever you like. If you like, you can wait until you've lost something valuable.")
@@ -10421,7 +10429,8 @@
 					if ( inv(INV_ITEM_QUALITY, ci) == FIX_QUALITY_GODLY ) {
 						p -= 1000
 					}
-					if ( p > gdata(GDATA_THALIA_LIMIT) ) {
+					/********** GARFU CUSTOM **********/ // Remove Artifact Fusion Limit
+					if ( 0 > gdata(GDATA_THALIA_LIMIT) ) {
 						snd SOUNDLIST_ATK_ELEC
 						chatMore lang("くっ！こいつはちょっと無理じゃ。付与されているエンチャントが強く反発しておる！", "Ku! There's no way it'll work! It's going to repel any enchantment!")
 						p = 0
@@ -23574,15 +23583,19 @@
 	repeat invrange, invhead
 		inv(INV_ITEM_NUM, cnt) = 0
 	loop
-	p = 40 + cdata(CDATA_ROLE_SHOP_LEVEL, tc) * 2 / 3
-	if ( p > 120 ) {
-		p = 120
-	}
+	/********** GARFU CUSTOM **********/ // Max shop rank removed. Was 120, now unlimited. Each rank adds 1 additional item roll.
+	p = 40 + cdata(CDATA_ROLE_SHOP_LEVEL, tc)
+	// p = 40 + cdata(CDATA_ROLE_SHOP_LEVEL, tc) * 2 / 3
+	// if ( p > 120 ) {
+	// 	p = 120
+	// }
 	if ( cdata(CDATA_ROLE, tc) == ROLE_SHOP_BLACKMARKET ) {
-		p = 7 + limit(cdata(CDATA_ROLE_SHOP_LEVEL, tc) / 7, 1, 30)
+		// p = 7 + limit(cdata(CDATA_ROLE_SHOP_LEVEL, tc) / 7, 1, 30)
+		p += 7
 	}
 	if ( cdata(CDATA_ROLE, tc) == ROLE_SHOP_ARMOR ) {
-		p = 15 + limit(cdata(CDATA_ROLE_SHOP_LEVEL, tc) / 7, 1, 120)
+		// p = 15 + limit(cdata(CDATA_ROLE_SHOP_LEVEL, tc) / 7, 1, 120)
+		p += 15
 	}
 	if ( cdata(CDATA_ROLE, tc) == ROLE_SHOP_WANDER ) {
 		p = 6 + rnd(4)
@@ -23594,13 +23607,13 @@
 		p = 23
 	}
 	if ( cdata(CDATA_ROLE, tc) == ROLE_SHOP_MOUNTAIN2 ) {
-		p /= 2
+		// p /= 2
 	}
 	if ( cdata(CDATA_ROLE, tc) == ROLE_SHOP_STOKE ) {
 		p = 20
 	}
 	if ( cdata(CDATA_ROLE, tc) == ROLE_SHOP_MOYER ) {
-		p /= 4
+		// p /= 4
 	}
 	if ( cdata(CDATA_FAME, tc) > 0 ) {
 		if ( cdata(CDATA_ROLE, tc) != ROLE_SHOP_WANDER & cdata(CDATA_ROLE, tc) != ROLE_GUEST_MERCHANT & cdata(CDATA_ROLE, tc) != ROLE_SHOP_STOKE & cdata(CDATA_ROLE, tc) != ROLE_SHOP_MOYER ) {
@@ -23716,6 +23729,14 @@
 					dbid = ITEM_ID_MONSTER_BALL
 				}
 			}
+			/********** GARFU CUSTOM - BEGINNING **********/ // Rod of wishing and gain attribute scrolls can now appear in normal shops (very small chance)
+			if ( cnt == 2 & rnd(1000) == 0 ) {
+				dbid = ITEM_ID_ROD_WISHING
+			}
+			if ( cnt == 3 & rnd(100) == 0 ) {
+				dbid = ITEM_ID_SCROLL_GAIN_ATTRIBUTE
+			}
+			/********** GARFU CUSTOM - ENDING **********/
 		}
 		if ( cdata(CDATA_ROLE, tc) == ROLE_SHOP_BAKERY ) {
 			if ( rnd(3) != 0 ) {
@@ -23762,6 +23783,14 @@
 			if ( rnd(2) == 0 ) {
 				fixlv = FIX_QUALITY_MIRACLE
 			}
+			/********** GARFU CUSTOM - BEGINNING **********/ // Rod of wishing and gain attribute scrolls can now appear in normal shops (very small chance)
+			if ( cnt == 2 & rnd(100) == 0 ) {
+				dbid = ITEM_ID_ROD_WISHING
+			}
+			if ( cnt == 3 & rnd(10) == 0 ) {
+				dbid = ITEM_ID_SCROLL_GAIN_ATTRIBUTE
+			}
+			/********** GARFU CUSTOM - ENDING **********/
 		}
 		if ( cdata(CDATA_ROLE, tc) == ROLE_SHOP_INN ) {
 			if ( cdata(CDATA_ID, tc) == CREATURE_ID_BARTENDER2 ) {
@@ -23818,6 +23847,14 @@
 			if ( rnd(15) == 0 ) {
 				dbid = ITEM_ID_DEED_HEIRSHIP
 			}
+			/********** GARFU CUSTOM - BEGINNING **********/ // Rod of wishing and gain attribute scrolls can now appear in normal shops (very small chance)
+			if ( cnt == 2 & rnd(1000) == 0 ) {
+				dbid = ITEM_ID_ROD_WISHING
+			}
+			if ( cnt == 3 & rnd(100) == 0 ) {
+				dbid = ITEM_ID_SCROLL_GAIN_ATTRIBUTE
+			}
+			/********** GARFU CUSTOM - ENDING **********/
 		}
 		if ( cdata(CDATA_ROLE, tc) == ROLE_SHOP_ARMOR ) {
 			if ( rnd(limit(cdata(CDATA_ROLE_SHOP_LEVEL, tc), 1, 1000) + 200) > rnd(1000) ) {

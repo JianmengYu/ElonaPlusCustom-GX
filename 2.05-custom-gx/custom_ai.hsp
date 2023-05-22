@@ -1237,7 +1237,8 @@
 		wend
 
 		CAIActionLearning(tc) = key
-		CAIActionLearnProgress(tc) = 0
+		/********** GARFU CUSTOM **********/ //
+		CAIActionLearnProgress(tc) = 10
 
 		break
 	}

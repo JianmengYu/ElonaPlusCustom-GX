@@ -39,8 +39,9 @@
 	locvar_convertartifact_n = "" + itemname(convertartifact_arg1)
 *convertartifact_WHILE1
 	inv(INV_ITEM_NUM, convertartifact_arg1) = 0
+	/********** GARFU CUSTOM **********/ // More Stardust per artifact
 	flt
-	itemcreate inv_getowner(convertartifact_arg1), ITEM_ID_STARDUST, inv(INV_ITEM_X, convertartifact_arg1), inv(INV_ITEM_Y, convertartifact_arg1), 0
+	itemcreate inv_getowner(convertartifact_arg1), ITEM_ID_STARDUST, inv(INV_ITEM_X, convertartifact_arg1), inv(INV_ITEM_Y, convertartifact_arg1), 3
 	if ( inv(INV_ITEM_QUALITY, ci) != FIX_QUALITY_UNIQUE ) {
 		goto *convertartifact_WEND1
 	}
@@ -233,14 +234,19 @@
 					}
 				}
 			}
-
-			/********** BLOODYSHADE CUSTOM - BEGINNING **********/ // Show dropped items on death.
-
-			items_lost_on_death += "" + itemname(ci) + ". "
-
-			/********** BLOODYSHADE CUSTOM - ENDING **********/
+			/********** GARFU CUSTOM - BEGINNING **********/ // Stops items from being destroyed in breath or fire or acid attacks.
+			if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_DEATH_LOSS, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+				f = 0
+			}
+			/********** GARFU CUSTOM - ENDING **********/
 
 			if ( f ) {
+				/********** BLOODYSHADE CUSTOM - BEGINNING **********/ // Show dropped items on death.
+	
+				items_lost_on_death += "" + itemname(ci) + ". "
+	
+				/********** BLOODYSHADE CUSTOM - ENDING **********/
+
 				inv(INV_ITEM_NUM, ci) = 0
 				continue
 			}
@@ -1489,7 +1495,8 @@
 			}
 		}
 	}
-	if ( cdata(CDATA_ID, rc) == CREATURE_ID_FAIRY ) {
+	/********** GARFU CUSTOM **********/ // Titanias can be ranched for SEOK??
+	if ( cdata(CDATA_ID, rc) == CREATURE_ID_FAIRY | cdata(CDATA_ID, rc) == CREATURE_ID_TITANIA ) {
 		if ( rnd(20) == 0 ) {
 			if ( gdata(GDATA_FLAG_RARE_DROP) == 100 ) {
 				flt
@@ -1801,6 +1808,11 @@
 	return
 
 *item_rot
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes food never rot.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_ROTTING, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		return
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	i = gdata(GDATA_HOUR) + gdata(GDATA_DAY) * 24 + gdata(GDATA_MONTH) * 24 * 30 + gdata(GDATA_YEAR) * 24 * 30 * 12
 	repeat MAX_CHARA_TOTAL + 1
 		if ( cnt == MAX_CHARA_TOTAL ) {
@@ -2190,7 +2202,8 @@
 		if ( gdata(GDATA_FLAG_DESTINY_LETTERS) != 8 & TweakData(TWEAK_GAMEPLAY_DISABLE_DESTINY, TWEAK_CATEGORY_GAMEPLAY) == FALSE ) {
 			if ( fixlv == FIX_QUALITY_GODLY ) {
 				if ( rnd(2) == 0 ) {
-					fixlv--
+					/********** GARFU CUSTOM **********/ // Remove random level reduction
+					// fixlv--
 				}
 			}
 		}
@@ -2745,6 +2758,11 @@
 			}
 		}
 	}
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes items always fully identified.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_FREE_IDENTIFY, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		item_identify ci, ITEM_KNOWN_NECRO
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	gosub *item_value
 	itemturn ci
 	if ( initnum != 0 ) {
@@ -3937,10 +3955,14 @@
 		skillmod SKILL_ATTR_LUC, cc, 1000 * 20
 	}
 	if ( inv(INV_ITEM_ID, ci) == ITEM_ID_HERO_CHEESE ) {
-		skillmod SKILL_ATTR_LIFE, cc, 1000 * 3
+		/********** GARFU CUSTOM **********/ // reduced cost for cheese etc
+		// skillmod SKILL_ATTR_LIFE, cc, 1000 * 3
+		skillmod SKILL_ATTR_LIFE, cc, 1000 * 5
 	}
 	if ( inv(INV_ITEM_ID, ci) == ITEM_ID_MAGIC_FRUIT ) {
-		skillmod SKILL_ATTR_MANA, cc, 1000 * 3
+		/********** GARFU CUSTOM **********/ // reduced cost for cheese etc
+		// skillmod SKILL_ATTR_MANA, cc, 1000 * 3
+		skillmod SKILL_ATTR_MANA, cc, 1000 * 5
 	}
 	if ( inv(INV_ITEM_ID, ci) == ITEM_ID_YITH_YAKI ) {
 		if ( synccheck(cc, -1) ) {

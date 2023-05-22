@@ -476,7 +476,7 @@ TweakData(51, 4) = "Disable cicada noises."
     cs = 0
     page = 0
     pagesize = 16
-    listmax = 32
+    listmax = 43
 *GameplayTweakMenu_pgchk
 	redraw 0
 	page_check
@@ -519,6 +519,21 @@ TweakData(51, 4) = "Disable cicada noises."
 	listn(0, 29) = "Use CGX Job Quests." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_CUSTOM_JOB_QUESTS)
 	listn(0, 30) = "Use CGX Arrow/Bolt/Ball Spell Animation." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_CUSTOM_SPELL_ANIMATIONS)
 	listn(0, 31) = "Disable random CNPC spawn." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_CUSTOM_CNPC_SUMMONING)
+	/********** GARFU CUSTOM - BEGINNING **********/
+	listn(0, 32) = "(CUSTOM-GFU) Potentials never drop below 100%." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_LOCK_POTENTIAL)
+	listn(0, 33) = "(CUSTOM-GFU) Resurrects and restores are free." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_FREE_RESURRECT)
+	listn(0, 34) = "(CUSTOM-GFU) Wages/Maintenance costs are free." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_FREE_TAX)
+	listn(0, 35) = "(CUSTOM-GFU) Items always fully identified." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_FREE_IDENTIFY)
+	listn(0, 36) = "(CUSTOM-GFU) Unlimited spell stock." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_SPELL_FORGET)
+	listn(0, 37) = "(CUSTOM-GFU) Reduced casting penalties for armor class." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_SPELL_ARMOR_PENALTY)
+	listn(0, 38) = "(CUSTOM-GFU) Player never gets hungry or full." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_HUNGER)
+	listn(0, 39) = "(CUSTOM-GFU) Food never rots." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_ROTTING)
+	listn(0, 40) = "(CUSTOM-GFU) Items immune to Acid/Fire/Freeze." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_ACID)
+	listn(0, 41) = "(CUSTOM-GFU) No item loss on death." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_DEATH_LOSS)
+	listn(0, 42) = "(CUSTOM-GFU) Plants always grow/regrow." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_PLANT_WITHER)
+	listn(0, 43) = "(CUSTOM-GFU) Train anywhere, even on sandbags." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_ENABLE_SANDBAG_TRAINING)
+	/********** GARFU CUSTOM - ENDING **********/
+	listn(0, 44) = "Go Back."
 
 	font lang(cfg_font1, cfg_font2), 14 - en * 2, 0
 
@@ -638,7 +653,12 @@ TweakData(51, 4) = "Disable cicada noises."
 			if ( p == 31 ) {
 				s = "Disable Random CNPC spawn in all areas except Derphy and Melkawn.\nInstead, you can use a summon crystal to summon them at will."
 			}
-			if ( p == 32 ) {
+			/********** GARFU CUSTOM - BEGINNING **********/
+			if ( p >= 32 & p <= 43 ) {
+				s = "Enable Changes in Elona+ Custom-GFU, made by Garfu."
+			}
+			/********** GARFU CUSTOM - ENDING **********/
+			if ( p == 44 ) {
 				s = "Return to the previous menu."
 			}
 			pos wx + 38, wy + 343
@@ -822,7 +842,14 @@ TweakData(51, 4) = "Disable cicada noises."
 		tn = TWEAK_GAMEPLAY_CUSTOM_CNPC_SUMMONING
 		gosub *ToggleTweak
 	}
-	if ( p == 32 ) {
+	/********** GARFU CUSTOM - BEGINNING **********/
+	if ( p >= 32 & p <= 43 ) {
+		tc = TWEAK_CATEGORY_GAMEPLAY
+		tn = TWEAK_GAMEPLAY_GARFU_CUSTOM_LOCK_POTENTIAL + (p - 32)
+		gosub *ToggleTweak
+	}
+	/********** GARFU CUSTOM - ENDING **********/
+	if ( p == 44 ) {
 		snd SOUNDLIST_OK1
 		return
 	}

@@ -11319,7 +11319,9 @@
 			if ( chipm(CHIPM_ROLE, map(cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), 0)) == MAP_CHIP_ROLE_SNOW ) {
 				snd SOUNDLIST_FOOT2A
 				txt lang("雪をかきあつめた。", "You rake up a handful of snow.")
-				actionsp CHARA_PLAYER, 10
+				/********** GARFU CUSTOM **********/ // Remove stamina cost from 4D pocket / Stairs
+				// actionsp CHARA_PLAYER, 10
+				actionsp CHARA_PLAYER, 0
 				if ( stat == 0 ) {
 					txt_exhausted
 					goto *turn_end
@@ -12860,7 +12862,9 @@
 					}
 				}
 				if ( invctrl(1) == 5 ) {
-					actionsp CHARA_PLAYER, 2
+					/********** GARFU CUSTOM **********/ // Remove stamina cost from 4D pocket / Stairs
+					// actionsp CHARA_PLAYER, 2
+					actionsp CHARA_PLAYER, 0
 					if ( stat == 0 ) {
 						txt_exhausted
 						goto *com_inventory_end
@@ -12881,7 +12885,9 @@
 					}
 				}
 				if ( invctrl(1) == 5 ) {
-					actionsp CHARA_PLAYER, 2
+					/********** GARFU CUSTOM **********/ // Remove stamina cost from 4D pocket / Stairs
+					// actionsp CHARA_PLAYER, 2
+					actionsp CHARA_PLAYER, 0
 					if ( stat == 0 ) {
 						txt_exhausted
 						goto *com_inventory_end

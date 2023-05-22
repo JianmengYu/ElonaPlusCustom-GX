@@ -1511,7 +1511,8 @@
 			snd SOUNDLIST_BASH1
 			txt lang(name(cc) + "は" + name(tc) + "に体当たりした。", name(cc) + " bash" + _s(cc) + " up " + name(tc) + ".")
 			txt lang(name(tc) + "は睡眠を妨害された。", name(cc) + " disturb" + _s(cc) + " " + his(tc) + " sleep.")
-			modkarma cc, -1
+			/********** GARFU CUSTOM **********/ // Remove Bashing Karma Penalty
+			// modkarma cc, -1
 			cdata(CDATA_EMO_ICON, tc) = 18 + 100 * 4
 		}
 		if ( cdata(CDATA_CONDITION_DIM, tc) > 60 ) {
@@ -2900,7 +2901,9 @@
 	}
 	if ( movelevelbystairs == 1 ) {
 		if ( TweakData(TWEAK_GAMEPLAY_HOME_STAIRS_NO_STAMINA_USAGE, TWEAK_CATEGORY_GAMEPLAY) == FALSE | gdata(GDATA_AREA) != AREA_HOME ) {
-			actionsp CHARA_PLAYER, 15
+			/********** GARFU CUSTOM **********/ // Remove stamina cost from 4D pocket / Stairs
+			// actionsp CHARA_PLAYER, 15
+			actionsp CHARA_PLAYER, 0
 			if ( stat == 0 | cdata(CDATA_BURDEN, CHARA_PLAYER) >= 3 ) {
 				if ( stat == 0 | rnd(4 + 1 - cdata(CDATA_BURDEN, CHARA_PLAYER)) == 0 ) {
 					txt lang("うわああ！" + name(CHARA_PLAYER) + "は階段から足を踏み外した。", "Noooo! You lost your step and roll down!")
@@ -5400,7 +5403,8 @@
 		if ( cdata(CDATA_EXIST, tc) != CHAR_STATE_ALIVE ) {
 			cw = attackitem
 			if ( ibit(ITEM_BIT_ALIVE, cw) ) {
-				if ( inv(INV_ITEM_GROWTH, cw) < 15 ) {
+				/********** GARFU CUSTOM **********/ // Living Weapon Level Cap to 25
+				if ( inv(INV_ITEM_GROWTH, cw) < 25 ) {
 					if ( inv(INV_ITEM_EXP, cw) < calcexpalive(inv(INV_ITEM_GROWTH, cw)) ) {
 						if ( charaGivesExp(tc) & cdata(CDATA_ROLE, tc) != ROLE_BOUNTY_HUNTER & cdata(CDATA_ROLE, tc) != ROLE_GUARD ) {
 							ikihosei = 0
@@ -5409,6 +5413,8 @@
 							ikihosei = 50
 						}
 						inv(INV_ITEM_EXP, cw) += rnd(cdata(CDATA_LEVEL, tc) / (inv(INV_ITEM_GROWTH, cw) + ikihosei) + 1)
+						/********** GARFU CUSTOM **********/ // Living Weapon Level Up Faster
+						inv(INV_ITEM_EXP, cw) += 50
 						if ( inv(INV_ITEM_EXP, cw) >= calcexpalive(inv(INV_ITEM_GROWTH, cw)) ) {
 							txtef COLOR_GREEN
 							snd SOUNDLIST_DING3
@@ -6620,7 +6626,8 @@
 		}
 	}
 	if ( ibit(ITEM_BIT_ALIVE, ci) ) {
-		if ( inv(INV_ITEM_GROWTH, ci) >= 15 ) {
+		/********** GARFU CUSTOM **********/ // Living Weapon Level Cap to 25
+		if ( inv(INV_ITEM_GROWTH, ci) >= 25 ) {
 			txt lang("この武器は成長しきっている。", "The weapon can not grow any more.")
 			goto *pc_turn
 		}
@@ -6640,7 +6647,8 @@
 			list(0, listmax) = rtval, rtval(1)
 			list(0, listmax) = -1
 			listmax++
-			s = lang("ボーナス+4を獲得する", "Enchantment Bonus + 4")
+			/********** GARFU CUSTOM **********/ // Living Weapon Enhancement bumped to +6 from +4
+			s = lang("ボーナス+6を獲得する", "Enchantment Bonus + 6")
 			promptAdd s
 			if ( taisei \ 11 == 0 ) {
 				list(0, listmax) = -2
@@ -7156,7 +7164,8 @@
 			}
 			else {
 				if ( list(0, rtval) == (-1) ) {
-					inv(INV_ITEM_LEVEL, ci) += 4
+					/********** GARFU CUSTOM **********/ // Living Weapon Enhancement bumped to +6 from +4
+					inv(INV_ITEM_LEVEL, ci) += 6
 				}
 				if ( list(0, rtval) == (-2) ) {
 					taiseip = taisei \ 11
@@ -7405,40 +7414,42 @@
 					}
 				}
 				if ( list(0, rtval) == (-7) ) {
+					/********** GARFU CUSTOM **********/ // Uber enchants doubled in effect (spell enhancement, piercing, etc.)
 					taiseip = taisei \ 9
 					if ( taiseip == 0 ) {
-						encadd ci, ENCHANT_BANE_GOD, 80, 0, 1
+						encadd ci, ENCHANT_BANE_GOD, 160, 0, 1
 					}
 					if ( taiseip == 1 ) {
-						encadd ci, ENCHANT_BANE_UNDEAD, 130, 0, 1
+						encadd ci, ENCHANT_BANE_UNDEAD, 260, 0, 1
 					}
 					if ( taiseip == 2 ) {
-						encadd ci, ENCHANT_BANE_DRAGON, 130, 0, 1
+						encadd ci, ENCHANT_BANE_DRAGON, 260, 0, 1
 					}
 					if ( taiseip == 3 ) {
-						encadd ci, ENCHANT_BANE_FLYING, 80, 0, 1
+						encadd ci, ENCHANT_BANE_FLYING, 160, 0, 1
 					}
 					if ( taiseip == 4 ) {
-						encadd ci, ENCHANT_BANE_METAL, 130, 0, 1
+						encadd ci, ENCHANT_BANE_METAL, 260, 0, 1
 					}
 					if ( taiseip == 5 ) {
-						encadd ci, ENCHANT_CRIT_CHANCE, 130, 0, 1, 0, 1
+						encadd ci, ENCHANT_CRIT_CHANCE, 260, 0, 1, 0, 1
 					}
 					if ( taiseip == 6 ) {
-						encadd ci, ENCHANT_ENHANCE_SPELL, 80, 0, 1, 0, 1
+						encadd ci, ENCHANT_ENHANCE_SPELL, 160, 0, 1, 0, 1
 					}
 					if ( taiseip == 7 ) {
-						encadd ci, ENCHANT_ENHANCE_BREATH, 130, 0, 1, 0, 1
+						encadd ci, ENCHANT_ENHANCE_BREATH, 260, 0, 1, 0, 1
 					}
 					if ( taiseip == 8 ) {
-						encadd ci, ENCHANT_PIERCING_CHANCE, 80, 0, 1, 0, 1
+						encadd ci, ENCHANT_PIERCING_CHANCE, 160, 0, 1, 0, 1
 					}
 				}
 				txtef COLOR_GREEN
 				txt lang(itemname(ci) + "は嬉しげに震えた。", itemname(ci) + " vibrates as if it is pleased.")
 				randomize inv(INV_ITEM_SUB_NAME, ci)
 				exrand_randomize inv(INV_ITEM_SUB_NAME, ci)
-				if ( inv(INV_ITEM_PARAM1, ci) >= 10 ) {
+				/********** GARFU CUSTOM **********/ // No Bleed for living weapon
+				if ( inv(INV_ITEM_PARAM1, ci) >= 999 ) {
 					txt lang("その力は次第に脅威になっている。", "Its power is becoming a threat.")
 					encadd ci, ENCHANT_SUCK_BLOOD, 50
 					if ( stat == 0 ) {
@@ -8708,18 +8719,20 @@
 			}
 		}
 		cc = tc
-		if ( cdata(CDATA_AP_CURRENT, cc) > 2000 ) {
+		/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+		if ( cdata(CDATA_AP_CURRENT, cc) > 5000 ) { 
 			txt lang("" + name(cc) + "はこれ以上APを貯めておけない。", name(cc) + " can't store any more AP.")
 			goto *act_use_SWEND1
 		}
-		if ( cdata(CDATA_AP_CURRENT, cc) < 2000 ) {
+		if ( cdata(CDATA_AP_CURRENT, cc) < 5000 ) { 
 			init = 0
 			aspd = cdata(CDATA_INIT_SPEED, cc)
 			if ( inv(INV_ITEM_PARAM2, ci) + inv(INV_ITEM_PARAM3, ci) >= 1000 ) {
 				if ( inv(INV_ITEM_PARAM2, ci) + inv(INV_ITEM_AMUR_CAGE, ci) > cdata(CDATA_INIT_ATTR, cc) + cdata(CDATA_INIT_LIFEMANA, cc) + aspd + (cdata(CDATA_AP_TOTAL, cc) + 1) / 5 ) {
+					/********** GARFU CUSTOM **********/ // Total AP Gain Adjustments
 					if ( inv(INV_ITEM_AMUR_CAGE, ci) > aspd * 5 ) {
 						cdata(CDATA_AP_CURRENT, cc) += 5
-						cdata(CDATA_AP_TOTAL, cc) += 5
+						cdata(CDATA_AP_TOTAL, cc) += 1
 						if ( cc != CHARA_PLAYER ) {
 							cdata(CDATA_AP_CURRENT, cc) += 5
 							cdata(CDATA_AP_TOTAL, cc) += 5
@@ -8727,45 +8740,46 @@
 					}
 					if ( inv(INV_ITEM_AMUR_CAGE, ci) > aspd * 4 ) {
 						cdata(CDATA_AP_CURRENT, cc) += 10
-						cdata(CDATA_AP_TOTAL, cc) += 10
+						cdata(CDATA_AP_TOTAL, cc) += 2
 						if ( cc != CHARA_PLAYER ) {
 							cdata(CDATA_AP_CURRENT, cc) += 10
-							cdata(CDATA_AP_TOTAL, cc) += 10
+							cdata(CDATA_AP_TOTAL, cc) += 2
 						}
 					}
 					if ( inv(INV_ITEM_AMUR_CAGE, ci) > aspd * 3 ) {
 						cdata(CDATA_AP_CURRENT, cc) += 10
-						cdata(CDATA_AP_TOTAL, cc) += 10
+						cdata(CDATA_AP_TOTAL, cc) += 2
 						if ( cc != CHARA_PLAYER ) {
 							cdata(CDATA_AP_CURRENT, cc) += 10
-							cdata(CDATA_AP_TOTAL, cc) += 10
+							cdata(CDATA_AP_TOTAL, cc) += 2
 						}
 					}
 					if ( inv(INV_ITEM_AMUR_CAGE, ci) > aspd * 2 ) {
 						cdata(CDATA_AP_CURRENT, cc) += 10
-						cdata(CDATA_AP_TOTAL, cc) += 10
+						cdata(CDATA_AP_TOTAL, cc) += 2
 						if ( cc != CHARA_PLAYER ) {
 							cdata(CDATA_AP_CURRENT, cc) += 10
-							cdata(CDATA_AP_TOTAL, cc) += 10
+							cdata(CDATA_AP_TOTAL, cc) += 2
 						}
 					}
 					if ( inv(INV_ITEM_AMUR_CAGE, ci) > aspd ) {
 						init = 1
 						cdata(CDATA_AP_CURRENT, cc) += 5
-						cdata(CDATA_AP_TOTAL, cc) += 5
+						cdata(CDATA_AP_TOTAL, cc) += 1
 						snd SOUNDLIST_ENC
 						animeload 36, cc
 						if ( cc != CHARA_PLAYER ) {
 							cdata(CDATA_AP_CURRENT, cc) += 5
-							cdata(CDATA_AP_TOTAL, cc) += 5
+							cdata(CDATA_AP_TOTAL, cc) += 1
 						}
 					}
-					if ( cdata(CDATA_AP_CURRENT, cc) > 2000 ) {
-						cdata(CDATA_AP_TOTAL, cc) -= cdata(CDATA_AP_CURRENT, cc) - 2000
-						cdata(CDATA_AP_CURRENT, cc) = 2000
+					/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+					if ( cdata(CDATA_AP_CURRENT, cc) > 5000 ) { 
+						cdata(CDATA_AP_TOTAL, cc) -= cdata(CDATA_AP_CURRENT, cc) - 5000
+						cdata(CDATA_AP_CURRENT, cc) = 5000
 					}
 					if ( cdata(CDATA_AP_TOTAL, cc) < 0 ) {
-						cdata(CDATA_AP_TOTAL, cc) = 2000
+						cdata(CDATA_AP_TOTAL, cc) = 5000
 					}
 				}
 			}
@@ -12150,8 +12164,9 @@
 						tc = cdata(CDATA_TAGTEAM_PARTNER, tc)
 					}
 				}
-				inv(INV_ITEM_NUM, ci)--
-				cell_refresh inv(INV_ITEM_X, ci), inv(INV_ITEM_Y, ci)
+				/********** GARFU CUSTOM **********/ // Insight lens no longer consumed on use
+				// inv(INV_ITEM_NUM, ci)--
+				// cell_refresh inv(INV_ITEM_X, ci), inv(INV_ITEM_Y, ci)
 				snd SOUNDLIST_ENC
 				animeload ANIMATION_CHAOS_CHILD, cc
 				if ( cdata(CDATA_RELATION, tc) == RELATION_ENEMY ) {
@@ -17868,7 +17883,8 @@
 			goto *pc_turn
 		}
 		snd SOUNDLIST_PRAY1
-		gdata(GDATA_NEW_FEAT) += 10
+		/********** GARFU CUSTOM **********/ // Feat from Secret Experience of Kumiromi every 5 levels instead of 10
+		gdata(GDATA_NEW_FEAT) += 5
 		inv(INV_ITEM_NUM, ci)--
 		cell_refresh inv(INV_ITEM_X, ci), inv(INV_ITEM_Y, ci)
 		gdata(GDATA_TRAIT_POINT)++
@@ -18519,6 +18535,11 @@
 	if ( sdata(SKILL_NORMAL_GARDENING, CHARA_PLAYER) < rnd(p + 1) | rnd(20) == 0 ) {
 		feat(3) += 50
 	}
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes all planted plants grow, no dead plants.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_PLANT_WITHER, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		feat(3) = feat(3) \ 50
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	return
 
 *item_seedRegrowth
@@ -18551,17 +18572,20 @@
 			saibai = 100
 		}
 	}
-	if ( sdata(SKILL_NORMAL_GARDENING, CHARA_PLAYER) < rnd(p + 1) | rnd(200) < p - saibai | feat(FEAT_CELL_SUB_FEATURE_ID) \ 10 == SEED_TYPE_ARTIFACT ) {
-
-	// Mod for collect yield with house board (usecustom = 1 when house board collection)
-		if ( usecustom ) {
-			map(x, y, 6) = 0
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes all planted plants grow, no dead plants.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_PLANT_WITHER, TWEAK_CATEGORY_GAMEPLAY) == FALSE ) {
+		if ( sdata(SKILL_NORMAL_GARDENING, CHARA_PLAYER) < rnd(p + 1) | rnd(200) < p - saibai | feat(FEAT_CELL_SUB_FEATURE_ID) \ 10 == SEED_TYPE_ARTIFACT ) {
+			// Mod for collect yield with house board (usecustom = 1 when house board collection)
+			if ( usecustom ) {
+				map(x, y, 6) = 0
+			}
+			else {
+				map(cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), 6) = 0
+			}
+			return
 		}
-		else {
-			map(cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), 6) = 0
-		}
-		return
 	}
+	/********** GARFU CUSTOM - ENDING **********/
 	saibai = 0
 	feat = tile_plant
 	if ( feat(FEAT_CELL_SUB_FEATURE_ID) \ 10 == SEED_TYPE_VEGETABLE ) {
@@ -19057,11 +19081,17 @@
 			gardenlvlv += 5
 		}
 
+		p = 0
+		/********** GARFU CUSTOM - BEGINNING **********/ // Small chance for an additional herb when picking herbs
+		if ( rnd(5) == 0 & feat(FEAT_CELL_SUB_FEATURE_ID) \ 10 == SEED_TYPE_HERB ) {
+			p = 2
+		}
+		/********** GARFU CUSTOM - ENDING **********/
         if ( usecustom ) {
-            itemcreate -1, dbid, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), 0
+            itemcreate -1, dbid, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), p
         }
         else {
-            itemcreate CHARA_PLAYER, dbid, -1, -1, 0
+            itemcreate CHARA_PLAYER, dbid, -1, -1, p
         }
 
 		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL

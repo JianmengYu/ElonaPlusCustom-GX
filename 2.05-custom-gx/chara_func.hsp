@@ -3331,7 +3331,8 @@
 				skillexp SKILL_ATTR_SPD, check_talk_arg1, limit(sorg(SKILL_ATTR_SPD, check_talk_arg2), 10, 2000) / 5
 			}
 		}
-		if ( cdata(CDATA_AP_CURRENT, check_talk_arg1) < 2000 ) {
+		/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+		if ( cdata(CDATA_AP_CURRENT, check_talk_arg1) < 5000 ) {
 			locvar_check_talk_aspd = cdata(CDATA_INIT_SPEED, check_talk_arg1)
 			if ( gdata(GDATA_RIDER) != 0 ) {
 				if ( check_talk_arg1 == 0 | check_talk_arg1 == gdata(GDATA_RIDER) ) {
@@ -3345,6 +3346,7 @@
 			}
 			if ( cdata(CDATA_INIT_ATTR, check_talk_arg2) + cdata(CDATA_INIT_LIFEMANA, check_talk_arg2) >= 1000 ) {
 				if ( cdata(CDATA_INIT_ATTR, check_talk_arg2) + cdata(CDATA_INIT_SPEED, check_talk_arg2) > cdata(CDATA_INIT_ATTR, check_talk_arg1) + cdata(CDATA_INIT_LIFEMANA, check_talk_arg1) + locvar_check_talk_aspd + (cdata(CDATA_AP_TOTAL, check_talk_arg1) + 1) / 5 ) {
+					/********** GARFU CUSTOM **********/ // Total AP Gain Adjustments
 					if ( cdata(CDATA_INIT_SPEED, check_talk_arg2) > locvar_check_talk_aspd * 5 ) {
 						cdata(CDATA_AP_CURRENT, check_talk_arg1) += 1
 						cdata(CDATA_AP_TOTAL, check_talk_arg1) += 1
@@ -3355,26 +3357,26 @@
 					}
 					if ( cdata(CDATA_INIT_SPEED, check_talk_arg2) > locvar_check_talk_aspd * 4 ) {
 						cdata(CDATA_AP_CURRENT, check_talk_arg1) += 2
-						cdata(CDATA_AP_TOTAL, check_talk_arg1) += 2
+						cdata(CDATA_AP_TOTAL, check_talk_arg1) += 1
 						if ( check_talk_arg1 != 0 ) {
 							cdata(CDATA_AP_CURRENT, check_talk_arg1) += 2
-							cdata(CDATA_AP_TOTAL, check_talk_arg1) += 2
+							cdata(CDATA_AP_TOTAL, check_talk_arg1) += 1
 						}
 					}
 					if ( cdata(CDATA_INIT_SPEED, check_talk_arg2) > locvar_check_talk_aspd * 3 ) {
 						cdata(CDATA_AP_CURRENT, check_talk_arg1) += 2
-						cdata(CDATA_AP_TOTAL, check_talk_arg1) += 2
+						cdata(CDATA_AP_TOTAL, check_talk_arg1) += 1
 						if ( check_talk_arg1 != 0 ) {
 							cdata(CDATA_AP_CURRENT, check_talk_arg1) += 2
-							cdata(CDATA_AP_TOTAL, check_talk_arg1) += 2
+							cdata(CDATA_AP_TOTAL, check_talk_arg1) += 1
 						}
 					}
 					if ( cdata(CDATA_INIT_SPEED, check_talk_arg2) > locvar_check_talk_aspd * 2 ) {
 						cdata(CDATA_AP_CURRENT, check_talk_arg1) += 2
-						cdata(CDATA_AP_TOTAL, check_talk_arg1) += 2
+						cdata(CDATA_AP_TOTAL, check_talk_arg1) += 1
 						if ( check_talk_arg1 != 0 ) {
 							cdata(CDATA_AP_CURRENT, check_talk_arg1) += 2
-							cdata(CDATA_AP_TOTAL, check_talk_arg1) += 2
+							cdata(CDATA_AP_TOTAL, check_talk_arg1) += 1
 						}
 					}
 					if ( cdata(CDATA_INIT_SPEED, check_talk_arg2) > locvar_check_talk_aspd ) {
@@ -3387,12 +3389,13 @@
 							cdata(CDATA_AP_TOTAL, check_talk_arg1)++
 						}
 					}
-					if ( cdata(CDATA_AP_CURRENT, check_talk_arg1) > 2000 ) {
-						cdata(CDATA_AP_TOTAL, check_talk_arg1) -= cdata(CDATA_AP_CURRENT, check_talk_arg1) - 2000
-						cdata(CDATA_AP_CURRENT, check_talk_arg1) = 2000
+					/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+					if ( cdata(CDATA_AP_CURRENT, check_talk_arg1) > 5000 ) {
+						cdata(CDATA_AP_TOTAL, check_talk_arg1) -= cdata(CDATA_AP_CURRENT, check_talk_arg1) - 5000
+						cdata(CDATA_AP_CURRENT, check_talk_arg1) = 5000
 					}
 					if ( cdata(CDATA_AP_TOTAL, check_talk_arg1) < 0 ) {
-						cdata(CDATA_AP_TOTAL, check_talk_arg1) = 2000
+						cdata(CDATA_AP_TOTAL, check_talk_arg1) = 5000
 					}
 				}
 			}
@@ -3407,7 +3410,8 @@
 			}
 		}
 		if ( locvar_check_talk_ccr >= 0 ) {
-			if ( cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) < 2000 ) {
+			/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+			if ( cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) < 5000 ) {
 				locvar_check_talk_aspd = cdata(CDATA_INIT_SPEED, locvar_check_talk_ccr)
 				if ( cdata(CDATA_INIT_SPEED, CHARA_PLAYER) > cdata(CDATA_INIT_SPEED, gdata(GDATA_RIDER)) ) {
 					locvar_check_talk_aspd = cdata(CDATA_INIT_SPEED, CHARA_PLAYER)
@@ -3422,6 +3426,7 @@
 				}
 				if ( cdata(CDATA_INIT_ATTR, check_talk_arg2) + cdata(CDATA_INIT_LIFEMANA, check_talk_arg2) >= 1000 ) {
 					if ( cdata(CDATA_INIT_ATTR, check_talk_arg2) + cdata(CDATA_INIT_SPEED, check_talk_arg2) > cdata(CDATA_INIT_ATTR, locvar_check_talk_ccr) + cdata(CDATA_INIT_LIFEMANA, locvar_check_talk_ccr) + locvar_check_talk_aspd + (cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) + 1) / 5 ) {
+						/********** GARFU CUSTOM **********/ // Total AP Gain Adjustments
 						if ( cdata(CDATA_INIT_SPEED, check_talk_arg2) > locvar_check_talk_aspd * 5 ) {
 							cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) += 1
 							cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) += 1
@@ -3432,26 +3437,26 @@
 						}
 						if ( cdata(CDATA_INIT_SPEED, check_talk_arg2) > locvar_check_talk_aspd * 4 ) {
 							cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) += 2
-							cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) += 2
+							cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) += 1
 							if ( locvar_check_talk_ccr != 0 ) {
 								cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) += 2
-								cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) += 2
+								cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) += 1
 							}
 						}
 						if ( cdata(CDATA_INIT_SPEED, check_talk_arg2) > locvar_check_talk_aspd * 3 ) {
 							cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) += 2
-							cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) += 2
+							cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) += 1
 							if ( locvar_check_talk_ccr != 0 ) {
 								cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) += 2
-								cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) += 2
+								cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) += 1
 							}
 						}
 						if ( cdata(CDATA_INIT_SPEED, check_talk_arg2) > locvar_check_talk_aspd * 2 ) {
 							cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) += 2
-							cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) += 2
+							cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) += 1
 							if ( locvar_check_talk_ccr != 0 ) {
 								cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) += 2
-								cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) += 2
+								cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) += 1
 							}
 						}
 						if ( cdata(CDATA_INIT_SPEED, check_talk_arg2) > locvar_check_talk_aspd ) {
@@ -3464,12 +3469,13 @@
 								cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr)++
 							}
 						}
-						if ( cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) > 2000 ) {
-							cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) -= cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) - 2000
-							cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) = 2000
+						/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+						if ( cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) > 5000 ) {
+							cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) -= cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) - 5000
+							cdata(CDATA_AP_CURRENT, locvar_check_talk_ccr) = 5000
 						}
 						if ( cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) < 0 ) {
-							cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) = 2000
+							cdata(CDATA_AP_TOTAL, locvar_check_talk_ccr) = 5000
 						}
 					}
 				}
@@ -3482,7 +3488,8 @@
 					skillexp SKILL_ATTR_SPD, locvar_check_talk_cct, limit(sorg(SKILL_ATTR_SPD, check_talk_arg2), 10, 2000) / 5
 				}
 			}
-			if ( cdata(CDATA_AP_CURRENT, locvar_check_talk_cct) < 2000 ) {
+			/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+			if ( cdata(CDATA_AP_CURRENT, locvar_check_talk_cct) < 5000 ) {
 				locvar_check_talk_aspd = cdata(CDATA_INIT_SPEED, locvar_check_talk_cct)
 				if ( gdata(GDATA_RIDER) != 0 ) {
 					if ( locvar_check_talk_cct == 0 | locvar_check_talk_cct == gdata(GDATA_RIDER) ) {
@@ -3496,6 +3503,7 @@
 				}
 				if ( cdata(CDATA_INIT_ATTR, check_talk_arg2) + cdata(CDATA_INIT_LIFEMANA, check_talk_arg2) >= 1000 ) {
 					if ( cdata(CDATA_INIT_ATTR, check_talk_arg2) + cdata(CDATA_INIT_SPEED, check_talk_arg2) > cdata(CDATA_INIT_ATTR, locvar_check_talk_cct) + cdata(CDATA_INIT_LIFEMANA, locvar_check_talk_cct) + locvar_check_talk_aspd + (cdata(CDATA_AP_TOTAL, locvar_check_talk_cct) + 1) / 5 ) {
+						/********** GARFU CUSTOM **********/ // Total AP Gain Adjustments
 						if ( cdata(CDATA_INIT_SPEED, check_talk_arg2) > locvar_check_talk_aspd * 5 ) {
 							cdata(CDATA_AP_CURRENT, locvar_check_talk_cct) += 1
 							cdata(CDATA_AP_TOTAL, locvar_check_talk_cct) += 1
@@ -3538,8 +3546,9 @@
 								cdata(CDATA_AP_TOTAL, locvar_check_talk_cct)++
 							}
 						}
-						if ( cdata(CDATA_AP_CURRENT, locvar_check_talk_cct) > 2000 ) {
-							cdata(CDATA_AP_CURRENT, locvar_check_talk_cct) = 2000
+						/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+						if ( cdata(CDATA_AP_CURRENT, locvar_check_talk_cct) > 5000 ) {
+							cdata(CDATA_AP_CURRENT, locvar_check_talk_cct) = 5000
 						}
 					}
 				}
@@ -3701,7 +3710,8 @@
 								skillexp SKILL_ATTR_SPD, check_kill_arg1, limit(sorg(SKILL_ATTR_SPD, check_kill_arg2), 10, 2000) / 5
 							}
 						}
-						if ( cdata(CDATA_AP_CURRENT, check_kill_arg1) < 2000 ) {
+						/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+						if ( cdata(CDATA_AP_CURRENT, check_kill_arg1) < 5000 ) {
 							locvar_check_kill_aspd = cdata(CDATA_INIT_SPEED, check_kill_arg1)
 							if ( gdata(GDATA_RIDER) != 0 ) {
 								if ( check_kill_arg1 == 0 | check_kill_arg1 == gdata(GDATA_RIDER) ) {
@@ -3715,36 +3725,37 @@
 							}
 							if ( cdata(CDATA_INIT_ATTR, check_kill_arg2) + cdata(CDATA_INIT_LIFEMANA, check_kill_arg2) >= 1000 ) {
 								if ( cdata(CDATA_INIT_ATTR, check_kill_arg2) + cdata(CDATA_INIT_SPEED, check_kill_arg2) > cdata(CDATA_INIT_ATTR, check_kill_arg1) + cdata(CDATA_INIT_LIFEMANA, check_kill_arg1) + locvar_check_kill_aspd + (cdata(CDATA_AP_TOTAL, check_kill_arg1) + 1) / 5 ) {
+									/********** GARFU CUSTOM **********/ // Total AP Gain Adjustments
 									if ( cdata(CDATA_INIT_SPEED, check_kill_arg2) > locvar_check_kill_aspd * 5 ) {
 										cdata(CDATA_AP_CURRENT, check_kill_arg1) += 2
-										cdata(CDATA_AP_TOTAL, check_kill_arg1) += 2
+										cdata(CDATA_AP_TOTAL, check_kill_arg1) += 1
 										if ( check_kill_arg1 != 0 ) {
 											cdata(CDATA_AP_CURRENT, check_kill_arg1) += 2
-											cdata(CDATA_AP_TOTAL, check_kill_arg1) += 2
+											cdata(CDATA_AP_TOTAL, check_kill_arg1) += 1
 										}
 									}
 									if ( cdata(CDATA_INIT_SPEED, check_kill_arg2) > locvar_check_kill_aspd * 4 ) {
 										cdata(CDATA_AP_CURRENT, check_kill_arg1) += 3
-										cdata(CDATA_AP_TOTAL, check_kill_arg1) += 3
+										cdata(CDATA_AP_TOTAL, check_kill_arg1) += 1
 										if ( check_kill_arg1 != 0 ) {
 											cdata(CDATA_AP_CURRENT, check_kill_arg1) += 3
-											cdata(CDATA_AP_TOTAL, check_kill_arg1) += 3
+											cdata(CDATA_AP_TOTAL, check_kill_arg1) += 1
 										}
 									}
 									if ( cdata(CDATA_INIT_SPEED, check_kill_arg2) > locvar_check_kill_aspd * 3 ) {
 										cdata(CDATA_AP_CURRENT, check_kill_arg1) += 3
-										cdata(CDATA_AP_TOTAL, check_kill_arg1) += 3
+										cdata(CDATA_AP_TOTAL, check_kill_arg1) += 1
 										if ( check_kill_arg1 != 0 ) {
 											cdata(CDATA_AP_CURRENT, check_kill_arg1) += 3
-											cdata(CDATA_AP_TOTAL, check_kill_arg1) += 3
+											cdata(CDATA_AP_TOTAL, check_kill_arg1) += 1
 										}
 									}
 									if ( cdata(CDATA_INIT_SPEED, check_kill_arg2) > locvar_check_kill_aspd * 2 ) {
 										cdata(CDATA_AP_CURRENT, check_kill_arg1) += 3
-										cdata(CDATA_AP_TOTAL, check_kill_arg1) += 3
+										cdata(CDATA_AP_TOTAL, check_kill_arg1) += 1
 										if ( check_kill_arg1 != 0 ) {
 											cdata(CDATA_AP_CURRENT, check_kill_arg1) += 3
-											cdata(CDATA_AP_TOTAL, check_kill_arg1) += 3
+											cdata(CDATA_AP_TOTAL, check_kill_arg1) += 1
 										}
 									}
 									if ( cdata(CDATA_INIT_SPEED, check_kill_arg2) > locvar_check_kill_aspd ) {
@@ -3757,12 +3768,13 @@
 											cdata(CDATA_AP_TOTAL, check_kill_arg1)++
 										}
 									}
-									if ( cdata(CDATA_AP_CURRENT, check_kill_arg1) > 2000 ) {
-										cdata(CDATA_AP_TOTAL, check_kill_arg1) -= cdata(CDATA_AP_CURRENT, check_kill_arg1) - 2000
-										cdata(CDATA_AP_CURRENT, check_kill_arg1) = 2000
+									/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+									if ( cdata(CDATA_AP_CURRENT, check_kill_arg1) > 5000 ) {
+										cdata(CDATA_AP_TOTAL, check_kill_arg1) -= cdata(CDATA_AP_CURRENT, check_kill_arg1) - 5000
+										cdata(CDATA_AP_CURRENT, check_kill_arg1) = 5000
 									}
 									if ( cdata(CDATA_AP_TOTAL, check_kill_arg1) < 0 ) {
-										cdata(CDATA_AP_TOTAL, check_kill_arg1) = 2000
+										cdata(CDATA_AP_TOTAL, check_kill_arg1) = 5000
 									}
 								}
 							}
@@ -3773,7 +3785,8 @@
 									skillexp SKILL_ATTR_SPD, CHARA_PLAYER, limit(sorg(SKILL_ATTR_SPD, check_kill_arg2), 10, 2000) / 5
 								}
 							}
-							if ( cdata(CDATA_AP_CURRENT, CHARA_PLAYER) < 2000 ) {
+							/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+							if ( cdata(CDATA_AP_CURRENT, CHARA_PLAYER) < 5000 ) {
 								locvar_check_kill_aspd = cdata(CDATA_INIT_SPEED, CHARA_PLAYER)
 								if ( gdata(GDATA_RIDER) != 0 ) {
 									if ( cdata(CDATA_INIT_SPEED, CHARA_PLAYER) > cdata(CDATA_INIT_SPEED, gdata(GDATA_RIDER)) ) {
@@ -3785,21 +3798,22 @@
 								}
 								if ( cdata(CDATA_INIT_ATTR, check_kill_arg2) + cdata(CDATA_INIT_LIFEMANA, check_kill_arg2) >= 1000 ) {
 									if ( cdata(CDATA_INIT_ATTR, check_kill_arg2) + cdata(CDATA_INIT_SPEED, check_kill_arg2) > cdata(CDATA_INIT_ATTR, CHARA_PLAYER) + cdata(CDATA_INIT_LIFEMANA, CHARA_PLAYER) + locvar_check_kill_aspd + (cdata(CDATA_AP_TOTAL, CHARA_PLAYER) + 1) / 5 ) {
+										/********** GARFU CUSTOM **********/ // Total AP Gain Adjustments
 										if ( cdata(CDATA_INIT_SPEED, check_kill_arg2) > locvar_check_kill_aspd * 5 ) {
 											cdata(CDATA_AP_CURRENT, CHARA_PLAYER) += 2
-											cdata(CDATA_AP_TOTAL, CHARA_PLAYER) += 2
+											cdata(CDATA_AP_TOTAL, CHARA_PLAYER) += 1
 										}
 										if ( cdata(CDATA_INIT_SPEED, check_kill_arg2) > locvar_check_kill_aspd * 4 ) {
 											cdata(CDATA_AP_CURRENT, CHARA_PLAYER) += 3
-											cdata(CDATA_AP_TOTAL, CHARA_PLAYER) += 3
+											cdata(CDATA_AP_TOTAL, CHARA_PLAYER) += 1
 										}
 										if ( cdata(CDATA_INIT_SPEED, check_kill_arg2) > locvar_check_kill_aspd * 3 ) {
 											cdata(CDATA_AP_CURRENT, CHARA_PLAYER) += 3
-											cdata(CDATA_AP_TOTAL, CHARA_PLAYER) += 3
+											cdata(CDATA_AP_TOTAL, CHARA_PLAYER) += 1
 										}
 										if ( cdata(CDATA_INIT_SPEED, check_kill_arg2) > locvar_check_kill_aspd * 2 ) {
 											cdata(CDATA_AP_CURRENT, CHARA_PLAYER) += 3
-											cdata(CDATA_AP_TOTAL, CHARA_PLAYER) += 3
+											cdata(CDATA_AP_TOTAL, CHARA_PLAYER) += 1
 										}
 										if ( cdata(CDATA_INIT_SPEED, check_kill_arg2) > locvar_check_kill_aspd ) {
 											cdata(CDATA_AP_CURRENT, CHARA_PLAYER)++
@@ -3807,15 +3821,16 @@
 											snd SOUNDLIST_ENC
 											animeload ANIMATION_CHAOS_CHILD, CHARA_PLAYER
 										}
-										if ( cdata(CDATA_AP_CURRENT, CHARA_PLAYER) > 2000 ) {
-											cdata(CDATA_AP_CURRENT, CHARA_PLAYER) = 2000
+										if ( cdata(CDATA_AP_CURRENT, CHARA_PLAYER) > 5000 ) {
+											cdata(CDATA_AP_CURRENT, CHARA_PLAYER) = 5000
 										}
 									}
 								}
 							}
 							if ( cdata(CDATA_IN_TAGTEAM, CHARA_PLAYER) != 0 ) {
 								locvar_check_kill_cct = cdata(CDATA_TAGTEAM_PARTNER, CHARA_PLAYER)
-								if ( cdata(CDATA_AP_CURRENT, locvar_check_kill_cct) < 2000 ) {
+								/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+								if ( cdata(CDATA_AP_CURRENT, locvar_check_kill_cct) < 5000 ) {
 									locvar_check_kill_aspd = cdata(CDATA_INIT_SPEED, locvar_check_kill_cct)
 									if ( gdata(GDATA_RIDER) != 0 ) {
 										if ( locvar_check_kill_cct == 0 | locvar_check_kill_cct == gdata(GDATA_RIDER) ) {
@@ -3855,8 +3870,8 @@
 													cdata(CDATA_AP_TOTAL, locvar_check_kill_cct)++
 												}
 											}
-											if ( cdata(CDATA_AP_CURRENT, locvar_check_kill_cct) > 2000 ) {
-												cdata(CDATA_AP_CURRENT, locvar_check_kill_cct) = 2000
+											if ( cdata(CDATA_AP_CURRENT, locvar_check_kill_cct) > 5000 ) {
+												cdata(CDATA_AP_CURRENT, locvar_check_kill_cct) = 5000
 											}
 										}
 									}
@@ -3873,7 +3888,8 @@
 							}
 						}
 						if ( locvar_check_kill_ccr >= 0 ) {
-							if ( cdata(CDATA_AP_CURRENT, locvar_check_kill_ccr) < 2000 ) {
+							/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+							if ( cdata(CDATA_AP_CURRENT, locvar_check_kill_ccr) < 5000 ) {
 								locvar_check_kill_aspd = cdata(CDATA_INIT_SPEED, locvar_check_kill_ccr)
 								if ( cdata(CDATA_INIT_SPEED, CHARA_PLAYER) > cdata(CDATA_INIT_SPEED, gdata(GDATA_RIDER)) ) {
 									locvar_check_kill_aspd = cdata(CDATA_INIT_SPEED, CHARA_PLAYER)
@@ -3888,6 +3904,7 @@
 								}
 								if ( cdata(CDATA_INIT_ATTR, check_kill_arg2) + cdata(CDATA_INIT_LIFEMANA, check_kill_arg2) >= 1000 ) {
 									if ( cdata(CDATA_INIT_ATTR, check_kill_arg2) + cdata(CDATA_INIT_SPEED, check_kill_arg2) > cdata(CDATA_INIT_ATTR, locvar_check_kill_ccr) + cdata(CDATA_INIT_LIFEMANA, locvar_check_kill_ccr) + locvar_check_kill_aspd + (cdata(CDATA_AP_TOTAL, locvar_check_kill_ccr) + 1) / 5 ) {
+										/********** GARFU CUSTOM **********/ // Total AP Gain Adjustments
 										if ( cdata(CDATA_INIT_SPEED, check_kill_arg2) > locvar_check_kill_aspd * 5 ) {
 											cdata(CDATA_AP_CURRENT, locvar_check_kill_ccr) += 1
 											cdata(CDATA_AP_TOTAL, locvar_check_kill_ccr) += 1
@@ -3930,12 +3947,13 @@
 												cdata(CDATA_AP_TOTAL, locvar_check_kill_ccr)++
 											}
 										}
-										if ( cdata(CDATA_AP_CURRENT, locvar_check_kill_ccr) > 2000 ) {
-											cdata(CDATA_AP_TOTAL, locvar_check_kill_ccr) -= cdata(CDATA_AP_CURRENT, locvar_check_kill_ccr) - 2000
-											cdata(CDATA_AP_CURRENT, locvar_check_kill_ccr) = 2000
+										/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+										if ( cdata(CDATA_AP_CURRENT, locvar_check_kill_ccr) > 5000 ) {
+											cdata(CDATA_AP_TOTAL, locvar_check_kill_ccr) -= cdata(CDATA_AP_CURRENT, locvar_check_kill_ccr) - 5000
+											cdata(CDATA_AP_CURRENT, locvar_check_kill_ccr) = 5000
 										}
 										if ( cdata(CDATA_AP_TOTAL, locvar_check_kill_ccr) < 0 ) {
-											cdata(CDATA_AP_TOTAL, locvar_check_kill_ccr) = 2000
+											cdata(CDATA_AP_TOTAL, locvar_check_kill_ccr) = 5000
 										}
 									}
 								}
@@ -3948,7 +3966,8 @@
 									skillexp SKILL_ATTR_SPD, locvar_check_kill_cct, limit(sorg(SKILL_ATTR_SPD, check_kill_arg2), 10, 2000) / 5
 								}
 							}
-							if ( cdata(CDATA_AP_CURRENT, locvar_check_kill_cct) < 2000 ) {
+							/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+							if ( cdata(CDATA_AP_CURRENT, locvar_check_kill_cct) < 5000 ) {
 								locvar_check_kill_aspd = cdata(CDATA_INIT_SPEED, locvar_check_kill_cct)
 								if ( gdata(GDATA_RIDER) != 0 ) {
 									if ( locvar_check_kill_cct == 0 | locvar_check_kill_cct == gdata(GDATA_RIDER) ) {
@@ -3962,6 +3981,7 @@
 								}
 								if ( cdata(CDATA_INIT_ATTR, check_kill_arg2) + cdata(CDATA_INIT_LIFEMANA, check_kill_arg2) >= 1000 ) {
 									if ( cdata(CDATA_INIT_ATTR, check_kill_arg2) + cdata(CDATA_INIT_SPEED, check_kill_arg2) > cdata(CDATA_INIT_ATTR, locvar_check_kill_cct) + cdata(CDATA_INIT_LIFEMANA, locvar_check_kill_cct) + locvar_check_kill_aspd + (cdata(CDATA_AP_TOTAL, locvar_check_kill_cct) + 1) / 5 ) {
+										/********** GARFU CUSTOM **********/ // Total AP Gain Adjustments
 										if ( cdata(CDATA_INIT_SPEED, check_kill_arg2) > locvar_check_kill_aspd * 5 ) {
 											cdata(CDATA_AP_CURRENT, locvar_check_kill_cct) += 1
 											cdata(CDATA_AP_TOTAL, locvar_check_kill_cct) += 1
@@ -4004,8 +4024,9 @@
 												cdata(CDATA_AP_TOTAL, locvar_check_kill_cct)++
 											}
 										}
-										if ( cdata(CDATA_AP_CURRENT, locvar_check_kill_cct) > 2000 ) {
-											cdata(CDATA_AP_CURRENT, locvar_check_kill_cct) = 2000
+										/********** GARFU CUSTOM **********/ // Current AP cap raised to 5k from 2k
+										if ( cdata(CDATA_AP_CURRENT, locvar_check_kill_cct) > 5000 ) {
+											cdata(CDATA_AP_CURRENT, locvar_check_kill_cct) = 5000
 										}
 									}
 								}
@@ -4038,6 +4059,11 @@
 	return
 
 #deffunc item_acid int item_acid_arg1, int item_acid_arg2
+	/********** GARFU CUSTOM - BEGINNING **********/ // Stops items from being destroyed in breath or fire or acid attacks.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_ACID, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		return
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	if ( item_acid_arg2 != (-1) ) {
 		locvar_item_acid_ci = item_acid_arg2
 	}
@@ -4103,6 +4129,11 @@
 	return
 
 #deffunc item_fire int item_fire_arg1, int item_fire_arg2
+	/********** GARFU CUSTOM - BEGINNING **********/ // Stops items from being destroyed in breath or fire or acid attacks.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_ACID, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		return 0
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	locvar_item_fire_max = 0
 	locvar_item_fire_ti = -1
 	if ( item_fire_arg2 != (-1) ) {
@@ -4315,6 +4346,11 @@
 	return
 
 #deffunc item_cold int item_cold_arg1, int item_cold_arg2
+	/********** GARFU CUSTOM - BEGINNING **********/ /// Stops items from being destroyed in breath or fire or acid attacks.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_ACID, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		return 0
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	locvar_item_fire_max = 0
 	locvar_item_fire_ti = -1
 	if ( item_cold_arg2 != (-1) ) {

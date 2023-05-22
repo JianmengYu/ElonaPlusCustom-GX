@@ -1481,6 +1481,9 @@
 			if ( cnt == 3 | cnt == 4 | cnt == 5 | cnt == 8 ) {
 				continue
 			}
+			/********** GARFU CUSTOM - BEGINNING **********/ // Stops ranking decay over time.
+			continue
+			/********** GARFU CUSTOM - ENDING **********/
 			gdata(STARTING_GDATA_RANK_NORMA + cnt)--
 			if ( gdata(STARTING_GDATA_RANK_NORMA + cnt) <= 0 ) {
 				modrank cnt, (gdata(p) / 12 + 100) * (-1)
@@ -6158,6 +6161,12 @@
 		itemcreate -1, ITEM_ID_PLATINUM_COIN, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), limit(1 + gdata(GDATA_LEVEL) / 20, 1, 5)
 		flt
 		itemcreate -1, ITEM_ID_BEJEWELED_CHEST, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), 0
+		/********** GARFU CUSTOM - BEGINNING **********/ // Chance for small medals as dungeon rewards
+		if ( rnd(2) == 0 ) {
+			flt
+			itemcreate -1, ITEM_ID_SMALL_MEDAL, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), 1
+		}
+		/********** GARFU CUSTOM - ENDING **********/
 		inv(INV_ITEM_PARAM2, ci) = 0
 		if ( gdata(GDATA_AREA) != AREA_VOID ) {
 			if ( gdata(GDATA_FLAG_DESTINY_NEFIA_BOSSES_DEFEATED) < 1 ) {

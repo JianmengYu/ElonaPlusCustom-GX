@@ -106,6 +106,11 @@
 				matgetmain random_material(atxlv, 0), 1, 1
 				matgetmain random_material(atxlv, 0), 1, 1
 				matgetmain random_material(atxlv, 0), 1, 1
+				/********** GARFU CUSTOM - BEGINNING **********/ // more mats per dig
+				repeat 6
+					matgetmain random_material(atxlv, 0), 1, 1
+				loop
+				/********** GARFU CUSTOM - ENDING **********/
 			}
 			else {
 				txt lang("採掘に失敗した。", "Your mining attempt fails.")
@@ -118,6 +123,11 @@
 				matgetmain random_material(atxlv, 0), 1, 2
 				matgetmain random_material(atxlv, 0), 1, 2
 				matgetmain random_material(atxlv, 0), 1, 2
+				/********** GARFU CUSTOM - BEGINNING **********/ // more mats per dig
+				repeat 6
+					matgetmain random_material(atxlv, 0), 1, 2
+				loop
+				/********** GARFU CUSTOM - ENDING **********/
 			}
 			else {
 				txt lang("釣りに失敗した。", "Your fishing attempt fails.")
@@ -130,6 +140,11 @@
 				matgetmain random_material(atxlv, 0), 1, 3
 				matgetmain random_material(atxlv, 0), 1, 3
 				matgetmain random_material(atxlv, 0), 1, 3
+				/********** GARFU CUSTOM - BEGINNING **********/ // more mats per dig
+				repeat 6
+					matgetmain random_material(atxlv, 0), 1, 3
+				loop
+				/********** GARFU CUSTOM - ENDING **********/
 			}
 			else {
 				txt lang("採取に失敗した。", "Your searching attempt fails.")
@@ -142,6 +157,11 @@
 				matgetmain random_material(atxlv, 0), 1, 4
 				matgetmain random_material(atxlv, 0), 1, 4
 				matgetmain random_material(atxlv, 0), 1, 4
+				/********** GARFU CUSTOM - BEGINNING **********/ // more mats per dig
+				repeat 6
+					matgetmain random_material(atxlv, 0), 1, 4
+				loop
+				/********** GARFU CUSTOM - ENDING **********/
 			}
 			else {
 				txt lang("回収に失敗した。", "Your searching attempt fails.")
@@ -154,6 +174,11 @@
 				matgetmain random_material(atxlv, 0), 1, 5
 				matgetmain random_material(atxlv, 0), 1, 5
 				matgetmain random_material(atxlv, 0), 1, 5
+				/********** GARFU CUSTOM - BEGINNING **********/ // more mats per dig
+				repeat 6
+					matgetmain random_material(atxlv, 0), 1, 5
+				loop
+				/********** GARFU CUSTOM - ENDING **********/
 			}
 			else {
 				txt lang("探索に失敗した。", "Your searching attempt fails.")
@@ -3148,7 +3173,8 @@
 			flt
 			itemcreate -1, ITEM_ID_GOLD_PIECE, cdata(CDATA_X, cc), cdata(CDATA_Y, cc), sexvalue
 			txt_questitem
-			modkarma CHARA_PLAYER, -1
+			/********** GARFU CUSTOM **********/ // Remove Prostitution Penalty
+			// modkarma CHARA_PLAYER, -1
 		}
 		else {
 			cdata(CDATA_GOLD, cc) += sexvalue
@@ -3586,7 +3612,9 @@
 			if ( f ) {
 				txtmore
 				txt lang("盗みを見咎められた！", "You are found stealing.")
-				modkarma CHARA_PLAYER, -5
+				/********** GARFU CUSTOM **********/ // Remove Stealing Penalty
+				// modkarma CHARA_PLAYER, -5
+				modkarma CHARA_PLAYER, -1
 				p = inv_getowner(ci)
 				if ( tg != (-1) ) {
 					if ( cdata(CDATA_ID, p) != CREATURE_ID_EBON_THE_FIRE_GIANT ) {
@@ -3707,7 +3735,8 @@
 			if ( rnd(3) == 0 ) {
 				txtmore
 				txt lang("あなたは良心の呵責を感じた。", "You feel the stings of conscience.")
-				modkarma CHARA_PLAYER, -1
+				/********** GARFU CUSTOM **********/ // Remove Stealing Penalty
+				// modkarma CHARA_PLAYER, -1
 			}
 		}
 	}
@@ -14154,6 +14183,9 @@
 		if ( inv(INV_ITEM_QUALITY, ci) == FIX_QUALITY_GODLY | ibit(ITEM_BIT_ALIVE, ci) == 1 ) {
 			if ( efid == SKILL_EFFECT_CHANGE_MATERIAL ) {
 				f = 0
+				/********** GARFU CUSTOM - BEGINNING **********/ // Change/Sup material scrolls work on miracle/godly equipment
+				f = 1
+				/********** GARFU CUSTOM - ENDING **********/
 			}
 		}
 		equip = inv(INV_ITEM_EQUIP, ci)

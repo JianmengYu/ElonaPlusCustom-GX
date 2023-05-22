@@ -2455,6 +2455,11 @@
 		else {
 			txt lang("あなたは骨と遺留品を埋葬した。", "You bury the corpse with respect.")
 			modkarma CHARA_PLAYER, 5
+			/********** GARFU CUSTOM - BEGINNING **********/ // chance of treasure map for burying corpse 
+			if ( rnd(5) == 0 ) {
+				itemcreate 0, ITEM_ID_TREASURE_MAP, -1, -1, 0
+			}
+			/********** GARFU CUSTOM - ENDING **********/
 		}
 		goto *random_eventProc_SWEND1
 	}
@@ -2535,6 +2540,11 @@
 		gosub *re_select
 		p = limit(rnd((cdata(CDATA_GOLD, CHARA_PLAYER) + 1) / 10 + 1), 100, 99999) + 20 * sdata(SKILL_ATTR_LUC, CHARA_PLAYER)
 		cdata(CDATA_GOLD, CHARA_PLAYER) += p
+		/********** GARFU CUSTOM - BEGINNING **********/ // chance of treasure map for burying corpse 
+		if ( rnd(10) == 0 ) {
+			itemcreate 0, ITEM_ID_TREASURE_MAP, -1, -1, 0
+		}
+		/********** GARFU CUSTOM - ENDING **********/
 		txt lang("金貨" + p + "枚を手に入れた。", "You pick up " + p + " gold pieces.")
 		goto *random_eventProc_SWEND1
 	}
@@ -2544,6 +2554,11 @@
 		efp = 800
 		tc = CHARA_PLAYER
 		gosub *effect
+		/********** GARFU CUSTOM - BEGINNING **********/ // chance of treasure map for burying corpse 
+		if ( rnd(20) == 0 ) {
+			itemcreate 0, ITEM_ID_TREASURE_MAP, -1, -1, 0
+		}
+		/********** GARFU CUSTOM - ENDING **********/
 		s = lang("辻プリースト", "Wandering Priest")
 		file = "bg_re11"
 		buff = lang("突然、向かいからやって来た一人の神官が、すれ違いざまにあなたに魔法をかけた。「ノープロブレム」", "A priest comes up to you and casts a spell on you. \"No problem.\"")
@@ -2732,7 +2747,7 @@
 			continue
 		}
 		if ( gdata(GDATA_BILL) <= 1 ) {
-			p = rnd(rnd(3) + 1) + 1 + (rnd(gdata(GDATA_COST_HIRE) + calccostbuilding() + calccosttax()) > rnd(50000))
+			p = rnd(rnd(3) + 1) + 1 + (rnd(gdata(GDATA_COST_HIRE) + calccostbuilding() + calccosttax() + 1) > rnd(50000))
 			cnt2 = cnt
 		}
 		if ( gdata(GDATA_BILL) > 1 ) {
@@ -2767,7 +2782,7 @@
 			}
 			if ( gdata(GDATA_BILL) <= 1 ) {
 				if ( flttypemajor != FILTER_ITEM_FOOD ) {
-					if ( rnd(gdata(GDATA_COST_HIRE) + calccostbuilding() + calccosttax()) > rnd(50000) ) {
+					if ( rnd(gdata(GDATA_COST_HIRE) + calccostbuilding() + calccosttax() + 1) > rnd(50000) ) {
 						nocubl = ITEM_STATUS_BLESSED
 					}
 				}

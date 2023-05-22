@@ -123,13 +123,19 @@
 		return 10000
 	}
 	if ( inv(INV_ITEM_ID, calcmusicticketvalue_itemid) == ITEM_ID_HERO_CHEESE ) {
-		return 35000
+		/********** GARFU CUSTOM **********/ // reduced cost for cheese etc
+		//return 35000
+		return 15000
 	}
 	if ( inv(INV_ITEM_ID, calcmusicticketvalue_itemid) == ITEM_ID_MAGIC_FRUIT ) {
-		return 35000
+		/********** GARFU CUSTOM **********/ // reduced cost for cheese etc
+		//return 35000
+		return 15000
 	}
 	if ( inv(INV_ITEM_ID, calcmusicticketvalue_itemid) == ITEM_ID_HAPPY_APPLE ) {
-		return 50000
+		/********** GARFU CUSTOM **********/ // reduced cost for cheese etc
+		//return 50000
+		return 30000
 	}
 	return 1
 
@@ -492,6 +498,11 @@
 			locvar_calcitemvalue_value = 0
 		}
 	}
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes tax, wages, and building maintenance free.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_FREE_TAX, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		locvar_calcitemvalue_value = 0
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	return locvar_calcitemvalue_value
 
 #deffunc generatemoney int generatemoney_charid
@@ -530,6 +541,12 @@
 	loop
 	locvar_calccosthire_cost = abs(locvar_calccosthire_cost * limit(100 - limit(cdata(CDATA_KARMA, CHARA_PLAYER) / 2, 0, 50) - 7 * trait(TRAIT_NORMAL_OTHER_ACCOUNTANT) - (cdata(CDATA_KARMA, CHARA_PLAYER) >= 20) * 5, 25, 200) / 100)
 	gdata(GDATA_COST_HIRE) = locvar_calccosthire_cost
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes tax, wages, and building maintenance free.
+	// Returning 0 may causes crashes during "event_income", added `+1` in the `rnd()` there so it doesn't happen.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_FREE_TAX, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		gdata(GDATA_COST_HIRE) = 0
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	return
 
 #defcfunc calccostbuilding
@@ -578,6 +595,12 @@
 		gdata(GDATA_RANK_SHOP) = 10000
 	}
 	locvar_calccosthire_cost = abs(locvar_calccosthire_cost * limit(100 - limit(cdata(CDATA_KARMA, CHARA_PLAYER) / 2, 0, 50) - 7 * trait(TRAIT_NORMAL_OTHER_ACCOUNTANT) - (cdata(CDATA_KARMA, CHARA_PLAYER) >= 20) * 5, 25, 200) / 100)
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes tax, wages, and building maintenance free.
+	// Returning 0 may causes crashes during "event_income", added `+1` in the `rnd()` there so it doesn't happen.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_FREE_TAX, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		return 0
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	return locvar_calccosthire_cost
 
 #defcfunc calccosttax
@@ -590,6 +613,12 @@
 		locvar_calccosthire_cost = 100000
 	}
 	locvar_calccosthire_cost = abs(locvar_calccosthire_cost * limit(100 - limit(cdata(CDATA_KARMA, CHARA_PLAYER) / 2, 0, 50) - 7 * trait(TRAIT_NORMAL_OTHER_ACCOUNTANT) - (cdata(CDATA_KARMA, CHARA_PLAYER) >= 20) * 5, 25, 200) / 100)
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes tax, wages, and building maintenance free.
+	// Returning 0 may causes crashes during "event_income", added `+1` in the `rnd()` there so it doesn't happen.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_FREE_TAX, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		return 0
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	return locvar_calccosthire_cost
 
 #defcfunc calcmealvalue
@@ -719,6 +748,11 @@
 	if ( gdata(GDATA_FLAG_GUILD_FIGHTER) ) {
 		locvar_calcitemvalue_value /= 2
 	}
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes identifying items free
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_FREE_IDENTIFY, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		return 0
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	return locvar_calcitemvalue_value
 
 #defcfunc calctraincost int calctraincost_arg1, int calctraincost_arg2, int calctraincost_arg3
@@ -726,6 +760,9 @@
 	if ( calctraincost_arg3 ) {
 		locvar_calcitemvalue_value /= 2
 	}
+	/********** GARFU CUSTOM - BEGINNING **********/ // Training skill cost 1 platinum.
+	locvar_calcitemvalue_value = 1
+	/********** GARFU CUSTOM - ENDING **********/
 	return locvar_calcitemvalue_value
 
 #defcfunc calclearncost int, int, int calclearncost_arg1
@@ -733,9 +770,17 @@
 	if ( calclearncost_arg1 ) {
 		locvar_calcitemvalue_value = locvar_calcitemvalue_value * 2 / 3
 	}
+	/********** GARFU CUSTOM - BEGINNING **********/ // Leaning skill cost 5 platinum.
+	locvar_calcitemvalue_value = 5
+	/********** GARFU CUSTOM - ENDING **********/
 	return locvar_calcitemvalue_value
 
 #defcfunc calcresurrectvalue int calcresurrectvalue_arg1
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes resurrects and restores free.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_FREE_RESURRECT, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		return 0
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	if ( cdata(CDATA_EXIST, calcresurrectvalue_arg1) != CHAR_STATE_ALLY_DEAD ) {
 		return 100
 	}
@@ -757,6 +802,11 @@
 	return locvar_calcitemvalue_value
 
 #defcfunc calcrestorecost
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes resurrects and restores free.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_FREE_RESURRECT, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		return 0
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	locvar_calcitemvalue_value = 500
 	if ( gdata(GDATA_FLAG_GUILD_FIGHTER) ) {
 		locvar_calcitemvalue_value /= 2
@@ -764,6 +814,11 @@
 	return locvar_calcitemvalue_value
 
 #defcfunc calcrestorecostc
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes resurrects and restores free.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_FREE_RESURRECT, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		return 0
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	locvar_calcitemvalue_value = limit((cdata(CDATA_FAME, CHARA_PLAYER) + 1) / 100 * 200, 300, 3000)
 	if ( gdata(GDATA_FLAG_GUILD_FIGHTER) ) {
 		locvar_calcitemvalue_value /= 2
@@ -840,6 +895,11 @@
 	}
 	locvar_calcspellfail_i = 4
 	locvar_calcspellfail_f = carmor(calcspellfail_charid)
+	/********** GARFU CUSTOM - BEGINNING **********/ // Remove Equipment Spell Casting Penalty
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_SPELL_ARMOR_PENALTY, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		locvar_calcspellfail_f = 171
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	if ( locvar_calcspellfail_f == 169 ) {
 		locvar_calcspellfail_i = 17 - sdata(SKILL_NORMAL_HEAVY_ARMOR, calcspellfail_charid) / 5
 	}
@@ -879,14 +939,18 @@
 			}
 		}
 	}
-	if ( cdata(CDATA_ATTACK_STYLE, calcspellfail_charid) & STYLE_DUAL_WIELD ) {
-		locvar_calcspellfail_p -= 6
-	}
-	if ( cdata(CDATA_ATTACK_STYLE, calcspellfail_charid) & STYLE_SHIELD ) {
-		if ( cdata(CDATA_SHIELD_STYLE_TYPE, calcspellfail_charid) == SHIELD_STYLE_NORMAL ) {
-			locvar_calcspellfail_p -= 5
+	/********** GARFU CUSTOM - BEGINNING **********/ // Remove Equipment Spell Casting Penalty
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_SPELL_ARMOR_PENALTY, TWEAK_CATEGORY_GAMEPLAY) == FALSE ) {
+		if ( cdata(CDATA_ATTACK_STYLE, calcspellfail_charid) & STYLE_DUAL_WIELD ) {
+			locvar_calcspellfail_p -= 6
+		}
+		if ( cdata(CDATA_ATTACK_STYLE, calcspellfail_charid) & STYLE_SHIELD ) {
+			if ( cdata(CDATA_SHIELD_STYLE_TYPE, calcspellfail_charid) == SHIELD_STYLE_NORMAL ) {
+				locvar_calcspellfail_p -= 5
+			}
 		}
 	}
+	/********** GARFU CUSTOM - ENDING **********/
 	if ( cdatan(CDATAN_CLASS, calcspellfail_charid) == "warmage" ) {
 		locvar_calcspellfail_p += 5
 	}
@@ -912,6 +976,9 @@
 	else {
 		locvar_calcspellcostmp_cost = sdataref(SKILL_DATAREF_COST, calcspellcostmp_skillid) * (50 + cdata(CDATA_LEVEL, calcspellcostmp_charid) * 3) / 100
 	}
+	/********** GARFU CUSTOM - BEGINNING **********/ // Removes spell level increase from increasing MP cost of casting the spell, keeping the MP cost constant.
+	locvar_calcspellcostmp_cost = sdataref(SKILL_DATAREF_COST, calcspellcostmp_skillid)
+	/********** GARFU CUSTOM - ENDING **********/
 	if ( cdatan(CDATAN_CLASS, locvar_calcspellcostmp_cc) == "wizard" ) {
 		locvar_calcspellcostmp_cost = locvar_calcspellcostmp_cost * 90 / 100
 	}
@@ -926,6 +993,11 @@
 	if ( locvar_calcspellcoststock_cost < 1 ) {
 		locvar_calcspellcoststock_cost = 1
 	}
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes spells unlimited, spell stock doesn't decrease.
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_SPELL_FORGET, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		locvar_calcspellcostmp_cost = sdataref(SKILL_DATAREF_COST, calcspellcostmp_skillid)
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	return locvar_calcspellcoststock_cost
 
 #deffunc skillinit int skillinit_skillid, int skillinit_charid, int skillinit_arg3
@@ -1626,6 +1698,11 @@
 				cdata(CDATA_HUNGER, r1) = 5000
 			}
 		}
+		/********** GARFU CUSTOM - BEGINNING **********/ // Player never gets hungry or full, can always eat food but never starves.
+		if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_HUNGER, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+			cdata(CDATA_HUNGER, r1) = 7000
+		}
+		/********** GARFU CUSTOM - ENDING **********/
 		if ( r1 == 0 ) {
 			if ( cdata(CDATA_HUNGER, r1) / 1000 != p ) {
 				if ( p == 1000 / 1000 ) {
@@ -2363,7 +2440,9 @@
 			continue
 		}
 		if ( cdata(CDATA_IMPRESSION, cnt) >= 53 ) {
-			if ( cdata(CDATA_QUALITY, cnt) >= FIX_QUALITY_MIRACLE ) {
+			if ( cdata(CDATA_QUALITY, cnt) >= FIX_QUALITY_MIRACLE ) {										/********** GARFU CUSTOM **********/ // Total AP Gain Adjustments
+				/********** GARFU CUSTOM **********/ // Larger party time rewards
+				// ptp += 20 + cdata(CDATA_LEVEL, cnt) / 3
 				ptp += 20 + cdata(CDATA_LEVEL, cnt) / 3
 				txt lang(cdatan(CDATAN_NAME, cnt) + "は満足した。", cdatan(CDATAN_NAME, cnt) + " " + is(cnt) + " satisfied.")
 			}

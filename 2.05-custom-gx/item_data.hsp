@@ -1185,15 +1185,28 @@
 	}
 	if ( fixlv == FIX_QUALITY_MIRACLE | fixlv == FIX_QUALITY_GODLY ) {
 		inv(INV_ITEM_SUB_NAME, ci) = 40000 + rnd(30000)
-		if ( gdata(GDATA_FLAG_RARE_DROP) == 100 & rnd(20) == 0 ) {
+		/********** GARFU CUSTOM - BEGINNING **********/ // Higher Living Weapon Chance
+		//if ( gdata(GDATA_FLAG_RARE_DROP) == 100 & rnd(20) == 0 ) {
+		if ( gdata(GDATA_FLAG_RARE_DROP) == 100 & rnd(10) == 0 ) {
 			if ( reftype == FILTER_RANGE | reftype == FILTER_WEAPON ) {
 				ibitmod ITEM_BIT_ALIVE, ci, 1
 				inv(INV_ITEM_PARAM1, ci) = 1
 				if ( fixlv == FIX_QUALITY_GODLY ) {
-					encadd ci, randomenc(99), (randomencp() + 1) / 2 + 200
+					// encadd ci, randomenc(99), (randomencp() + 1) / 2 + 200
+					/********** GARFU CUSTOM - BEGINNING **********/ // Added more attribute rolls for living weapons
+					encadd ci, randomenc(99), (randomencp() + 1) / 2 + 500
+					encadd ci, randomenc(99), (randomencp() + 1) / 2 + 500
+					encadd ci, randomenc(99), (randomencp() + 1) / 2 + 500
+					encadd ci, randomenc(99), (randomencp() + 1) / 2 + 400
+					/********** GARFU CUSTOM - ENDING **********/
 				}
 				if ( fixlv == FIX_QUALITY_MIRACLE ) {
-					encadd ci, randomenc(99), (randomencp() + 1) / 3 + 150
+					// encadd ci, randomenc(99), (randomencp() + 1) / 3 + 150
+					/********** GARFU CUSTOM - BEGINNING **********/ // Added more attribute rolls for living weapons
+					encadd ci, randomenc(99), (randomencp() + 1) / 2 + 400
+					encadd ci, randomenc(99), (randomencp() + 1) / 2 + 400
+					encadd ci, randomenc(99), (randomencp() + 1) / 2 + 400
+					/********** GARFU CUSTOM - ENDING **********/
 				}
 				return
 			}

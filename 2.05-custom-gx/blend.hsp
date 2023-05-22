@@ -3354,11 +3354,12 @@
 		_switch_sw = 0
 		txtef COLOR_GREEN
 		txt lang(itemname(ti, 1) + "を" + itemname(ci) + "に装着した。", "You bait " + itemname(ci) + " with " + itemname(ti, 1) + ".")
+		/********** GARFU CUSTOM **********/ // More fishing casts per bait
 		if ( inv(INV_ITEM_FISHING_BAIT, ci) == inv(INV_ITEM_PARAM1, ti) ) {
-			inv(INV_ITEM_CHARGE, ci) += rnd(10) + 15
+			inv(INV_ITEM_CHARGE, ci) += rnd(20) + 30
 		}
 		else {
-			inv(INV_ITEM_CHARGE, ci) = rnd(10) + 15
+			inv(INV_ITEM_CHARGE, ci) = rnd(20) + 30
 			inv(INV_ITEM_FISHING_BAIT, ci) = inv(INV_ITEM_PARAM1, ti)
 		}
 		snd SOUNDLIST_EQUIP1

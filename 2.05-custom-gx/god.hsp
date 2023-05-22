@@ -836,7 +836,8 @@
 		gdata(GDATA_GOD_RANK)++
 	}
 	if ( gdata(GDATA_GOD_RANK) >= 3 ) {
-		if ( gdata(GDATA_MONTH) == 11 ) {
+		/********** GARFU CUSTOM **********/ // Uber pray any month?
+		if ( gdata(GDATA_MONTH) == 11 | TRUE ) {
 			if ( gdata(GDATA_AREA) == AREA_TRUCE_GROUND ) {
 				if ( cdata(CDATA_GOD, CHARA_PLAYER) != GOD_EYTH ) {
 					if ( gdata(GDATA_FLAG_TRUCE_GROUND_SUMMONING) == 0 ) {

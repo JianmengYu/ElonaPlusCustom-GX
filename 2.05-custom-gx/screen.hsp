@@ -5667,7 +5667,7 @@
 		}
 		if ( r1 == CHARA_PLAYER ) {
 			cdata(CDATA_SKILLPOINT, r1) += p
-			gdata(GDATA_FLAG_PC_SKILL_BONUS_OBTAINED) += p
+			gdata(GDATA_FLAG_PC_SKILL_BONUS_OBTAINED) += p + 5 /********** GARFU CUSTOM **********/ // additional skillpoints on level up
 		}
 		if ( cdatan(CDATAN_RACE, r1) == "mutant" | (r1 == CHARA_PLAYER & trait(TRAIT_NORMAL_OTHER_MUTANT) == 1) ) {
 			if ( cdata(CDATA_LEVEL, r1) < 37 ) {
@@ -5858,7 +5858,8 @@
 			return
 		}
 	}
-	skillexp SKILL_NORMAL_WEIGHT_LIFTING, r1, 4, 0, 1000
+	/********** GARFU CUSTOM **********/ // Increased Weight Lifting xp gain
+	skillexp SKILL_NORMAL_WEIGHT_LIFTING, r1, 4, 0, 2000
 	return
 
 *expSwimming
@@ -5882,14 +5883,15 @@
 			return
 		}
 	}
+	/********** GARFU CUSTOM **********/ // Increased Armor class xp gain
 	if ( cdata(CDATA_EQUIP_WEIGHT, r1) >= 35000 ) {
-		skillexp SKILL_NORMAL_HEAVY_ARMOR, r1, 20, 0, 1000
+		skillexp SKILL_NORMAL_HEAVY_ARMOR, r1, 20, 0, 2000
 	}
 	if ( cdata(CDATA_EQUIP_WEIGHT, r1) < 35000 & cdata(CDATA_EQUIP_WEIGHT, r1) >= 15000 ) {
-		skillexp SKILL_NORMAL_MEDIUM_ARMOR, r1, 20, 0, 1000
+		skillexp SKILL_NORMAL_MEDIUM_ARMOR, r1, 20, 0, 2000
 	}
 	if ( cdata(CDATA_EQUIP_WEIGHT, r1) < 15000 ) {
-		skillexp SKILL_NORMAL_LIGHT_ARMOR, r1, 20, 0, 1000
+		skillexp SKILL_NORMAL_LIGHT_ARMOR, r1, 20, 0, 2000
 	}
 	return
 

@@ -276,6 +276,13 @@
 	return sdata(sexp_skillid + STARTING_SKILL_SPACT, sexp_charid) \ 1000000 / 1000
 
 #defcfunc sgrowth int sgrowth_skillid, int sgrowth_charid
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes potentials never drop below 100%
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_LOCK_POTENTIAL, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		if ( sdata(sgrowth_skillid + STARTING_SKILL_SPACT, sgrowth_charid) \ 1000 < 100 ) {
+			sdata(sgrowth_skillid + STARTING_SKILL_SPACT, sgrowth_charid) = ( sdata(sgrowth_skillid + STARTING_SKILL_SPACT, sgrowth_charid) / 1000 ) * 1000 + 100
+		}
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	return sdata(sgrowth_skillid + STARTING_SKILL_SPACT, sgrowth_charid) \ 1000
 
 #deffunc modgrowth int modgrowth_charid, int modgrowth_skillid, int modgrowth_arg3
@@ -289,6 +296,13 @@
 			locvar_modgrowth_growth = 2
 		}
 	}
+	/********** GARFU CUSTOM - BEGINNING **********/ // Makes potentials never drop below 100%
+	if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_LOCK_POTENTIAL, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+		if ( locvar_modgrowth_growth < 100 ) {
+			locvar_modgrowth_growth = 100
+		}
+	}
+	/********** GARFU CUSTOM - ENDING **********/
 	sdata(modgrowth_skillid + STARTING_SKILL_SPACT, modgrowth_charid) = sorg(modgrowth_skillid, modgrowth_charid) * 1000000 + sexp(modgrowth_skillid, modgrowth_charid) * 1000 + locvar_modgrowth_growth
 	return
 
@@ -362,6 +376,13 @@
 			if ( locvar_skillmod_growth > 400 ) {
 				locvar_skillmod_growth = 400
 			}
+			/********** GARFU CUSTOM - BEGINNING **********/ // Makes potentials never drop below 100%
+			if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_LOCK_POTENTIAL, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+				if ( locvar_skillmod_growth < 100 ) {
+					locvar_skillmod_growth = 100
+				}
+			}
+			/********** GARFU CUSTOM - ENDING **********/
 		loop
 		sdata(skillmod_skillid + STARTING_SKILL_SPACT, skillmod_charid) = limit(locvar_skillmod_lv, 0, 2000) * 1000000 + locvar_skillmod_exp * 1000 + locvar_skillmod_growth
 		if ( skillmod_charid == CHARA_PLAYER | skillmod_charid < MAX_CHARA_FOLLOWER ) {
@@ -634,6 +655,13 @@
 			if ( locvar_skillmod_growth > 400 ) {
 				locvar_skillmod_growth = 400
 			}
+			/********** GARFU CUSTOM - BEGINNING **********/ // Makes potentials never drop below 100%
+			if ( TweakData(TWEAK_GAMEPLAY_GARFU_CUSTOM_LOCK_POTENTIAL, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+				if ( locvar_skillmod_growth < 100 ) {
+					locvar_skillmod_growth = 100
+				}
+			}
+			/********** GARFU CUSTOM - ENDING **********/
 		loop
 		sdata(skillexp_skillid + STARTING_SKILL_SPACT, skillexp_charid) = limit(locvar_skillmod_lv, 0, 2000) * 1000000 + locvar_skillmod_exp * 1000 + locvar_skillmod_growth
 		if ( synccheck(skillexp_charid, -1) ) {
