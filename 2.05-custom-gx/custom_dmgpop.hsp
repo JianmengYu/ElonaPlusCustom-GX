@@ -1,6 +1,6 @@
 // Ports oom's damage popups.
 
-#define MAX_DAMAGE_POPUPS 20
+#define MAX_DAMAGE_POPUPS 400
 
 #define DefineDmgConCol(%1,%2) locvar_colorres_i = %2%c\
     colorres%c\
@@ -78,6 +78,11 @@
             return
         }
     }
+    if ( cfg_dmgpopup_chat == FALSE ) {
+        if ( prm_extra == 9999 ) {
+            return
+        }
+    }
 
     DmgPopupTexts(DmgPopupNext) = prm_text
     DmgPopups(0, DmgPopupNext) = timeGetTime(), prm_cc, 255, 255, 255, 0, 0, 0
@@ -110,6 +115,12 @@
         }
     }
 
+    DmgPopups(8, DmgPopupNext) = prm_extra
+    DmgPopups(9, DmgPopupNext) = prm_type
+    if (prm_extra == 9999) {
+        DmgPopups(0, DmgPopupNext) += 1500
+    }
+
     DmgPopupNext = (DmgPopupNext + 1) \ length2(DmgPopups)
 
     return
@@ -140,8 +151,9 @@
             popupY@DP = 0
             repeat length2(DmgPopups) - j@DP
                 otheri@DP = (i@DP + cnt) \ length2(DmgPopups)
-                if (DmgPopups(0, otheri@DP) + cfg_dmgspeed * 300 > t@DP) {
-                    if (cdata(CDATA_X, cc@DP) == cdata(CDATA_X, DmgPopups(1, otheri@DP)) & cdata(CDATA_Y, cc@DP) == cdata(CDATA_Y, DmgPopups(1, otheri@DP))) {
+                if (DmgPopups(0, otheri@DP) + cfg_dmgspeed * 150 > t@DP & otheri@DP != i@DP) {
+                    if (cdata(CDATA_X, cc@DP) == cdata(CDATA_X, DmgPopups(1, otheri@DP)) & cdata(CDATA_Y, cc@DP) == cdata(CDATA_Y, DmgPopups(1, otheri@DP)) ) {
+                        if (DmgPopups(8, i@DP) == 9999 & DmgPopups(8, otheri@DP) != 9999) { continue }
                         popupY@DP++
                     }
                 }
@@ -149,13 +161,24 @@
 
             s = DmgPopupTexts(i@DP)
 
-            DmgPopupX = (cdata(CDATA_X, cc@DP) - scx) * inf_tiles + inf_screenx - strlen(s) * (2 + cfg_dmgfont + 1) / 2 / 2 + inf_tiles / 2
-            DmgPopupY = (cdata(CDATA_Y, cc@DP) - scy) * inf_tiles + inf_screeny - popupY@DP * (2 + cfg_dmgfont + 3) - (t@DP - dt@DP) / (cfg_dmgspeed * 5 + 1)
+            DmgPopFontInc = 0
+            if ( DmgPopups(8, i@DP) != 9999 & ( DmgPopups(9, i@DP) == DMGPOPUP_NORMAL_DAMAGE | DmgPopups(9, i@DP) == DMGPOPUP_ELEM_DAMAGE ) ) {
+                if ( (t@DP - dt@DP) / (cfg_dmgspeed * 5 + 1) + popupY@DP * (2 + cfg_dmgfont + 3) < 16) {
+                    DmgPopFontInc = 16 - ((t@DP - dt@DP) / (cfg_dmgspeed * 5 + 1) - popupY@DP * (2 + cfg_dmgfont + 3))
+                }
+            }
+
+            DmgPopupX = (cdata(CDATA_X, cc@DP) - scx) * inf_tiles + inf_screenx - strlen(s) * (2 + cfg_dmgfont + 1 + DmgPopFontInc) / 2 / 2 + inf_tiles / 2
+            DmgPopupY = (cdata(CDATA_Y, cc@DP) - scy) * inf_tiles + inf_screeny - popupY@DP * (2 + cfg_dmgfont + 3 + DmgPopFontInc) - (t@DP - dt@DP) / (cfg_dmgspeed * 5 + 1)
+            if (DmgPopups(8, i@DP) == 9999) {
+                DmgPopupY = (cdata(CDATA_Y, cc@DP) - scy) * inf_tiles + inf_screeny - popupY@DP * (2 + cfg_dmgfont + 3) - 24
+            }
             DmgPopupX += (scx != scxbk) * sxfix
             DmgPopupY += (scy != scybk) * syfix
-            if (DmgPopupY < 0 | DmgPopupY + (2 + cfg_dmgfont + 3) > inf_ver | DmgPopupY < 0 | DmgPopupY + strlen(s) * (2 + cfg_dmgfont + 1) > windoww) {
-                continue
-            }
+            // if (DmgPopupY < 0 | DmgPopupY + (2 + cfg_dmgfont + 3) > inf_ver | DmgPopupX < 0 | DmgPopupX + strlen(s) * (2 + cfg_dmgfont + DmgPopFontInc + 1) > windoww) {
+            //     continue
+            // }
+            font lang(cfg_font1, cfg_font2), 13 - en * 2 + DmgPopFontInc, 0
             pos DmgPopupX, DmgPopupY
             color DmgPopups(5, i@DP), DmgPopups(6, i@DP), DmgPopups(7, i@DP)
             bmes s, DmgPopups(2, i@DP), DmgPopups(3, i@DP), DmgPopups(4, i@DP)

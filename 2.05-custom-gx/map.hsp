@@ -413,6 +413,11 @@
 		flt calcobjlv(gdata(GDATA_LEVEL)), calcfixlv(FIX_QUALITY_GOOD)
 		return
 	}
+	if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD & gdata(GDATA_AREA) == AREA_WILDERNESS ) {
+		flt gdata(GDATA_DEEPEST_LEVEL), calcfixlv(FIX_QUALITY_GREAT)
+		fltnrace = "seamonster"
+		return
+	}
 	if ( gdata(GDATA_AREA) == AREA_HARVEST_SHIP ) {
 		dbid = CREATURE_ID_PALMIAN_ELITE_SOLDIER
 		return
@@ -509,10 +514,18 @@
 			cdata(CDATA_CAN_REVIVE, cnt) = 1
 		}
 		cdata(CDATA_FRIENDSHIP, CHARA_PLAYER) = 0
+		cbitmod CHARA_BIT_SHADOW_CLONE, cnt, FALSE
 		cbitmod CHARA_BIT_MAGNETISM_S_POLE, cnt, FALSE
 		cbitmod CHARA_BIT_MAGNETISM_N_POLE, cnt, FALSE
 		if ( gdata(GDATA_AREA) == AREA_WILDERNESS ) {
-			gdata(GDATA_FLAG_COLLECTED_WISHES) = 0
+			if ( gdata(GDATA_WORLD) != AREA_TEST_WORLD ) {
+				/********** CUSTOM - BEGINNING **********/ // Fixes Some Bugs made by Ano
+				if ( cnt == CHARA_PLAYER ) {
+					gdatatotalsaved = gdata(GDATA_FLAG_COLLECTED_WISHES)
+				}
+				/********** CUSTOM - ENDING **********/
+				gdata(GDATA_FLAG_COLLECTED_WISHES) = 0
+			}
 		}
 		cdata(CDATA_POWER_GAUGE, cnt) = 0
 		if ( cnt < MAX_CHARA_FOLLOWER ) {
@@ -773,7 +786,7 @@
 			}
 		}
 		if ( feat(1) == CELL_FEATURE_UPSTAIRS ) {
-			if ( gdata(GDATA_AREA_PREV) != AREA_NT_SOUTH_BORDER & gdata(GDATA_LEVEL) != 100 ) {
+			if ( gdata(GDATA_AREA_PREV) != AREA_NT_SOUTH_BORDER & gdata(GDATA_LEVEL) != 100 & gdata(GDATA_AREA_PREV) != AREA_TEST_WORLD ) {
 				msgtemp += lang("階段を昇った。", "You walk up the stairs.")
 			}
 			f = 1
@@ -790,6 +803,26 @@
 		}
 		else {
 			zyuusann = 0
+		}
+		if ( adata(ADATA_ID, gdata(GDATA_AREA)) == AREA_TEST_WORLD ) {
+			if ( gdata(GDATA_LEVEL) == 1 ) {
+				gdata(GDATA_WORLD) = gdata(GDATA_FLAG_SHIP_LAST_PORT) / 100
+				gdata(GDATA_AREA) = gdata(GDATA_FLAG_SHIP_LAST_PORT) \ 100
+				gdata(GDATA_FLAG_SHIP_LAST_PORT) = 0
+				snd SOUNDLIST_MIZU
+				/********** ORIGINAL - BEGINNING ********** // Fixes Some Bugs made by Ano
+				modkarma CHARA_PLAYER, gdata(GDATA_FLAG_COLLECTED_WISHES) * 2
+				msgtemp += lang("漂流者は礼を言って去っていった。", "Drifter thanked you and left. ")
+				 ********** ORIGINAL - ENDING **********/
+					
+				/********** CUSTOM - BEGINNING **********/ // Fixes Some Bugs made by Ano
+				if ( gdatatotalsaved > 0 ) {
+					modkarma CHARA_PLAYER, gdatatotalsaved * 2
+					msgtemp += lang("漂流者は礼を言って去っていった。", "Drifter thanked you and left. (Karma + " + gdatatotalsaved * 2 + ")")
+					gdatatotalsaved = 0
+				}
+				/********** CUSTOM - ENDING **********/
+			}
 		}
 		if ( f == 0 ) {
 			if ( mdata(MDATA_TYPE) == MAP_TYPE_WORLD ) {
@@ -965,10 +998,46 @@
 			gdata(GDATA_LEVEL_START_ON) = 7
 			fixstart = 1
 		}
+		if ( gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+			if ( gdata(GDATA_LEVEL) == 11 ) {
+				mapstartx = 93
+				mapstarty = 51
+				gdata(GDATA_LEVEL_START_ON) = 7
+				fixstart = 1
+			}
+			if ( gdata(GDATA_LEVEL) == 36 ) {
+				mapstartx = 58
+				mapstarty = 47
+				gdata(GDATA_LEVEL_START_ON) = 7
+				fixstart = 1
+			}
+			if ( gdata(GDATA_LEVEL) == 53 ) {
+				mapstartx = 89
+				mapstarty = 90
+				gdata(GDATA_LEVEL_START_ON) = 7
+				fixstart = 1
+			}
+			if ( gdata(GDATA_LEVEL) == 54 ) {
+				mapstartx = 73
+				mapstarty = 11
+				gdata(GDATA_LEVEL_START_ON) = 7
+				fixstart = 1
+			}
+			if ( gdata(GDATA_LEVEL) == 93 ) {
+				mapstartx = 46
+				mapstarty = 69
+				gdata(GDATA_LEVEL_START_ON) = 7
+				fixstart = 1
+			}
+		}
 	}
 	if ( cdata(CDATA_EXIST, CHARA_PLAYER) == CHAR_STATE_DEAD ) {
 		rc = CHARA_PLAYER
 		gosub *chara_respawn
+		if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) != 0 ) {
+			gdata(GDATA_WORLD) = gdata(GDATA_FLAG_SHIP_LAST_PORT) / 100
+			gdata(GDATA_FLAG_SHIP_LAST_PORT) = 0
+		}
 		if ( gdata(GDATA_WORLD) == adata(ADATA_PARENT, AREA_HOME) ) {
 			gdata(GDATA_AREA) = AREA_HOME
 			gdata(GDATA_LEVEL) = 1
@@ -1020,19 +1089,29 @@
 		}
 		else {
 			if ( adata(ADATA_TYPE, gdata(GDATA_AREA_PREV)) == MAP_TYPE_WORLD ) {
-				if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > 0 ) {
-					msgtemp += lang("乗り物から降りて" + mapname(gdata(GDATA_AREA)) + "に入った。", "You got off the world-vehicle and entered " + mapname(gdata(GDATA_AREA)) + ".")
+				if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD & gdata(GDATA_AREA) != AREA_TEST_WORLD ) {
+					msgtemp += lang("船から降りた。", "You leave your ship.")
 				}
-				if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) == 0 ) {
-					msgtemp += lang(mapname(gdata(GDATA_AREA)) + "に入った。", "You entered " + mapname(gdata(GDATA_AREA)) + ".")
+				else {
+					if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > 0 ) {
+						msgtemp += lang("乗り物から降りて" + mapname(gdata(GDATA_AREA)) + "に入った。", "You got off the world-vehicle and entered " + mapname(gdata(GDATA_AREA)) + ".")
+					}
+					if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) == 0 ) {
+						msgtemp += lang(mapname(gdata(GDATA_AREA)) + "に入った。", "You entered " + mapname(gdata(GDATA_AREA)) + ".")
+					}
 				}
 			}
 			else {
-				if ( mdata(MDATA_TYPE) == MAP_TYPE_QUEST ) {
-					msgtemp += lang(mapname(gdata(GDATA_AREA)) + "に戻った。", " You returned to " + mapname(gdata(GDATA_AREA)) + ".")
+				if ( adata(ADATA_ID, gdata(GDATA_AREA)) == AREA_TEST_WORLD ) {
+					msgtemp += lang("船に乗った。", "You boarded your ship")
 				}
 				else {
-					msgtemp += lang(mapname(gdata(GDATA_AREA_PREV)) + "を後にした。", "You left " + mapname(gdata(GDATA_AREA_PREV)) + ".")
+					if ( mdata(MDATA_TYPE) == MAP_TYPE_QUEST ) {
+						msgtemp += lang(mapname(gdata(GDATA_AREA)) + "に戻った。", "You returned to " + mapname(gdata(GDATA_AREA)))
+					}
+					else {
+						msgtemp += lang(mapname(gdata(GDATA_AREA_PREV)) + "を後にした。", "You left " + mapname(gdata(GDATA_AREA_PREV)) + ".")
+					}
 				}
 			}
 		}
@@ -1116,6 +1195,12 @@
 			gdata(GDATA_LEVEL) = 1
 			gdata(GDATA_LEVEL_START_ON) = 2
 			msgtemp += lang("古の庭園に辿りついた。", "You reached the ancient garden.")
+		}
+	}
+	if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
+		if ( adata(ADATA_ID, gdata(GDATA_AREA)) == AREA_TEST_WORLD ) {
+			gdata(GDATA_LEVEL) = gdata(GDATA_FLAG_SHIP_LAST_PORT) \ 100
+			snd SOUNDLIST_MIZU
 		}
 	}
 	repeat MAX_CHARA_FOLLOWER
@@ -2293,7 +2378,7 @@
 		gosub *world_newRandArea
 		map_placeplayer
 	}
-	if ( gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+	if ( gdata(GDATA_AREA) == areatestworld ) {
 		map_initcustom "test"
 		gosub *world_newRandArea
 		map_placeplayer
@@ -3537,6 +3622,91 @@
 				inv(INV_ITEM_PROPERTY, ci) = PROP_NPC
 			loop
 		}
+		if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
+			mdatan(0) = lang("海底", "Seabed")
+			map_randomtile 281, 30
+			map_randomtile 282, 20
+			map_randomtile 283, 10
+			repeat 3 + rnd(3)
+				flt
+				flttypemajor = FILTER_ENVIRONMENT_SEABED
+				itemcreate -1, ITEM_ID_DUMMY, -1, -1, 0
+				inv(INV_ITEM_PROPERTY, ci) = PROP_NPC
+			loop
+			repeat 5 + rnd(5)
+				if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) \ 100 == 53 | gdata(GDATA_FLAG_SHIP_LAST_PORT) \ 100 == 54 ) {
+					if ( rnd(2) == 0 ) {
+						flt
+						itemcreate -1, ITEM_ID_MOZUKU, -1, -1, 0
+						inv(INV_ITEM_PROPERTY, ci) = PROP_NPC
+					}
+				}
+				if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) \ 100 == 36 | gdata(GDATA_FLAG_SHIP_LAST_PORT) \ 100 == 93 ) {
+					if ( rnd(2) == 0 ) {
+						flt
+						itemcreate -1, ITEM_ID_KOMBU, -1, -1, 0
+						inv(INV_ITEM_PROPERTY, ci) = PROP_NPC
+					}
+				}
+				flt
+				itemcreate -1, ITEM_ID_WAKAME, -1, -1, 0
+				inv(INV_ITEM_PROPERTY, ci) = PROP_NPC
+			loop
+			repeat 4 + rnd(5)
+				flt
+				flttypeminor = FILTER_JUNK_SEABED
+				itemcreate -1, ITEM_ID_DUMMY, -1, -1, 0
+			loop
+			repeat 2 + rnd(2)
+				if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) \ 100 == 53 | gdata(GDATA_FLAG_SHIP_LAST_PORT) \ 100 == 54 ) {
+					if ( rnd(2) == 0 ) {
+						flt
+						itemcreate -1, ITEM_ID_SAZAE, -1, -1, 0
+					}
+				}
+				if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) \ 100 == 36 ) {
+					if ( rnd(2) == 0 ) {
+						flt
+						itemcreate -1, ITEM_ID_HAMAGURI, -1, -1, 0
+					}
+				}
+				if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) \ 100 == 11 ) {
+					if ( rnd(2) == 0 ) {
+						flt
+						itemcreate -1, ITEM_ID_HOTATE, -1, -1, 0
+					}
+				}
+			loop
+			if ( gdata(GDATA_DEEPEST_LEVEL) > 91 ) {
+				if ( rnd(5) == 0 ) {
+					flt
+					characreate -1, CREATURE_ID_CHAOSHAPRINCESS_FSSSY, -3, 0
+				}
+			}
+			if ( gdata(GDATA_DEEPEST_LEVEL) > 90 ) {
+				if ( rnd(5) == 0 ) {
+					flt
+					characreate -1, CREATURE_ID_AROMA_LOCARIS, -3, 0
+				}
+			}
+			if ( gdata(GDATA_DEEPEST_LEVEL) > 122 ) {
+				if ( rnd(5) == 0 ) {
+					flt
+					characreate -1, CREATURE_ID_BASATAN, -3, 0
+				}
+			}
+			if ( gdata(GDATA_DEEPEST_LEVEL) > 61 ) {
+				if ( rnd(5) == 0 ) {
+					flt
+					characreate -1, CREATURE_ID_INDIGO_LOBSTER, -3, 0
+				}
+			}
+			repeat 4 + rnd(5)
+				flt gdata(GDATA_DEEPEST_LEVEL), calcfixlv(FIX_QUALITY_GREAT)
+				fltnrace = "seamonster"
+				characreate -1, CREATURE_ID_BUG, -3, 0
+			loop
+		}
 		if ( gdata(GDATA_WORLD) == AREA_AIMWELL ) {
 			mdatan(MDATAN_NAME) = lang("平地", "Plain Field")
 			map_randomtile 1, 10
@@ -3643,15 +3813,19 @@
 			}
 		}
 		map_placeplayer
-		if ( 264 > gdata(GDATA_WORLD_TILE) | gdata(GDATA_WORLD_TILE) >= 363 ) {
-			repeat 4 + rnd(5)
-				flt
-				flttypeminor = FILTER_JUNK
-				itemcreate -1, ITEM_ID_DUMMY, -1, -1, 0
-			loop
+		if ( 264 <= gdata(GDATA_WORLD_TILE) & gdata(GDATA_WORLD_TILE) < 363 ) {
 		}
-		if ( encounter == 0 ) {
-			if ( gdata(GDATA_WORLD) != AREA_AIMWELL ) {
+		else {
+			if ( gdata(GDATA_WORLD) != AREA_TEST_WORLD ) {
+				repeat 4 + rnd(5)
+					flt
+					flttypeminor = FILTER_JUNK
+					itemcreate -1, ITEM_ID_DUMMY, -1, -1, 0
+				loop
+			}
+		}
+		if ( encounter == ENCOUNTER_NONE ) {
+			if ( gdata(GDATA_WORLD) != AREA_AIMWELL & gdata(GDATA_WORLD) != AREA_TEST_WORLD ) {
 				repeat mdata(MDATA_MODERATE_CROWD) + 1
 					gosub *fltChara
 					flt
@@ -3659,7 +3833,7 @@
 				loop
 			}
 		}
-		if ( encounter == 4 ) {
+		if ( encounter == ENCOUNTER_ROGUE ) {
 			mdata(MDATA_MODERATE_CROWD) = 0
 			flt
 			initlv = encounterlv
@@ -3674,13 +3848,13 @@
 			gdatan(GDATAN_TEAM2) = random_title(2)
 			evadd EVENT_ROGUE
 		}
-		if ( encounter == 5 ) {
+		if ( encounter == ENCOUNTER_CHESTNUT_GIANT ) {
 			flt
 			initlv = encounterlv
 			characreate -1, CREATURE_ID_CHESTNUT_GIANT, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER)
 			evadd EVENT_CHESTNUT_GIANT
 		}
-		if ( encounter == 3 ) {
+		if ( encounter == ENCOUNTER_ASSASSIN ) {
 			mdata(MDATA_MODERATE_CROWD) = 0
 			mdata(MDATA_TYPE) = MAP_TYPE_QUEST
 			rq = encounterref
@@ -3714,7 +3888,7 @@
 				txt_saving
 			}
 		}
-		if ( encounter == 2 ) {
+		if ( encounter == ENCOUNTER_MERCHANT ) {
 			flt
 			characreate -1, CREATURE_ID_SHOPKEEPER, 10, 11
 			cdata(CDATA_ROLE, rc) = ROLE_SHOP_WANDER, encounterlv
@@ -3735,7 +3909,7 @@
 				cdatan(CDATAN_NAME, rc) += " Lv" + cdata(CDATA_LEVEL, rc)
 			loop
 		}
-		if ( encounter == 1 ) {
+		if ( encounter == ENCOUNTER_ENEMY ) {
 			kaisuu = rnd(9)
 			if ( cdata(CDATA_LEVEL, CHARA_PLAYER) <= 5 ) {
 				kaisuu = rnd(3)
@@ -3770,6 +3944,74 @@
 		}
 		else {
 			adata(ADATA_BOSS, gdata(GDATA_AREA)) = 0
+		}
+	}
+	if ( gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+		if ( gdata(GDATA_LEVEL) == 1 ) {
+			mdata(MDATA_MODERATE_CROWD) = 40
+			map_initcustom "sea1"
+			map_placeplayer
+			mdata(MDATA_WALL) = 0
+		}
+		if ( gdata(GDATA_LEVEL) == 11 ) {
+			map_initcustom "sea11"
+			mdata(MDATA_FIELD) = MAP_FIELD_OUTDOOR
+			mdata(MDATA_TYPE) = MAP_TYPE_WORLD
+			mdata(MDATA_MODERATE_CROWD) = 0
+			mdata(MDATA_MUSIC) = MUSICLIST_MCHUGE
+			mdata(MDATA_CAN_SAVE) = 0
+			mdata(MDATA_NO_RENEW) = 0
+			mdatan(0) = lang("カプール近海", "Kapul coastal")
+			map_placeplayer
+			cell_featset 94, 51, tile_upstairs, CELL_FEATURE_UPSTAIRS, 1
+		}
+		if ( gdata(GDATA_LEVEL) == 36 ) {
+			map_initcustom "sea36"
+			mdata(MDATA_FIELD) = MAP_FIELD_OUTDOOR
+			mdata(MDATA_TYPE) = MAP_TYPE_WORLD
+			mdata(MDATA_MODERATE_CROWD) = 0
+			mdata(MDATA_MUSIC) = MUSICLIST_MCHUGE
+			mdata(MDATA_CAN_SAVE) = 0
+			mdata(MDATA_NO_RENEW) = 0
+			mdatan(0) = lang("ルミエスト近海", "Lumiest coastal")
+			map_placeplayer
+			cell_featset 57, 47, tile_upstairs, CELL_FEATURE_UPSTAIRS, 1
+		}
+		if ( gdata(GDATA_LEVEL) == 53 ) {
+			map_initcustom "sea53"
+			mdata(MDATA_FIELD) = MAP_FIELD_OUTDOOR
+			mdata(MDATA_TYPE) = MAP_TYPE_WORLD
+			mdata(MDATA_MODERATE_CROWD) = 0
+			mdata(MDATA_MUSIC) = MUSICLIST_MCHUGE
+			mdata(MDATA_CAN_SAVE) = 0
+			mdata(MDATA_NO_RENEW) = 0
+			mdatan(0) = lang("クルアルム近海", "Kurualm coastal")
+			map_placeplayer
+			cell_featset 89, 89, tile_upstairs, CELL_FEATURE_UPSTAIRS, 1
+		}
+		if ( gdata(GDATA_LEVEL) == 54 ) {
+			map_initcustom "sea54"
+			mdata(MDATA_FIELD) = MAP_FIELD_OUTDOOR
+			mdata(MDATA_TYPE) = MAP_TYPE_WORLD
+			mdata(MDATA_MODERATE_CROWD) = 0
+			mdata(MDATA_MUSIC) = MUSICLIST_MCHUGE
+			mdata(MDATA_CAN_SAVE) = 0
+			mdata(MDATA_NO_RENEW) = 0
+			mdatan(0) = lang("ヴァルム近海", "Valm coastal")
+			map_placeplayer
+			cell_featset 74, 11, tile_upstairs, CELL_FEATURE_UPSTAIRS, 1
+		}
+		if ( gdata(GDATA_LEVEL) == 93 ) {
+			map_initcustom "sea93"
+			mdata(MDATA_FIELD) = MAP_FIELD_OUTDOOR
+			mdata(MDATA_TYPE) = MAP_TYPE_WORLD
+			mdata(MDATA_MODERATE_CROWD) = 0
+			mdata(MDATA_MUSIC) = MUSICLIST_MCHUGE
+			mdata(MDATA_CAN_SAVE) = 0
+			mdata(MDATA_NO_RENEW) = 0
+			mdatan(0) = lang("悪魔岬近海", "Devil coastal")
+			map_placeplayer
+			cell_featset 46, 70, tile_upstairs, CELL_FEATURE_UPSTAIRS, 1
 		}
 	}
 	if ( gdata(GDATA_AREA) == AREA_LESIMAS ) {
@@ -9520,6 +9762,15 @@
 		}
 		kamen9 = 0
 	}
+	if ( kamen10 >= 100 ) {
+		if ( kamen10 == 100 ) {
+			flt
+			itemcreate -1, ITEM_ID_POT_OF_ALCHEMIST, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), 0
+			inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+			txt lang("何かが足元に転がってきた。", "Something is put on the ground.")
+		}
+		kamen10 = 0
+	}
 	if ( tuikabui == 100 ) {
 		flt
 		itemcreate -1, ITEM_ID_WONDER_BODY_FORMER, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), 6
@@ -12118,6 +12369,76 @@
 			}
 		}
 	}
+	if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
+		if ( gdata(GDATA_AREA) == AREA_WILDERNESS ) {
+			if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) \ 100 == 53 | gdata(GDATA_FLAG_SHIP_LAST_PORT) \ 100 == 54 ) {
+				if ( gdata(GDATA_HOUR) >= 24 ) {
+					p = 250, 120, 60
+					shade = 8
+				}
+				if ( gdata(GDATA_HOUR) >= 0 & gdata(GDATA_HOUR) < 4 ) {
+					p = 250, 120, 60
+					shade = 8
+				}
+				if ( gdata(GDATA_HOUR) >= 4 & gdata(GDATA_HOUR) < 10 ) {
+					p = 210 - (gdata(GDATA_HOUR) - 3) * 10, 110 - (gdata(GDATA_HOUR) - 3) * 12, 60 - (gdata(GDATA_HOUR) - 3) * 10
+					if ( p < 10 ) {
+						p = 10
+						shade = (gdata(GDATA_HOUR) - 3) * 2 + 8
+					}
+				}
+				if ( gdata(GDATA_HOUR) >= 10 & gdata(GDATA_HOUR) < 12 ) {
+					p = 140, 40, 10
+					shade = 25
+				}
+				if ( gdata(GDATA_HOUR) >= 12 & gdata(GDATA_HOUR) < 17 ) {
+					p = 140, 30, 0
+					shade = 25
+				}
+				if ( gdata(GDATA_HOUR) >= 17 & gdata(GDATA_HOUR) < 21 ) {
+					p = 140 + (gdata(GDATA_HOUR) - 17) * 20, 45 + (gdata(GDATA_HOUR) - 16) * 15, 10 + (gdata(GDATA_HOUR) - 16) * 10
+					shade = 12
+				}
+				if ( gdata(GDATA_HOUR) >= 21 & gdata(GDATA_HOUR) < 24 ) {
+					p = 220 + (gdata(GDATA_HOUR) - 21) * 10, 110 + (gdata(GDATA_HOUR) - 21) * 10, 40 + (gdata(GDATA_HOUR) - 21) * 5
+					shade = 7
+				}
+			}
+			else {
+				if ( gdata(GDATA_HOUR) >= 24 ) {
+					p = 250, 90, 60
+					shade = 8
+				}
+				if ( gdata(GDATA_HOUR) >= 0 & gdata(GDATA_HOUR) < 4 ) {
+					p = 250, 90, 60
+					shade = 8
+				}
+				if ( gdata(GDATA_HOUR) >= 4 & gdata(GDATA_HOUR) < 10 ) {
+					p = 210 - (gdata(GDATA_HOUR) - 3) * 10, 80 - (gdata(GDATA_HOUR) - 3) * 12, 60 - (gdata(GDATA_HOUR) - 3) * 10
+					if ( p < 10 ) {
+						p = 10
+						shade = (gdata(GDATA_HOUR) - 3) * 2 + 8
+					}
+				}
+				if ( gdata(GDATA_HOUR) >= 10 & gdata(GDATA_HOUR) < 12 ) {
+					p = 140, 10, 10
+					shade = 25
+				}
+				if ( gdata(GDATA_HOUR) >= 12 & gdata(GDATA_HOUR) < 17 ) {
+					p = 140, 0, 0
+					shade = 25
+				}
+				if ( gdata(GDATA_HOUR) >= 17 & gdata(GDATA_HOUR) < 21 ) {
+					p = 140 + (gdata(GDATA_HOUR) - 17) * 20, 15 + (gdata(GDATA_HOUR) - 16) * 15, 10 + (gdata(GDATA_HOUR) - 16) * 10
+					shade = 12
+				}
+				if ( gdata(GDATA_HOUR) >= 21 & gdata(GDATA_HOUR) < 24 ) {
+					p = 220 + (gdata(GDATA_HOUR) - 21) * 10, 80 + (gdata(GDATA_HOUR) - 21) * 10, 40 + (gdata(GDATA_HOUR) - 21) * 5
+					shade = 7
+				}
+			}
+		}
+	}
 	pos 0, 0
 	gfini 33 * inf_tiles, 25 * inf_tiles
 	gfdec2 p, p(1), p(2)
@@ -12188,7 +12509,7 @@
 			gosub *world_newRandArea
 			map_placeplayer
 		}
-		if ( gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+		if ( gdata(GDATA_AREA) == areatestworld ) {
 			map_initcustom "test"
 			gosub *world_newRandArea
 			map_placeplayer
@@ -12327,8 +12648,10 @@
 		repeat mdata(MDATA_WIDTH)
 			x = cnt
 			cell_featread x, y
-			if ( feat(1) < CELL_FEATURE_SAMPLING_SPOT_DETECTION | feat(1) > CELL_FEATURE_SAMPLING_SPOT_GARDENING ) {
-				map(x, y, 6) = 0
+			if ( feat(FEAT_CELL_FEATURE_ID) >= CELL_FEATURE_SAMPLING_SPOT_DETECTION & feat(FEAT_CELL_FEATURE_ID) <= CELL_FEATURE_SAMPLING_SPOT_GARDENING | feat(FEAT_CELL_FEATURE_ID) == CELL_FEATURE_UPSTAIRS | feat(FEAT_CELL_FEATURE_ID) == CELL_FEATURE_DOWNSTAIRS ) {
+			}
+			else {
+				map(x, y, MAP_FEATS_ON_TILE) = 0
 			}
 			map(x, y, 9) = 0
 		loop
@@ -12436,6 +12759,25 @@
 	adata(ADATA_ID, p) = AREA_TEST_WORLD
 	adata(ADATA_ICON, p) = xy2pic(0, 0)
 	adata(ADATA_TYPE, p) = MAP_TYPE_WORLD
+	adata(ADATA_X, p) = 6
+	adata(ADATA_Y, p) = 21
+	adata(ADATA_START_ON, p) = 6
+	adata(ADATA_TILE_FILE, p) = 1
+	adata(ADATA_TILESET, p) = 2
+	adata(ADATA_TIME_SCALE, p) = 30000
+	adata(ADATA_MIN_LEVEL, p) = 1
+	adata(ADATA_MAX_LEVEL, p) = 999
+	adata(ADATA_FIELD, p) = 2
+	adata(ADATA_CAN_SAVE, p) = 1
+	adata(ADATA_RESTORE_POS, p) = 0
+	adata(ADATA_PARENT, p) = AREA_TEST_WORLD
+	p = areatestworld
+	adata(ADATA_ID, p) = areatestworld
+	adata(ADATA_ICON, p) = xy2pic(0, 0)
+	adata(ADATA_TYPE, p) = MAP_TYPE_WORLD
+	/********** CUSTOM - BEGINNING **********/ // Fixes Some Bugs made by Ano
+	adata(ADATA_TYPE, 0) = 0
+	/********** CUSTOM - ENDING **********/
 	adata(ADATA_X, p) = 26
 	adata(ADATA_Y, p) = 23
 	adata(ADATA_START_ON, p) = 6
@@ -12447,7 +12789,7 @@
 	adata(ADATA_FIELD, p) = 2
 	adata(ADATA_CAN_SAVE, p) = 1
 	adata(ADATA_RESTORE_POS, p) = 0
-	adata(ADATA_PARENT, p) = AREA_TEST_WORLD
+	adata(ADATA_PARENT, p) = areatestworld
 	p = AREA_TW_NORTH_BORDER
 	adata(ADATA_ID, p) = AREA_TW_NORTH_BORDER
 	adata(ADATA_ICON, p) = xy2pic(26, 4)
@@ -12463,7 +12805,7 @@
 	adata(ADATA_FIELD, p) = 1
 	adata(ADATA_CAN_SAVE, p) = 1
 	adata(ADATA_RESTORE_POS, p) = 1
-	adata(ADATA_PARENT, p) = AREA_TEST_WORLD
+	adata(ADATA_PARENT, p) = areatestworld
 	p = AREA_SOUTH_TYRIS
 	adata(ADATA_ID, p) = AREA_SOUTH_TYRIS
 	adata(ADATA_ICON, p) = xy2pic(0, 0)

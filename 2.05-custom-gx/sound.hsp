@@ -280,6 +280,8 @@
 	sndload folder + "gun10.wav", SOUNDLIST_GUN10
 	sndload folder + "chandler23.wav", SOUNDLIST_CHANDLER23
 	sndload folder + "hawk1.wav", SOUNDLIST_HAWK1
+	sndload folder + "uminado.wav", SOUNDLIST_UMINADO
+	sndload folder + "mizu2.wav", SOUNDLIST_MIZU2
 
 	folder = exedir + "user\\sound\\"
 	sndload folder + "se0.wav", SOUNDLIST_USER_SE00
@@ -447,6 +449,11 @@
 	if ( gdata(GDATA_WEATHER) == WEATHER_ETHER ) {
 		env = SOUNDLIST_BG_WIND
 	}
+	if ( gdata(GDATA_AREA) == AREA_WILDERNESS ) {
+		if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
+			env = SOUNDLIST_UMINADO
+		}
+	}
 	if ( gdata(GDATA_AREA) == AREA_AMUR_CAGE & gdata(GDATA_LEVEL) >= 20 ) {
 		env = SOUNDLIST_BG_RAIN
 	}
@@ -500,6 +507,13 @@
 	else {
 		DSSTOP lpfilewind
 		DSRELEASE lpfilewind
+	}
+	if ( gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+		snd SOUNDLIST_BG_SEA, TRUE
+	}
+	else {
+		DSSTOP 7 + 6 + 1
+		DSRELEASE 7 + 6 + 1
 	}
 	if ( envonly == 1 ) {
 		envonly = 0
@@ -875,6 +889,16 @@
 				music = MUSICLIST_MCMEMORY
 			}
 		}
+		if ( gdata(GDATA_AREA) == AREA_WILDERNESS ) {
+			if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
+				if ( gdata(GDATA_HOUR) > 5 & gdata(GDATA_HOUR) < 17 ) {
+					music = MUSICLIST_MCSEA1
+				}
+				else {
+					music = MUSICLIST_MCSEA2
+				}
+			}
+		}
 	}
 	if ( scenemode == FALSE ) {
 	    if ( music == MUSICLIST_NONE | adata(ADATA_TYPE, gdata(GDATA_AREA)) == MAP_TYPE_WORLD ) {
@@ -883,6 +907,9 @@
 	    if ( gdata(GDATA_AREA) == AREA_LOST_YLVA ) {
 	    	music = MUSICLIST_MCLOST1 + gdata(GDATA_DAY) \ 3
 	    }
+		if ( gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+			music = MUSICLIST_MCHUGE
+		}
 	    if ( gdata(GDATA_AREA) == AREA_AIMWELL ) {
 	    	music = MUSICLIST_MCMARCH2
 	    }

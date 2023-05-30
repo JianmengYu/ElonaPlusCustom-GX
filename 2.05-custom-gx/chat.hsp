@@ -312,6 +312,7 @@
 		}
 		if ( cdata(CDATA_IMPRESSION, tc) < 25 ) {
 			chatMore lang("貴様！見つけた" + _yo(2), "You scum! You won't get away from me now!")
+			chatc@DP = tc
 			txt lang("「これでも食らうがいい" + _yo(2) + "」", cnvtalk("Eat this!"))
 			if ( rnd(2) == 0 ) {
 				repeat 28
@@ -481,9 +482,11 @@
 		if ( rnd(3) == 0 ) {
 			chatMore lang("酒でも飲んで親睦を深めよう" + _yo(2), "Let's have a drink and deepen our friendship!")
 			snd SOUNDLIST_DRINK1
+			chatc@DP = (-1)
 			txt lang("あなたと" + name(tc) + "は乾杯した！", cnvtalk("Cheers!"))
 			txtef COLOR_SKY_BLUE
 			txtmore
+			chatc@DP = tc
 			txt lang("「うぃっ！」", "*Hic*"), lang("「うまいぜ」", cnvtalk("Ah, good booze.")), lang("「らららー♪」", cnvtalk("La-la-la-la.")), lang("「ひっく」", cnvtalk("I'm going to heaven.")), lang("「ふぅ」", cnvtalk("Whew!")), lang("「たまらないわ」", cnvtalk("I'm revived!")), lang("「んまっ♪」", cnvtalk("Awesome."))
 			if ( cdata(CDATA_MATERIAL1_COUNTER, CHARA_PLAYER) == 1 ) {
 				snd SOUNDLIST_WRITE1
@@ -3953,6 +3956,7 @@
 				gosub *charaRefresh
 				dbidn = 0
 				dbmode = DBMODE_NONE
+				chatc@DP = tc
 				txt lang("「カガクの進歩に犠牲はつきものじゃー」", cnvtalk("Sacrifice is inherent to the advancement of science~"))
 				r1 = CHARA_PLAYER
 				rc = CHARA_PLAYER
@@ -5814,6 +5818,7 @@
 			chatMore lang("そうか、聞きたいか！勉強熱心だなぁ！", "Oh, so you'd like to hear about our history?! You are an eager student!")
 			chatMore lang("古い伝承によれば、全ては1人の姉と神の遭遇から始まったとされている。その神は幾人もの姉たちを束ねたかのような姉波動を放っており大いなる強さとやさしさ、父性と母性すらも内包する絶対の神姉だったという。そして今日に至るまで、姉波動の力に目覚めていった姉たちが愚弟愚妹を守り導いてきた。ちなみに支部を任されている私たち修道姉クラスは、姉神と同じ三つ編みにすることが許されているんだ。", "According to ancient legend, it all began with an encounter between an elder sister and a god. The god was an absolute divine elder sister who radiated sisterly vibrations, and appeared to unite a vast number of elder sisters whilist encompassing a great strength and gentleness. To the elder sisters, this god even encompassed both paternal and maternal qualities. And to this day, the elder sisters who have awakened to the power of Sistergy waves have protected and guided their lesser siblings. By the way - we, the class of monastic elder sisters who are in charge of this branch, are allowed to wear braids of the same style as the divine elder sister."), strquestion
 			txtef COLOR_YELLOW
+			chatc@DP = (-1)
 			txt lang("ノルン「あのお方は確かに姉でもあるけど…」", "Norn: " + cnvtalk("That god is certainly an older sister, but..."))
 			goto *chat_end
 		}
@@ -6072,6 +6077,7 @@
 					cell_setchara ttc, rtval, rtval(1)
 					tag_end rc
 				}
+				chatc@DP = (-1)
 				txt lang("迷子の子猫を犬のおまわりさんに引き渡した。「おうちかえれう？」", "You turned over the stray cat to the dog cop. " + cnvtalk("Am I going home?"))
 
 				/********** ANNA CUSTOM - BEGINNING **********/
@@ -7417,6 +7423,8 @@
 			flt
 			itemcreate -1, ITEM_ID_PHILOSOPHERS_STONE_MASK, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), 3
 			flt
+			itemcreate -1, ITEM_ID_POT_OF_ALCHEMIST, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), 0
+			flt
 			itemcreate -1, ITEM_ID_MUSIC_TICKET, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), 800
 			txt_questcompleted
 			txtmore
@@ -8017,6 +8025,7 @@
 					if ( cbit(CHARA_BIT_PCC, c) == 1 ) {
 						txtef COLOR_RED
 						txtmore
+						chatc@DP = tc
 						txt lang("ナズナ「修行にお洒落など不要！さぁ、着替えろ！」", "Nazuna yells, " + cnvtalk("You've no need for fancy clothing in training! Now, go change!"))
 						cbitmod CHARA_BIT_PCC, c, 0
 					}
@@ -8232,6 +8241,7 @@
 				loop
 				txtef COLOR_YELLOW
 				txtmore
+				chatc@DP = tc
 				txt lang("ナズナ「全員の主能力とスキルの潜在能力を鍛えてやったぞ！」", "Nazuna yells, " + cnvtalk("I trained all their attributes and skill potentials!"))
 				goto *chat_end
 			}
@@ -8293,6 +8303,7 @@
 				if ( cbit(CHARA_BIT_PCC, c) == 1 ) {
 					txtef COLOR_RED
 					txtmore
+					chatc@DP = tc
 					txt lang("ナズナ「修行にお洒落など不要！さぁ、着替えろ！」", "Nazuna yells, " + cnvtalk("You've no need of fancy wear in training! Now, go change!"))
 					cbitmod CHARA_BIT_PCC, c, 0
 				}
@@ -9652,6 +9663,7 @@
 			if ( gdata(GDATA_LEVEL) == 11 | gdata(GDATA_LEVEL) == 12 ) {
 				if ( soulstage == 3 ) {
 					chatMore lang("早く！こっちよ！", "Hurry up! Here!")
+					chatc@DP = tc
 					txt lang("「おかあ…さん？」", cnvtalk("Mom...?"))
 					soulstage = 4
 					goto *chat_end
@@ -11411,15 +11423,19 @@
 					txt lang("黄金の騎士たちが駆け付けてきた。", "The Golden Knights come rushing to the scene.")
 					txtef COLOR_YELLOW
 					txtmore
+					chatc@DP = (-1)
 					txt lang("「なんのつもりだ！」", cnvtalk("What do you think you're doing?!"))
 					txtef COLOR_YELLOW
 					txtmore
+					chatc@DP = (-1)
 					txt lang("「変質者め、おとなしくしろ」", cnvtalk("Behave yourself, pervert!"))
 					txtef COLOR_YELLOW
 					txtmore
+					chatc@DP = (-1)
 					txt lang("「のこのこ現れるとはな！」", cnvtalk("Have some damned shame!"))
 					txtef COLOR_YELLOW
 					txtmore
+					chatc@DP = (-1)
 					txt lang("「観念しろ！」", cnvtalk("Don't resist!"))
 					chatMore lang("(騎士に引きずられていくあなたを見ながら、怯えている…)", "(Paralyzed with fright, you are carried away by the Golden Knights...)")
 					evadd EVENT_QUEST_TIMEOUT
@@ -14525,6 +14541,7 @@
 			cdata(CDATA_EMO_ICON, tc) = 18 + 100 * 2
 			cdata(CDATA_TARGET, tc) = hometc
 			txtef COLOR_YELLOW
+			chatc@DP = tc
 			txt cdatan(CDATAN_NAME, tc) + lang("「害虫ゥゥゥゥ！！」", " " + cnvtalk("Kiiiiiill!!!"))
 			goto *label_6452
 			goto *label_6450
@@ -15613,6 +15630,7 @@
 			}
 		loop
 		if ( tuikabui > 14 ) {
+			chatc@DP = tc
 			txt lang("「これ以上は装着するところが無いな」", cnvtalk("There's nowhere else to attach any limbs."))
 			goto *chat_end
 		}
@@ -15837,6 +15855,7 @@
 			gosub *charaRefresh
 			cbitmod CHARA_BIT_ALTERED_LIMBS, c, 1
 			snd SOUNDLIST_COMPLETE1
+			chatc@DP = tc
 			txt lang("「完了だ。馴染み具合にも問題はないだろう」", cnvtalk("All done. There should be no chance of rejection."))
 		}
 	}
@@ -17452,6 +17471,7 @@
 	snd SOUNDLIST_TAORE08
 	chatMore lang("がはっ…クソっ…逃げろテスカトリポカ…！", "Gack... You little... Run, Tezcatlipoca!"), strmore, findchara(CREATURE_ID_ORPHE_THE_PRINCE_OF_LOST_KINGDOM)
 	txtef COLOR_YELLOW
+	chatc@DP = tc
 	txt lang("「光あれ」", cnvtalk("Let there be light..."))
 	msg_halt
 	animeid = ANIMATION_RAGNA
@@ -17574,6 +17594,7 @@
 		txtnew
 		txtef COLOR_RED
 		txt lang("何かは殺された。", "Something is killed.")
+		chatc@DP = tc
 		txt lang("「ぐわぁ」", cnvtalk("Uggghhh!"))
 		snd SOUNDLIST_KILL1
 		spillblood 28, 6, 10
@@ -17984,6 +18005,7 @@
 					txt lang(name(tc) + "は呆気にとられている。", name(tc) + " is taken aback.")
 				}
 				else {
+					chatc@DP = tc
 					if ( rnd(3) == 0 ) {
 						txt lang("「？？？」", cnvtalk("???"))
 					}
@@ -18057,6 +18079,7 @@
 					gosub *convert_word
 				}
 				if ( gdata(GDATA_CUSTOM_TALK) == 100 ) {
+					chatc@DP = tc
 					txt lang("「とてもよかった" + _yo(3) + "」", cnvtalk("You are awesome!")), lang("「す、すごすぎる" + _yo(3) + "」", cnvtalk("Oh my god....")), lang("「も、もうだめ" + _da(3) + "」", cnvtalk("Okay, okay, you win!")), lang("「こ、心地よかった" + _yo(3) + "」", cnvtalk("Holy...!")), lang("「さ、最高" + _da(3) + "」", cnvtalk("Holy...!"))
 				}
 				gain_iden tc, CHARA_PLAYER, 15
@@ -18071,6 +18094,7 @@
 				gosub *convert_word
 			}
 			if ( gdata(GDATA_CUSTOM_TALK) == 100 ) {
+				chatc@DP = tc
 				txt lang( "「ぬれてるぅ」", cnvtalk("Yes!")), lang("「びちゃびちゃ…」", cnvtalk("Ohhh")), lang("「うれしい、でも…」", "*gasp*"),  lang("「ふぅふぅ」", "*rumble*"), lang("「うふふふ」", cnvtalk("Come on!"))
 			}
 		}
@@ -18940,6 +18964,7 @@
 		}
 		chara_vanquish hometc
 		kaiwa = rnd(4)
+		chatc@DP = tc
 		if ( kaiwa == 0 ) {
 			txtef COLOR_YELLOW
 			txt cdatan(CDATAN_NAME, tc) + lang("「お帰りはこちら！」", " " + cnvtalk("Go back!"))
@@ -20511,6 +20536,7 @@
 				}
 				if ( cdata(CDATA_ID, cnt) == CREATURE_ID_ROVID ) {
 					snd SOUNDLIST_AMMO
+					chatc@DP = cnt
 					txt lang(cdatan(CDATAN_NAME, cnt) + "「私が許しませんよ！」", cdatan(CDATAN_NAME, cnt) + " says: " + cnvtalk("I won't allow it!"))
 					goto *chat_end
 					break
@@ -20552,6 +20578,7 @@
 				}
 				if ( cdata(CDATA_ID, cnt) == CREATURE_ID_ROVID ) {
 					snd SOUNDLIST_AMMO
+					chatc@DP = cnt
 					txt lang(cdatan(CDATAN_NAME, cnt) + "「やめなさい！ジュア様が嫌だと言っているでしょう！」", cdatan(CDATAN_NAME, cnt) + " says: " + cnvtalk("Stop this at once! Can't you see that Lady Jure doesn't want this?!"))
 					goto *chat_end
 					break
@@ -22639,7 +22666,7 @@
 			itemcreate 0, qdata(QDATA_DEST_ITEM, rq), cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER), 0
 			/********** CUSTOM JOB QUESTS - BEGINNING **********/
 			if ( TweakData(TWEAK_GAMEPLAY_CUSTOM_JOB_QUESTS, TWEAK_CATEGORY_GAMEPLAY) != 0 ) {
-				inv(INV_ITEM_WEIGHT, ci) += (rnd(11) + 5) * 200 * qdata(QDATA_LEVEL, rq)
+				inv(INV_ITEM_WEIGHT, ci) += (rnd(11) + 5) * 400 * qdata(QDATA_LEVEL, rq)
 				ibitmod ITEM_BIT_HANDMADE, ci, 1
 			}
 			/********** CUSTOM JOB QUESTS - ENDING **********/
@@ -23699,7 +23726,7 @@
 			if ( rnd(8) == 0 ) {
 				flttypemajor = FILTER_CARGO_FOOD
 			}
-			if ( rnd(10) == 0 ) {
+			if ( rnd(5) == 0 ) {
 				dbid = isetdeed(rnd(length(isetdeed)))
 			}
 			if ( rnd(20) == 0 ) {
@@ -23838,7 +23865,7 @@
 			if ( rnd(10) == 0 ) {
 				flttypemajor = FILTER_CARGO_FOOD
 			}
-			if ( rnd(10) == 0 ) {
+			if ( rnd(5) == 0 ) {
 				dbid = isetdeed(rnd(length(isetdeed)))
 			}
 			if ( rnd(20) == 0 ) {
@@ -23927,7 +23954,7 @@
 				continue
 			}
 			flttypemajor = FILTER_ITEM_BOOK
-			if ( rnd(3) == 0 ) {
+			if ( rnd(2) == 0 ) {
 				dbid = isetdeed(rnd(length(isetdeed)))
 			}
 			if ( rnd(5) == 0 ) {

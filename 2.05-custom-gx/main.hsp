@@ -18,9 +18,9 @@
 #include "mock_defines.hsp"
 #endif
 
-#define global VARIANT_NAME "ElonaPlus Custom-GX 2.17.1.0"
-#define global VARIANT_TITLE "Elona+ Custom-GX 2.17.1.0"
-#define global VERSION_STRING "6.17"
+#define global VARIANT_NAME "ElonaPlus Custom-GX 2.18.1.0"
+#define global VARIANT_TITLE "Elona+ Custom-GX 2.18.1.0"
+#define global VERSION_STRING "6.18"
 #define global VERSION_NUMBER int(double(VERSION_STRING) * 1000)
 #define global NET_VERSION	200000
 
@@ -703,6 +703,18 @@
 		itemcreate 0, ITEM_ID_SONIC_TONFA, -1, -1, 0
 		flt
 		itemcreate 0, ITEM_ID_MANDRAKE_SALAD, -1, -1, 0
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_DEED_OF_HUGE_RAFT, -1, -1, 0
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_DEED_OF_FISHING_SHIP, -1, -1, 0
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_DEED_OF_PIRATE_SHIP, -1, -1, 0
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_DEED_OF_CRUISE_SHIP, -1, -1, 0
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_DEED_OF_WARSHIP, -1, -1, 0
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_DEED_OF_SUBMARINE, -1, -1, 0
 		flt
 		itemcreate 0, ITEM_ID_DEED_OF_CARRIAGE, -1, -1, 0
 		flt
@@ -1716,8 +1728,14 @@
 			gdata(GDATA_RETURN)--
 			if ( mdata(MDATA_TYPE) == MAP_TYPE_QUEST | gdata(GDATA_AREA) == AREA_SHELTER | gdata(GDATA_AREA) == AREA_JAIL | (gdata(GDATA_AREA) == AREA_AMUR_CAGE & gdata(GDATA_LEVEL) >= 10) ) {
 				gdata(GDATA_RETURN) = 0
-				txt lang("不思議な力が帰還を阻止した。", "A mysterious power prevents you from returning.")
-				goto *game_main_redo_WEND1
+				if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) == 0 ) {
+					txt lang("不思議な力が帰還を阻止した。", "Strange power prevents you from returning.")
+					goto *game_main_redo_WEND1
+				}
+				if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) != 0 ) {
+					txt lang("不思議な力が船出を阻止した。", "Strange power prevents you from sailing.")
+					goto *game_main_redo_WEND1
+				}
 			}
 			if ( gdata(GDATA_RETURN) <= 0 & evnum == 0 ) {
 				f = 0
@@ -1732,8 +1750,14 @@
 					}
 				loop
 				if ( f ) {
-					txt lang("今は帰還できない仲間を連れている。", "One of your allies prevents you from returning.")
-					goto *game_main_redo_WEND1
+					if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) == 0 ) {
+						txt lang("今は帰還できない仲間を連れている。", "One of your allies prevents you from returning.")
+						goto *game_main_redo_WEND1
+					}
+					if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) != 0 ) {
+						txt lang("今は船出できない仲間を連れている。", "One of your allies prevents you from sailing.")
+						goto *game_main_redo_WEND1
+					}
 				}
 				if ( cdata(CDATA_BURDEN, CHARA_PLAYER) >= 4 ) {
 					txt lang("どこからか声が聞こえた。「悪いが重量オーバーだ」", "Someone shouts, \"Sorry, overweight.\"")
@@ -1751,19 +1775,36 @@
 					txt lang("あなたは法を犯した。", "You commit a crime.")
 					modkarma CHARA_PLAYER, -10
 				}
-				snd SOUNDLIST_TELEPORT1
-				txt lang("あなたは次元の扉を開けた。", "A dimensional door opens in front of you.")
+				if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) == 0 ) {
+					snd SOUNDLIST_TELEPORT1
+					txt lang("あなたは次元の扉を開けた。", "A dimensional door opens in front of you.")
+				}
+				if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) != 0 ) {
+					snd SOUNDLIST_MIZU
+					txt lang("あなたの船が到着した。", "Your ship has arrived.")
+				}
 				if ( gdata(GDATA_FLAG_DUEL_TARGET) > 0 ) {
 					snd SOUNDLIST_FAIL1
 					txt_duel2
 					goto *game_main_redo_WEND1
 				}
 				if ( gdata(GDATA_CARGO_WEIGHT) > gdata(GDATA_CARGO_LIMIT) ) {
-					txt lang("だが荷車が重すぎて帰還できなかった。", "Return failed because your cargo is too heavy.")
-					goto *game_main_redo_WEND1
+					if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) == 0 ) {
+						txt lang("だが荷車が重すぎて帰還できなかった。", "Return failed because your cargo is too heavy.")
+						goto *game_main_redo_WEND1
+					}
+					if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) != 0 ) {
+						txt lang("だが荷車が重すぎて乗船できなかった。", "Sailing failed because your cargo is too heavy.")
+						goto *game_main_redo_WEND1
+					}
 				}
 				if ( gdata(GDATA_TELEPORT_AREA) == AREA_JAIL ) {
 					txt lang("気まぐれな時の管理者により次元は歪められた！", "The capricious controller of time has changed your destination!")
+				}
+				if ( gdata(GDATA_FLAG_SHIP_LAST_PORT) != 0 ) {
+					prevsekai = gdata(GDATA_WORLD)
+					gdata(GDATA_WORLD) = AREA_TEST_WORLD
+					fixtransfermap = 1
 				}
 				msg_halt
 				gosub *screen_draw
@@ -1968,6 +2009,7 @@
 				if ( rnd(20) == 0 ) {
 					cdata(CDATA_EMO_ICON, cc) = 20 + 100
 					kaiwa = rnd(3)
+					chatc@DP = cc
 					if ( kaiwa == 0 ) {
 						txt lang("「うわ…これ大丈夫なの" + _kana(3) + "？」", cnvtalk("Wow... Is this really okay?"))
 					}
@@ -1984,6 +2026,7 @@
 				}
 				if ( rnd(10) == 0 ) {
 					kaiwa = rnd(3)
+					chatc@DP = cc
 					if ( kaiwa == 0 ) {
 						txt lang("「わけがわからない" + _yo(3) + "」", cnvtalk("I don't get it!"))
 					}
@@ -2022,6 +2065,7 @@
 					if ( synccheck(cc, -1) | synccheck(tc, -1) ) {
 						txtef COLOR_SKY_BLUE
 						txt lang(name(cc) + "は酔っ払って" + name(tc) + "にからんだ。", name(cc) + " gets the worse for drink and catches " + name(tc) + ".")
+						chatc@DP = cc
 						txt lang("「一杯どうだい？」", cnvtalk("Have a drink baby.")), lang("「飲んでないよ」", cnvtalk("What are you looking at?")), lang("「何見てるのさ」", cnvtalk("I ain't drunk.")), lang("「遊ぼうぜ」", cnvtalk("Let's have fun."))
 					}
 					if ( rnd(4 - int(partyTimeDrunkkeness * 0.039) ) == 0 ) {
@@ -2029,6 +2073,7 @@
 							if ( synccheck(cc, -1) | synccheck(tc, -1) ) {
 								txtef COLOR_SKY_BLUE
 								txt lang(name(tc) + "はカチンときた。", name(tc) + " is pretty annoyed with the drunkard.")
+								chatc@DP = cc
 								txt lang("「酔っ払いにはうんざり！」", cnvtalk("Your time is over, drunk!"))
 							}
 							cdata(CDATA_AI_AGGRO, tc) = 20
@@ -2107,6 +2152,7 @@
 		}
 	}
 	if ( cdata(CDATA_ROW_ACT, cc) != ACTION_NONE ) {
+		chatc@DP = 0
 		ci = cdata(CDATA_ITEM_USING, cc)
 		cdata(CDATA_ACTION_PERIOD, cc)--
 		if ( cdata(CDATA_ROW_ACT, cc) == ACTION_FISH ) {
@@ -2309,6 +2355,7 @@
 	/********** ANNA CUSTOM - ENDING **********/
 
 	cc = ct
+	chatc@DP = 0
 	if ( cdata(CDATA_EXIST, cc) != CHAR_STATE_ALIVE ) {
 		goto *game_main
 	}
@@ -2360,6 +2407,7 @@
 				await 200
 			}
 			txtef COLOR_SKY_BLUE
+			chatc@DP = cc
 			txt " *tick* "
 			gdata(GDATA_FLAG_STOP_TIME_OTHER_CHARA_INDEX) = 0
 			repeat MAX_CHARA_TOTAL
@@ -5584,6 +5632,7 @@
 			komaku = 0
 			haretu = 0
 			snd SOUNDLIST_STAB
+			chatc@DP = tc
 			txt lang("「〜〜〜〜〜〜〜〜〜っ！！！！！？？」", cnvtalk("!!!???")), lang("「耳が、耳がぁ〜！！」", cnvtalk("Eeeeeeeeeek!"))
 			modimp tc, -20
 			dmghp tc, rnd(sdata(SKILL_ATTR_STR, CHARA_PLAYER) * sqrt(sdata(SKILL_ATTR_STR, CHARA_PLAYER)) + sdata(SKILL_ATTR_STR, CHARA_PLAYER)), tc, SKILL_RES_SOUND, 1000
@@ -5594,6 +5643,7 @@
 			komaku = 0
 			haretu = 0
 			snd SOUNDLIST_BALL1
+			chatc@DP = tc
 			txt lang("「ひぎぃ！？」", cnvtalk("What are you doing!?")), lang("「もうイヤー！」", cnvtalk("No...No...!"))
 			modimp tc, -10
 			dmgcon tc, CONDITION_BLEED, 100
@@ -5642,9 +5692,11 @@
 				mimikaki++
 				snd SOUNDLIST_SNOW
 				if ( mimikaki == 1 ) {
+					chatc@DP = tc
 					txt lang("「なんだか変な感じ" + _da(3) + "」", cnvtalk("It is somehow strange feeling.")), lang("「少しこわい" + _na(3) + "」", cnvtalk("A little scary.")), lang("「優しくして" + _kure(3) + "…」", cnvtalk("Please be gentle..."))
 				}
 				if ( mimikaki == 2 ) {
+					chatc@DP = tc
 					txt lang("「くっ…♪」", cnvtalk("Oh…")), lang("「気持ちいい" + _na(3) + "♪」", cnvtalk("It feels good...!")), lang("「くすぐったい" + _yo(3) + "♪」", cnvtalk("That tickles!"))
 				}
 			}
@@ -5656,6 +5708,7 @@
 				komaku++
 				snd SOUNDLIST_CRACK
 				if ( komaku < 3 ) {
+					chatc@DP = tc
 					txt lang("「痛っ！」", cnvtalk("Ouch!")), lang("「鼓膜に当たった" + _yo(3) + "！？」", cnvtalk("You are hurting my eardrum!")), lang("「乱暴にしないで" + _kure(3) + "！」", cnvtalk("Don't be rough!"))
 				}
 			}
@@ -5663,6 +5716,7 @@
 				haretu++
 				snd SOUNDLIST_CRACK2
 				if ( haretu < 3 ) {
+					chatc@DP = tc
 					txt lang("「なんか膨らんできた" + _yo(3) + "！？」", cnvtalk("Something has swelled!?")), lang("「" + _ore(3) + "には大きすぎる" + _na(3) + "…」", cnvtalk("It's too big for me...")), lang("「ちょっと落ち着いて" + _kure(3) + "！」", cnvtalk("Calm down a little!"))
 				}
 			}
@@ -6564,6 +6618,7 @@
 		if ( tc != CHARA_PLAYER ) {
 			if ( cdata(CDATA_EXIST, tc) == CHAR_STATE_ALIVE ) {
 				txtef COLOR_BLUE
+				chatc@DP = tc
 				txt lang("パエル「おかあさんーー！！」", cnvtalk("M-mom...!!"))
 				cdata(CDATA_RELATION, tc) = -3
 				cdata(CDATA_AI_AGGRO, tc) = 1000
@@ -6591,12 +6646,15 @@
 		msg_halt
 		msg_clear
 		txtef COLOR_YELLOW
+		chatc@DP = rc
 		txt lang("「合格だ！」", cnvtalk("You passed!"))
 		msg_halt
 		txtef COLOR_YELLOW
+		chatc@DP = rc
 		txt lang("「お前は決戦因子としてふさわしい力を示した」", cnvtalk("You've shown you have suitable strength to be considered the Deciding Factor in a decisive battle."))
 		msg_halt
 		txtef COLOR_YELLOW
+		chatc@DP = rc
 		txt lang("「これなら混沌の神も倒せるかもしれん…いや、きっと倒せる！」", cnvtalk("As you are now, you might even be able to defeat the God of Chaos... No, I'm certain you can!"))
 		msg_halt
 		repeat 2
@@ -6611,6 +6669,7 @@
 		_switch_sw = 0
 		chara_vanquish findchara(CREATURE_ID_BLACK_GAUNTLET_LEOLD)
 		txtef COLOR_YELLOW
+		chatc@DP = tc
 		txt lang("「望み通り戦ってやろう！」", cnvtalk("Let's fight as you wish!!"))
 		flt
 		novoidlv = 1

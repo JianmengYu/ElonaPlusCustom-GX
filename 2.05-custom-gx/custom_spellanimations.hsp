@@ -32,7 +32,8 @@
 
     preparePicItem 6, anicol
     if ( efid == SKILL_SPELL_FIRE_CLAW ) {
-		preparePicItem xy2pic(21, 36), anicol
+        preparePicItem xy2pic(21, 36), anicol
+        aangle@CSA = atan(cdata(CDATA_X, cc) - cdata(CDATA_X, tc), cdata(CDATA_Y, tc) - cdata(CDATA_Y, cc))
     }
     if ( efid == SKILL_SPELL_COLD_BLADE ) {
 		preparePicItem xy2pic(27, 36), anicol
@@ -79,7 +80,7 @@
             gsel 9
             gmode 0
             pos 0, 0
-            gcopy 0, ax, ay - inf_tiles / 2, inf_tiles, inf_tiles
+            gcopy 0, ax, ay - inf_tiles / 2  + 24, inf_tiles, inf_tiles
             gmode 2
             gsel 0
             gmode 2, inf_tiles, inf_tiles
@@ -91,7 +92,7 @@
 
             redraw 0
             gmode 0
-            pos ax, ay - inf_tiles / 2
+            pos ax, ay - inf_tiles / 2  + 24
             gcopy 9, 0, 0, inf_tiles, inf_tiles
             gmode 2
             redraw 1
@@ -99,6 +100,7 @@
     }
 
     hoseiwait = ( cfg_animewait ) * ( ammoproc != ENCHANT_AMMO_BURST )
+    aangle@CSA = atan(cdata(CDATA_X, tc) - cdata(CDATA_X, cc), cdata(CDATA_Y, cc) - cdata(CDATA_Y, tc))
     effshift@CSA = 0
 
     gsel 7

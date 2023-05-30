@@ -532,6 +532,7 @@
 							tc = cnt
 							cbitmod CHARA_BIT_BODYGUARD, cnt, 0
 							if ( cdata(CDATA_EXIST, tc) == CHAR_STATE_ALIVE ) {
+								chatc@DP = tc
 								if ( qdata(QDATA_VAR, rq) == 0 ) {
 									s = lang("「おい、暗殺者が私の後ろにいるぞ」", cnvtalk("Hey, the assassins are killing me."))
 									p = DAMAGE_FROM_UNSEEN

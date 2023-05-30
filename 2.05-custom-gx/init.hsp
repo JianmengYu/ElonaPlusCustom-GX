@@ -1080,6 +1080,17 @@ if instr(s,0,%1)!-1{	%c\
 
 #deffunc txt_conv
 	redraw 0
+	/********** CUSTOM DIALOG POP UPS - BEGINNING **********/
+	if ( chatc@DP != 0) {
+		if ( chatc@DP < 0 ) { 
+			chatc@DP = CHARA_PLAYER
+		}
+		if ( msgtemp != "" & ( instr(msgtemp, 0, "\"") != (-1) | instr(msgtemp, 0, "*") != (-1) ) ) {
+			DamagePopupAdd msgtemp, chatc@DP, DMGPOPUP_REMOVE_CONDITION, 9999
+		}
+	}
+	chatc@DP = 0
+	/********** CUSTOM DIALOG POP UPS - ENDING **********/
 	if ( msgtemp == "" ) {
 		return
 	}

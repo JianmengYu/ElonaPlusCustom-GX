@@ -32,208 +32,214 @@
 			goto *random_eventProc
 		}
 	}
+	if ( breakfast == 666 ) {
+		id = RANDOM_EVENT_SEA_RAGING_SEA
+		goto *random_eventProc
+	}
 	if ( breakfast < 100 & kitune != 10 ) {
-		child = 0
-		repeat MAX_CHARA_TOTAL
-			if ( cbit(CHARA_BIT_BIRTHED_CHILD, cnt) != TRUE ) {
+	}
+	child = 0
+	repeat MAX_CHARA_TOTAL
+		if ( cbit(CHARA_BIT_BIRTHED_CHILD, cnt) != TRUE ) {
+			continue
+		}
+		if ( cdata(CDATA_EXIST, cnt) != CHAR_STATE_ALIVE ) {
+			continue
+		}
+		if ( cdata(CDATA_CONDITION_SLEEP, cnt) > 0 ) {
+			continue
+		}
+		if ( cdata(CDATA_CONDITION_DIM, cnt) >= 60 ) {
+			continue
+		}
+		if ( rnd(100) > 10 ) {
+			continue
+		}
+		if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-4) ) {
+			if ( rnd(10) > 7 ) {
 				continue
 			}
-			if ( cdata(CDATA_EXIST, cnt) != CHAR_STATE_ALIVE ) {
+		}
+		if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-3) ) {
+			if ( rnd(10) > 5 ) {
 				continue
 			}
-			if ( cdata(CDATA_CONDITION_SLEEP, cnt) > 0 ) {
+		}
+		if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-2) ) {
+			if ( rnd(10) > 3 ) {
 				continue
 			}
-			if ( cdata(CDATA_CONDITION_DIM, cnt) >= 60 ) {
+		}
+		if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-1) ) {
+			if ( rnd(10) > 3 ) {
 				continue
 			}
-			if ( rnd(100) > 10 ) {
-				continue
+		}
+		child = cnt
+		break
+	loop
+	kitune = 0
+	if ( mode == MODELIST_TXT_ADV ) {
+		if ( cdata(CDATA_GOD, CHARA_PLAYER) != GOD_EYTH ) {
+			if ( rnd(12) == 0 ) {
+				id = RANDOM_EVENT_FAITH
 			}
-			if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-4) ) {
-				if ( rnd(10) > 7 ) {
-					continue
-				}
-			}
-			if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-3) ) {
-				if ( rnd(10) > 5 ) {
-					continue
-				}
-			}
-			if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-2) ) {
-				if ( rnd(10) > 3 ) {
-					continue
-				}
-			}
-			if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-1) ) {
-				if ( rnd(10) > 3 ) {
-					continue
-				}
-			}
-			child = cnt
-			break
-		loop
-		kitune = 0
-		if ( mode == MODELIST_TXT_ADV ) {
-			if ( cdata(CDATA_GOD, CHARA_PLAYER) != GOD_EYTH ) {
-				if ( rnd(12) == 0 ) {
-					id = RANDOM_EVENT_FAITH
-				}
-			}
-			if ( rnd(120) == 0 ) {
-				id = RANDOM_EVENT_DREAM_LOSE_RES, 120
-			}
-			if ( rnd(100) == 0 ) {
-				id = RANDOM_EVENT_DREAM_CONNECT
-			}
-			if ( rnd(50) == 0 ) {
-				id = RANDOM_EVENT_DREAM_GROWTH
-			}
-			if ( rnd(25) == 0 ) {
-				id = RANDOM_EVENT_DREAM_MAGIC
-			}
-			if ( rnd(150) == 0 ) {
-				id = RANDOM_EVENT_DREAM_CURSE, 65
-			}
-			if ( rnd(150) == 0 ) {
-				id = RANDOM_EVENT_DREAM_STRANGE_STAIRS
-			}
-			if ( rnd(20) == 0 ) {
-				id = RANDOM_EVENT_DREAM_REGEN_HP
-			}
-			if ( rnd(20) == 0 ) {
-				id = RANDOM_EVENT_DREAM_REGEN_MP
-			}
-			if ( rnd(120) == 0 ) {
-				id = RANDOM_EVENT_THIEF, 40
-			}
-			if ( rnd(300) == 0 ) {
-				id = RANDOM_EVENT_DREAM_BUTTERFLY
-			}
-			if ( rnd(50) == 0 ) {
-				id = RANDOM_EVENT_DREAM_MATERIAL
-			}
-			if ( rnd(300) == 0 ) {
-				id = RANDOM_EVENT_DREAM_POTENTIAL
-			}
-			if ( rnd(120) == 0 ) {
-				id = RANDOM_EVENT_DREAM_MUTATION, 70
-			}
-			if ( rnd(100) == 0 ) {
-				id = RANDOM_EVENT_DREAM_SHEEP_NIGHTMARE
-			}
-			if ( rnd(50) == 0 | soine == 2000 ) {
-				id = RANDOM_EVENT_SLEEP_SHARING
-			}
-			if ( cdata(CDATA_ITEM_USING, CHARA_PLAYER) >= 0 ) {
-				if ( inv(INV_ITEM_ID, cdata(CDATA_ITEM_USING, CHARA_PLAYER)) == ITEM_ID_JURES_BODY_PILLOW ) {
-					if ( cdata(CDATA_GOD, CHARA_PLAYER) != GOD_EYTH ) {
-						if ( rnd(2) == 0 ) {
-							id = RANDOM_EVENT_FAITH
-						}
-					}
+		}
+		if ( rnd(120) == 0 ) {
+			id = RANDOM_EVENT_DREAM_LOSE_RES, 120
+		}
+		if ( rnd(100) == 0 ) {
+			id = RANDOM_EVENT_DREAM_CONNECT
+		}
+		if ( rnd(50) == 0 ) {
+			id = RANDOM_EVENT_DREAM_GROWTH
+		}
+		if ( rnd(25) == 0 ) {
+			id = RANDOM_EVENT_DREAM_MAGIC
+		}
+		if ( rnd(150) == 0 ) {
+			id = RANDOM_EVENT_DREAM_CURSE, 65
+		}
+		if ( rnd(150) == 0 ) {
+			id = RANDOM_EVENT_DREAM_STRANGE_STAIRS
+		}
+		if ( rnd(20) == 0 ) {
+			id = RANDOM_EVENT_DREAM_REGEN_HP
+		}
+		if ( rnd(20) == 0 ) {
+			id = RANDOM_EVENT_DREAM_REGEN_MP
+		}
+		if ( rnd(120) == 0 ) {
+			id = RANDOM_EVENT_THIEF, 40
+		}
+		if ( rnd(300) == 0 ) {
+			id = RANDOM_EVENT_DREAM_BUTTERFLY
+		}
+		if ( rnd(50) == 0 ) {
+			id = RANDOM_EVENT_DREAM_MATERIAL
+		}
+		if ( rnd(300) == 0 ) {
+			id = RANDOM_EVENT_DREAM_POTENTIAL
+		}
+		if ( rnd(120) == 0 ) {
+			id = RANDOM_EVENT_DREAM_MUTATION, 70
+		}
+		if ( rnd(100) == 0 ) {
+			id = RANDOM_EVENT_DREAM_SHEEP_NIGHTMARE
+		}
+		if ( rnd(50) == 0 | soine == 2000 ) {
+			id = RANDOM_EVENT_SLEEP_SHARING
+		}
+		if ( cdata(CDATA_ITEM_USING, CHARA_PLAYER) >= 0 ) {
+			if ( inv(INV_ITEM_ID, cdata(CDATA_ITEM_USING, CHARA_PLAYER)) == ITEM_ID_JURES_BODY_PILLOW ) {
+				if ( cdata(CDATA_GOD, CHARA_PLAYER) != GOD_EYTH ) {
 					if ( rnd(2) == 0 ) {
-						id = RANDOM_EVENT_DREAM_REGEN_HP
-					}
-					if ( rnd(10) == 0 ) {
-						id = RANDOM_EVENT_DREAM_GROWTH
-					}
-					if ( rnd(60) == 0 ) {
-						id = RANDOM_EVENT_DREAM_POTENTIAL
+						id = RANDOM_EVENT_FAITH
 					}
 				}
-			}
-			if ( child > 0 ) {
-				if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-5) ) {
-					id = RANDOM_EVENT_DREAM_CAUSE_UNKNOWN
+				if ( rnd(2) == 0 ) {
+					id = RANDOM_EVENT_DREAM_REGEN_HP
 				}
-			}
-			if ( rnd(200) == 0 ) {
-				id = RANDOM_EVENT_DREAM_LUCKY
-			}
-			if ( rnd(250) == 0 ) {
-				if ( inv_getfreeid(CHARA_PLAYER) != (-1) ) {
-					id = RANDOM_EVENT_DREAM_TREASURE
+				if ( rnd(10) == 0 ) {
+					id = RANDOM_EVENT_DREAM_GROWTH
 				}
-			}
-			if ( rnd(10000) == 0 ) {
-				if ( inv_getfreeid(CHARA_PLAYER) != (-1) ) {
-					id = RANDOM_EVENT_DREAM_EHEKATL
+				if ( rnd(60) == 0 ) {
+					id = RANDOM_EVENT_DREAM_POTENTIAL
 				}
-			}
-			if ( soine == 1000 ) {
-				id = RANDOM_EVENT_FORCED_SLEEP_SHARING
-			}
-			goto *random_eventProc
-		}
-		if ( mdata(MDATA_TYPE) != MAP_TYPE_WORLD ) {
-			if ( cdata(CDATA_ROW_ACT, CHARA_PLAYER) != ACTION_NONE ) {
-				return
-			}
-		}
-		if ( mdata(MDATA_TYPE) == MAP_TYPE_HOME ) {
-			return
-		}
-		if ( gdata(GDATA_AREA) == AREA_VALM ) {
-			if ( gdata(GDATA_LEVEL) == 3 ) {
-				return
 			}
 		}
 		if ( child > 0 ) {
-			kaiwa = 0
 			if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-5) ) {
 				id = RANDOM_EVENT_DREAM_CAUSE_UNKNOWN
 			}
-			if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-4) ) {
-				id = RANDOM_EVENT_DREAM_CHILD_SELF_EXPRESSION
-			}
-			if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-3) ) {
-				if ( cdata(CDATA_PERSONALITY, child) > 2 ) {
-					cdata(CDATA_PERSONALITY, child) = 0
-				}
-				if ( cdata(CDATA_PERSONALITY, child) == 0 ) {
-					id = RANDOM_EVENT_DREAM_DREAM_FOR_THE_FUTURE
-				}
-				if ( cdata(CDATA_PERSONALITY, child) == 1 ) {
-					id = RANDOM_EVENT_DREAM_TREASURE_DISCOVERY
-				}
-				if ( cdata(CDATA_PERSONALITY, child) == 2 ) {
-					id = RANDOM_EVENT_DREAM_ROOTS
-				}
-				cdata(CDATA_PERSONALITY, child)++
-			}
-			if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-2) ) {
-				if ( cdata(CDATA_PERSONALITY, child) > 2 ) {
-					cdata(CDATA_PERSONALITY, child) = 0
-				}
-				if ( cdata(CDATA_PERSONALITY, child) == 0 ) {
-					id = RANDOM_EVENT_DREAM_BATTLE_IN_THE_BRAIN
-				}
-				if ( cdata(CDATA_PERSONALITY, child) == 1 ) {
-					id = RANDOM_EVENT_DREAM_THIS_WORLD_IS_CANVAS
-				}
-				if ( cdata(CDATA_PERSONALITY, child) == 2 ) {
-					id = RANDOM_EVENT_DREAM_MEANING_OF_STUDY
-				}
-				cdata(CDATA_PERSONALITY, child)++
-			}
-			if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-1) ) {
-				if ( cdata(CDATA_PERSONALITY, child) > 2 ) {
-					cdata(CDATA_PERSONALITY, child) = 0
-				}
-				if ( cdata(CDATA_PERSONALITY, child) == 0 ) {
-					id = RANDOM_EVENT_DREAM_SELF_REVELATION
-				}
-				if ( cdata(CDATA_PERSONALITY, child) == 1 ) {
-					id = RANDOM_EVENT_DREAM_SELF_AWARENESS
-				}
-				if ( cdata(CDATA_PERSONALITY, child) == 2 ) {
-					id = RANDOM_EVENT_DREAM_MARGINAL_MAN
-				}
-				cdata(CDATA_PERSONALITY, child)++
-			}
-			goto *random_eventProc
 		}
+		if ( rnd(200) == 0 ) {
+			id = RANDOM_EVENT_DREAM_LUCKY
+		}
+		if ( rnd(250) == 0 ) {
+			if ( inv_getfreeid(CHARA_PLAYER) != (-1) ) {
+				id = RANDOM_EVENT_DREAM_TREASURE
+			}
+		}
+		if ( rnd(10000) == 0 ) {
+			if ( inv_getfreeid(CHARA_PLAYER) != (-1) ) {
+				id = RANDOM_EVENT_DREAM_EHEKATL
+			}
+		}
+		if ( soine == 1000 ) {
+			id = RANDOM_EVENT_FORCED_SLEEP_SHARING
+		}
+		goto *random_eventProc
+	}
+	if ( mdata(MDATA_TYPE) != MAP_TYPE_WORLD ) {
+		if ( cdata(CDATA_ROW_ACT, CHARA_PLAYER) != ACTION_NONE ) {
+			return
+		}
+	}
+	if ( mdata(MDATA_TYPE) == MAP_TYPE_HOME ) {
+		return
+	}
+	if ( gdata(GDATA_AREA) == AREA_VALM ) {
+		if ( gdata(GDATA_LEVEL) == 3 ) {
+			return
+		}
+	}
+	if ( child > 0 ) {
+		kaiwa = 0
+		if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-5) ) {
+			id = RANDOM_EVENT_DREAM_CAUSE_UNKNOWN
+		}
+		if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-4) ) {
+			id = RANDOM_EVENT_DREAM_CHILD_SELF_EXPRESSION
+		}
+		if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-3) ) {
+			if ( cdata(CDATA_PERSONALITY, child) > 2 ) {
+				cdata(CDATA_PERSONALITY, child) = 0
+			}
+			if ( cdata(CDATA_PERSONALITY, child) == 0 ) {
+				id = RANDOM_EVENT_DREAM_DREAM_FOR_THE_FUTURE
+			}
+			if ( cdata(CDATA_PERSONALITY, child) == 1 ) {
+				id = RANDOM_EVENT_DREAM_TREASURE_DISCOVERY
+			}
+			if ( cdata(CDATA_PERSONALITY, child) == 2 ) {
+				id = RANDOM_EVENT_DREAM_ROOTS
+			}
+			cdata(CDATA_PERSONALITY, child)++
+		}
+		if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-2) ) {
+			if ( cdata(CDATA_PERSONALITY, child) > 2 ) {
+				cdata(CDATA_PERSONALITY, child) = 0
+			}
+			if ( cdata(CDATA_PERSONALITY, child) == 0 ) {
+				id = RANDOM_EVENT_DREAM_BATTLE_IN_THE_BRAIN
+			}
+			if ( cdata(CDATA_PERSONALITY, child) == 1 ) {
+				id = RANDOM_EVENT_DREAM_THIS_WORLD_IS_CANVAS
+			}
+			if ( cdata(CDATA_PERSONALITY, child) == 2 ) {
+				id = RANDOM_EVENT_DREAM_MEANING_OF_STUDY
+			}
+			cdata(CDATA_PERSONALITY, child)++
+		}
+		if ( cdata(CDATA_SPRITE_SIZE_MILK, child) == (-1) ) {
+			if ( cdata(CDATA_PERSONALITY, child) > 2 ) {
+				cdata(CDATA_PERSONALITY, child) = 0
+			}
+			if ( cdata(CDATA_PERSONALITY, child) == 0 ) {
+				id = RANDOM_EVENT_DREAM_SELF_REVELATION
+			}
+			if ( cdata(CDATA_PERSONALITY, child) == 1 ) {
+				id = RANDOM_EVENT_DREAM_SELF_AWARENESS
+			}
+			if ( cdata(CDATA_PERSONALITY, child) == 2 ) {
+				id = RANDOM_EVENT_DREAM_MARGINAL_MAN
+			}
+			cdata(CDATA_PERSONALITY, child)++
+		}
+		goto *random_eventProc
+	}
+	if ( gdata(GDATA_WORLD) != AREA_TEST_WORLD ) {
 		if ( rnd(30) == 0 ) {
 			id = RANDOM_EVENT_PRIEST
 		}
@@ -254,6 +260,40 @@
 		}
 		if ( rnd(80) == 0 ) {
 			id = RANDOM_EVENT_HUNGRY, 45
+		}
+	}
+	else {
+		if ( gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+			if ( gdata(GDATA_WEATHER) == WEATHER_HARD_RAIN | gdata(GDATA_WEATHER) == WEATHER_ETHER ) {
+				if ( rnd(10 + gdata(GDATA_FLAG_SHIP_TYPE) * 2) == 0 ) {
+					id = RANDOM_EVENT_SEA_RAGING_SEA
+					gosub *random_event
+				}
+			}
+			if ( gdata(GDATA_FLAG_SHIP_TYPE) > 0 ) {
+				if ( rnd(5) == 0 ) {
+					id = RANDOM_EVENT_SEA_SWEPT_AWAY
+					goto *random_eventProc
+				}
+				if ( rnd(5) == 0 ) {
+					id = RANDOM_EVENT_SEA_AFTER_ESCAPE
+					goto *random_eventProc
+				}
+				if ( rnd(5) == 0 ) {
+					id = RANDOM_EVENT_SEA_DRIFTERS
+					goto *random_eventProc
+				}
+				if ( gdata(GDATA_FLAG_SHIP_TYPE) < 6 ) {
+					if ( rnd(10) == 0 ) {
+						id = RANDOM_EVENT_SEA_AERIAL_THREAT
+						goto *random_eventProc
+					}
+				}
+				if ( rnd(10) == 0 ) {
+					id = RANDOM_EVENT_SEA_UNDERSEA_THREAT
+					goto *random_eventProc
+				}
+			}
 		}
 		if ( mdata(MDATA_TYPE) == MAP_TYPE_TOWN ) {
 			if ( rnd(25) == 0 ) {
@@ -326,6 +366,7 @@
 		if ( tc == CHARA_PLAYER ) {
 			goto *random_eventProc_SWEND1
 		}
+		chatc@DP = tc
 		txt lang(name(tc) + "「ぎゃぁーー！」", name(tc) + " screams, " + cnvtalk("Ahhhhhhh!"))
 		dmghp tc, 44444, DAMAGE_FROM_EXECUTION
 		mdata(MDATA_WEREWOLF_STAGE) = 0
@@ -377,6 +418,7 @@
 					}
 				}
 				if ( cdata(CDATA_EXIST, p) == CHAR_STATE_ALIVE ) {
+					chatc@DP = p
 					txt lang(name(p) + "「ぎゃぁーー！」", name(p) + " screams, " + cnvtalk("Ahhhhhhh!"))
 					dmghp p, 99999, DAMAGE_FROM_UNSEEN
 					kitune = 10
@@ -411,6 +453,7 @@
 				continue cnt
 			}
 			if ( cdata(CDATA_EXIST, p) == CHAR_STATE_ALIVE ) {
+				chatc@DP = p
 				txt lang(name(p) + "「ぎゃぁーー！」", name(p) + " screams, " + cnvtalk("Ahhhhhhh!"))
 				dmghp p, 99999, DAMAGE_FROM_UNSEEN
 				break
@@ -1143,6 +1186,7 @@
 		chatList 2, lang("真面目に考えようね", "Please reconsider.")
 		chatList 3, lang("なれるように勉強しようね", "Let's study so that you can!")
 		gosub *re_select
+		chatc@DP = child
 		if ( rtval == 1 ) {
 			if ( jp ) {
 				txt cdatan(CDATAN_NAME, child) + "「へへへ…」", cdatan(CDATAN_NAME, child) + "「" + _ore(3) + "の夢を真似してもいいよ！」"
@@ -1244,6 +1288,7 @@
 		chatList 2, lang("受け取ってこっそり捨てる", "(Receive and secretly throw away)")
 		chatList 3, lang("ゴミ拾ってないで勉強しろ", "Study without picking up junk!!")
 		gosub *re_select
+		chatc@DP = child
 		if ( rtval == 1 ) {
 			if ( jp ) {
 				txt cdatan(CDATAN_NAME, child) + "「あげないよ！？」", cdatan(CDATAN_NAME, child) + "「見せるだけ！見せるだけだから！」"
@@ -1291,6 +1336,7 @@
 		chatList 2, lang("コウノトリさんが運んできた", "The white stork brings it.")
 		chatList 3, lang("橋の下から拾ってきた", "It can be picked up in a cabbage patch.")
 		gosub *re_select
+		chatc@DP = child
 		if ( rtval == 1 ) {
 			if ( jp ) {
 				txt cdatan(CDATAN_NAME, child) + "「遺伝子…？？？」", cdatan(CDATAN_NAME, child) + "「意味わからない！」"
@@ -1337,6 +1383,7 @@
 		chatList 2, lang("もっと現実世界でがんばらなくちゃ", "Try harder in the real world.")
 		chatList 3, lang("するなら戦いの勉強をするべき", "If you do, you should study fighting.")
 		gosub *re_select
+		chatc@DP = child
 		if ( rtval == 1 ) {
 			if ( jp ) {
 				txt cdatan(CDATAN_NAME, child) + "「とうっ！」", cdatan(CDATAN_NAME, child) + "「なかなかやるな！」"
@@ -1383,6 +1430,7 @@
 		chatList 2, lang("最後はちゃんと消しておくように", "Erase it properly at the end.")
 		chatList 3, lang("本格的な絵の勉強してみる？", "Do you want to study painting?")
 		gosub *re_select
+		chatc@DP = child
 		if ( rtval == 1 ) {
 			if ( jp ) {
 				txt cdatan(CDATAN_NAME, child) + "「恥ずかしい" + _na(3) + "」", cdatan(CDATAN_NAME, child) + "「勝手に見ないでー」"
@@ -1430,6 +1478,7 @@
 		chatList 2, lang("大人になっても仕事の勉強が続く", "Even when you grow up, you need to study for a job.")
 		chatList 3, lang("子供が馬鹿だと親が恥ずかしいから", "Parents are embarrassed that their children are stupid.")
 		gosub *re_select
+		chatc@DP = child
 		if ( rtval == 1 ) {
 			if ( jp ) {
 				txt cdatan(CDATAN_NAME, child) + "「意味がよくわからない…」", cdatan(CDATAN_NAME, child) + "「" + _ore(3) + "はどうせ冒険者になるから関係ない" + _daro(3) + "」"
@@ -1476,6 +1525,7 @@
 		chatList 2, lang("一緒に考えてあげる", "I'll think about it with you.")
 		chatList 3, lang("勉強して語彙力つけなさい", "Study hard and improve your vocabulary.")
 		gosub *re_select
+		chatc@DP = child
 		if ( rtval == 1 ) {
 			if ( jp ) {
 				txt cdatan(CDATAN_NAME, child) + "「意味不明」", cdatan(CDATAN_NAME, child) + "「決めポーズの練習するからあっち行ってて" + _kure(3) + "」"
@@ -1522,6 +1572,7 @@
 		chatList 2, lang("個性的でいいと思う", "I think it's good to be individual.")
 		chatList 3, lang("オシャレの勉強する？", "Do you want to study fashion?")
 		gosub *re_select
+		chatc@DP = child
 		if ( rtval == 1 ) {
 			if ( jp ) {
 				txt cdatan(CDATAN_NAME, child) + "「もういい…」", cdatan(CDATAN_NAME, child) + "「相談する相手を間違えた" + _kana(3) + "」"
@@ -1569,6 +1620,7 @@
 		chatList 2, lang("そんなこと言ってる間はまだまだ子供", "As long as you care about such things, you are still a child.")
 		chatList 3, lang("どうやら勉強が足りないようだな", "It seems that you haven't studied enough.")
 		gosub *re_select
+		chatc@DP = child
 		if ( rtval == 1 ) {
 			if ( jp ) {
 				txt cdatan(CDATAN_NAME, child) + "「難しい言葉で誤魔化さないで…」", cdatan(CDATAN_NAME, child) + "「…大人もつらい" + _noka(3) + "？」"
@@ -2564,6 +2616,313 @@
 		buff = lang("突然、向かいからやって来た一人の神官が、すれ違いざまにあなたに魔法をかけた。「ノープロブレム」", "A priest comes up to you and casts a spell on you. \"No problem.\"")
 		chatList 1, lang("ありがとう", "Thanks.")
 		gosub *re_select
+		goto *random_eventProc_SWEND1
+	}
+	
+	if ( _switch_val == RANDOM_EVENT_SEA_RAGING_SEA | _switch_sw ) {
+		_switch_sw = 0
+		s = lang("荒れ狂う海", "Raging Sea")
+		file = "bg_re22"
+		buff = lang("悲鳴のような轟音、身体をゆさぶる波の振動…まるで悪魔がもたらしたような突風の中であなたは呟いた。", "The sound of sky-shattering thunder and violent waves slam you... You mutter a faint curse under your breath.")
+		if ( gdata(GDATA_WEATHER) != WEATHER_ETHER ) {
+			list(0, listmax) = 1
+			listn(0, listmax) = lang("ひどい雷雨だ", "The hard rain descends upon us...")
+			listmax++
+		}
+		if ( gdata(GDATA_WEATHER) == WEATHER_ETHER ) {
+			list(0, listmax) = 1
+			listn(0, listmax) = lang("エーテルの風だ", "The ether wind descends upon us...")
+			listmax++
+		}
+		gosub *re_select
+		snd SOUNDLIST_BOLT1
+		if ( cdata(CDATA_CHARACTER_TIER, CHARA_PLAYER) > CHARACTER_TIER_NONE ) {
+			cdata(CDATA_CHARACTER_TIER, CHARA_PLAYER)--
+			if ( cdata(CDATA_CHARACTER_TIER, CHARA_PLAYER) <= CHARACTER_TIER_NONE ) {
+				txtef COLOR_RED
+				txt lang("波の重壁が何もかもを押しつぶし、あなたが祈る間もなく船は海にのまれていった。", "Then... without so much as a moment's warning, the hull and you are swept into the oceans.")
+				snd SOUNDLIST_CRUSH1
+				snd SOUNDLIST_CRUSH1
+				snd SOUNDLIST_CRUSH1
+				gdata(GDATA_FLAG_SHIP_TYPE) = 0
+				create_pcpic 0, 1
+			}
+		}
+		if ( cdata(CDATA_CHARACTER_TIER, CHARA_PLAYER) <= CHARACTER_TIER_NONE ) {
+			repeat 16
+				if ( cdata(CDATA_EXIST, cnt) != CHAR_STATE_ALIVE ) {
+					continue
+				}
+				if ( cdata(CDATA_CONDITION_WET, cnt) < 5 ) {
+					wet r1, 5
+				}
+				cdata(CDATA_CONDITION_SUFFOCATION, cnt) += 10
+			loop
+		}
+		goto *random_eventProc_SWEND1
+		_switch_sw++
+	}
+	if ( _switch_val == RANDOM_EVENT_SEA_SWEPT_AWAY | _switch_sw ) {
+		_switch_sw = 0
+		tabikate = 0
+		item_find ITEM_ID_CARGO_INNER_TUBE, ITEM_FIND_MODE_DBID, ITEM_FIND_LOCATION_CHARAS
+		if ( stat != (-1) ) {
+			ci = stat
+			if ( inv(INV_ITEM_NUM, ci) >= 1 ) {
+				tabikate = 1
+			}
+		}
+		s = lang("流される者", "Swept Away")
+		file = "bg_re4"
+		buff = lang("波間にもがいている漂流者を発見した。「高波にさらわれてこんなところまで流されてしまったよ！」", "You found a drifter drowning in the waves.")
+		list(0, listmax) = 1
+		listn(0, listmax) = lang("見捨てる", "(Abandon)")
+		listmax++
+		if ( gdata(GDATA_FLAG_COLLECTED_WISHES) < maxship ) {
+			list(0, listmax) = 2
+			listn(0, listmax) = lang("乗せてあげる", "(Put on your ship)")
+			listmax++
+		}
+		if ( tabikate == 1 ) {
+			list(0, listmax) = 3
+			listn(0, listmax) = lang("浮き輪を１つ投げて去る", "(Throw 1 inner tube and leave)")
+			listmax++
+		}
+		chatesc = -1
+		gosub *re_select
+		msg_clear
+		chatc@DP = (-1)
+		if ( rtval == 1 ) {
+			if ( jp ) {
+				txt "「そんなぁ…」", "「ごぼぼぼぼ…」", "「乗せてよー！」"
+			}
+			if ( en ) {
+				txt cnvtalk("You are terrible..."), cnvtalk("Drown!"), cnvtalk("Get me on your ship...!")
+			}
+			snd SOUNDLIST_ATK_DARK
+			modkarma 0, -1
+		}
+		if ( rtval == 2 ) {
+			txt lang("「ありがとう！」", cnvtalk("Thanks!"))
+			snd SOUNDLIST_GET1
+			gdata(GDATA_FLAG_COLLECTED_WISHES) += 1
+			txt lang("無事に陸まで連れて行ってあげよう。", "You should get the drifter to shore safely.")
+		}
+		if ( rtval == 3 ) {
+			txt lang("「助かるけども！？」", cnvtalk("It's helpful but it's not!"))
+			snd SOUNDLIST_THROW1
+			inv(INV_ITEM_NUM, ci) -= 1
+		}
+		goto *random_eventProc_SWEND1
+		_switch_sw++
+	}
+	if ( _switch_val == RANDOM_EVENT_SEA_AFTER_ESCAPE | _switch_sw ) {
+		_switch_sw = 0
+		tabikate = 0
+		item_find ITEM_ID_TRAVELERS_FOOD, ITEM_FIND_MODE_DBID, ITEM_FIND_LOCATION_CHARAS
+		if ( stat != (-1) ) {
+			ci = stat
+			if ( inv(INV_ITEM_NUM, ci) >= 1 ) {
+				tabikate = 1
+			}
+		}
+		s = lang("脱出、その後", "After Escape")
+		file = "bg_re4"
+		buff = lang("小さなイカダに乗った漂流者を発見した。「無人島から自力で脱出してきたけれど、もう限界…」", "You found a drifter on a small raft that escaped from an uninhabited island.")
+		list(0, listmax) = 1
+		listn(0, listmax) = lang("見捨てる", "(Abandon)")
+		listmax++
+		if ( gdata(GDATA_FLAG_COLLECTED_WISHES) < maxship ) {
+			list(0, listmax) = 2
+			listn(0, listmax) = lang("乗せてあげる", "(Put on your ship)")
+			listmax++
+		}
+		if ( tabikate == 1 ) {
+			list(0, listmax) = 3
+			listn(0, listmax) = lang("旅糧を１つ投げて去る", "(Throw 1 traveler's food and leave)")
+			listmax++
+		}
+		chatesc = -1
+		gosub *re_select
+		msg_clear
+		chatc@DP = (-1)
+		if ( rtval == 1 ) {
+			if ( jp ) {
+				txt "「ひ、ひどい」", "「おーい！？」", "「乗せてぇえ…！」"
+			}
+			if ( en ) {
+				txt cnvtalk("You are cruel..."), cnvtalk("Help!"), cnvtalk("Get me on your ship!!!")
+			}
+			snd SOUNDLIST_ATK_DARK
+			modkarma 0, -1
+		}
+		if ( rtval == 2 ) {
+			txt lang("「ありがとう！」", cnvtalk("Thanks!"))
+			snd SOUNDLIST_GET1
+			gdata(GDATA_FLAG_COLLECTED_WISHES) += 1
+			txt lang("無事に陸まで連れて行ってあげよう。", "You should get the drifter to shore safely.")
+		}
+		if ( rtval == 3 ) {
+			txt lang("「これで頑張れと！？」", cnvtalk("Are you telling me to do my best with this!?"))
+			snd SOUNDLIST_THROW1
+			inv(INV_ITEM_NUM, ci) -= 1
+		}
+		goto *random_eventProc_SWEND1
+		_switch_sw++
+	}
+	if ( _switch_val == RANDOM_EVENT_SEA_DRIFTERS | _switch_sw ) {
+		_switch_sw = 0
+		tabikate = 0
+		item_find ITEM_ID_CARGO_INNER_TUBE, ITEM_FIND_MODE_DBID, ITEM_FIND_LOCATION_CHARAS
+		if ( stat != (-1) ) {
+			ci = stat
+			if ( inv(INV_ITEM_NUM, ci) >= 1 ) {
+				tabikate = 1
+			}
+		}
+		s = lang("漂流者たち", "Drifters")
+		file = "bg_re4"
+		buff = lang("漂流者複数名を発見した。「船が沈んでこのザマです…」", "You found drifters thrown out of the wrecked ship.")
+		list(0, listmax) = 1
+		listn(0, listmax) = lang("まとめて見捨てる", "(Abandon collectively)")
+		listmax++
+		if ( gdata(GDATA_FLAG_COLLECTED_WISHES) < maxship ) {
+			list(0, listmax) = 2
+			listn(0, listmax) = lang("乗せられるだけ乗せる", "(Put on your ship as much as you can)")
+			listmax++
+		}
+		if ( tabikate == 1 ) {
+			list(0, listmax) = 3
+			listn(0, listmax) = lang("浮き輪を１つ投げて去る", "(Throw 1 inner tube and leave)")
+			listmax++
+		}
+		chatesc = -1
+		gosub *re_select
+		msg_clear
+		kazu = 3 + rnd(8)
+		chatc@DP = (-1)
+		if ( rtval == 1 ) {
+			if ( jp ) {
+				txt "「鬼だ…」", "「ウソだろ！？」", "「子供だけでも乗せてやってくれー！」"
+			}
+			if ( en ) {
+				txt cnvtalk("You are a demon!"), cnvtalk("It's a lie, right!?"), cnvtalk("Please put even just children on your ship!")
+			}
+			snd SOUNDLIST_ATK_DARK
+			modkarma 0, -kazu
+		}
+		if ( rtval == 2 ) {
+			txt lang("「ありがとう！ありがとう！」", cnvtalk("Thanks! Thanks!!"))
+			if ( kazu > maxship - gdata(GDATA_FLAG_COLLECTED_WISHES) ) {
+				txt lang("「これ以上は乗れないか…残念だ」", cnvtalk("It looks like I can't get on this ship..."))
+			}
+			snd SOUNDLIST_GET1
+			gdata(GDATA_FLAG_COLLECTED_WISHES) += limit(kazu, 0, maxship - gdata(GDATA_FLAG_COLLECTED_WISHES))
+			txt lang("無事に陸まで連れて行ってあげよう。", "You should get drifters to shore safely.")
+		}
+		if ( rtval == 3 ) {
+			txt lang("「どけ！俺のだ！」「子供もいるのよ！？」", cnvtalk("Only I use that inner tube! Give up you guys!"))
+			snd SOUNDLIST_THROW1
+			inv(INV_ITEM_NUM, ci) -= 1
+		}
+		goto *random_eventProc_SWEND1
+		_switch_sw++
+	}
+	if ( _switch_val == RANDOM_EVENT_SEA_AERIAL_THREAT | _switch_sw ) {
+		_switch_sw = 0
+		s = lang("上空の脅威", "Aerial Threat")
+		file = "bg_re5"
+		buff = lang("急に空が薄暗くなり、船が何度も衝撃を受ける…。外を見たあなたの視界に飛び込んできたのは…海鳥だ。巨大な海鳥達が、群れをなして船を襲ってきたのだ！", "The sky suddenly darkens, and your ship receives repeated shocks... When you look outside, what jumps into your sight is...seabirds. A flock of giant seabirds is attacking your ship!")
+		list(0, listmax) = 1
+		listn(0, listmax) = lang("うむっ、緊急離脱だ", "(Emergency withdrawal)")
+		listmax++
+		list(0, listmax) = 2
+		listn(0, listmax) = lang("やさしく迎えてくれ", "(Drive away)")
+		listmax++
+		chatesc = -1
+		gosub *re_select
+		msg_clear
+		chatc@DP = (-1)
+		if ( rtval == 1 ) {
+			if ( rnd(gdata(GDATA_FLAG_SHIP_TYPE) * 2) > rnd(10) ) {
+				txt lang("大きな損傷を受ける前に逃げ切ることができた。", "Your ship was able to escape before it was severely damaged.")
+				snd SOUNDLIST_EXITMAP1
+			}
+			else {
+				txt lang("どうにか逃げきれたが、船がそれなりに損傷を受けた。", "Your ship managed to escape, but suffered some damage...")
+				snd SOUNDLIST_PUNISH1
+				cdata(CDATA_CHARACTER_TIER, CHARA_PLAYER)--
+			}
+		}
+		if ( rtval == 2 ) {
+			if ( gdata(GDATA_FLAG_SHIP_TYPE) == 3 | gdata(GDATA_FLAG_SHIP_TYPE) == 5 ) {
+				txt lang("大きな損傷を受ける前に大砲で追い払うことができた。", "Your ship was able to drive off the seabirds with its cannon before it was severely damaged.")
+				snd SOUNDLIST_BALL1
+			}
+			else {
+				txt lang("どうにか追い払えたが、船がそれなりに損傷を受けた。", "Your ship managed to drive off the seabirds, but suffered some damage...")
+				snd SOUNDLIST_PUNISH1
+				cdata(CDATA_CHARACTER_TIER, CHARA_PLAYER)--
+			}
+		}
+		if ( cdata(CDATA_CHARACTER_TIER, CHARA_PLAYER) <= CHARACTER_TIER_NONE ) {
+			txtef COLOR_RED
+			txt lang("度重なる損傷により、あなたの船は大破した。", "Your ship is wrecked due to repeated damage...")
+			snd SOUNDLIST_CRUSH1
+			snd SOUNDLIST_CRUSH1
+			snd SOUNDLIST_CRUSH1
+			gdata(GDATA_FLAG_SHIP_TYPE) = 0
+			create_pcpic 0, 1
+		}
+		goto *random_eventProc_SWEND1
+		_switch_sw++
+	}
+	if ( _switch_val == RANDOM_EVENT_SEA_UNDERSEA_THREAT | _switch_sw ) {
+		_switch_sw = 0
+		s = lang("海中の脅威", "Undersea Threat")
+		file = "bg_re23"
+		buff = lang("突如、海中から突き上げられるように船が大きく揺れた…。何事かと海中に目を凝らしたあなたは、サメが船底に体当たりしているのを目撃した！", "Suddenly, your ship shook violently as if it was pushed up from the sea... As you peek into the sea, you see a shark ramming the bottom of the ship!")
+		list(0, listmax) = 1
+		listn(0, listmax) = lang("シャクだが逃げよう", "(Emergency withdrawal)")
+		listmax++
+		list(0, listmax) = 2
+		listn(0, listmax) = lang("フカヒレにしてやりたい", "(Kill the shark)")
+		listmax++
+		chatesc = -1
+		gosub *re_select
+		msg_clear
+		chatc@DP = (-1)
+		if ( rtval == 1 ) {
+			if ( rnd(gdata(GDATA_FLAG_SHIP_TYPE) * 2) > rnd(10) ) {
+				txt lang("大きな損傷を受ける前に逃げ切ることができた。", "Your ship was able to escape before it was severely damaged.")
+				snd SOUNDLIST_EXITMAP1
+			}
+			else {
+				txt lang("どうにか逃げきれたが、船がそれなりに損傷を受けた。", "Your ship managed to escape, but suffered some damage...")
+				snd SOUNDLIST_PUNISH1
+				cdata(CDATA_CHARACTER_TIER, CHARA_PLAYER)--
+			}
+		}
+		if ( rtval == 2 ) {
+			if ( gdata(GDATA_FLAG_SHIP_TYPE) >= 5 ) {
+				txt lang("大きな損傷を受ける前に魚雷でサメを爆殺した。", "Your ship was able to kill the shark with torpedoes before it was severely damaged.")
+				snd SOUNDLIST_BALL1
+			}
+			else {
+				txt lang("どうにかサメを仕留めたが、船がそれなりに損傷を受けた。", "Your ship managed to kill the shark, but suffered some damage...")
+				snd SOUNDLIST_PUNISH1
+				cdata(CDATA_CHARACTER_TIER, CHARA_PLAYER)--
+			}
+		}
+		if ( cdata(CDATA_CHARACTER_TIER, CHARA_PLAYER) <= CHARACTER_TIER_NONE ) {
+			txtef COLOR_RED
+			txt lang("度重なる損傷により、あなたの船は大破した。", "Your ship is wrecked due to repeated damage...")
+			snd SOUNDLIST_CRUSH1
+			snd SOUNDLIST_CRUSH1
+			snd SOUNDLIST_CRUSH1
+			gdata(GDATA_FLAG_SHIP_TYPE) = 0
+			create_pcpic 0, 1
+		}
 		goto *random_eventProc_SWEND1
 	}
 *random_eventProc_SWEND1

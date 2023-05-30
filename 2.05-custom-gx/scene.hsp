@@ -368,6 +368,21 @@
 		if ( s(1) == "mcHome0" ) {
 			music = MUSICLIST_MCHOME0
 		}
+		if ( s(1) == "mcZangyou" ) {
+			music = MUSICLIST_MCZANGYOU
+		}
+		if ( s(1) == "mcMelan" ) {
+			music = MUSICLIST_MCMELAN
+		}
+		if ( s(1) == "mcChurch" ) {
+			music = MUSICLIST_MCCHURCH
+		}
+		if ( s(1) == "mcSea1" ) {
+			music = MUSICLIST_MCSEA1
+		}
+		if ( s(1) == "mcSea2" ) {
+			music = MUSICLIST_MCSEA2
+		}
 		if ( music == (-1) ) {
 			musicfile(MUSICLIST_SCENE_MUSIC) = s(1)
 			music = MUSICLIST_SCENE_MUSIC

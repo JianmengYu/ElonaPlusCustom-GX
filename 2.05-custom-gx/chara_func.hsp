@@ -193,6 +193,7 @@
 	locvar_customtalk_f = 0
 	gdata(GDATA_CUSTOM_TALK) = 100
 	chatc = customtalk_charid
+	chatc@DP = customtalk_charid
 	if ( cbit(CHARA_BIT_MSG_FILE, customtalk_charid) ) {
 		exist exedir + "user\\talk\\" + cdatan(CDATAN_MSG, customtalk_charid)
 		if ( strsize == (-1) ) {
@@ -399,6 +400,7 @@
 	if ( cdata(CDATA_TXT, customtalk_charid) != 0 ) {
 		dbid = cdata(CDATA_ID, customtalk_charid)
 		dbmode = customtalk_dbmode
+		chatc@DP = customtalk_charid
 		gosub *db_creature
 		return 1
 	}
@@ -1044,6 +1046,9 @@
 	if ( cdata(CDATA_BURDEN, CHARA_PLAYER) == 1 ) {
 		cdata(CDATA_SPEED_FIX, CHARA_PLAYER) -= 10
 	}
+	if ( gdata(GDATA_FLAG_MOST_EXPENSIVE_SHIP_THIS_MONTH) < gdata(GDATA_FLAG_SHIP_TYPE) ) {
+		gdata(GDATA_FLAG_MOST_EXPENSIVE_SHIP_THIS_MONTH) = gdata(GDATA_FLAG_SHIP_TYPE)
+	}
 	if ( gdata(GDATA_FLAG_MOST_EXPENSIVE_WORLD_MAP_VEHICLE_THIS_MONTH) < gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) ) {
 		gdata(GDATA_FLAG_MOST_EXPENSIVE_WORLD_MAP_VEHICLE_THIS_MONTH) = gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND)
 	}
@@ -1194,6 +1199,7 @@
 								if ( synccheck(cnt, -1) ) {
 									txtef COLOR_SKY_BLUE
 									txt lang(name(cnt) + "はキレた。", name(cnt) + " can no longer put up with it.")
+									chatc@DP = cnt
 									txt lang("「もう我慢できない」", cnvtalk("That's it."))
 								}
 								turn_aggro cnt, make_sound_arg6, 80
@@ -1679,7 +1685,9 @@
 			txt lang("パワー" + addbuff_arg3 + "。", "But it produces no effect.")
 		}
 		if ( sdata(SKILL_NORMAL_FAITH, addbuff_charid) * 2 + 100 > rnd(addbuff_arg3 * 2 + 100) ) {
-			locvar_addbuff_f = 1
+			if ( addbuff_buffid != BUFF_PUNISHMENT ) {
+				locvar_addbuff_f = 1
+			}
 		}
 		if ( cdata(CDATA_QUALITY, addbuff_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, addbuff_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
 			if ( rnd(4) ) {
@@ -1697,9 +1705,11 @@
 			}
 		}
 		if ( findbuff(addbuff_charid, BUFF_HOLY_VEIL) != (-1) ) {
-			if ( cdata(STARTING_CDATA_BUFF + findbuff(addbuff_charid, BUFF_HOLY_VEIL) * ARRAY_CDATA_BUFF + 1, addbuff_charid) + 50 > addbuff_arg3 * 5 / 2 | rnd(cdata(STARTING_CDATA_BUFF + findbuff(addbuff_charid, BUFF_HOLY_VEIL) * ARRAY_CDATA_BUFF + 1, addbuff_charid) + 50) > rnd(addbuff_arg3 + 1) ) {
-				txt lang("ホーリーヴェイルが呪いを防いだ。", "The holy veil repels the hex.")
-				return
+			if ( addbuff_buffid != BUFF_PUNISHMENT ) {
+				if ( cdata(STARTING_CDATA_BUFF + findbuff(addbuff_charid, BUFF_HOLY_VEIL) * ARRAY_CDATA_BUFF + 1, addbuff_charid) + 50 > addbuff_arg3 * 5 / 2 | rnd(cdata(STARTING_CDATA_BUFF + findbuff(addbuff_charid, BUFF_HOLY_VEIL) * ARRAY_CDATA_BUFF + 1, addbuff_charid) + 50) > rnd(addbuff_arg3 + 1) ) {
+					txt lang("ホーリーヴェイルが呪いを防いだ。", "The holy veil repels the hex.")
+					return
+				}
 			}
 		}
 		if ( locvar_addbuff_f == 1 ) {
@@ -1710,11 +1720,13 @@
 			return
 		}
 		if ( findbuff(addbuff_charid, BUFF_HOLY_VEIL) != (-1) ) {
-			locvar_addbuff_vpower = cdata(STARTING_CDATA_BUFF + findbuff(addbuff_charid, BUFF_HOLY_VEIL) * ARRAY_CDATA_BUFF + 1, addbuff_charid) / 5
-			if ( addbuff_buffid != BUFF_DEATH_WORD ) {
-				locvar_addbuff_fixeddur = limit(addbuff_arg4 - locvar_addbuff_vpower, addbuff_arg4 / 1000 + 1, locvar_addbuff_fixeddur)
+			if ( addbuff_buffid != BUFF_PUNISHMENT ) {
+				locvar_addbuff_vpower = cdata(STARTING_CDATA_BUFF + findbuff(addbuff_charid, BUFF_HOLY_VEIL) * ARRAY_CDATA_BUFF + 1, addbuff_charid) / 5
+				if ( addbuff_buffid != BUFF_DEATH_WORD ) {
+					locvar_addbuff_fixeddur = limit(addbuff_arg4 - locvar_addbuff_vpower, addbuff_arg4 / 1000 + 1, locvar_addbuff_fixeddur)
+				}
+				txt lang("ホーリーヴェイルが呪いを弱めた。", "The holy veil repels the hex.")
 			}
-			txt lang("ホーリーヴェイルが呪いを弱めた。", "The holy veil weakens the hex.")
 		}
 		if ( cc == CHARA_PLAYER ) {
 			hostileaction CHARA_PLAYER, addbuff_charid
@@ -2732,7 +2744,8 @@
 						snd SOUNDLIST_WATERM
 						txt lang(name(dmgcon_charid) + "は漏らした。", name(dmgcon_charid) + " is incontinent.")
 						if ( dmgcon_charid != CHARA_PLAYER ) {
-							txt lang("「…スッキリ！」", cnvtalk("Do not look at me!"))
+							chatc@DP = dmgcon_charid
+							txt lang("「…スッキリ！」", cnvtalk("Don't look at me!"))
 						}
 					}
 					if ( mdata(MDATA_TYPE) != MAP_TYPE_WORLD ) {
@@ -5255,6 +5268,14 @@
 	if ( gdata(GDATA_TEMPORARY_FLAGS2) == 1200 ) {
 		locvar_dmghp_dmg = locvar_dmghp_dmg * 1 / 6 + 1
 	}
+	if ( dmghp_source == DAMAGE_FROM_CHARA ) {
+		if ( cdata(CDATA_GOD, CHARA_PLAYER) == GOD_EYTH ) {
+			locvar_dmghp_s = refchara(cdata(CDATA_ID, dmghp_charid), DBSPEC_CHARA_FILTER, 1)
+			if ( instr(locvar_dmghp_s, 0, "/god/") != (-1) ) {
+				locvar_dmghp_dmg = locvar_dmghp_dmg * 7 / 5
+			}
+		}
+	}
 	if ( TweakData(TWEAK_GAMEPLAY_CG_DISABLE_CHAIN_ATTACKS, TWEAK_CATEGORY_GAMEPLAY) == FALSE ) {
 		if ( cdata(CDATA_CHAIN_ATTACK_COUNT, dmghp_charid) >= 50 ) {
 			locvar_dmghp_dmg = locvar_dmghp_dmg / 10 * (10 - cdata(CDATA_CHAIN_ATTACK_COUNT, dmghp_charid) / 20)
@@ -5688,6 +5709,7 @@
 				locvar_dmghp_dmgpro = locvar_dmghp_dmg / 2 + 1
 				locvar_dmghp_dmg = 0
 				snd SOUNDLIST_AMMO
+				chatc@DP = cnt
 				txt lang("＊絶対防衛＊", "*Absolute protect*")
 				cdata(CDATA_HP, cnt) -= locvar_dmghp_dmgpro
 				break
@@ -5984,7 +6006,8 @@
 			}
 			cbitmod CHARA_BIT_EXCLUSIVE_SKILL_CHARGE, cnt, 0
 			txtef COLOR_SKY_BLUE
-			txt lang(name(cnt) + "は叫んだ。「この者にジュアの加護を。レイハンド！」", name(cnt) + " shout" + _s(cnt) + ", " + cnvtalk("Lay hand!"))
+			chatc@DP = cnt
+			txt lang(name(cnt) + "は叫んだ。「この者にジュアの加護を。レイハンド！」", name(cnt) + " shout" + _s(cnt) + ", " + cnvtalk("Lay on Hands!"))
 			txtmore
 			txt lang(name(dmghp_charid) + "は回復した。", name(dmghp_charid) + " " + is(dmghp_charid) + " healed.")
 			cdata(CDATA_HP, dmghp_charid) = cdata(CDATA_MAX_HP, dmghp_charid) / 2
@@ -6412,6 +6435,7 @@
 			if ( cdata(CDATA_CONDITION_DIM, dmghp_charid) < 100 ) {
 				cdata(CDATA_CONDITION_DIM, dmghp_charid) = 100
 				txtef COLOR_YELLOW
+				chatc@DP = dmghp_source
 				txt lang("＊ノックアウト＊", "*Knockout*")
 				snd SOUNDLIST_GONG
 			}
@@ -6781,7 +6805,8 @@
 					}
 				}
 				gdata(GDATA_FLAG_SUB_AMURDAD) += 9
-				txt lang("ネヘルタード「もう駄目…残念…」", "Amurdad: " + cnvtalk("It's no use... Alas..."))
+				chatc@DP = (-1)
+				txt lang("ネヘルタード「もう駄目…残念…」", "Amurdad: " + cnvtalk("Alas... It was in vain..."))
 				msg_halt
 				evadd EVENT_AMURDEAD_SUB_CREATE_STAIRS, 0
 			}
@@ -6950,6 +6975,7 @@
 		if ( gdata(GDATA_FLAG_DUEL_TARGET) > 0 ) {
 			if ( dmghp_charid == gdata(GDATA_FLAG_DUEL_TARGET) | dmghp_charid == CHARA_PLAYER ) {
 				txtef COLOR_GREEN
+				chatc@DP = (-1)
 				txt lang("＊決闘終了＊", "*Duel-Over!*")
 				snd SOUNDLIST_GONG
 				gdata(GDATA_FLAG_DUEL_TARGET) = -3
@@ -7569,6 +7595,7 @@
 	if ( cbit(CHARA_BIT_SANDBAG, dmghp_charid) ) {
 		if ( synccheck(dmghp_charid, -1) ) {
 			if ( rnd(20) == 0 ) {
+				chatc@DP = dmghp_charid
 				txt lang("「くっ！」", cnvtalk("Kill me already!")), lang("「まだまだ！」", cnvtalk("No... not yet...!")), lang("「もう限界…」", cnvtalk("I can't take it anymore...")), lang("「うぐぐ」", cnvtalk("Argh!")), lang("「あう」", cnvtalk("Uhhh")), lang("「ああんっ」", cnvtalk("Ugggg"))
 			}
 		}
@@ -7867,7 +7894,8 @@
 		snd SOUNDLIST_WATERM
 		txt lang(name(chara_morasi_arg1) + "は漏らした。", name(chara_morasi_arg1) + " is incontinent.")
 		if ( chara_morasi_arg1 != 0 ) {
-			txt lang("「…スッキリ！」", cnvtalk("Do not look at me!"))
+			chatc@DP = chara_morasi_arg1
+			txt lang("「…スッキリ！」", cnvtalk("Don't look at me!"))
 		}
 	}
 	if ( mdata(MDATA_TYPE) != MAP_TYPE_WORLD ) {

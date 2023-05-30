@@ -49,28 +49,28 @@
 			bedtxt += lang("とっても寝心地が良さそうだ！", "I think I'll be able to sleep very comfortably!")
 		}
 		if ( inv(INV_ITEM_ID, rtval(1)) == ITEM_ID_BOMB_BARREL ) {
-			if ( cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER) == "錬金術士" ) {
-				bedtxt += lang("「たる…」", "\"Barrel...\"")
+			if ( cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER) == "錬金術士" | instr(cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER), 0, "lchemist") != (-1) ) {
+				bedtxt += lang("「たる…」", " \"Baaarrel...\"")
 			}
 		}
 		if ( inv(INV_ITEM_ID, rtval(1)) == ITEM_ID_POTION_NEKTAR ) {
-			if ( cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER) == "錬金術士" ) {
-				bedtxt += lang("「たる〜」", "\"Barrel~\"")
+			if ( cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER) == "錬金術士" | instr(cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER), 0, "lchemist") != (-1) ) {
+				bedtxt += lang("「たる〜」", " \"It's a Barrel~\"")
 			}
 		}
 		if ( inv(INV_ITEM_ID, rtval(1)) == ITEM_ID_SNOW_BARREL ) {
-			if ( cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER) == "錬金術士" ) {
-				bedtxt += lang("「たるっ」", "\"Barrell.\"")
+			if ( cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER) == "錬金術士" | instr(cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER), 0, "lchemist") != (-1) ) {
+				bedtxt += lang("「たるっ」", " \"A barrel.\"")
 			}
 		}
 		if ( inv(INV_ITEM_ID, rtval(1)) == ITEM_ID_CARGO_BARREL ) {
-			if ( cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER) == "錬金術士" ) {
-				bedtxt += lang("「たる！」", "\"Barrel!\"")
+			if ( cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER) == "錬金術士" | instr(cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER), 0, "lchemist") != (-1) ) {
+				bedtxt += lang("「たる！」", " \"Barrel!\"")
 			}
 	}
 		if ( inv(INV_ITEM_ID, rtval(1)) == ITEM_ID_BARREL ) {
-			if ( cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER) == "錬金術士" ) {
-				bedtxt += lang("「たーる」", "\"Barrel.\"")
+			if ( cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER) == "錬金術士" | instr(cdatan(CDATAN_FAKE_CLASS, CHARA_PLAYER), 0, "lchemist") != (-1) ) {
+				bedtxt += lang("「たーる」", " \"Barrel.\"")
 			}
 		}
 		return bedtxt
@@ -3447,6 +3447,7 @@
 	if ( p != (-1) ) {
 		if ( p == ITEM_ID_SPELLBOOK_WISHING | p == ITEM_ID_SPELLBOOK_HARVEST ) {
 			snd SOUNDLIST_FAIL1
+			chatc@DP = tc
 			txt lang("「その本は入手できないね」", cnvtalk("Ah, that book is unavailable."))
 			goto *com_reserve_loop_pgchk
 		}
@@ -3763,6 +3764,15 @@
 			s += "mcMelan"
 		}
 		if ( p == 84 ) {
+			s += "mcChurch"
+		}
+		if ( p == 85 ) {
+			s += "mcSea1"
+		}
+		if ( p == 86 ) {
+			s += "mcSea2"
+		}
+		if ( p == 87 ) {
 			s += "No Music"
 		}
 		cs_list s, wx + 84, wy + 66 + cnt * 19 - 1, 19
@@ -4093,6 +4103,10 @@
 		inputlog = getpath(inputlog, 16)
 	}
 	snd SOUNDLIST_DING2
+	if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD & gdata(GDATA_AREA) == AREA_WILDERNESS ) {
+		txt lang("水中でゴボゴボ言われてもよく分かんないんだけど…。", "I don't quite understand what you're saying underwater...")
+		goto *com_wish_end
+	}
 	if ( instr(inputlog, 0, "中の神") != (-1) | instr(inputlog, 0, "god inside") != (-1) ) {
 		txt lang("中の神も大変…あ…中の神なんているわけないじゃない！…ねえ、聞かなかったことにしてね。", "It must be rough for the god insi... Ah... There's no god inside!... Hey, listen to me!")
 		goto *com_wish_end
@@ -4561,6 +4575,13 @@
 				inv(INV_ITEM_NUM, ci) = 0
 				flt
 				itemcreate -1, ITEM_ID_DEED_OF_CARRIAGE, cdata(CDATA_X, cc), cdata(CDATA_Y, cc), 0
+				txt lang("あ、それ在庫切れ。", "It's sold out.")
+				txtmore
+			}
+			if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_PIRATE_SHIP | inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_CRUISE_SHIP | inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_WARSHIP | inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_SUBMARINE ) {
+				inv(INV_ITEM_NUM, ci) = 0
+				flt
+				itemcreate -1, ITEM_ID_DEED_OF_FISHING_SHIP, cdata(CDATA_X, cc), cdata(CDATA_Y, cc), 0
 				txt lang("あ、それ在庫切れ。", "It's sold out.")
 				txtmore
 			}
@@ -6164,6 +6185,12 @@
 				txtef COLOR_RED
 				txt lang(cdatan(CDATAN_NAME, tc) + "は気持ち悪そうにあなたを見ている…。", cdatan(CDATAN_NAME, tc) + " is looking at you like you're some kind of creep.")
 			}
+			/********** CUSTOM - BEGINNING **********/ // Pets should (normally) be happy after you tell them how you feel.
+			cdata(CDATA_EVOCHAT_POINTS, tc) += 2
+			if ( cdata(CDATA_EVOCHAT_POINTS, tc) > 10 ) {
+				cdata(CDATA_EVOCHAT_POINTS, tc) = 10
+			}
+			/********** CUSTOM - ENDING **********/
 		}
 		if ( rtval >= 4 & rtval <= 6 ) {
 			snd SOUNDLIST_DING2
@@ -6171,6 +6198,12 @@
 			txt lang(cdatan(CDATAN_NAME, tc) + "はまんざらでもないようだ。", cdatan(CDATAN_NAME, tc) + " doesn't seem to be very happy about that.")
 			modimp tc, 7
 			cdata(CDATA_EMO_ICON, tc) = 6 + 100 * 3
+			/********** CUSTOM - BEGINNING **********/ // Pets should (normally) be happy after you tell them how you feel.
+			cdata(CDATA_EVOCHAT_POINTS, tc) += 1
+			if ( cdata(CDATA_EVOCHAT_POINTS, tc) > 10 ) {
+				cdata(CDATA_EVOCHAT_POINTS, tc) = 10
+			}
+			/********** CUSTOM - ENDING **********/
 		}
 		if ( rtval >= 7 & rtval <= 9 ) {
 			if ( cdata(CDATA_IMPRESSION, tc) >= 150 ) {
@@ -6184,6 +6217,12 @@
 			if ( cdata(CDATA_IMPRESSION, tc) < 75 ) {
 				txt lang(cdatan(CDATAN_NAME, tc) + "はやれやれと肩をすくめた。", cdatan(CDATAN_NAME, tc) + " shrugged " + his(tc) + " shoulders in relief.")
 			}
+			/********** CUSTOM - BEGINNING **********/
+			cdata(CDATA_EVOCHAT_POINTS, tc) -= 1
+			if ( cdata(CDATA_EVOCHAT_POINTS, tc) < 0 ) {
+				cdata(CDATA_EVOCHAT_POINTS, tc) = 0
+			}
+			/********** CUSTOM - ENDING **********/
 		}
 		if ( rtval == 10 ) {
 			if ( cbit(CHARA_BIT_MARRIED, tc) != FALSE ) {
@@ -6374,6 +6413,7 @@
 		goto *pc_turn
 	}
 	if ( p == 15 ) {
+		chatc@DP = tc
 		if ( cdata(CDATA_IMPRESSION, tc) < 0 ) {
 			if ( jp ) {
 				txtef COLOR_RED
@@ -9080,10 +9120,10 @@
 		font lang(cfg_font1, cfg_font2), 12 + sizefix - en * 2, 1
 		color 20, 10, 0
 		if ( cdata(CDATA_ROLE, cc) == ROLE_ADVENTURER | cc < MAX_CHARA_FOLLOWER ) {
-			s = lang("レベル", "Level"), lang("経験", "EXP"), lang("必要値", "Next Lv"), lang("信仰", "God"), lang("所属", "Guild")
+			s = lang("レベル", "Level"), lang("必要値", "Next Lv"), lang("信仰", "God"), lang("所属", "Guild"), lang("成長力", "Growth"), ""
 		}
 		else {
-			s = lang("レベル", "Level"), lang("経験", "EXP"), lang("必要値", "Next Lv"), lang("信仰", "God"), ""
+			s = lang("レベル", "Level"), lang("必要値", "Next Lv"), lang("信仰", "God"), "", "", ""
 		}
 		repeat 5
 			pos wx + 355, wy + 46 + cnt * 15
@@ -9151,11 +9191,18 @@
 		font lang(cfg_font1, cfg_font2), 14 - en * 2, 0
 		color 0, 0, 0
 		if ( cdata(CDATA_ROLE, cc) != ROLE_ADVENTURER ) {
+			growrate = gdata(GDATA_FLAG_MAIN) + 100
+			/********** CUSTOM - BEGINNING **********/
+			growrate = ( gdata(GDATA_FLAG_MAIN) + 100 ) / 4
+			if ( TweakData(TWEAK_GAMEPLAY_REVERT_POST_217_EXP_CHANGES, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
+				growrate = 100
+			}
+			/********** CUSTOM - ENDING **********/
 			if ( cc < MAX_CHARA_FOLLOWER ) {
-				s = "" + cdata(CDATA_LEVEL, cc), "" + cdata(CDATA_EXP, cc), "" + cdata(CDATA_EXP_TO_NEXT_LVL, cc), godname(cdata(CDATA_GOD, cc)), guildname()
+				s = "" + cdata(CDATA_LEVEL, cc), "" + cdata(CDATA_EXP_TO_NEXT_LVL, cc), godname(cdata(CDATA_GOD, cc)), guildname(), "" + growrate + "" + lang("%", " %")
 			}
 			if ( cc >= MAX_CHARA_FOLLOWER ) {
-				s = "" + cdata(CDATA_LEVEL, cc), "" + cdata(CDATA_EXP, cc), "" + cdata(CDATA_EXP_TO_NEXT_LVL, cc), godname(cdata(CDATA_GOD, cc)), ""
+				s = "" + cdata(CDATA_LEVEL, cc), "" + cdata(CDATA_EXP_TO_NEXT_LVL, cc), godname(cdata(CDATA_GOD, cc)), "", ""
 			}
 		}
 		if ( cdata(CDATA_ROLE, cc) == ROLE_ADVENTURER ) {
@@ -9172,7 +9219,8 @@
 			if ( cdatan(CDATAN_CLASS, cc) == "archer" ) {
 				guildadv = lang("盗賊ギルド", "Thieves Guild")
 			}
-			s = "" + cdata(CDATA_LEVEL, cc), "" + cdata(CDATA_EXP, cc), "" + cdata(CDATA_EXP_TO_NEXT_LVL, cc), godname(cdata(CDATA_GOD, cc)), guildadv
+			growrate = cdata(CDATA_LEVEL, cc) / 3 + gdata(GDATA_FLAG_MAIN) / 3 + 100
+			s = "" + cdata(CDATA_LEVEL, cc), "" + cdata(CDATA_EXP_TO_NEXT_LVL, cc), godname(cdata(CDATA_GOD, cc)), guildadv, "" + growrate + "" + lang("%", " %"), ""
 		}
 		repeat 5
 			pos wx + 410 + en * 5, wy + 45 + cnt * 15
@@ -13109,6 +13157,7 @@
 				snd SOUNDLIST_FAIL1
 				goto *com_inventory_loop
 			}
+			chatc@DP = tc
 			reftype = refitem(inv(INV_ITEM_ID, ci), DBSPEC_TYPE)
 			if ( inv(INV_ITEM_ID, ci) == ITEM_ID_GIFT ) {
 				snd SOUNDLIST_EQUIP1
@@ -15976,7 +16025,8 @@
 		}
 		s = s + ":" + s(1)
 		if ( inv(INV_ITEM_AMMO, ci) == cnt - 1 ) {
-			s = "[" + s + "]"
+			chatc@DP = (-1)
+			s = "*[" + s + "]*"
 			txtef COLOR_BLUE
 		}
 		else {

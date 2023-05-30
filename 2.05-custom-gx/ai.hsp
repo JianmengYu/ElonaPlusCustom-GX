@@ -59,6 +59,7 @@
 	return 0
 
 *ai_turn
+	chatc@DP = 0
 	if ( cdata(CDATA_CHAIN_ATTACK_COUNT, cc) != 0 ) {
 		cdata(CDATA_CHAIN_ATTACK_COUNT, cc) = 0
 	}
@@ -422,6 +423,7 @@
 		if ( synccheck(cc, -1) ) {
 			if ( rnd(30) == 0 ) {
 				tc = cc
+				chatc@DP = cc
 				txt lang("「もっとぶって" + _yo(2) + "」", cnvtalk("Release me now.")), lang("「こんなことして、許さない" + _yo() + "」", cnvtalk("I won't forget this.")), lang("「何をする" + _nda(2) + "」", cnvtalk("Hit me!"))
 			}
 		}
@@ -457,6 +459,7 @@
 							}
 							else {
 								if ( rnd(2) ) {
+									chatc@DP = cc
 									txt lang("「痛っ！」", cnvtalk("Ouch!")), lang("「やめて！」", cnvtalk("Stop it!"))
 									hostileaction CHARA_PLAYER, cc
 								}
@@ -562,6 +565,7 @@
 				if ( rnd(40) == 0 ) {
 					txtef COLOR_BLUE
 					txtmore
+					chatc@DP = cc
 					txt lang("「いいぞ！」", cnvtalk("Come on!")), lang("「もっとやれー」", cnvtalk("More blood!")), lang("「血をみせろー」", cnvtalk("Beat'em!")), lang("「頑張って！」", cnvtalk("Use your brain!")), lang("「うぉぉぉぉ！」", cnvtalk("Wooooo!")), lang("「行けぇ！」", cnvtalk("Go go!")), lang("「頭を使えよ」", cnvtalk("Good fighting.")), lang("「きゃー」", cnvtalk("Yeeee!"))
 				}
 				goto *ai_calmMove
@@ -573,6 +577,7 @@
 				if ( rnd(40) == 0 ) {
 					txtef COLOR_BLUE
 					txtmore
+					chatc@DP = cc
 					txt lang("「面白そう！」", cnvtalk("Come on!")), lang("「どっちもがんばれー」", cnvtalk("More blood!"))
 				}
 				goto *turn_end
@@ -888,23 +893,67 @@
 
 	/********** ANNA CUSTOM - BEGINNING **********/ // Pets eat food from their inventories
 
-	if ( cc < MAX_CHARA_FOLLOWER & cc > 0 & cdata(CDATA_HUNGER, cc) <= 6000 & tc == CHARA_PLAYER & CustomVal(0, cc) == 1 ) {
-		FoundFood = 0
-		inv_getheader cc
+	if ( CustomVal(0, cc) == 1 ) {
+		if ( cc < MAX_CHARA_FOLLOWER & cc > 0 & tc == CHARA_PLAYER & (gdata(GDATA_AREA) != AREA_VALM & gdata(GDATA_AREA) != AREA_SHELTER) ) {
+			if ( cdata(CDATA_HUNGER, cc) <= 10000 ) {
+				FoundFood = 0
+				inv_getheader cc
 
-		repeat invrange, invhead
-		if ( inv(INV_ITEM_NUM, cnt) == 0 ) {
-			continue
-		}
-		if ( refitem(inv(INV_ITEM_ID, cnt), DBSPEC_TYPE) == FILTER_ITEM_FOOD ) {
-			ci = cnt
-			FoundFood = 1
-			break
-		}
-		loop
+				repeat invrange, invhead
+				if ( inv(INV_ITEM_NUM, cnt) == 0 ) {
+					continue
+				}
+				if ( refitem(inv(INV_ITEM_ID, cnt), DBSPEC_TYPE) == FILTER_ITEM_FOOD ) {
+					ci = cnt
+					FoundFood = 1
+					break
+				}
+				loop
 
-		if ( FoundFood ) {
-			goto *act_eat
+				if ( FoundFood ) {
+					goto *act_eat
+				}
+			}
+
+			if ( cdata(CDATA_HUNGER, cc) <= 5000 & rnd(1000) == 0 ) {
+				cdata(CDATA_EMO_ICON, cc) = 16 + 100 * 3
+				txt lang("" + name(cc) + "の所持品内に食料が存在しない。", "" + name(cc) + " searched " + him(cc) + " bag and find nothing to eat!")
+			}
+		}
+	}
+
+	if ( TweakData(TWEAK_GAMEPLAY_CG_DISABLE_THIRST, TWEAK_CATEGORY_GAMEPLAY) == FALSE & CustomVal(1, cc) == 1 ) {
+		if ( cc < MAX_CHARA_FOLLOWER & cc > 0 & tc == CHARA_PLAYER & (gdata(GDATA_AREA) != AREA_VALM & gdata(GDATA_AREA) != AREA_SHELTER) ) {
+			if ( cdata(CDATA_THIRST, cc) <= 10000 ) {
+				FoundDrink = 0
+				inv_getheader cc
+		
+				repeat invrange, invhead
+				if ( inv(INV_ITEM_NUM, cnt) == 0 ) {
+					continue
+				}
+				if ( refitem(inv(INV_ITEM_ID, cnt), DBSPEC_TYPE) == FILTER_ITEM_POTION ) {
+					ci = cnt
+					FoundDrink = 1
+					break
+				}
+				loop
+		
+				if ( FoundDrink ) {
+					goto *act_drink
+				}
+			}
+
+			if ( cdata(CDATA_THIRST, cc) <= 5000 & rnd(1000) == 0 ) {
+				cdata(CDATA_EMO_ICON, cc) = 9 + 100 * 3
+				txt lang("" + name(cc) + "の喉がカラカラだ。", "" + name(cc) + " searched " + him(cc) + " bag and find nothing to drink!")
+			}
+		}
+	}
+
+	if ( CustomVal(2, cc) == 1 ) {
+		if ( cdata(CDATA_EVOCHAT_POINTS, cc) <= 0 & ( cdata(CDATA_INTEREST, cc) >= 80 | cdata(CDATA_EVOCHAT_POINTS, CHARA_PLAYER) > 0 ) ) {
+			cdata(CDATA_EMO_ICON, cc) = 7 + 100 * 3
 		}
 	}
 
@@ -1205,6 +1254,7 @@
 				if ( cdata(CDATA_CONDITION_DRUNK, cc) < 5 ) {
 					cdata(CDATA_CONDITION_DRUNK, cc) += 40
 				}
+				chatc@DP = cc
 				if ( rnd(3) == 0 ) {
 					txt lang("「米さ米種だろ♪」", cnvtalk("Vrei sa pleci dar♪")), lang("「飲ま飲まイェイ！！」", cnvtalk("Numa numa yay!!")), lang("「飲ま飲ま飲まイェイ！！」", cnvtalk("Numa numa numa yay!!"))
 					goto *ai_calmMove_WEND1
@@ -1278,6 +1328,7 @@
 											tlocx = cdata(CDATA_X, gdata(GDATA_FLAG_GIANT_ID))
 											tlocy = cdata(CDATA_Y, gdata(GDATA_FLAG_GIANT_ID))
 											txtef COLOR_SKY_BLUE
+											chatc@DP = cc
 											txt lang("「化け物め！」", cnvtalk("Filthy monster!")), lang("「くたばれっ」", cnvtalk("Go to hell!")), lang("「退治してやるぅ！」", cnvtalk("I'll get rid of you.")), lang("「くらえー！」", cnvtalk("Eat this!"))
 											goto *act_throw
 										}
@@ -1322,6 +1373,7 @@
 									tlocx = cdata(CDATA_X, CHARA_PLAYER)
 									tlocy = cdata(CDATA_Y, CHARA_PLAYER)
 									txtef COLOR_SKY_BLUE
+									chatc@DP = cc
 									txt lang(" *クスクス* ", " *grin* "), lang("「えいっ」", cnvtalk("Fire in the hole!")), lang("「うりゃ」", cnvtalk("Tee-hee-hee!")), lang("「くらえー！」", cnvtalk("Eat this!")), lang("「危ないっ！」", cnvtalk("Watch out!")), lang("「避けてー」", cnvtalk("Scut!"))
 									txtmore
 									goto *act_throw
@@ -1468,6 +1520,7 @@
 						if ( synccheck(cc, -1) ) {
 							txtef COLOR_SKY_BLUE
 							txtmore
+							chatc@DP = cc
 							txt lang("「なめくじだ！」", cnvtalk("Snail!")), lang("「殺す！」", cnvtalk("Kill!"))
 						}
 						goto *act_throw
@@ -3035,6 +3088,13 @@
 			}
 		}
 	}
+	if ( cdata(CDATA_ID, cc) == CREATURE_ID_13TH_STEP_GHOST | cdata(CDATA_ID, cc) == CREATURE_ID_GHOST | cdata(CDATA_ID, cc) == CREATURE_ID_NINJA ) {
+		if ( cdata(CDATA_TARGET, cc) > (-1) ) {
+			if ( rnd(15) == 0 ) {
+				act = SKILL_SPACT_SHADOW_JUMP
+			}
+		}
+	}
 	if ( cdata(CDATA_ID, cc) == CREATURE_ID_LOTHRIAN_AGENT | cdata(CDATA_ID, cc) == CREATURE_ID_METAL_ZILLA | cdata(CDATA_ID, cc) == CREATURE_ID_MELGET_THE_INFORMER | cdata(CDATA_ID, cc) == CREATURE_ID_MOBILE_COMMUNICATION_EQUIPMENT | cdata(CDATA_ID, cc) == CREATURE_ID_LEAD_DEVELOPER_DR_GAVELA ) {
 		if ( cdata(CDATA_ANALYSIS_GAUGE, cc) >= 50 ) {
 			if ( cdata(CDATA_ALLIED, cc) == 0 ) {
@@ -3058,6 +3118,15 @@
 			if ( cdata(CDATA_POWER_GAUGE, cc) >= 25 ) {
 				if ( rnd(10) == 0 ) {
 					act = SKILL_SPACT_EXTERMINATION_BREATH
+				}
+			}
+		}
+	}
+	if ( cdata(CDATA_ID, cc) == CREATURE_ID_GETUEI_THE_NINJA_MASTER | cdata(CDATA_ID, cc) == CREATURE_ID_SHADOW ) {
+		if ( cbit(CHARA_BIT_SHADOW_CLONE, cc) == FALSE ) {
+			if ( cdata(CDATA_HP, cc) >= cdata(CDATA_MAX_HP, cc) / 2 ) {
+				if ( cdata(CDATA_RELATION, cc) != RELATION_NEUTRAL ) {
+					act = SKILL_SPACT_SHADOW_HOP
 				}
 			}
 		}
@@ -4106,6 +4175,7 @@
 		customtalk cc, DBMODE_FLAVOR_SHIFT
 		gosub *convert_word
 		if ( gdata(GDATA_CUSTOM_TALK) == 100 ) {
+			chatc@DP = cc
 			txt lang("「変身！」", cnvtalk("Transform!")), lang("「フォームアップ！」", cnvtalk("Form Up!")), lang("「ドレスアップ！」", cnvtalk("Dress Up!")), lang("「トランスフォーム！」", cnvtalk("Transform!"))
 		}
 		if ( inv(INV_ITEM_ID, cic) == ITEM_ID_ALPHA_SHIFT_CORE ) {

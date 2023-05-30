@@ -431,6 +431,15 @@
 				}
 			}
 		}
+
+		/********** CUSTOM - BEGINNING **********/
+		if ( TweakData(TWEAK_GAMEPLAY_REVERT_POST_217_EXP_CHANGES, TWEAK_CATEGORY_GAMEPLAY) == FALSE ) {
+			if ( locvar_skillmod_exp > 0 ) {
+				locvar_skillmod_exp = locvar_skillmod_exp / 4 * (gdata(GDATA_FLAG_MAIN) + 100) / 100
+			}
+		}
+		/********** CUSTOM - ENDING **********/
+
 		if ( gdata(GDATA_FLAG_GAME_MODE) == GAMEMODE_PURGE ) {
 			if ( locvar_skillmod_exp == 0 ) {
 				locvar_skillmod_exp = 1
@@ -1261,7 +1270,7 @@
 				}
 			}
 			if ( locvar_cell_show_c != 0 ) {
-				if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > VEHICLE_NONE & mdata(MDATA_TYPE) == MAP_TYPE_WORLD & cdata(CDATA_RELATION, locvar_cell_show_c) == RELATION_ALLY ) {
+				if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > 0 & mdata(MDATA_TYPE) == MAP_TYPE_WORLD | (gdata(GDATA_FLAG_SHIP_TYPE) > 0 & gdata(GDATA_AREA) == AREA_TEST_WORLD) & cdata(CDATA_RELATION, locvar_cell_draw_c) == RELATION_ALLY ) {
 					locvar_cell_show_c = 0
 				}
             }
@@ -1338,7 +1347,7 @@
 					}
 				}
 				if ( locvar_cell_show_c != 0 ) {
-					if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > 0 & mdata(MDATA_TYPE) == MAP_TYPE_WORLD & cdata(CDATA_RELATION, locvar_cell_show_c) == RELATION_ALLY ) {
+					if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > 0 & mdata(MDATA_TYPE) == MAP_TYPE_WORLD | (gdata(GDATA_FLAG_SHIP_TYPE) > 0 & gdata(GDATA_AREA) == AREA_TEST_WORLD) & cdata(CDATA_RELATION, locvar_cell_show_c) == RELATION_ALLY ) {
 						locvar_cell_show_c = 0
 					}
 				}
@@ -2026,7 +2035,7 @@
 								locvar_cell_draw_ani = cdata(CDATA_TURN, CHARA_PLAYER) \ 4 * 32
 							}
 							if ( mdata(MDATA_TYPE) == MAP_TYPE_WORLD ) {
-								if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > VEHICLE_NONE ) {
+								if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > 0 & gdata(GDATA_AREA) != AREA_TEST_WORLD ) {
 									locvar_cell_draw_wide = 1
 									if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) == VEHICLE_LAND_BATTLESHIP ) {
 										locvar_cell_draw_wide = 2
@@ -2060,19 +2069,57 @@
 									}
 								}
                                 else {
-									gmode 6, 32, 16, 85
-									color 0, 0, 0
-									pos locvar_cell_draw_px + 24, locvar_cell_draw_py + 27
-									grotate 3, 240, 384, 0, 20, 10
-									if ( cfg_pcc_show == 0 ) {
-										gmode 2, 32, 48
-										pos locvar_cell_draw_px + 24, locvar_cell_draw_py + 14
-										grotate 10, locvar_cell_draw_ani, cdata(CDATA_DIR, CHARA_PLAYER) * 48, 0, 24, 36
+									if ( gdata(GDATA_FLAG_SHIP_TYPE) > 0 & gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+										locvar_cell_draw_wide = 1
+										if ( gdata(GDATA_FLAG_SHIP_TYPE) >= 3 ) {
+											locvar_cell_draw_wide = 2
+										}
+										if ( gdata(GDATA_FLAG_SHIP_TYPE) != 6 ) {
+											gmode 6, , , 110
+											color 0, 0, 0
+											pos locvar_cell_draw_px + 8, locvar_cell_draw_py + 20
+											gcopy BUFFER_INF, 240, 384, 32, 16
+											if ( cfg_pcc_show == 0 ) {
+												gmode 2, 32, 48
+												pos locvar_cell_draw_px + 22, locvar_cell_draw_py + 8
+												grotate BUFFER_PCC, locvar_cell_draw_ani, cdata(CDATA_DIR, CHARA_PLAYER) * 48, 0, 32 * locvar_cell_draw_wide, 48
+											}
+											if ( cfg_pcc_show == 1 ) {
+												gmode 2, 32, 48
+												pos locvar_cell_draw_px + 24, locvar_cell_draw_py + 8
+												grotate BUFFER_PCC, locvar_cell_draw_ani, cdata(CDATA_DIR, CHARA_PLAYER) * 48, 0, 24 * locvar_cell_draw_wide, 40
+											}
+										}
+										if ( gdata(GDATA_FLAG_SHIP_TYPE) == 6 ) {
+											if ( cfg_pcc_show == 0 ) {
+												gmode 4, 32, 48, 146
+												color 0, 0, 0
+												pos locvar_cell_draw_px + 22, locvar_cell_draw_py + 8
+												grotate BUFFER_PCC, locvar_cell_draw_ani, cdata(CDATA_DIR, CHARA_PLAYER) * 48, 0, 32 * locvar_cell_draw_wide, 48
+											}
+											if ( cfg_pcc_show == 1 ) {
+												gmode 4, 32, 48, 146
+												color 0, 0, 0
+												pos locvar_cell_draw_px + 24, locvar_cell_draw_py + 8
+												grotate BUFFER_PCC, locvar_cell_draw_ani, cdata(CDATA_DIR, CHARA_PLAYER) * 48, 0, 24 * locvar_cell_draw_wide, 40
+											}
+										}
 									}
-									if ( cfg_pcc_show == 1 ) {
-										gmode 2, 32, 48
-										pos locvar_cell_draw_px + 24, locvar_cell_draw_py + 14
-										grotate 10, locvar_cell_draw_ani, cdata(CDATA_DIR, CHARA_PLAYER) * 48, 0, 16, 24
+									else {
+										gmode 6, 32, 16, 85
+										color 0, 0, 0
+										pos locvar_cell_draw_px + 24, locvar_cell_draw_py + 27
+										grotate BUFFER_INF, 240, 384, 0, 20, 10
+										if ( cfg_pcc_show == 0 ) {
+											gmode 2, 32, 48
+											pos locvar_cell_draw_px + 24, locvar_cell_draw_py + 14
+											grotate BUFFER_PCC, locvar_cell_draw_ani, cdata(CDATA_DIR, CHARA_PLAYER) * 48, 0, 24, 36
+										}
+										if ( cfg_pcc_show == 1 ) {
+											gmode 2, 32, 48
+											pos locvar_cell_draw_px + 24, locvar_cell_draw_py + 14
+											grotate BUFFER_PCC, locvar_cell_draw_ani, cdata(CDATA_DIR, CHARA_PLAYER) * 48, 0, 16, 24
+										}
 									}
                                 }
 							}
@@ -2686,7 +2733,7 @@
 						}
 					}
 					if ( locvar_cell_draw_c != CHARA_PLAYER ) {
-						if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > 0 & mdata(MDATA_TYPE) == MAP_TYPE_WORLD & cdata(CDATA_RELATION, locvar_cell_draw_c) == RELATION_ALLY ) {
+						if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > 0 & mdata(MDATA_TYPE) == MAP_TYPE_WORLD | (gdata(GDATA_FLAG_SHIP_TYPE) > 0 & gdata(GDATA_AREA) == AREA_TEST_WORLD) & cdata(CDATA_RELATION, locvar_cell_show_c) == RELATION_ALLY ) {
 							locvar_cell_draw_c = 0
 						}
 					}
@@ -2909,7 +2956,7 @@
 								}
 							}
 						}
-						if ( cbit(CHARA_BIT_STETHOSCOPE, locvar_cell_draw_c) == 1 | gdata(GDATA_SCOPE) == locvar_cell_draw_c | cbit(CHARA_BIT_NECRO, locvar_cell_draw_c) | (cdata(CDATA_RELATION, locvar_cell_draw_c) == 10 & locvar_cell_draw_c >= MAX_CHARA_FOLLOWER) ) {
+						if ( cbit(CHARA_BIT_STETHOSCOPE, locvar_cell_draw_c) == TRUE | gdata(GDATA_SCOPE) == locvar_cell_draw_c | (cbit(CHARA_BIT_NECRO, locvar_cell_draw_c) & cdata(CDATA_RELATION, locvar_cell_draw_c) == RELATION_ALLY) | (cdata(CDATA_RELATION, locvar_cell_draw_c) == RELATION_ALLY & locvar_cell_draw_c >= MAX_CHARA_FOLLOWER) ) {
 							if ( cdata(CDATA_IN_TAGTEAM, locvar_cell_draw_c) == 0 ) {
 								locvar_cell_draw_h = cdata(CDATA_HP, locvar_cell_draw_c) * 30 / cdata(CDATA_MAX_HP, locvar_cell_draw_c)
 								if ( locvar_cell_draw_h > 30 ) {
@@ -2985,13 +3032,19 @@
 								}
 							}
 							else {
-								if ( cbit(CHARA_BIT_NECRO, locvar_cell_draw_c) | (cdata(CDATA_RELATION, locvar_cell_draw_c) == 10 & locvar_cell_draw_c >= MAX_CHARA_FOLLOWER) ) {
+								if ( cbit(CHARA_BIT_NECRO, locvar_cell_draw_c) | cbit(CHARA_BIT_NECRO, locvar_cell_draw_c) & cdata(CDATA_RELATION, locvar_cell_draw_c) == RELATION_ALLY | (cdata(CDATA_RELATION, locvar_cell_draw_c) == RELATION_ALLY & locvar_cell_draw_c >= MAX_CHARA_FOLLOWER) ) {
 									pos locvar_cell_draw_dx + 9, locvar_cell_draw_dy + 31
 									gcopy 3, 1440 - locvar_cell_draw_h, 500, locvar_cell_draw_h, 3
+									if ( cdata(CDATA_HUNGER, locvar_cell_draw_c) > 10000 ) {
+										gcopy BUFFER_INF, 1440 - locvar_cell_draw_h, 595, locvar_cell_draw_h, 3
+									}
 								}
 								else {
 									pos locvar_cell_draw_dx + 9, locvar_cell_draw_dy + 31
 									gcopy 3, 480 - locvar_cell_draw_h, 513, locvar_cell_draw_h, 3
+									if ( cdata(CDATA_HUNGER, locvar_cell_draw_c) > 10000 ) {
+										gcopy BUFFER_INF, 1440 - locvar_cell_draw_h, 599, locvar_cell_draw_h, 3
+									}
 								}
 							}
 						}
@@ -3117,7 +3170,7 @@
 								}
 							}
 						}
-						if ( cbit(CHARA_BIT_STETHOSCOPE, locvar_cell_draw_c) == 1 | gdata(GDATA_SCOPE) == locvar_cell_draw_c | cbit(CHARA_BIT_NECRO, locvar_cell_draw_c) | (cdata(CDATA_RELATION, locvar_cell_draw_c) == 10 & locvar_cell_draw_c >= MAX_CHARA_FOLLOWER) ) {
+						if ( cbit(CHARA_BIT_STETHOSCOPE, locvar_cell_draw_c) == TRUE | gdata(GDATA_SCOPE) == locvar_cell_draw_c | (cbit(CHARA_BIT_NECRO, locvar_cell_draw_c) & cdata(CDATA_RELATION, locvar_cell_draw_c) == RELATION_ALLY) | (cdata(CDATA_RELATION, locvar_cell_draw_c) == RELATION_ALLY & locvar_cell_draw_c >= MAX_CHARA_FOLLOWER) ) {
 							if ( cdata(CDATA_IN_TAGTEAM, locvar_cell_draw_c) == 0 ) {
 								locvar_cell_draw_h = cdata(CDATA_MP, locvar_cell_draw_c) * 30 / cdata(CDATA_MAX_MP, locvar_cell_draw_c)
 								if ( locvar_cell_draw_h > 30 ) {
@@ -3142,7 +3195,7 @@
 								}
 							}
 							else {
-								if ( cbit(CHARA_BIT_NECRO, locvar_cell_draw_c) | (cdata(CDATA_RELATION, locvar_cell_draw_c) == 10 & locvar_cell_draw_c >= MAX_CHARA_FOLLOWER) ) {
+								if ( cbit(CHARA_BIT_NECRO, locvar_cell_draw_c) & cdata(CDATA_RELATION, locvar_cell_draw_c) == RELATION_ALLY | (cdata(CDATA_RELATION, locvar_cell_draw_c) == RELATION_ALLY & locvar_cell_draw_c >= MAX_CHARA_FOLLOWER) ) {
 									pos locvar_cell_draw_dx + 9, locvar_cell_draw_dy + 34
 									gcopy 3, 1440 - locvar_cell_draw_h, 528, locvar_cell_draw_h, 2
 								}
@@ -3302,7 +3355,7 @@
 								}
 							}
 							if ( locvar_cell_draw_c != CHARA_PLAYER ) {
-								if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > 0 & mdata(MDATA_TYPE) == MAP_TYPE_WORLD & cdata(CDATA_RELATION, locvar_cell_draw_c) == RELATION_ALLY ) {
+								if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > 0 & mdata(MDATA_TYPE) == MAP_TYPE_WORLD | (gdata(GDATA_FLAG_SHIP_TYPE) > 0 & gdata(GDATA_AREA) == AREA_TEST_WORLD) & cdata(CDATA_RELATION, locvar_cell_show_c) == RELATION_ALLY ) {
 									locvar_cell_draw_c = 0
 								}
 							}

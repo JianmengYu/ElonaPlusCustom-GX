@@ -36434,7 +36434,7 @@
 			return 0
 		}
 		if ( dbmode == DBMODE_REF ) {
-			dbidn = "god"
+			dbidn = "servant"
 			dbmode = DBMODE_REF
 			gosub *db_race
 			cpicref = 1052
@@ -36466,7 +36466,7 @@
 			cdata(CDATA_RELATION, rc) = RELATION_ENEMY
 			cdata(CDATA_RELATION_ORG, rc) = RELATION_ENEMY
 			cdata(CDATA_ALIGNMENT, rc) = -10000
-			dbidn = "god"
+			dbidn = "servant"
 			dbmode = DBMODE_SET
 			gosub *db_race
 			dbidn = "gunner"
@@ -36505,7 +36505,7 @@
 			return 0
 		}
 		if ( dbmode == DBMODE_REF ) {
-			dbidn = "god"
+			dbidn = "servant"
 			dbmode = DBMODE_REF
 			gosub *db_race
 			cpicref = 1051
@@ -36537,7 +36537,7 @@
 			cdata(CDATA_RELATION, rc) = RELATION_ENEMY
 			cdata(CDATA_RELATION_ORG, rc) = RELATION_ENEMY
 			cdata(CDATA_ALIGNMENT, rc) = -10000
-			dbidn = "god"
+			dbidn = "servant"
 			dbmode = DBMODE_SET
 			gosub *db_race
 			dbidn = "wizard"
@@ -36571,7 +36571,7 @@
 			return 0
 		}
 		if ( dbmode == DBMODE_REF ) {
-			dbidn = "god"
+			dbidn = "servant"
 			dbmode = DBMODE_REF
 			gosub *db_race
 			cpicref = 1050
@@ -36602,7 +36602,7 @@
 			cdata(CDATA_RELATION, rc) = RELATION_ENEMY
 			cdata(CDATA_RELATION_ORG, rc) = RELATION_ENEMY
 			cdata(CDATA_ALIGNMENT, rc) = -10000
-			dbidn = "god"
+			dbidn = "servant"
 			dbmode = DBMODE_SET
 			gosub *db_race
 			dbidn = "predator"

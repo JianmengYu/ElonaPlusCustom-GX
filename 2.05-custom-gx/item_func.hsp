@@ -928,6 +928,14 @@
 			locvar_itemowner_s += lang("コーヒー", "coffee")
 		}
 	}
+	if ( inv(INV_ITEM_ID, itemowner_itemid) == ITEM_ID_BLACK_TEA ) {
+		if ( ibit(ITEM_BIT_ACIDPROOF, itemowner_itemid) == TRUE ) {
+			locvar_itemowner_s += lang("ミルクティー", "milk tea")
+		}
+		if ( ibit(ITEM_BIT_ACIDPROOF, itemowner_itemid) != TRUE ) {
+			locvar_itemowner_s += lang("紅茶", "black tea")
+		}
+	}
 	if ( locvar_itemowner_a == FILTER_ITEM_FOOD ) {
 		if ( inv(INV_ITEM_PARAM1, itemowner_itemid) != 0 ) {
 			if ( inv(INV_ITEM_PARAM2, itemowner_itemid) != 0 ) {
@@ -1169,6 +1177,9 @@
 				locvar_itemname_s2 += "bottle"
 			}
 			if ( inv(INV_ITEM_ID, itemname_itemid) == ITEM_ID_COFFEE ) {
+				locvar_itemname_s2 += "cup"
+			}
+			if ( inv(INV_ITEM_ID, itemname_itemid) == ITEM_ID_BLACK_TEA ) {
 				locvar_itemname_s2 += "cup"
 			}
 			if ( instr(ioriginalnameref(inv(INV_ITEM_ID, itemname_itemid)), 0, "with") != (-1) ) {

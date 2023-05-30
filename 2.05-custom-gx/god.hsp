@@ -266,6 +266,9 @@
 
 *god_detail
 	buff = " "
+	if ( inv(INV_ITEM_PARAM1, ci) == GOD_EYTH ) {
+		buff += lang("無畏無頼(自動:神に与えるあらゆるダメージを+40%)<p>", "Atheism (Passive: Increase all damage you<br>give to gods.)<p>")
+	}
 	if ( inv(INV_ITEM_GOD, ci) == GOD_MANI ) {
 		buff = lang("マニは機械仕掛けの神です。マニを信仰した者は、機械に対する膨大な知識を得るほか、研ぎ澄まされた感覚により精密な攻撃が可能になります。<p><p>", "Mani is a clockwork god of machinery. Those faithful to Mani<br>receive immense knowledge of machines and learn a way to use them<br>effectively.<p>")
 		buff += lang("　捧げ物: 死体 / 銃器 / 機械<p>", "Offering: Corpses/Guns/Machinery<p>")

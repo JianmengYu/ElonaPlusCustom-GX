@@ -73,13 +73,14 @@
 			rdy3 = cnt
 			repeat rw, rx
 				rdx3 = cnt
+				if ( rnd(2) != 0 ) { continue }
 				if ( rnd(rh * rw) > vaultroom_monster_limit@NT ) { continue }
 				if ( rdx3 < 0 | rdy3 < 0 | rdx3 >= mdata(MDATA_WIDTH) | rdy3 >= mdata(MDATA_HEIGHT) ) { continue }
 				gosub *fltChara
 				characreate -1, CREATURE_ID_BUG, rdx3, rdy3
 			loop
 		loop
-		repeat rnd(3) + rnd(3) + 1
+		repeat rnd(2) + rnd(2) + 1
 			dx@NT = rnd(rw) + rx
 			dy@NT = rnd(rh) + ry
 			if ( dx@NT < 0 | dy@NT < 0 | dx@NT >= mdata(MDATA_WIDTH) | dy@NT >= mdata(MDATA_HEIGHT) ) { continue }
@@ -2488,7 +2489,7 @@
 *map_createDungeonCaveHobbit
 	mdata(MDATA_WIDTH) = 50
 	mdata(MDATA_HEIGHT) = 50
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 12
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
 	map_initialize
 
 	map_makesimpleroom2 3, 3, 44, 44, 3, 3
@@ -2523,7 +2524,7 @@
 *map_createDungeonCaveSlums
 	mdata(MDATA_WIDTH) = 40 + rnd(11)
 	mdata(MDATA_HEIGHT) = 40 + rnd(11)
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 8
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
 	map_initialize
 
 	repeat mdata(MDATA_WIDTH) - 2
@@ -2576,7 +2577,7 @@
 *map_createDungeonNestDragon
 	mdata(MDATA_WIDTH) = 50
 	mdata(MDATA_HEIGHT) = 50
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 12
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
 	map_initialize
 	
 	tile_default = 468
@@ -2589,7 +2590,8 @@
 	dighole_cellular_automata 16, 16, 18, 18, 40, 4, 2, 5, 100, (-1)
 	dighole_cellular_automata 16, 16, 18, 18, 40, 4, 3, 5, 100, (-1)
 	map_createroom_circular mdata(MDATA_WIDTH) / 2, mdata(MDATA_HEIGHT) / 2, 5, 5, 3, 3
-	vaultroom@NT = 1	
+	map_createroom_circular mdata(MDATA_WIDTH) / 2, mdata(MDATA_HEIGHT) / 2, 3, 3, 3, 3
+	vaultroom@NT = 2 // Mark the second smaller circular room as vaultroom (less monsters)
 
 	map_find_points 10, 5, 30
     repeat count@NT
@@ -2622,7 +2624,7 @@
 *map_createDungeonNestSpider
 	mdata(MDATA_WIDTH) = 40
 	mdata(MDATA_HEIGHT) = 40
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 12
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
 	map_initialize
 
 	dighole_voronoi_diagram 1, 1, 38, 38, 100, 8, 1, 3
@@ -2805,7 +2807,7 @@
 *map_createDungeonFortHeroQuest
 	mdata(MDATA_WIDTH) = 27
 	mdata(MDATA_HEIGHT) = 39
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 12
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
 	map_initialize
 
 	dighole_custom 1, 1, 3, 5, 1, 1, 11, 8, 100
@@ -2932,7 +2934,7 @@
 *map_createDungeonFortComplex
 	mdata(MDATA_WIDTH) = 40
 	mdata(MDATA_HEIGHT) = 30
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 20
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
 	map_initialize
 
 	map_furniture_setgroup 10
@@ -3003,7 +3005,7 @@
 	minetunneldepth@NT = 4 + rnd(3)
 	mdata(MDATA_WIDTH) = 36
 	mdata(MDATA_HEIGHT) = 12 + 7 * minetunneldepth@NT
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 8
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
 	map_initialize
 	
 	repeat mdata(MDATA_WIDTH) - 2
@@ -3068,7 +3070,7 @@
 *map_createDungeonMineDeposit
 	mdata(MDATA_WIDTH) = 30
 	mdata(MDATA_HEIGHT) = 60 + rnd(30)
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 20
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
 	map_initialize
 
 	tile_default = 468
@@ -3102,7 +3104,7 @@
 *map_createDungeonMineTunnelSnake
 	mdata(MDATA_WIDTH) = 40
 	mdata(MDATA_HEIGHT) = 40
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 20
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
 	map_initialize
 
 	tile_doorclosed = 733
@@ -3152,7 +3154,7 @@
 *map_createDungeonMineMoltenCore
 	mdata(MDATA_WIDTH) = 40
 	mdata(MDATA_HEIGHT) = 40
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 12
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
 	map_initialize
 
 	map_makesimpleroom2 5, 5, 30, 30, 3, 3
@@ -3182,7 +3184,7 @@
 *map_createDungeonLakeTunnelOfLove
 	mdata(MDATA_WIDTH) = 50
 	mdata(MDATA_HEIGHT) = 50
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 20
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
 	map_initialize
 
 	map_makesimpleroom2 3, 3, 44, 44, 3, 3
@@ -3217,7 +3219,7 @@
 *map_createDungeonLakeBranch
 	mdata(MDATA_WIDTH) = 30
 	mdata(MDATA_HEIGHT) = 80 + rnd(40)
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 20
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
 	map_initialize
 
 	repeat 3 + rnd(2)
@@ -3332,7 +3334,7 @@
 *map_createDungeonLakeviewCabin
 	mdata(MDATA_WIDTH) = 60
 	mdata(MDATA_HEIGHT) = 40
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 8
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 12
 	map_initialize
 
 	no_spider_web@NT = 1
@@ -3389,7 +3391,7 @@
 *map_createDungeonLakeBeachWalk
 	mdata(MDATA_WIDTH) = 20
 	mdata(MDATA_HEIGHT) = 50
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 8
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 12
 	map_initialize
 
 	no_spider_web@NT = 1
@@ -3423,7 +3425,7 @@
 *map_createDungeonTowerBubbles
 	mdata(MDATA_WIDTH) = 50
 	mdata(MDATA_HEIGHT) = 50
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 20
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 24
 	map_initialize
 
 	tile_doorclosed = 733
@@ -3468,7 +3470,7 @@
 	loop
 
 	repeat count@NT
-		fur_spawn_rate_multiplier@NT = 2
+		// fur_spawn_rate_multiplier@NT = 2
 		map_furniture_setgroup 10
 		map_createroom_circular matrix_pt@NT(0,cnt), matrix_pt@NT(1,cnt), 5, 5, 90+rnd(2), 81+rnd(2)
 	loop
@@ -3628,7 +3630,7 @@
 	passwindow@NT = 10
 	mdata(MDATA_WIDTH) = (octo@NT * 3 - 2) + 2 * (pass@NT + wall@NT) * layer@NT + 4
 	mdata(MDATA_HEIGHT) = (octo@NT * 3 - 2) + 2 * (pass@NT + wall@NT) * layer@NT + 4
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 12
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 20
 	map_initialize
 
 	// (Optional) Draw Void
@@ -3748,7 +3750,7 @@
 	floors@NT = 10 + rnd(5) 
 	mdata(MDATA_WIDTH) = 18
 	mdata(MDATA_HEIGHT) = floors@NT * 5 - 2
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 12
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
 	map_initialize
 
 	tile_doorclosed = 733
@@ -3834,7 +3836,7 @@
 *map_createDungeonForestTrail
 	mdata(MDATA_WIDTH) = 60
 	mdata(MDATA_HEIGHT) = 40
-	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 12
+	mdata(MDATA_MODERATE_CROWD) = mdata(MDATA_WIDTH) * mdata(MDATA_HEIGHT) / 16
     map_initialize
     
 	dighole_cellular_automata 0, 0, 60, 40, 40, 4, 3, 5, 3, 1

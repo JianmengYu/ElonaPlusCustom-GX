@@ -67,20 +67,32 @@
 	gosub *screen_drawMsg2
 
 	if ( CustomVal(0, tc) == 0 ) {
-		listn(0, 0) = "Eat items from your bag."
+		listn(0, 0) = "Eat items from your bag if you are hungry."
 	}
 	if ( CustomVal(0, tc) == 1 ) {
 		listn(0, 0) = "Don't eat items from your bag."
 	}
-	listn(0, 1) = "Exit"
+	if ( CustomVal(1, tc) == 0 ) {
+		listn(0, 1) = "Drink potions in your bag if you are thirsty."
+	}
+	if ( CustomVal(1, tc) == 1 ) {
+		listn(0, 1) = "Don't drink potions in your bag."
+	}
+	if ( CustomVal(2, tc) == 0 ) {
+		listn(0, 2) = "Tell me if you want to chat with me."
+	}
+	if ( CustomVal(2, tc) == 1 ) {
+		listn(0, 2) = "I don't have time to chat right now."
+	}
+	listn(0, 3) = "Exit"
 	font lang(cfg_font1, cfg_font2), 14 - en * 2, 0
 
-	repeat 2
+	repeat 4
 		key_list(cnt) = key_select(cnt)
 		keyrange = cnt + 1
-		pos wx + 38, wy + 385 + cnt * 19 - 2
+		pos wx + 38, wy + 347 + cnt * 19 - 2
 		gcopy 3, cnt * 24 + 72, 30, 24, 18
-		cs_list listn(0, cnt), wx + 64, wy + 385 + cnt * 19 - 1, 19
+		cs_list listn(0, cnt), wx + 64, wy + 347 + cnt * 19 - 1, 19
 	loop
 
 	font lang(cfg_font1, cfg_font2), 13 - en * 2, 0
@@ -95,6 +107,16 @@
 		gosub *ToggleSetting
 	}
 	if ( key == key_select(1) ) {
+		snd SOUNDLIST_OK1
+		tn = 1
+		gosub *ToggleSetting
+	}
+	if ( key == key_select(2) ) {
+		snd SOUNDLIST_OK1
+		tn = 2
+		gosub *ToggleSetting
+	}
+	if ( key == key_select(3) ) {
 		snd SOUNDLIST_OK1
 		goto *chat_end
 	}

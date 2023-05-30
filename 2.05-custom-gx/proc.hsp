@@ -547,6 +547,7 @@
 			if ( synccheck(cc, -1) ) {
 				if ( rnd(2) == 0 ) {
 					txtef COLOR_BLUE
+					chatc@DP = cc
 					if ( inv(INV_ITEM_ID, ci) == ITEM_ID_OCARINA | inv(INV_ITEM_ID, ci) == ITEM_ID_RECORDER | inv(INV_ITEM_ID, ci) == ITEM_ID_PAN_FLUTE ) {
 						txt lang("ﾋﾟﾛｰ♪ ", "*Zip*"), lang("ﾌﾟｵｰ♪ ", "*Zingo*"), lang("ﾎﾟｰ♪ ", "*Yowl*")
 					}
@@ -569,25 +570,28 @@
 						txt lang("ﾄﾞﾝﾄﾞﾝ♪ ", "*Bam*"), lang("ｶｯｶ♪ ", "*Rat-a-tat*"), lang("ﾄﾞｺﾄﾞﾝ♪ ", "*Bash*"), lang("ﾄﾞｺﾄﾞｺ♪ ", "*Bump*")
 					}
 				}
-				if ( rnd(10) == 0 ) {
+				if ( rnd(3) == 0 ) {
 					if ( cdata(CDATA_ID, cc) == CREATURE_ID_KARAVIKA ) {
+						chatc@DP = cc
 						if ( rnd(2) == 0 ) {
 							txtef COLOR_YELLOW
-							txt lang(" ♪振り返れば消えていく足跡　褪せていく思い出♪ ", "*Lulu*"), lang(" ♪血を吐きながら　乗り越えた日々も♪ ", "*Laaa*"), lang(" ♪精一杯　胸に刻み込んで♪ ", "*Lulu*"), lang(" ♪君と僕の向かう先は違うけれど♪ ", "*Lulu*"), lang(" ♪明日は僕らの開拓地♪ ", "*Lala*"), lang(" ♪僕らは明日の開拓者♪ ", "*Lala*")
+							txt lang(" ♪振り返れば消えていく足跡　褪せていく思い出♪ ", "*~can be so sweet ~ on the shiny side~*"), lang(" ♪血を吐きながら　乗り越えた日々も♪ ", "*~but too much, too much is crawling in the mines~*"), lang(" ♪精一杯　胸に刻み込んで♪ ", "*~this is enough of you ~ and my ghoulish heart~*"), lang(" ♪君と僕の向かう先は違うけれど♪ ", "*~cause my adventurer ~ he's gone left this town~*"), lang(" ♪明日は僕らの開拓地♪ ", "*~harpies in the skies ~ will sing their song~*"), lang(" ♪僕らは明日の開拓者♪ ", "*~shining bright beside you ~ night breezes seems to~*")
 						}
 						else {
 							txtef COLOR_YELLOW
-							txt lang(" ♪情熱が恐怖焼き尽くして♪ ", "*Lala*"), lang(" ♪向かい風も　不安の影も♪ ", "*Lala*"), lang(" ♪忘れたはずの約束が蘇る♪ ", "*Lala*"), lang(" ♪夢の残骸も　汗の結晶も　新たな道の礎だから♪ ", "*Lala*"), lang(" ♪それでも前へ　前へ進むのさ♪ ", "*Lala*")
+							txt lang(" ♪情熱が恐怖焼き尽くして♪ ", "*~everytime you're near me~*"), lang(" ♪向かい風も　不安の影も♪ ", "*~sailing over the etherwind~*"), lang(" ♪忘れたはずの約束が蘇る♪ ", "*~and I'm so in love ~ there's nothing ~*"), lang(" ♪夢の残骸も　汗の結晶も　新たな道の礎だから♪ ", "*~dream in my heart ~ without a love of my own~*"), lang(" ♪それでも前へ　前へ進むのさ♪ ", "*~hey now, you are a rock bomb ~ get your fuse on~*")
 						}
 					}
 				}
 				if ( ens > 0 ) {
 					if ( rnd(5) == 0 ) {
 						txtef COLOR_YELLOW
+						chatc@DP = cc
 						txt lang("ﾗﾗﾗ♪ ", "*Lulu*"), lang("ﾗｰ♪ ", "*Laaa*"), lang("ﾙﾙﾙ♪ ", "*Lala*")
 					}
 				}
 				txtef COLOR_BLUE
+				chatc@DP = cc
 				txt lang("〜♪ ", "*Cha*")
 			}
 		}
@@ -653,6 +657,7 @@
 							if ( rnd(3) == 0 ) {
 								cdata(CDATA_PERFORM_SCORE, cc) -= cdata(CDATA_LEVEL, tc) / 2
 								txtef COLOR_SKY_BLUE
+								chatc@DP = tc
 								txt lang("「引っ込め！」", cnvtalk("Boo boo!")), lang("「うるさい！」", cnvtalk("Shut it!")), lang("「下手っぴ！」", cnvtalk("What are you doing!")), lang("「何のつもりだ！」", cnvtalk("You can't play shit."))
 								txt lang("" + name(tc) + "は石を投げた。", name(tc) + " throw" + _s(tc) + " a rock.")
 								dmg = rnd(cdata(CDATA_LEVEL, tc) + 1) + 1
@@ -672,6 +677,7 @@
 					if ( synccheck(cc, -1) ) {
 						if ( cdata(CDATA_ID, cc) != CREATURE_ID_KARAVIKA ) {
 							txtef COLOR_SKY_BLUE
+							chatc@DP = tc
 							txt lang("「飽きた」", cnvtalk("Boring.")), lang("「前にも聴いたよ」", cnvtalk("I've heard this before.")), lang("「またこの曲か…」", cnvtalk("This song again?"))
 						}
 					}
@@ -739,6 +745,7 @@
 					if ( rnd(3) == 0 ) {
 						if ( synccheck(cc, -1) ) {
 							txtef COLOR_SKY_BLUE
+							chatc@DP = tc
 							txt lang(name(tc) + "は歓声を上げた。", name(tc) + " clap" + _s(tc) + "."), lang(name(tc) + "は目を輝かせた。", name(tc) + " listen" + _s(tc) + " to " + name(cc) + your(cc) + " music joyfully."), lang("「ブラボー」", cnvtalk("Bravo!")), lang("「いいぞ！」", cnvtalk("Nice song.")), lang(name(tc) + "はうっとりした。", cnvtalk("Scut!")), lang(name(tc) + "は" + name(cc) + "の演奏を褒め称えた。", name(tc) + " " + is(tc) + " excited!")
 						}
 						if ( cc == CHARA_PLAYER ) {
@@ -1074,6 +1081,7 @@
 				if ( cdata(CDATA_INTEREST, tc) <= 0 ) {
 					if ( synccheck(cc, -1) ) {
 						txtef COLOR_SKY_BLUE
+						chatc@DP = tc
 						txt lang("「飽きた」", cnvtalk("Boring.")), lang("「もうその踊りはいいよ」", cnvtalk("I've heard this before.")), lang("「まだ踊るのか…」", cnvtalk("You're still dancing?"))
 					}
 					cdata(CDATA_INTEREST, tc) = 0
@@ -1245,6 +1253,7 @@
 			snd SOUNDLIST_PRAY1
 			cdata(CDATA_EMO_ICON, tc) = 17 + 100 * 3
 			txtef COLOR_YELLOW
+			chatc@DP = tc
 			txt lang(name(tc) + "の視線は釘づけだ！", name(tc) + " " + is(tc) + " crazy about " + name(cc) + "!"), lang(name(tc) + "は思わず生唾を飲み込んだ。", name(tc) + " " + is(tc) + " fascinated."), lang("「ビューティフォー…」", cnvtalk("Beautiful...")), lang("「…すごい」", cnvtalk("Amazing...")), lang(name(tc) + "は完全に見とれている。", name(tc) + " " + is(tc) + " deeply appreciative.")
 			if ( cdata(CDATA_ALLIED, cc) == 0 ) {
 				if ( tc == CHARA_PLAYER ) {
@@ -1331,6 +1340,7 @@
 				if ( cdata(CDATA_INTEREST, tc) <= 0 ) {
 					if ( synccheck(cc, -1) ) {
 						txtef COLOR_SKY_BLUE
+						chatc@DP = tc
 						if ( jp ) {
 							txt "「目障り」", "「あっちいけ！」", "「シッシッ！」"
 						}
@@ -1345,6 +1355,7 @@
 					if ( tc >= MAX_CHARA_FOLLOWER ) {
 						if ( synccheck(cc, -1) ) {
 							txtef COLOR_SKY_BLUE
+							chatc@DP = tc
 							if ( jp ) {
 								txt "「" + _ore(3) + "よりお金持ってるみたい" + _dana(3) + "」"
 							}
@@ -1384,6 +1395,7 @@
 								cdata(CDATA_INTEREST_RENEW, tc) = gdata(GDATA_HOUR) + gdata(GDATA_DAY) * 24 + gdata(GDATA_MONTH) * 24 * 30 + gdata(GDATA_YEAR) * 24 * 30 * 12 + 12
 							}
 						}
+						chatc@DP = tc
 						if ( jp ) {
 							txt "「哀れな…」", "「すっごいかわいそ！」", "「みじめぇ！」"
 						}
@@ -1534,6 +1546,7 @@
 				if ( cdata(CDATA_INTEREST, tc) <= 0 ) {
 					if ( synccheck(cc, -1) ) {
 						txtef COLOR_SKY_BLUE
+						chatc@DP = tc
 						txt lang("「飽きた」", cnvtalk("Boring.")), lang("「もうその話は聴いたよ」", cnvtalk("I've heard this before.")), lang("「まだ喋るのか…」", cnvtalk("You're still talking?"))
 					}
 					cdata(CDATA_INTEREST, tc) = 0
@@ -1544,6 +1557,7 @@
 						if ( rnd(6) == 0 | (rnd(3) == 0 & cdata(CDATA_GOD, cc) != cdata(CDATA_GOD, tc)) ) {
 							if ( synccheck(cc, -1) ) {
 								txtef COLOR_SKY_BLUE
+								chatc@DP = tc
 								txt lang("「引っ込め！」", cnvtalk("Take it back!")), lang("「うるさい！」", cnvtalk("Shut up!")), lang("「この不届き者！」", cnvtalk("You insolent piece of...!"))
 								txt lang("" + name(tc) + "は石を投げた。", name(tc) + " throw" + _s(tc) + " a rock.")
 							}
@@ -1662,13 +1676,14 @@
 							if ( gdata(GDATA_QUEST) == QUEST_TYPE_PARTY ) {
 								if ( tc >= 57 ) {
 									if ( cdata(CDATA_IMPRESSION, tc) < 53 ) {
-										cdata(CDATA_IMPRESSION, tc) += rnd(2)
+										cdata(CDATA_IMPRESSION, tc) += rnd(2) + 1
 										calcpartyscore
 									}
 								}
 							}
 							cdata(CDATA_PERFORM_SCORE, cc) += p
 							if ( kami == 0 ) {
+								chatc@DP = tc
 								txt lang(name(tc) + "は歓声を上げた。", name(tc) + " lets out a cheer."), lang("「なるほど」", cnvtalk("I see.")), lang("「素晴らしい！」", cnvtalk("That's amazing!")), lang(name(tc) + "はしきりに頷いている。", name(tc) + " nods in agreement.")
 							}
 							if ( tc != CHARA_PLAYER ) {
@@ -1800,6 +1815,7 @@
 		return
 	}
 	txtef COLOR_RED
+	chatc@DP = cc
 	txt lang("*フルチャージ！！*", "*Full Charge!!*")
 	if ( synccheck(cc, -1) ) {
 		animeid = ANIMATION_GENE
@@ -2912,6 +2928,7 @@
 		cdata(CDATA_EMO_ICON, cc) = 16 + 100
 		if ( cdata(CDATA_ACTION_PERIOD, cc) \ 5 == 0 ) {
 			if ( synccheck(cc, -1) ) {
+				chatc@DP = cc
 				txt lang("*むしゃむしゃ*", "*Munch munch*")
 			}
 		}
@@ -3024,6 +3041,7 @@
 		cdata(CDATA_EMO_ICON, cc) = 16 + 100
 		if ( cdata(CDATA_ACTION_PERIOD, cc) \ 5 == 0 ) {
 			if ( synccheck(cc, -1) ) {
+				chatc@DP = cc
 				txt lang("*むしゃむしゃ*", "*Munch munch*")
 			}
 		}
@@ -3082,6 +3100,7 @@
 			if ( cdata(CDATA_ACTION_PERIOD, cc) \ 5 == 0 ) {
 				if ( synccheck(cc, -1) ) {
 					txtef COLOR_SKY_BLUE
+					chatc@DP = cc
 					if ( jp ) {
 						txt "「きくぅ」", "「もふもふ」", "「くやしい、でも…」", "「はぁはぁ！」", "「ウフフフ」"
 					}
@@ -3148,14 +3167,17 @@
 	if ( tc != CHARA_PLAYER ) {
 		if ( cdata(CDATA_GOLD, tc) >= sexvalue ) {
 			if ( synccheck(cc, -1) ) {
+				chatc@DP = tc
 				txt lang("！さあ、小遣いを受け取って" + _kure(3) + "」", "Here, take this.\"")
 			}
 		}
 		else {
 			if ( synccheck(cc, -1) ) {
+				chatc@DP = tc
 				txt lang("！これが" + _ore(3) + "の財布の中身の全て" + _da() + "」", "Take this money, it's all I have!\"")
 				if ( rnd(3) == 0 ) {
 					if ( cc != CHARA_PLAYER ) {
+						chatc@DP = tc
 						txt lang(name(cc) + "は激怒した。「なめてんの？」", name(cc) + " gets furious, " + cnvtalk("And you think you can just run away?"))
 						cdata(CDATA_TARGET, cc) = tc
 						cdata(CDATA_AI_AGGRO, cc) = 20
@@ -3214,6 +3236,7 @@
 			if ( cdata(CDATA_ACTION_PERIOD, cc) \ 5 == 0 ) {
 				if ( synccheck(cc, -1) ) {
 					txtef COLOR_SKY_BLUE
+					chatc@DP = cc
 					if ( jp ) {
 						txt "「もふもふ」", "「くやしい、でも…」", "「はぁはぁ！」", "「ウフフフ」"
 					}
@@ -3256,6 +3279,7 @@
 	}
 	if ( synccheck(cc, -1) ) {
 		txtef COLOR_SKY_BLUE
+		chatc@DP = tc
 		if ( jp ) {
 			txt "「よかった" + _yo(3) + "」", "「す、すごい" + _yo(3) + "」", "「も、もうだめ" + _da(3) + "」", "「は、激しかった" + _yo(3) + "」", "「か、完敗" + _da(3) + "」"
 		}
@@ -3271,14 +3295,17 @@
 		snd SOUNDLIST_AMMO
 		if ( cdata(CDATA_GOLD, tc) >= sexvalue ) {
 			if ( synccheck(cc, -1) ) {
+				chatc@DP = tc
 				txt lang("！さあ、小遣いを受け取って" + _kure(3) + "」", "Here, take this.\"")
 			}
 		}
 		else {
 			if ( synccheck(cc, -1) ) {
+				chatc@DP = tc
 				txt lang("！これが" + _ore(3) + "の財布の中身の全て" + _da() + "」", "Take this money, it's all I have!\"")
 				if ( rnd(3) == 0 ) {
 					if ( cc != 0 ) {
+						chatc@DP = tc
 						txt lang(name(cc) + "は激怒した。「なめてんの？」", name(cc) + " gets furious, " + cnvtalk("And you think you can just run away?"))
 						cdata(CDATA_TARGET, cc) = tc
 						cdata(CDATA_AI_AGGRO, cc) = 20
@@ -3407,6 +3434,7 @@
 	tc = cdata(CDATA_ROW_ACT_TC, cc)
 	if ( cdata(CDATA_ACTION_PERIOD, cc) > 0 ) {
 		if ( gdata(GDATA_ROW_ACT) == ACTION_CUT_TREE ) {
+			chatc@DP = (-1)
 			if ( rnd(5) == 0 ) {
 				skillexp SKILL_WEAPON_AXE, cc, 20
 			}
@@ -3440,6 +3468,7 @@
 			}
 		}
 		if ( gdata(GDATA_ROW_ACT) == ACTION_HARVEST ) {
+			chatc@DP = (-1)
 			if ( rnd(5) == 0 ) {
 				skillexp SKILL_NORMAL_GARDENING, CHARA_PLAYER, 40, 4
 			}
@@ -3598,10 +3627,12 @@
 						txt lang(name(cnt) + "は不審な物音に気づいた。", name(cnt) + " hear" + _s(cnt) + " a loud noise,")
 					}
 					if ( cdata(CDATA_ROLE, cnt) == ROLE_GUARD ) {
+						chatc@DP = cnt
 						txt lang("「貴様、何をしている！」", cnvtalk("You there, stop!"))
 						modimp cnt, -5
 					}
 					else {
+						chatc@DP = cnt
 						txt lang("「ガード！ガード！」", cnvtalk("Guards! Guards!"))
 						modimp cnt, -5
 					}
@@ -3946,6 +3977,7 @@
 		ci = stat
 		if ( inv(INV_ITEM_NUM, ci) >= 1 ) {
 			kaiwa = rnd(4)
+			chatc@DP = (-1)
 			if ( kaiwa == 0 ) {
 				txt lang("「時間だ。再起動しろ」", cnvtalk("It's time. Restarting."))
 			}
@@ -4372,12 +4404,23 @@
 		if ( gdata(GDATA_WEATHER) == WEATHER_SNOW | chipm(CHIPM_ROLE, map(cdata(CDATA_X, cc), cdata(CDATA_Y, cc), 0)) == MAP_CHIP_ROLE_SNOW ) {
 			cdata(CDATA_ACTION_PERIOD, cc) = cdata(CDATA_ACTION_PERIOD, cc) * 22 / 10
 		}
-		if ( gdata(GDATA_WEATHER) == WEATHER_ETHER ) {
-			cdata(CDATA_ACTION_PERIOD, cc) = cdata(CDATA_ACTION_PERIOD, cc) * 5 / 10
-			norimono = 500
+		if ( gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+			if ( gdata(GDATA_FLAG_SHIP_TYPE) > 0 ) {
+				norimono = 500
+				cdata(CDATA_ACTION_PERIOD, cc) = cdata(CDATA_ACTION_PERIOD, cc) * 2
+			}
+			if ( gdata(GDATA_FLAG_SHIP_TYPE) == 0 ) {
+				norimono = 0
+				cdata(CDATA_ACTION_PERIOD, cc) = cdata(CDATA_ACTION_PERIOD, cc) * 2
+			}
 		}
 		else {
-			norimono = 0
+			if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > 0 ) {
+				norimono = 500
+			}
+			else {
+				norimono = 0
+			}
 		}
 		cdata(CDATA_ACTION_PERIOD, cc) = cdata(CDATA_ACTION_PERIOD, cc) * 100 / (100 + gdata(GDATA_TRAVEL_SPEED) + sdata(SKILL_NORMAL_TRAVELING, CHARA_PLAYER) + norimono)
 		if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > VEHICLE_NONE ) {
@@ -4426,38 +4469,57 @@
 			gosub *insta_eat
 		}
 	}
-	if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) != VEHICLE_MAGIC_LOCOMOTIVE ) {
-        if ( gdata(GDATA_WEATHER) == WEATHER_SNOW | chipm(CHIPM_ROLE, map(cdata(CDATA_X, cc), cdata(CDATA_Y, cc), 0)) == MAP_CHIP_ROLE_SNOW ) {
-            if ( gdata(GDATA_RES_WEATHER) == 0 ) {
-                if ( rnd(100) == 0 ) {
-                    if ( cbit(CHARA_BIT_FLOAT, CHARA_PLAYER) == 0 | cdata(CDATA_CONDITION_GRAVITY, CHARA_PLAYER) > 0 ) {
-                        txtef COLOR_SKY_BLUE
-                        if ( jp ) {
-                            txt " *ずぶっ* ", " *ザシュ* ", " *ズボ* ", " *ズサッ* "
-                        }
-                        if ( en ) {
-                            txt " *kisssh* ", " *thudd* ", " *siz* ", " *clump* ", " *skritch* "
-                        }
-                        cdata(CDATA_ACTION_PERIOD, cc) += 10
-                    }
-                }
-                if ( rnd(1000) == 0 ) {
-                    txtef COLOR_PURPLE
-                    txt lang("積雪のせいで旅程が遅れている。", "Snow delays your travel."), lang("雪道を進むのは大変な苦労だ。", "You are caught in a snowdrift."), lang("深い雪に脚をとられている。", "It's hard to walk on a snowy road.")
-                    cdata(CDATA_ACTION_PERIOD, cc) += 50
-                }
-            }
-            if ( cdata(CDATA_HUNGER, CHARA_PLAYER) <= 1200 ) {
-                if ( cbit(CHARA_BIT_ANOREXIA, CHARA_PLAYER) == 0 ) {
-                    snd SOUNDLIST_EAT1
-                    txt lang("空腹のあまり、あなたは積もっている雪を腹にかきこんだ。", "You are too hungry. You chow down snow.")
-                    cdata(CDATA_HUNGER, cc) += 5000
-                    gosub *eat_finish
-                    dmgcon CHARA_PLAYER, CONDITION_DIM, 1000
-                }
-            }
-        }
-    }
+	if ( gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+		if ( rnd(1000) == 0 ) {
+			txtef COLOR_PURPLE
+			if ( jp ) {
+				txt "高波のせいで旅程が遅れている。", "流れに逆らって進むのは大変な苦労だ。"
+			}
+			if ( en ) {
+				txt "High waves delays your travel.", "It's hard to go against the flow."
+			}
+		}
+	}
+	if ( gdata(GDATA_AREA) != AREA_TEST_WORLD ) {
+		if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) != 3 ) {
+			if ( gdata(GDATA_WEATHER) == WEATHER_SNOW | chipm(CHIPM_ROLE, map(cdata(CDATA_X, cc), cdata(CDATA_Y, cc), MAP_TILE_ID)) == MAP_CHIP_ROLE_SNOW ) {
+				if ( gdata(GDATA_RES_WEATHER) == 0 ) {
+					if ( rnd(100) == 0 ) {
+						if ( cbit(CHARA_BIT_FLOAT, CHARA_PLAYER) == FALSE | cdata(CDATA_CONDITION_GRAVITY, CHARA_PLAYER) > 0 ) {
+							txtef COLOR_SKY_BLUE
+							chatc@DP = (-1)
+							if ( jp ) {
+								txt " *ずぶっ* ", " *ザシュ* ", " *ズボ* ", " *ズサッ* "
+							}
+							if ( en ) {
+								txt " *kisssh*", "*thudd*", "*siz*", "*clump*", "*skritch*"
+							}
+							cdata(CDATA_ACTION_PERIOD, cc) += 10
+						}
+					}
+					if ( rnd(1000) == 0 ) {
+						txtef COLOR_PURPLE
+						if ( jp ) {
+							txt "積雪のせいで旅程が遅れている。", "雪道を進むのは大変な苦労だ。", "深い雪に脚をとられている。"
+						}
+						if ( en ) {
+							txt "Snow delays your travel.", "You are caught in a snowdrift.", "It's hard to walk on a snowy road."
+						}
+						cdata(CDATA_ACTION_PERIOD, cc) += 50
+					}
+				}
+				if ( cdata(CDATA_HUNGER, CHARA_PLAYER) <= 1200 ) {
+					if ( cbit(CHARA_BIT_ANOREXIA, CHARA_PLAYER) == FALSE ) {
+						snd SOUNDLIST_EAT1
+						txt lang("空腹のあまり、あなたは積もっている雪を腹にかきこんだ。", "You are too hungry. You chow down snow.")
+						cdata(CDATA_HUNGER, cc) += 5000
+						gosub *eat_finish
+						dmgcon CHARA_PLAYER, CONDITION_DIM, 1000
+					}
+				}
+			}
+		}
+	}
 	if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) != VEHICLE_LAND_BATTLESHIP ) {
         if ( chipm(CHIPM_ROLE, map(cdata(CDATA_X, cc), cdata(CDATA_Y, cc), 0)) == MAP_CHIP_ROLE_SAND ) {
             if ( rnd(15) == 0 ) {
@@ -4525,9 +4587,16 @@
 			gdata(GDATA_FLAG_MANUSCRIPT_IDEAS)++
 		}
 	}
-	traveldone = 1
-	gdata(GDATA_TRAVEL_DISTANCE) += 4
-	gdata(GDATA_FLAG_MILES_TRAVELED) += 4
+	if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
+		traveldone = 1
+		gdata(GDATA_TRAVEL_DISTANCE) += 1
+		gdata(GDATA_FLAG_MILES_TRAVELED) += 1
+	}
+	else {
+		traveldone = 1
+		gdata(GDATA_TRAVEL_DISTANCE) += 4
+		gdata(GDATA_FLAG_MILES_TRAVELED) += 4
+	}
 	if ( gdata(GDATA_FLAG_MILES_TRAVELED) >= 1000000000 ) {
 		gdata(GDATA_FLAG_MILES_TRAVELED) = 0
 	}
@@ -4835,6 +4904,7 @@
 							gdata(GDATA_FLAG_TREASURE_FOUND)++
 							snd SOUNDLIST_CHEST1
 							txtef COLOR_YELLOW
+							chatc@DP = (-1)
 							txt lang(" *ガチッ* …何かがある！", "*click* ...There's something here!")
 							msg_halt
 							snd SOUNDLIST_DING2
@@ -5109,6 +5179,7 @@
 						}
 						if ( rtval != 0 ) {
 							kaiwa = rnd(4)
+							chatc@DP = (-1)
 							if ( kaiwa == 0 ) {
 								txt lang("「フハハハ!フハハハ!」", cnvtalk("Muwahaha! Muwahaha!"))
 							}
@@ -5289,6 +5360,7 @@
 			if ( inv(INV_ITEM_MATERIAL, ci) == ITEM_MATERIAL_RAW ) {
 				if ( inv(INV_ITEM_ROT, ci) < 0 ) {
 					txtef COLOR_SKY_BLUE
+					chatc@DP = cc
 					if ( jp ) {
 						txt "「うぐぐ！なんだこの飯は！」", "「うっ！」", "「……！！」", "「あれれ…」", "「…これは何の嫌がらせですか」", "「まずい！」"
 					}
@@ -5315,6 +5387,7 @@
 		if ( synccheck(cc, -1) ) {
 			txtef COLOR_PURPLE
 			txt lang(name(cc) + "はもちを喉につまらせた！", name(cc) + " choke" + _s(cc) + " on mochi!")
+			chatc@DP = cc
 			txt lang("「むがっ」", cnvtalk("Mm-ghmm"))
 		}
 		cdata(CDATA_CONDITION_SUFFOCATION, cc) = 100 + rnd(100)
@@ -5697,6 +5770,14 @@
 				snd SOUNDLIST_FAIL1
 				return 1
 			}
+			/********** CUSTOM - BEGINNING **********/ // Fixes Some Bugs made by Ano
+			if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
+				snd SOUNDLIST_FAIL1
+				txt lang("この階層では帰還が出来ないようだ。", "It seems that you cannot return from this floor.")
+				obvious = 0
+				goto *effect_end
+			}
+			/********** CUSTOM - BEGINNING **********/
 			if ( gdata(GDATA_AREA) == AREA_REMIDO & gdata(GDATA_LEVEL) == 129 | (gdata(GDATA_AREA) == AREA_CHAOS_CRADLE & gdata(GDATA_LEVEL) == 179) ) {
 				snd SOUNDLIST_FAIL1
 				txt lang("この階層では脱出が出来ないようだ。", "This floor gradually loses power.")
@@ -5831,6 +5912,7 @@
 				txtef COLOR_YELLOW
 				txt cnven(cdatan(CDATAN_NAME, rc)) + lang("は復活した！", " " + have(rc) + " been resurrected!")
 				txtvalid = 0
+				chatc@DP = rc
 				txt lang("「苦しい…」", cnvtalk("It hurts..."))
 				cdata(CDATA_CAN_REVIVE, rc)--
 			loop
@@ -6394,6 +6476,7 @@
 				txt lang(name(cc) + "は井戸に落ちた！ ", name(cc) + " falls in the well!")
 				txtmore
 				txtef COLOR_SKY_BLUE
+				chatc@DP = cc
 				txt name(cc) + lang("「手を伸ばせー」", " yells, " + cnvtalk("G-Give me your hands!"))
 				if ( cbit(CHARA_BIT_FLOAT, cc) == 1 & cdata(CDATA_CONDITION_GRAVITY, cc) == 0 | findbuff(cc, BUFF_GRAVITY_ACCEL) != (-1) ) {
 					txtmore
@@ -6598,7 +6681,7 @@
 		txt lang(npcn(cc) + itemname(ci, 1) + "を読んだ。", name(cc) + " read" + _s(cc) + " " + itemname(ci, 1) + ".")
 		txtmore
 	}
-	if ( inv(INV_ITEM_ID, ci) != ITEM_ID_TREASURE_MAP & inv(INV_ITEM_ID, ci) != ITEM_ID_MAP & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_LAND_BATTLESHIP & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_MAGIC_LOCOMOTIVE & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_TRUCK & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_CARRIAGE ) {
+	if ( inv(INV_ITEM_ID, ci) != ITEM_ID_TREASURE_MAP & inv(INV_ITEM_ID, ci) != ITEM_ID_MAP & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_LAND_BATTLESHIP & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_MAGIC_LOCOMOTIVE & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_TRUCK & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_CARRIAGE & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_HUGE_RAFT & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_FISHING_SHIP & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_PIRATE_SHIP & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_CRUISE_SHIP & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_WARSHIP & inv(INV_ITEM_ID, ci) != ITEM_ID_DEED_OF_SUBMARINE ) {
 		inv(INV_ITEM_NUM, ci)--
 		if ( ci >= RANGE_INV2 ) {
 			cell_refresh inv(INV_ITEM_X, ci), inv(INV_ITEM_Y, ci)
@@ -8132,6 +8215,7 @@
 						customtalk tc, DBMODE_FLAVOR_DRAIN
 						gosub *convert_word
 						if ( gdata(GDATA_CUSTOM_TALK) == 100 ) {
+							chatc@DP = tc
 							txt lang(name(tc) + "は大人しく血を吸われている。", name(tc) + " obediently allows you to suck " + his(tc, 1) + " blood."), lang("「どうぞ…」", cnvtalk("Here you go...")), lang("「美味しい？」", cnvtalk("Is it good?"))
 						}
 						dmgcon tc, CONDITION_BLEED, 50
@@ -9219,6 +9303,10 @@
 			txt lang("それはワールドマップで読む必要がある。", "You need to read it while you are in the world map.")
 			goto *effect_end
 		}
+		if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
+			txt lang("それは海の地図ではない。", "It's not a sea map.")
+			goto *effect_end
+		}
 		if ( efstatus <= (-1) ) {
 			if ( rnd(5) == 0 ) {
 				txt lang("呪われた地図は触れると崩れ落ちた。", "The cursed map crumbles as you touch it.")
@@ -9453,6 +9541,7 @@
 				}
 				else {
 					txtef COLOR_SKY_BLUE
+					chatc@DP = tc
 					txt lang("「ぺっぺっ、まずー」", cnvtalk("Argh, the milk is cursed!"))
 				}
 			}
@@ -9462,6 +9551,7 @@
 				}
 				else {
 					txtef COLOR_SKY_BLUE
+					chatc@DP = tc
 					txt lang("「うまー」", cnvtalk("Yummy!"))
 				}
 				if ( cdata(CDATA_SPRITE_SIZE_MILK, tc) <= (-1) & cdata(CDATA_HUNGER, tc) < 8000 & cbit(CHARA_BIT_BIRTHED_CHILD, tc) != TRUE ) {
@@ -9485,6 +9575,7 @@
 						}
 					}
 					if ( cdata(CDATA_HUNGER, tc) >= 8000 ) {
+						chatc@DP = tc
 						txt lang("「げふぅ」", name(tc) + " muttered " + cnvtalk("Ugh-Ughu"))
 					}
 				}
@@ -9517,11 +9608,13 @@
 			if ( efstatus <= (-1) ) {
 				txtef COLOR_SKY_BLUE
 				txtmore
+				chatc@DP = tc
 				txt lang("「うぃっ…」", "*Hic*"), lang("「まずいぜ」", cnvtalk("Ah, bad booze.")), lang("「げー♪」", cnvtalk("Ugh...")), lang("「腐ったミルクみたいな味だ」", cnvtalk("Bah, smells like rotten milk."))
 			}
 			else {
 				txtef COLOR_SKY_BLUE
 				txtmore
+				chatc@DP = tc
 				txt lang("「うぃっ！」", "*Hic*"), lang("「うまいぜ」", cnvtalk("Ah, good booze.")), lang("「らららー♪」", cnvtalk("La-la-la-la.")), lang("「ひっく」", cnvtalk("I'm going to heaven.")), lang("「ふぅ」", cnvtalk("Whew!")), lang("「たまらないわ」", cnvtalk("I'm revived!")), lang("「んまっ♪」", cnvtalk("Awesome."))
 			}
 		}
@@ -9536,6 +9629,7 @@
 		}
 		else {
 			txtef COLOR_SKY_BLUE
+			chatc@DP = tc
 			txt lang("「うまいっ！！」", cnvtalk("Very yummy!"))
 		}
 		gosub *effect_elixer
@@ -9747,9 +9841,11 @@
 		_switch_sw = 0
 		if ( synccheck(tc, -1) ) {
 			if ( tc == CHARA_PLAYER ) {
+				chatc@DP = (-1)
 				txt lang("*ごくっ* 綺麗な水だ。", "*quaff* The water is refreshing.")
 			}
 			else {
+				chatc@DP = cc
 				txt lang(" *ごくっ* ", " *quaff* ")
 			}
 		}
@@ -9767,6 +9863,8 @@
 	if ( _switch_val == SKILL_EFFECT_COLA | _switch_sw ) {
 		_switch_sw = 0
 		if ( synccheck(tc, -1) ) {
+			chatc@DP = tc
+			if ( tc == 0 ) { chatc@DP = (-1) }
 			txt lang("「げふぅ」", "*Ughu*")
 		}
 		flt
@@ -9787,9 +9885,11 @@
 		_switch_sw = 0
 		if ( synccheck(tc, -1) ) {
 			if ( tc == CHARA_PLAYER ) {
+				chatc@DP = (-1)
 				txt lang("*ごくっ* 血行が良くなりそうだ。", "*quaff* It seems to help my circulation.")
 			}
 			else {
+				chatc@DP = tc
 				txt lang(" *ごくっ* ", " *quaff* ")
 			}
 		}
@@ -9803,6 +9903,8 @@
 	if ( _switch_val == SKILL_EFFECT_POTION_SODA | _switch_sw ) {
 		_switch_sw = 0
 		if ( synccheck(tc, -1) ) {
+			chatc@DP = tc
+			if ( tc == 0 ) { chatc@DP = (-1) }
 			txt lang("*シュワワ* 刺激的！", "*quaff* Refreshing!")
 			txt lang(name(tc) + "のスタミナが少し回復した。", name(tc) + " restore" + _s(tc) + " some stamina.")
 		}
@@ -9816,6 +9918,8 @@
 	if ( _switch_val == SKILL_EFFECT_POTION_CAPSULE | _switch_sw ) {
 		_switch_sw = 0
 		if ( synccheck(tc, -1) ) {
+			chatc@DP = tc
+			if ( tc == 0 ) { chatc@DP = (-1) }
 			txt lang("*ごくり*", " *quaff* ")
 			txt lang(name(tc) + "のスタミナはかなり回復した。", name(tc) + " greatly restore" + _s(tc) + " stamina.")
 		}
@@ -9828,6 +9932,7 @@
 		if ( cdata(CDATA_ID, tc) == CREATURE_ID_SNAIL_THE_ANDROID_RIDER ) {
 			txtef COLOR_SKY_BLUE
 			txtmore
+			chatc@DP = tc
 			txt lang("「アンチソルトシステム作動」", cnvtalk("Anti-salt system activated."))
 			flt
 			itemcreate -1, ITEM_ID_RICE_BALL, cdata(CDATA_X, tc), cdata(CDATA_Y, tc), 0
@@ -9849,6 +9954,7 @@
 			if ( synccheck(tc, -1) ) {
 				txtef COLOR_SKY_BLUE
 				txtmore
+				chatc@DP = tc
 				txt lang("「しょっぱ〜」", cnvtalk("Salty!"))
 			}
 		}
@@ -10240,6 +10346,18 @@
 					p++
 					continue cnt
 				}
+				cdata(STARTING_CDATA_BUFF + i * ARRAY_CDATA_BUFF + 1, tc) -= efp
+				cdata(STARTING_CDATA_BUFF + i * ARRAY_CDATA_BUFF + 2, tc) -= efp / 5
+				if ( cdata(STARTING_CDATA_BUFF + i * ARRAY_CDATA_BUFF + 1, tc) <= BUFF_NONE ) {
+					delbuff tc, i
+					p++
+					continue cnt
+				}
+				if ( cdata(STARTING_CDATA_BUFF + i * ARRAY_CDATA_BUFF + 2, tc) <= BUFF_NONE ) {
+					delbuff tc, i
+					p++
+					continue cnt
+				}
 			loop
 			animeload ANIMATION_HEAL_FAST, tc
 		loop
@@ -10274,6 +10392,18 @@
 				continue
 			}
 			if ( rnd(efp * 2 + 1) > rnd(cdata(STARTING_CDATA_BUFF + i * ARRAY_CDATA_BUFF + 1, tc) + 1) ) {
+				delbuff tc, i
+				p++
+				continue cnt
+			}
+			cdata(STARTING_CDATA_BUFF + i * ARRAY_CDATA_BUFF + 1, tc) -= efp
+			cdata(STARTING_CDATA_BUFF + i * ARRAY_CDATA_BUFF + 2, tc) -= efp / 5
+			if ( cdata(STARTING_CDATA_BUFF + i * ARRAY_CDATA_BUFF + 1, tc) <= BUFF_NONE ) {
+				delbuff tc, i
+				p++
+				continue cnt
+			}
+			if ( cdata(STARTING_CDATA_BUFF + i * ARRAY_CDATA_BUFF + 2, tc) <= BUFF_NONE ) {
 				delbuff tc, i
 				p++
 				continue cnt
@@ -11557,6 +11687,106 @@
 		}
 		goto *effect_end
 	}
+	if ( _switch_val == SKILL_SPACT_SHADOW_JUMP | _switch_sw ) {
+		_switch_sw = 0
+		if ( gdata(GDATA_RIDER) != 0 ) {
+			if ( cc == gdata(GDATA_RIDER) ) {
+				goto *effect_end
+			}
+		}
+		if ( cdata(CDATA_IN_TAGTEAM, cc) == 1 ) {
+			goto *effect_end
+		}
+		/********** CUSTOM - BEGINNING **********/
+		if ( cdata(CDATA_TARGET, CHARA_PLAYER) == 0 & cc == CHARA_PLAYER ) {
+			gosub *findTarget
+		}	
+		/********** CUSTOM - BEGINNING **********/	
+		if ( cdata(CDATA_TARGET, cc) == (-1) | cc == cdata(CDATA_TARGET, cc) ) {
+			if ( cc == CHARA_PLAYER ) {	
+				txt lang("ターゲットをしていない。", "you have not set a target.")
+			}
+			goto *effect_end
+		}
+		tc = cdata(CDATA_TARGET, cc)
+		telex = cdata(CDATA_X, tc)
+		teley = cdata(CDATA_Y, tc)
+		snd SOUNDLIST_ATK_DARK
+		repeat 200
+			cdata(CDATA_X_NEW, cc) = telex + rnd(cnt / 8 + 2) - rnd(cnt / 8 + 2)
+			cdata(CDATA_Y_NEW, cc) = teley + rnd(cnt / 8 + 2) - rnd(cnt / 8 + 2)
+			cell_check cdata(CDATA_X_NEW, cc), cdata(CDATA_Y_NEW, cc)
+			if ( cellaccess == 1 ) {
+				if ( synccheck(cc, -1) ) {
+					txt lang(name(cc) + "は" + cdatan(CDATAN_NAME, tc) + "の影へと移動し縛り付けた。", name(cc) + " teleport" + _s(cc) + " in the shadow and bind" + _s(cc) + " " + cdatan(CDATAN_NAME, tc) + ".")
+				}
+				if ( cdata(CDATA_CONDITION_BIND, tc) < 5 ) {
+					cdata(CDATA_CONDITION_BIND, tc) = 5
+				}
+				rowactend cc
+				if ( cdata(CDATA_IN_TAGTEAM, cc) != 0 ) {
+					tcc = cdata(CDATA_TAGTEAM_PARTNER, cc)
+					rowactend tcc
+				}
+				ccprev = cc
+				gosub *procMove
+				cc = ccprev
+				if ( cc == CHARA_PLAYER ) {
+					gosub *screen_draw
+				}
+				break
+			}
+		loop
+		goto *effect_end
+		_switch_sw++
+	}
+	if ( _switch_val == SKILL_SPACT_SHADOW_HOP | _switch_sw ) {
+		_switch_sw = 0
+		if ( cdata(CDATA_HP, cc) < cdata(CDATA_MAX_HP, cc) / 2 ) {
+			txt lang("何もおきない… ", "Nothing happens...")
+			goto *effect_end
+		}
+		if ( cbit(CHARA_BIT_SHADOW_CLONE, cc) ) {
+			txt lang("何もおきない… ", "Nothing happens...")
+			goto *effect_end
+		}
+		cost = cdata(CDATA_MAX_HP, cc) / 2
+		cdata(CDATA_HP, cc) -= cdata(CDATA_MAX_HP, cc) / 2
+		snd SOUNDLIST_OFFER1
+		necrolv = sdata(SKILL_NORMAL_STEALTH, cc)
+		if ( cc == CHARA_PLAYER ) {
+			if ( necrolv > gdata(GDATA_DEEPEST_LEVEL) * 3 / 2 ) {
+				necrolv = gdata(GDATA_DEEPEST_LEVEL) * 3 / 2
+			}
+		}
+		cbitmod CHARA_BIT_SHADOW_CLONE, cc, TRUE
+		repeat 25
+			flt
+			initlv = necrolv
+			novoidlv = 1
+			fixlv = FIX_QUALITY_GOOD
+			characreate -1, CREATURE_ID_SHADE, cdata(CDATA_X, cc), cdata(CDATA_Y, cc)
+			cdata(CDATA_HP, rc) = limit(cost / 25, 1, 2000)
+			cdata(CDATA_MAX_HP, rc) = limit(cost / 25, 1, 2000)
+			cbitmod CHARA_BIT_NECRO, rc, TRUE
+			cdata(CDATA_TARGET, rc) = cdata(CDATA_TARGET, cc)
+			cdata(CDATA_AI_AGGRO, rc) = cdata(CDATA_AI_AGGRO, cc)
+			/********** CUSTOM - BEGINNING **********/ // Fixes Some Bugs made by Ano
+			cdata(CDATA_RELATION, rc) = 10
+			cdata(CDATA_RELATION_ORG, rc) = 10
+			cbitmod CHARA_BIT_SUMMONED, rc, TRUE
+			/********** CUSTOM - ENDING **********/
+			if ( cc != CHARA_PLAYER ) {
+				cdata(CDATA_PIC, rc) = cdata(CDATA_PIC, cc)
+				cdata(CDATA_CHARA_PIC, rc) = cdata(CDATA_CHARA_PIC, cc)
+				cdatan(CDATAN_NAME, rc) = cdatan(CDATAN_NAME, cc)
+				cdata(CDATA_RELATION, rc) = cdata(CDATA_RELATION, cc)
+				cdata(CDATA_RELATION_ORG, rc) = cdata(CDATA_RELATION_ORG, cc)
+			}
+		loop
+		goto *effect_end
+		_switch_sw++
+	}
 	if ( _switch_val == SKILL_SPACT_ROCKET_FIRE | _switch_sw ) {
 		_switch_sw = 0
 		if ( cdata(CDATA_POWER_GAUGE, cc) < 25 ) {
@@ -11762,6 +11992,7 @@
 			}
 		}
 		txtef COLOR_YELLOW
+		chatc@DP = cc
 		txt lang("*" + skillname(efid) + "*　", "*" + skillname(efid) + "* ")
 		if ( weap == 0 ) {
 			weap = sdata(SKILL_WEAPON_THROWING, cc)
@@ -13307,6 +13538,7 @@
 		cdata(444, cc) = limit(cdata(CDATA_DAMAGE_FIX, cc) + (weap + 1) / 2, 2, 2500) * sqrt(weap) * sqrt(eqlv - 2) + rnd(weap + 1)
 		if ( TweakData(50, 4) > 0 & cdata(444, cc) >= cdata(CDATA_HP, tc) ) {
 			txtef COLOR_YELLOW
+			chatc@DP = cc
 			switch TweakData(50, 4)
 				case 1
 					txt "「お前はもう死んでいる。」"
@@ -13430,12 +13662,21 @@
 			obvious = 0
 			goto *effect_end
 		}
+		/********** CUSTOM - BEGINNING **********/ // Fixes Some Bugs made by Ano
+		if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
+			snd SOUNDLIST_FAIL1
+			txt lang("この階層では帰還が出来ないようだ。", "It seems that you cannot return from this floor.")
+			obvious = 0
+			goto *effect_end
+		}
+		/********** CUSTOM - BEGINNING **********/
 		if ( gdata(GDATA_AREA) == AREA_REMIDO & gdata(GDATA_LEVEL) == 129 | (gdata(GDATA_AREA) == AREA_CHAOS_CRADLE & gdata(GDATA_LEVEL) == 179) ) {
 			snd SOUNDLIST_FAIL1
 			txt lang("この階層では脱出が出来ないようだ。", "It seems that you cannot escape from this floor.")
 			obvious = 0
 			goto *effect_end
 		}
+		gdata(GDATA_FLAG_SHIP_LAST_PORT) = 0
 		if ( gdata(GDATA_RETURN) != 0 ) {
 			txt lang("脱出を中止した。", "The air around you gradually loses power.")
 			gdata(GDATA_RETURN) = 0
@@ -13459,7 +13700,7 @@
 			}
 			gdata(GDATA_TELEPORT_AREA) = gdata(GDATA_WORLD), 1
 			if ( efstatus <= (-1) ) {
-				if ( gdata(GDATA_WORLD) != AREA_LOST_YLVA ) {
+				if ( gdata(GDATA_WORLD) != AREA_LOST_YLVA & gdata(GDATA_WORLD) != AREA_TEST_WORLD ) {
 					if ( rnd(3) == 0 ) {
 						gdata(GDATA_TELEPORT_AREA) = AREA_JAIL, 1
 					}
@@ -13476,12 +13717,21 @@
 			obvious = 0
 			goto *effect_end
 		}
+		/********** CUSTOM - BEGINNING **********/ // Fixes Some Bugs made by Ano
+		if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
+			snd SOUNDLIST_FAIL1
+			txt lang("この階層では帰還が出来ないようだ。", "It seems that you cannot return from this floor.")
+			obvious = 0
+			goto *effect_end
+		}
+		/********** CUSTOM - BEGINNING **********/
 		if ( gdata(GDATA_AREA) == AREA_REMIDO & gdata(GDATA_LEVEL) == 129 | (gdata(GDATA_AREA) == AREA_CHAOS_CRADLE & gdata(GDATA_LEVEL) == 179) ) {
 			snd SOUNDLIST_FAIL1
 			txt lang("この階層では帰還が出来ないようだ。", "It seems that you cannot return from this floor.")
 			obvious = 0
 			goto *effect_end
 		}
+		gdata(GDATA_FLAG_SHIP_LAST_PORT) = 0
 		if ( gdata(GDATA_RETURN) != 0 ) {
 			txt lang("帰還を中止した。", "The air around you gradually loses power.")
 			gdata(GDATA_RETURN) = 0
@@ -13489,7 +13739,7 @@
 		else {
 			gosub *com_return
 			if ( efstatus <= (-1) ) {
-				if ( gdata(GDATA_WORLD) != AREA_LOST_YLVA ) {
+				if ( gdata(GDATA_WORLD) != AREA_LOST_YLVA & gdata(GDATA_WORLD) != AREA_TEST_WORLD ) {
 					if ( rnd(3) == 0 ) {
 						gdata(GDATA_TELEPORT_AREA) = AREA_JAIL, 1
 					}
@@ -14445,6 +14695,87 @@
 			gdata(GDATA_CARGO_LIMIT) += 100 * 1000
 		}
 		gosub *calcBurdenPc
+		goto *effect_end
+		_switch_sw++
+	}
+	if ( _switch_val == SKILL_EFFECT_SHIP_DEED | _switch_sw ) {
+		_switch_sw = 0
+		if ( gdata(GDATA_AREA) != AREA_PORT_KAPUL & gdata(GDATA_AREA) != AREA_DEVIL_CAPE & gdata(GDATA_AREA) != AREA_LUMIEST & gdata(GDATA_AREA) != AREA_KURUALM & gdata(GDATA_AREA) != AREA_VALM ) {
+			txt lang("それは海に面した街などで読む必要がある。", "You need to read it while you are in the town by the sea.")
+			goto *effect_end
+		}
+		if ( cc != CHARA_PLAYER ) {
+			txt lang("何もおきない… ", "Nothing happens...")
+			obvious = 0
+			goto *effect_end
+		}
+		if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_HUGE_RAFT ) {
+			cost = 5000
+		}
+		if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_FISHING_SHIP ) {
+			cost = 10000
+		}
+		if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_PIRATE_SHIP ) {
+			cost = 15000
+		}
+		if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_CRUISE_SHIP ) {
+			cost = 20000
+		}
+		if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_WARSHIP ) {
+			cost = 25000
+		}
+		if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_SUBMARINE ) {
+			cost = 30000
+		}
+		txtmore
+		txt lang("保険料" + cost + "gpを払って出航する？", "Do you pay " + cost + "gp for insurance and set sail?")
+		promptl(0, 0) = stryes, "y", "0"
+		promptl(0, 1) = strno, "n", "1"
+		promptmax = 2
+		val = promptx, prompty, 160, 1
+		gosub *prompt_key
+		if ( rtval != 0 ) {
+			gosub *screen_draw
+			goto *pc_turn
+		}
+		if ( rtval == 0 ) {
+			if ( cdata(CDATA_GOLD, tc) < cost ) {
+				snd SOUNDLIST_FAIL1
+				txt lang("金が足りない…", "You don't have enough money.")
+				gosub *screen_draw
+				goto *pc_turn
+			}
+			snd SOUNDLIST_PAYGOLD1
+			cdata(CDATA_GOLD, tc) -= cost
+			snd SOUNDLIST_DING1
+			if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_HUGE_RAFT ) {
+				gdata(GDATA_FLAG_SHIP_TYPE) = 1
+			}
+			if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_FISHING_SHIP ) {
+				gdata(GDATA_FLAG_SHIP_TYPE) = 2
+			}
+			if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_PIRATE_SHIP ) {
+				gdata(GDATA_FLAG_SHIP_TYPE) = 3
+			}
+			if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_CRUISE_SHIP ) {
+				gdata(GDATA_FLAG_SHIP_TYPE) = 4
+			}
+			if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_WARSHIP ) {
+				gdata(GDATA_FLAG_SHIP_TYPE) = 5
+			}
+			if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DEED_OF_SUBMARINE ) {
+				gdata(GDATA_FLAG_SHIP_TYPE) = 6
+			}
+			gdata(GDATA_FLAG_SHIP_IMAGE) = gdata(GDATA_FLAG_SHIP_TYPE) + inv(INV_ITEM_COL, ci) * 1000
+			if ( gdata(GDATA_FLAG_MOST_EXPENSIVE_SHIP_THIS_MONTH) < gdata(GDATA_FLAG_SHIP_TYPE) ) {
+				gdata(GDATA_FLAG_MOST_EXPENSIVE_SHIP_THIS_MONTH) = gdata(GDATA_FLAG_SHIP_TYPE)
+			}
+			cdata(CDATA_CHARACTER_TIER, CHARA_PLAYER) = CHARACTER_TIER_SHIP_HULL_ENDURANCE
+			gdata(GDATA_FLAG_COLLECTED_WISHES) = 0
+			gdata(GDATA_FLAG_SHIP_LAST_PORT) = gdata(GDATA_WORLD) * 100 + gdata(GDATA_AREA)
+			gdata(GDATA_TELEPORT_AREA) = AREA_TEST_WORLD, gdata(GDATA_AREA)
+			gdata(GDATA_RETURN) = 1
+		}
 		goto *effect_end
 		_switch_sw++
 	}
@@ -16298,6 +16629,7 @@
 		}
 		cdata(CDATA_POWER_GAUGE, cc) -= 75
 		if ( cdata(CDATA_ID, cc) == CREATURE_ID_GETUEI_THE_NINJA_MASTER ) {
+			chatc@DP = cc
 			txt lang("「超忍法・影の舞！」", "*Shadow Dance*")
 			snd SOUNDLIST_CARD1
 			redraw 0
@@ -18237,6 +18569,7 @@
 				}
 			}
 			else {
+				chatc@DP = cc
 				if ( rnd(2) ) {
 					txt cnvtalk("You suck!"), cnvtalk("You will die alone."), cnvtalk("Bow down before me."), cnvtalk("Go jump off a bridge."), cnvtalk("Bang your head against the wall!"), cnvtalk("Why do you sniff under your dog's tail?")
 				}
@@ -18371,6 +18704,11 @@
 				if ( cdata(CDATA_EXIST, cnt) != CHAR_STATE_ALIVE ) {
 					continue
 				}
+				/********** CUSTOM - BEGINNING **********/ // Fixes Some Bugs made by Ano
+				if ( cdata(CDATA_ID, cnt) == CREATURE_ID_SHADE ) {
+					continue
+				}
+				/********** CUSTOM - ENDING **********/
 				if ( cc == cnt ) {
 					continue
 				}
@@ -19798,6 +20136,7 @@
 				txt name(tc) + " writh" + _s(tc) + " with a laugh!", name(tc) + " squirm" + _s(tc) + " hard!"
 			}
 		}
+			chatc@DP = tc
 		if ( jp ) {
 			txt "「ひっ！ひィィ！」", "「あはははっ！！」", "「はははっはは！」", "「んぎいいい！？」", "「ぐっああ…！はぁーっ！」", "「イッ…ひっひひいい…！」", "「くうっ…んん！！」", "「やめっ！やめ…！」"
 		}
@@ -19806,6 +20145,7 @@
  		}
 		if ( cdata(CDATA_SP, tc) < cdata(CDATA_MAX_SP, tc) / 2 ) {
 			dmgsan tc, rnd(rnd(1 + sdata(SKILL_ATTR_DEX, cc) / 20) * 10 + 2) + 1
+			chatc@DP = tc
 			if ( jp ) {
 				txt "「やめっ…でぇぇっ！」", "「ひゃはははは！！！」", "「…げほっ！げほっ！！ううう…ぐえっ！」", "「いっ…ひいいい！！！」", "「あ、あはははっ…！」", "「あ、ひゃあああアアアアアッ！！？」", "「んひいいいッ…！！！」", "「ぎいいいああああっ！！」"
 			}
@@ -20779,6 +21119,7 @@
 			if ( rnd(sdata(SKILL_ATTR_CON, cc) + sdata(SKILL_ATTR_WIL, cc)) >= rnd(sdata(SKILL_ATTR_CON, tc) + sdata(SKILL_ATTR_WIL, tc)) ) {
 				txtef COLOR_PURPLE
 				txt lang(name(tc) + "は拷問に屈した。", name(cc) + " succumbed to torture.")
+				chatc@DP = tc
 				if ( tc != CHARA_PLAYER ) {
 					txt lang("「すみません…でした…」", cnvtalk("I'm sorry... really...!")), lang("「許して…ください」", cnvtalk("Forgive me, please.")), lang("「うう…こんなの、耐えられるわけ…」", cnvtalk("I can not stand... such a thing.")), lang("「む…り…！」", cnvtalk("I-I... can't!")), lang("「ひと思いに殺して…」", cnvtalk("Kill me! Please kill me!")), lang("「ひっ、ひィィィ…」", cnvtalk("A...aaaugh..."))
 				}
@@ -22368,6 +22709,9 @@
 		if ( gdata(GDATA_AREA) == AREA_SHOW_HOUSE ) {
 			goto *effect_end
 		}
+		if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
+			goto *effect_end
+		}
 		if ( cc < MAX_CHARA_FOLLOWER | cdata(CDATA_ALLIED, cc) == 100 ) {
 			efid = SKILL_SPACT_SQUEEZE
 			gosub *effect
@@ -22996,6 +23340,7 @@
 						}
 					}
 					else {
+						chatc@DP = cc
 						if ( rnd(2) ) {
 							txt cnvtalk("You suck!"), cnvtalk("You will die alone."), cnvtalk("Bow down before me."), cnvtalk("Go jump off a bridge."), cnvtalk("Bang your head against the wall!"), cnvtalk("Why do you sniff under your dog's tail?")
 						}
@@ -23684,6 +24029,7 @@
 	}
 	if ( _switch_val == SKILL_EFFECT_VERNIS_ORIGINAL | _switch_sw ) {
 		_switch_sw = 0
+		chatc@DP = tc
 		txt lang("バリバリ…ゴクリ。なんと！状態異常が回復した！", "*Munch munch*... *Gulp*! Wow! All status conditions were cured!")
 		cdata(CDATA_CONDITION_MPOISON, tc) = 0
 		cdata(CDATA_CONDITION_POISON, tc) = 0
@@ -23922,6 +24268,7 @@
 		gosub *convert_word
 		if ( gdata(GDATA_CUSTOM_TALK) == 100 ) {
 			txtef COLOR_SKY_BLUE
+			chatc@DP = tc
 			if ( jp ) {
 				txt name(tc) + "「了解！」", name(tc) + "「気をつける" + _yo(3) + "」", name(tc) + "「なるほど…」", name(tc) + "「ＯＫ」"
 			}
@@ -23989,6 +24336,7 @@
 			if ( cdata(CDATA_SPRITE_SIZE_MILK, tc) == (-1) ) {
 				if ( rnd(2) == 0 ) {
 					snd SOUNDLIST_FAIL1
+					chatc@DP = tc
 					if ( jp ) {
 						txt cdatan(CDATAN_NAME, tc) + "「指図しないで" + _kure(3) + "」", cdatan(CDATAN_NAME, tc) + "「今やろうと思っていたのにやる気がなくなった" + _yo(3) + "」"
 					}

@@ -345,7 +345,7 @@
 
 	sdataref(SKILL_DATAREF_USE, SKILL_NORMAL_FAITH) = SKILL_ATTR_WIL, SKILL_TYPE_SP, 0, TARGET_TYPE_NONE, 0
 	skillname(SKILL_NORMAL_FAITH) = lang("信仰", "Faith")
-	skilldesc(SKILL_NORMAL_FAITH) = lang("神との距離を近める", "Gets you closer to god.")
+	skilldesc(SKILL_NORMAL_FAITH) = lang("神との距離を近める/呪いへの抵抗", "Gets you closer to god/resist to curses")
 	skillencdesc(SKILL_NORMAL_FAITH) = lang("信仰を深める", "makes you pious.")
 
 	sdataref(SKILL_DATAREF_USE, SKILL_NORMAL_TRAVELING) = SKILL_ATTR_SPD, SKILL_TYPE_SP, 0, TARGET_TYPE_NONE, 0
@@ -1860,6 +1860,14 @@
 	sdataref(SKILL_DATAREF_USE, SKILL_SPACT_TUIN_DER_LUSTEN) = SKILL_ATTR_CHA, SKILL_TYPE_SP, 10, TARGET_TYPE_SELF + SKILL_TYPE_FOV_BOLT, 500
 	skillname(SKILL_SPACT_TUIN_DER_LUSTEN) = lang("快楽の園", "Tuin der Lusten")
 	skilldesc(SKILL_SPACT_TUIN_DER_LUSTEN) = lang("魅力対抗/広域気持ちいいこと/疲労大", "Against CHR,Give pleasure to drunken people")
+
+	sdataref(SKILL_DATAREF_USE, SKILL_SPACT_SHADOW_HOP) = SKILL_ATTR_WIL, SKILL_TYPE_SP, 30, TARGET_TYPE_SELF, 200
+	skillname(SKILL_SPACT_SHADOW_HOP) = lang("シャドウホップ", "Shadow Hop")
+	skilldesc(SKILL_SPACT_SHADOW_HOP) = lang("HP半分消費し影分身を召喚", "Summon clones/halve HP")
+	
+	sdataref(SKILL_DATAREF_USE, SKILL_SPACT_SHADOW_JUMP) = SKILL_ATTR_WIL, SKILL_TYPE_SP, 5, TARGET_TYPE_SELF, 0
+	skillname(SKILL_SPACT_SHADOW_JUMP) = lang("シャドウジャンプ", "Shadow Jump")
+	skilldesc(SKILL_SPACT_SHADOW_JUMP) = lang("視界外でも敵を追跡束縛", "Chase and bind target")
 
 	return
 

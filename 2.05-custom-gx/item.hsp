@@ -89,7 +89,7 @@
 	fsetremain = FILTER_AMMO, FILTER_ITEM_FOOD, FILTER_ITEM_FOOD, FILTER_ORE, FILTER_ITEM_SCROLL, FILTER_ITEM_POTION, FILTER_ITEM_FOOD
 	fsetbarrel = FILTER_AMMO, FILTER_ITEM_FOOD, FILTER_ITEM_SCROLL, FILTER_ITEM_POTION, FILTER_ORE, FILTER_JUNK
 	fsetcollect = FILTER_JUNK, FILTER_FURNITURE, FILTER_ITEM_FOOD, FILTER_ORE
-	isetdeed = ITEM_ID_DEED, ITEM_ID_DEED_MUSEUM, ITEM_ID_DEED_SHOP, ITEM_ID_DEED_FARM, ITEM_ID_DEED_STORAGE_HOUSE, ITEM_ID_SHELTER, ITEM_ID_DEED_RANCH, ITEM_ID_DEED_OF_LAND_BATTLESHIP, ITEM_ID_DEED_OF_MAGIC_LOCOMOTIVE, ITEM_ID_DEED_OF_TRUCK, ITEM_ID_DEED_OF_CARRIAGE
+	isetdeed = ITEM_ID_DEED, ITEM_ID_DEED_MUSEUM, ITEM_ID_DEED_SHOP, ITEM_ID_DEED_FARM, ITEM_ID_DEED_STORAGE_HOUSE, ITEM_ID_SHELTER, ITEM_ID_DEED_RANCH, ITEM_ID_DEED_OF_LAND_BATTLESHIP, ITEM_ID_DEED_OF_MAGIC_LOCOMOTIVE, ITEM_ID_DEED_OF_TRUCK, ITEM_ID_DEED_OF_CARRIAGE, ITEM_ID_DEED_OF_HUGE_RAFT, ITEM_ID_DEED_OF_FISHING_SHIP, ITEM_ID_DEED_OF_PIRATE_SHIP, ITEM_ID_DEED_OF_CRUISE_SHIP, ITEM_ID_DEED_OF_WARSHIP, ITEM_ID_DEED_OF_SUBMARINE
 	isetfruit = ITEM_ID_APPLE, ITEM_ID_GRAPE, ITEM_ID_TANGERINE, ITEM_ID_LEMON, ITEM_ID_STRAWBERRY, ITEM_ID_CHERRY, ITEM_ID_KAKI
 	isetthrowpotionminor = ITEM_ID_POTION_BLINDNESS, ITEM_ID_POTION_CONFUSION, ITEM_ID_SLEEPING_DRUG, ITEM_ID_POTION_PARALYSIS, ITEM_ID_POISON, ITEM_ID_BOTTLE_BEER
 	isetthrowpotionmajor = ITEM_ID_POTION_SLOW, ITEM_ID_POTION_SILENCE, ITEM_ID_POTION_WEAKEN_RESISTANCE, ITEM_ID_ESSENTIAL_OIL, ITEM_ID_MOLOTOV, ITEM_ID_BOTTLE_WHISKY, ITEM_ID_POTION_WEAKNESS
@@ -1835,7 +1835,7 @@
 					if ( inv(INV_ITEM_ROT, cnt) > 0 ) {
 						if ( inv(INV_ITEM_PROPERTY, cnt) <= PROP_NONE ) {
 							if ( inv(INV_ITEM_PARAM1, cnt) / 1000 == 6 & inv(INV_ITEM_PARAM2, cnt) == 0 ) {
-								if ( chipm(CHIPM_ROLE, map(inv(INV_ITEM_X, cnt), inv(INV_ITEM_Y, cnt), 0)) == MAP_CHIP_ROLE_WATER ) {
+								if ( chipm(CHIPM_ROLE, map(inv(INV_ITEM_X, cnt), inv(INV_ITEM_Y, cnt), 0)) == MAP_CHIP_ROLE_WATER | (gdata(GDATA_WORLD) == AREA_TEST_WORLD & gdata(GDATA_AREA) == AREA_WILDERNESS) ) {
 									inv(INV_ITEM_ROT, cnt) = gdata(GDATA_HOUR) + gdata(GDATA_DAY) * 24 + gdata(GDATA_MONTH) * 24 * 30 + gdata(GDATA_YEAR) * 24 * 30 * 12 + 72
 									continue
 								}
@@ -1987,6 +1987,7 @@
 	if ( rnd(15) == 0 ) {
 		if ( synccheck(cc, -1) ) {
 			txt lang(name(cc) + "は不安げに腹を押さえた。", name(cc) + " pat" + _s(cc) + " " + his(cc) + " stomach uneasily.")
+			chatc@DP = cc
 			txt lang("「なにかが産まれそうだよ！」", cnvtalk("I'm going to have a baby!")), lang("「腹になにかが…」", cnvtalk("Something is wrong with my stomach..."))
 		}
 	}
@@ -2798,6 +2799,7 @@
 	cibk = ci
 	txtmore
 	txtef COLOR_SKY_BLUE
+	chatc@DP = lovemiracle_arg1
 	txt lang("「あ…！」", cnvtalk("Uh...!"))
 	flt
 	if ( rnd(2) ) {
@@ -2966,11 +2968,32 @@
 	txt lang(itemname(cooktool) + "で" + s + "を料理して、" + itemname(ci, 1) + "を作った。", "You cook " + s + " with " + itemname(cooktool, 1) + " and make " + itemname(ci, 1) + ".")
 	r1 = inv(INV_ITEM_PARAM2, ci)
 	ibitmod ITEM_BIT_HERBED_IN, ci, 0
-	if ( sdata(SKILL_NORMAL_COOKING, CHARA_PLAYER) >= 100 ) {
-		inv(INV_ITEM_NUM, ci)++
+	inv(INV_ITEM_LEVEL, ci) += limit(sdata(SKILL_NORMAL_COOKING, CHARA_PLAYER) / 100, 0, 20)
+	p = 50 + inv(INV_ITEM_LEVEL, ci) * 30
+	i = inv(INV_ITEM_PARAM1, ci) / 1000
+	if ( i == 1 ) {
+		encadd ci, ENCHANT_SKILL * EXT_ENCHANTMENT + SKILL_NORMAL_ANATOMY, p, 0, 1
 	}
-	if ( sdata(SKILL_NORMAL_COOKING, CHARA_PLAYER) >= 200 ) {
-		inv(INV_ITEM_NUM, ci)++
+	if ( i == 8 ) {
+		encadd ci, ENCHANT_SKILL * EXT_ENCHANTMENT + SKILL_NORMAL_GENE_ENGINEER, p, 0, 1
+	}
+	if ( i == 2 ) {
+		encadd ci, ENCHANT_SKILL * EXT_ENCHANTMENT + SKILL_NORMAL_GARDENING, p, 0, 1
+	}
+	if ( i == 3 ) {
+		encadd ci, ENCHANT_SKILL * EXT_ENCHANTMENT + SKILL_NORMAL_JEWELER, p, 0, 1
+	}
+	if ( i == 7 ) {
+		encadd ci, ENCHANT_SKILL * EXT_ENCHANTMENT + SKILL_NORMAL_MAGIC_DEVICE, p, 0, 1
+	}
+	if ( i == 4 ) {
+		encadd ci, ENCHANT_SKILL * EXT_ENCHANTMENT + SKILL_NORMAL_SENSE_QUALITY, p, 0, 1
+	}
+	if ( i == 6 ) {
+		encadd ci, ENCHANT_SKILL * EXT_ENCHANTMENT + SKILL_NORMAL_FISHING, p, 0, 1
+	}
+	if ( i == 5 ) {
+		encadd ci, ENCHANT_SKILL * EXT_ENCHANTMENT + SKILL_NORMAL_CONTROL_MAGIC, p, 0, 1
 	}
 	if ( r1 > 2 ) {
 		skillexp SKILL_NORMAL_COOKING, cc, 30 + r1 * 5
@@ -3040,15 +3063,15 @@
 	}
 	if ( i == 8 ) {
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_CHA, 20
+			fdlist(0, fdmax) = SKILL_ATTR_CHA, 20 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_PER, 20
+			fdlist(0, fdmax) = SKILL_ATTR_PER, 20 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_WIL, 20
+			fdlist(0, fdmax) = SKILL_ATTR_WIL, 20 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		nutrition = 2000
@@ -3086,7 +3109,7 @@
 			fdmax++
 		}
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_CHA, 20
+			fdlist(0, fdmax) = SKILL_ATTR_CHA, 20 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
@@ -3105,19 +3128,19 @@
 	}
 	if ( i == 7 ) {
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_STR, 25
+			fdlist(0, fdmax) = SKILL_ATTR_STR, 25 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_DEX, 25
+			fdlist(0, fdmax) = SKILL_ATTR_DEX, 25 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_LER, 25
+			fdlist(0, fdmax) = SKILL_ATTR_LER, 25 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_CON, 25
+			fdlist(0, fdmax) = SKILL_ATTR_CON, 25 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		nutrition = 2800
@@ -3132,15 +3155,15 @@
 	}
 	if ( i == 4 ) {
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_MAG, 40
+			fdlist(0, fdmax) = SKILL_ATTR_MAG, 40 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_DEX, 30
+			fdlist(0, fdmax) = SKILL_ATTR_DEX, 30 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_LER, 30
+			fdlist(0, fdmax) = SKILL_ATTR_LER, 30 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		nutrition = 1500
@@ -3163,7 +3186,7 @@
 			fdmax++
 		}
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_PER, 20
+			fdlist(0, fdmax) = SKILL_ATTR_PER, 20 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		nutrition = 3000
@@ -3178,11 +3201,11 @@
 	}
 	if ( i == 5 ) {
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_CON, 60
+			fdlist(0, fdmax) = SKILL_ATTR_CON, 60 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		if ( fdmax < MAX_SKILL_ATTR - STARTING_SKILL_ATTR ) {
-			fdlist(0, fdmax) = SKILL_ATTR_DEX, 40
+			fdlist(0, fdmax) = SKILL_ATTR_DEX, 40 + inv(INV_ITEM_LEVEL, ci)
 			fdmax++
 		}
 		nutrition = 3500
@@ -3828,6 +3851,7 @@
 		if ( cdata(CDATA_ID, cc) == CREATURE_ID_SILVER_FOX_BROTHER | cdata(CDATA_ID, cc) == CREATURE_ID_FOX_SPIRIT | cdata(CDATA_ID, cc) == CREATURE_ID_FOX_BROTHER ) {
 			kaiwa = rnd(4)
 			txtef COLOR_GREEN
+			chatc@DP = cc
 			if ( kaiwa == 0 ) {
 				txt lang("「あぶらあげぇ…♪1」", name(cc) + " muttered " + cnvtalk("Abura-Age...!"))
 			}
@@ -3858,6 +3882,7 @@
 		inv_find ITEM_ID_BIO_BATTERY, cc
 		if ( stat == (-1) ) {
 			if ( cc != CHARA_PLAYER ) {
+				chatc@DP = cc
 				txt lang("「パッサパサ！」", cnvtalk("This is hard!")), lang("「パッサパサ！」", cnvtalk("This is hard!")), lang("「口のなかパッサパサ！」", cnvtalk("This dries your mouth!")), lang("「口の中パッサパサだよ！」", cnvtalk("Ugh, this is so dry!")), lang("「パッサパサだよ！」", cnvtalk("Ugh, this is hard!")), lang("「パッサパサだよ」", cnvtalk("Ugh, this is hard."))
 			}
 			omosa = limit(cdata(CDATA_WEIGHT, cc), 1, 100000000)
@@ -4139,6 +4164,7 @@
 	if ( ibit(ITEM_BIT_POISON_BLEND, ci) == 1 ) {
 		if ( synccheck(cc, -1) ) {
 			txt lang("これは毒されている！" + name(cc) + "はもがき苦しみのたうちまわった！", "It's poisoned! " + name(cc) + " writhe" + _s(cc) + " in agony!")
+			chatc@DP = cc
 			txt lang("「ギャァァ…！」", cnvtalk("Gyaaaaa...!")), lang("「ブッ！」", cnvtalk("Ugh!"))
 		}
 		dmghp cc, rnd(250) + 250, DAMAGE_FROM_POISON
@@ -4169,6 +4195,7 @@
 		}
 		else {
 			txtef COLOR_SKY_BLUE
+			chatc@DP = cc
 			txt name(cc) + lang("「なんだか…変な気分なの…」", " gasps, " + cnvtalk("I f-feel...strange...")), name(cc) + lang("「あれ…なにこの感じは…」", "gasps " + cnvtalk("Uh.. uh.. What is this feeling..."))
 			cdata(CDATA_EMO_ICON, cc) = 17 + 100 * 3
 			if ( cdata(CDATA_IMPRESSION, cc) < 100 ) {

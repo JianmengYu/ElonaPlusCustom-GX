@@ -23,7 +23,7 @@
 	StatusOffsets(0) = CDATA_CONDITION_FEAR, CDATA_CONDITION_ATROPHY, CDATA_CONDITION_BIND, CDATA_CONDITION_BLEED, CDATA_CONDITION_BLIND, CDATA_CONDITION_BRAINWASH, CDATA_CONDITION_CHILLS, CDATA_CONDITION_CONFUSE, CDATA_CONDITION_DIM, CDATA_CONDITION_ANGRY, CDATA_CONDITION_GRAVITY, CDATA_CONDITION_INSANE, CDATA_CONDITION_JIU_JITSU, CDATA_CONDITION_METAL, CDATA_CONDITION_MPOISON, CDATA_CONDITION_OIL, CDATA_CONDITION_PARALYZE, CDATA_CONDITION_POISON, CDATA_CONDITION_SLEEP, CDATA_CONDITION_WET, CDATA_CONDITION_WINCE
 	AITextData(0, 0) = "Not Set", "Attack (Melee)", "Attack (Ranged)", "Move (Away)", "Move (Forward)", "And", "Do Nothing", "Use Shift Core", "NULL"
 	AITextData(0, 1) = "Not Set", "Self", "Target", "Ally", "Player", "NULL"
-	AITextData(0, 2) = "Not Set", "HP", "MP", "Distance", "Buff", "Gauge", "Class", "Status", "NULL"
+	AITextData(0, 2) = "Not Set", "HP", "MP", "Distance", "Buff", "Gauge", "Class", "Status", "Percent Chance", "NULL"
 	AITextData(0, 3) = "Not Set", "<", ">", "=", "!=", ">=", "<=", "NULL"
 	AITextData(0, 4) = "10", "20", "25", "30", "40", "50", "60", "70", "75", "80", "90", "100", "NULL"
 	AITextData(0, 5) = "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "NULL"
@@ -584,6 +584,22 @@
 					}
 				}; End value verification
 			}; End Status Handling
+			
+			; Chance Handling
+			if ( CAIComparator(cnt, cc) == CUSTOM_AI_CONDITION_CHANCE ) {; If condition is equal to "Chance"
+				if ( CAIValue(cnt, cc) > 99 & CAIValue(cnt, cc) - 100 < 100 ) { ; If value is a percentage
+					if ( rnd(100) < AITextData(CAIValue(cnt, cc) - 100, 4) ) {
+						act = CAIAction(cnt, cc)
+						gosub *ProcessTactic
+						if ( ContinueTactic == 1 | PassTactic == 1 ) {
+							continue
+						}
+						else {
+							break
+						}
+					}
+				}; End value verification
+			}; End Chance Handling
 		}
 	loop
 
@@ -1340,7 +1356,7 @@
 *AIConfigMenu
 	GoConfig = 0
 	redraw 0
-	s = "Tactical Instructions", strhint3b
+	s = "Tactical Instructions", lang("Shift,Esc [戻る]  * [入れ替]  / [消去] ", "Shift,Esc [Back]  * [Swap]  / [Clear Row] ")
 	display_window (windoww - 680) / 2 + inf_screenx, winposy(500, 1) + 20, 680, 500
 	display_topic "Entity", wx + 28, wy + 30
 	display_topic "Condition", wx + 128, wy + 30
@@ -1378,24 +1394,26 @@
 	gosub *PrintAIInfo
 
 	repeat CAIAvailableSlots(tc)
+		p = 0
+		if (cnt == HeldTactic) { p = 10 }
 		s = AITextData(CAIEntity(cnt, tc) \ 1000, 1)
-		pos wx + 48, wy + 60 + cnt * 19 + 2
+		pos wx + 48 + p, wy + 60 + cnt * 19 + 2
 		mes s
 		s = AITextData(CAIComparator(cnt, tc), 2)
-		pos wx + 148, wy + 60 + cnt * 19 + 2
+		pos wx + 148 + p, wy + 60 + cnt * 19 + 2
 		mes s
 		s = AITextData(CAIComparatorFix(cnt, tc), 3)
-		pos wx + 273, wy + 60 + cnt * 19 + 2
+		pos wx + 273 + p, wy + 60 + cnt * 19 + 2
 		mes s
 		SlotID = cnt
 		gosub *GetValueName
 		s = ValueName
-		pos wx + 408, wy + 60 + cnt * 19 + 2
+		pos wx + 408 + p, wy + 60 + cnt * 19 + 2
 		mes s
 		ActionToGet = CAIAction(SlotID, tc)
 		gosub *GetActionName
 		s = ActionName
-		pos wx + 508, wy + 60 + cnt * 19 + 2
+		pos wx + 508 + p, wy + 60 + cnt * 19 + 2
 		mes s
 	loop
 
@@ -1427,6 +1445,14 @@
 			CAIAction(HeldTactic, tc) = TempSwap
 			HeldTactic = -1
 		}
+	}
+	
+	if ( key == key_msglog ) {
+		CAIEntity(cs, tc) = 0
+		CAIComparator(cs, tc) = 0
+		CAIComparatorFix(cs, tc) = 0
+		CAIValue(cs, tc) = 0
+		CAIAction(cs, tc) = 0
 	}
 
 	repeat CAIAvailableSlots(tc)
@@ -3021,7 +3047,7 @@
 	listn(0, NumActions) = "Not Set"
 	key_list(NumActions) = 0
 	NumActions++
-	if ( CAIComparator(CurrentTactic, tc) == 1 | CAIComparator(CurrentTactic, tc) == 2 | CAIComparator(CurrentTactic, tc) == 5 ) {
+	if ( CAIComparator(CurrentTactic, tc) == 1 | CAIComparator(CurrentTactic, tc) == 2 | CAIComparator(CurrentTactic, tc) == 5 | CAIComparator(CurrentTactic, tc) == 8 ) {
 		repeat length(AITextData)
 			if ( AITextData(cnt,4) != "NULL" ) {
 				listn(0, NumActions) = AITextData(cnt, 4) + "%"
@@ -3238,6 +3264,9 @@
 				if ( cnt == 4 | cnt == 6 | cnt == 7 ) {
 					CAIComparatorFix(CurrentTactic, tc) = 0
 				}
+				if ( cnt == 8 ) {
+					CAIComparatorFix(CurrentTactic, tc) = 3
+				}
 				CAIValue(CurrentTactic, tc) = 0
 			}
 			cs = 0
@@ -3266,6 +3295,10 @@
 		if ( AITextData(cnt, 3) != "NULL" ) {
 			; "Not Set", "=" and "!=" are always included
 			if ( cnt == 0 | (CAIComparator(CurrentTactic, tc) != 4 & CAIComparator(CurrentTactic, tc) != 6 & CAIComparator(CurrentTactic, tc) != 7 ) | (cnt == 3) | (cnt == 4) ) {
+				; Except "Chance" Option, Where comparator is not used
+				if ( CAIComparator(CurrentTactic, tc) == 8 & cnt != 3 ) {
+					continue
+				}
 				listn(0, NumActions) = AITextData(cnt, 3)
 				key_list(NumActions) = key_select(NumActions)
 				AIComparatorFix(NumActions) = cnt
@@ -3392,7 +3425,7 @@
 				if ( cnt == 0 & (p(2) \ 1000) <= 4 ) {
 					CAIEntity(cnt2, tc) = (p(2) \ 1000) + (p(2) >= 1000) * 1000
 				}
-				if ( cnt == 1 & p(2) <= 7 ) {
+				if ( cnt == 1 & p(2) <= 8 ) {
 					CAIComparator(cnt2, tc) = p(2)
 				}
 				if ( cnt == 2 & p(2) <= 6 ) {

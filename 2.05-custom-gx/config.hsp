@@ -20,6 +20,9 @@
 		if ( instr(s, 0, valn) == (-1) ) {
 			continue
 		}
+		if ( instr(s, 1, valn) != (-1) ) {
+			continue
+		}
 		i = 1
 		p = 0
 		repeat
@@ -285,6 +288,7 @@
 		cfgRead "dmgPopupBuffHex.", cfg_dmgpopup_buffhex = int(rtvaln)
 		cfgRead "dmgPopupCon.", cfg_dmgpopup_con = int(rtvaln)
 		cfgRead "dmgPopupEvade.", cfg_dmgpopup_evade = int(rtvaln)
+		cfgRead "dmgPopupChat.", cfg_dmgpopup_chat = int(rtvaln)
 		cfgRead "dmgPopupFontSize.", cfg_dmgfont = int(rtvaln)
 		cfgRead "dmgPopupSpeed.", cfg_dmgspeed = int(rtvaln)
 
@@ -606,7 +610,7 @@
 	}
 	if ( submenu == 9 ) {
         q = lang("拡張設定2(表示)", "EX Setting 2 (Display)")
-        s = lang("ダメージ表示", "Damage Popups"), lang("　HEX+バフ", "  Hexes/Buffs"), lang("　状態異常", "  Ailments"), lang("　回避", "  Evade"), lang("　フォントサイズ", "  Font Size"), lang("　表示速度", "  Display Duration"), ""
+        s = lang("ダメージ表示", "Damage Popups"), lang("　HEX+バフ", "  Hexes/Buffs"), lang("　状態異常", "  Ailments"), lang("　回避", "  Evade"), lang("　会話", "  Chat"), lang("　フォントサイズ", "  Font Size"), lang("　表示速度", "  Display Duration"), ""
 		dx = 440
 		dy = 300
 	}
@@ -936,9 +940,13 @@
 				mes s(cfg_dmgpopup_evade)
 			}
 			if ( cnt == 4 ) {
-				mes "" + cfg_dmgfont
+				s = lang("なし", "Don't show"), lang("あり", "Show")
+				mes s(cfg_dmgpopup_chat)
 			}
 			if ( cnt == 5 ) {
+				mes "" + cfg_dmgfont
+			}
+			if ( cnt == 6 ) {
 				mes "" + cfg_dmgspeed
 			}
 		}
@@ -1774,9 +1782,12 @@
 				setBoolOption cfg_dmgpopup_evade, "dmgPopupEvade"
 			}
 			if ( cs == 4 ) {
-				setOption cfg_dmgfont, "dmgPopupFontSize", 8, 30
+				setBoolOption cfg_dmgpopup_chat, "dmgPopupChat"
 			}
 			if ( cs == 5 ) {
+				setOption cfg_dmgfont, "dmgPopupFontSize", 8, 30
+			}
+			if ( cs == 6 ) {
 				setOption cfg_dmgspeed, "dmgPopupSpeed", 1, 50
 			}
 		}

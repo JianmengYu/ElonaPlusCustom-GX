@@ -476,7 +476,7 @@ TweakData(51, 4) = "Disable cicada noises."
     cs = 0
     page = 0
     pagesize = 16
-    listmax = 43
+    listmax = 46
 *GameplayTweakMenu_pgchk
 	redraw 0
 	page_check
@@ -499,8 +499,8 @@ TweakData(51, 4) = "Disable cicada noises."
 	listn(0, 9) = "Sandbag training." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_SANDBAG_TRAINING)
 	listn(0, 10) = "No naps while traveling." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_NO_NAPS_WHILE_TRAVELING)
 	listn(0, 11) = "Harvest Moon Mode for ranches." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_HARVEST_MOON_RANCH)
-	listn(0, 12) = "Revert post-1.90 experience formula changes." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_REVERT_POST_190_EXP_CHANGES)
-	listn(0, 13) = "Disable study days." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_DISABLE_STUDY_DAYS)
+	listn(0, 12) = "Revert post-1.90 weapon skill exp formula changes." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_REVERT_POST_190_EXP_CHANGES)
+	listn(0, 13) = "Disable study days. (triple skill exp)" + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_DISABLE_STUDY_DAYS)
 	listn(0, 14) = "Disable DESTINY." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_DISABLE_DESTINY)
 	listn(0, 15) = "(Custom-G) Disable thirst." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_CG_DISABLE_THIRST)
 	listn(0, 16) = "(Custom-G) Disable Curtain Call." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_CG_DISABLE_CURTAIN_CALL)
@@ -513,12 +513,12 @@ TweakData(51, 4) = "Disable cicada noises."
 	listn(0, 23) = "Increased daily Pet Arena attempts. " + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_PET_ARENA_INCREASED_MATCH_LIMIT)
 	listn(0, 24) = "Increased variety of hireable home servants." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_MORE_HIREABLE_HOUSE_SERVANTS)
 	listn(0, 25) = "Disable stamina depletion when attacking." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_DISABLE_ATTACK_STAMINA_DEPLETION)
-	listn(0, 26) = "Revert post-2.13 experience formula changes." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_REVERT_POST_213_EXP_CHANGES)
+	listn(0, 26) = "Revert post-2.13 combat exp formula changes." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_REVERT_POST_213_EXP_CHANGES)
 	listn(0, 27) = "Disable urination from fear." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_DISABLE_URINATION_FROM_FEAR)
 	listn(0, 28) = "Use CGX Map Layouts in Random Nefia." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_USE_CUSTOM_NEFIA_TYPES) + "% Chance."
 	listn(0, 29) = "Use CGX Job Quests." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_CUSTOM_JOB_QUESTS)
 	listn(0, 30) = "Use CGX Arrow/Bolt/Ball Spell Animation." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_CUSTOM_SPELL_ANIMATIONS)
-	listn(0, 31) = "Disable random CNPC spawn." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_CUSTOM_CNPC_SUMMONING)
+	listn(0, 31) = "Use summoning crystals to summon Custom NPCs." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_CUSTOM_CNPC_SUMMONING)
 	/********** GARFU CUSTOM - BEGINNING **********/
 	listn(0, 32) = "(CUSTOM-GFU) Potentials never drop below 100%." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_LOCK_POTENTIAL)
 	listn(0, 33) = "(CUSTOM-GFU) Resurrects and restores are free." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_FREE_RESURRECT)
@@ -533,7 +533,8 @@ TweakData(51, 4) = "Disable cicada noises."
 	listn(0, 42) = "(CUSTOM-GFU) Plants always grow/regrow." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_DISABLE_PLANT_WITHER)
 	listn(0, 43) = "(CUSTOM-GFU) Train anywhere, even on sandbags." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_GARFU_CUSTOM_ENABLE_SANDBAG_TRAINING)
 	/********** GARFU CUSTOM - ENDING **********/
-	listn(0, 44) = "Go Back."
+	listn(0, 44) = "Revert post-1.90 skill exp formula changes." + GetTStatus(TWEAK_CATEGORY_GAMEPLAY, TWEAK_GAMEPLAY_REVERT_POST_217_EXP_CHANGES)
+	listn(0, 45) = "Go Back."
 
 	font lang(cfg_font1, cfg_font2), 14 - en * 2, 0
 
@@ -594,10 +595,10 @@ TweakData(51, 4) = "Disable cicada noises."
 				s = "Livestock can randomly become sick, are born unable to be milked, etc."
 			}
 			if ( p == 12 ) {
-				s = "Reverts changes to the experience formula after version 1.90.\nThis mainly addresses the three-fold increase in player experience gain."
+				s = "Reverts changes to the weapon skill experience formula after version 1.90.\nThis mainly addresses the three-fold increase in player weapon skill exp gain.\nIt does not change the study day triple exp bonus."
 			}
 			if ( p == 13 ) {
-				s = "Disables the \"study day bonus\" feature.\nThis will prevent certain skills from gaining triple experience based on the\nstudy day type."
+				s = "Disables the \"study day bonus\" feature.\nThis will prevent certain skills from gaining triple skill experience based on the\nstudy day type."
 			}
 			if ( p == 14 ) {
 				s = "Disables the \"DESTINY\" feature.\nThis restores the chances of godly equipment being generated, regardless of\nDESTINY triggers."
@@ -636,7 +637,7 @@ TweakData(51, 4) = "Disable cicada noises."
 				s = "Disables stamina depletion when attacking or casting spells."
 			}
 			if ( p == 26 ) {
-				s = "Reverts changes to the experience formula after version 2.13.\nAddresses \"increased EXP multipliers when defeating enemies above the PC's level\".\nToggling this also reverts the changes to the taxation mechanic."
+				s = "Reverts changes to the killing experience formula after version 2.13.\nAddresses \"increased EXP multipliers when defeating enemies above the PC's level\".\nToggling this also reverts the changes to the taxation mechanic."
 			}
 			if ( p == 27 ) {
 				s = "Prevents characters from urinating when they are afflicted with fear."
@@ -651,7 +652,7 @@ TweakData(51, 4) = "Disable cicada noises."
 				s = "Use Custom Animation for Arrow/Bolt/Ball spell animations."
 			}
 			if ( p == 31 ) {
-				s = "Disable Random CNPC spawn in all areas except Derphy and Melkawn.\nInstead, you can use a summon crystal to summon them at will."
+				s = "You can now use a summon crystal to summon Custom NPCS.\nThis will also disable Random CNPC spawn in all areas except Derphy and Melkawn."
 			}
 			/********** GARFU CUSTOM - BEGINNING **********/
 			if ( p >= 32 & p <= 43 ) {
@@ -659,6 +660,9 @@ TweakData(51, 4) = "Disable cicada noises."
 			}
 			/********** GARFU CUSTOM - ENDING **********/
 			if ( p == 44 ) {
+				s = "Reverts changes to the skill experience formula after version 2.17.\nThis will lock your growth rate at 100% (compared to growth in 2.17)."
+			}
+			if ( p == 45 ) {
 				s = "Return to the previous menu."
 			}
 			pos wx + 38, wy + 343
@@ -850,6 +854,11 @@ TweakData(51, 4) = "Disable cicada noises."
 	}
 	/********** GARFU CUSTOM - ENDING **********/
 	if ( p == 44 ) {
+		tc = TWEAK_CATEGORY_GAMEPLAY
+		tn = TWEAK_GAMEPLAY_REVERT_POST_217_EXP_CHANGES
+		gosub *ToggleTweak
+	}
+	if ( p == 45 ) {
 		snd SOUNDLIST_OK1
 		return
 	}

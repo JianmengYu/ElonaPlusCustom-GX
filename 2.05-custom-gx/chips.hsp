@@ -44,13 +44,20 @@
 			}
 		loop
 	}
-	if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > VEHICLE_NONE & mdata(MDATA_TYPE) == MAP_TYPE_WORLD ) {
+	if ( gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_KIND) > VEHICLE_NONE & mdata(MDATA_TYPE) == MAP_TYPE_WORLD & gdata(GDATA_AREA) != AREA_TEST_WORLD ) {
 		if ( prm_cc == CHARA_PLAYER ) {
             pccSet("world", gdata(GDATA_FLAG_WORLD_MAP_VEHICLE_PIC))
 		}
 	}
 	else {
-        gosub *create_pcpic_normal
+		if ( gdata(GDATA_FLAG_SHIP_TYPE) > 0 & mdata(MDATA_TYPE) == MAP_TYPE_WORLD & gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+			if ( create_pcpic_arg1 == 0 ) {
+				pccSet("worldship", gdata(GDATA_FLAG_SHIP_IMAGE) \ 1000)
+			}
+		}
+		else {
+			gosub *create_pcpic_normal
+		}
     }
 
 	gsel BUFFER_SCREEN
@@ -149,11 +156,21 @@
 
 *cloud_init
 	repeat MAX_CLOUD
-		if ( rnd(2) == 0 ) {
-			cloud(CLOUD_PX, cnt) = 288, 1040, 208, 160
+		if ( gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+			if ( rnd(2) == 0 ) {
+				cloud(CLOUD_PX, cnt) = 1223, 1040, 208, 160
+			}
+			else {
+				cloud(CLOUD_PX, cnt) = 935, 976, 288, 224
+			}
 		}
 		else {
-			cloud(CLOUD_PX, cnt) = 0, 976, 288, 224
+			if ( rnd(2) == 0 ) {
+				cloud(CLOUD_PX, cnt) = 288, 1040, 208, 160
+			}
+			else {
+				cloud(CLOUD_PX, cnt) = 0, 976, 288, 224
+			}
 		}
 		cloud(CLOUD_X, cnt) = rnd(100) + cnt * 200 + 100000
 		cloud(CLOUD_Y, cnt) = rnd(100) + cnt / 5 * 200 + 100000
@@ -337,6 +354,7 @@
 		chipm(CHIPM_ROLE, xy2pic(14, 9)) = MAP_CHIP_ROLE_SAND
 		chipm(CHIPM_ANIM, xy2pic(14, 9)) = 3
 		chipm(CHIPM_ANIM, xy2pic(11, 8)) = 5
+		chipm(CHIPM_ANIM, xy2pic(29, 11)) = 3
 		chipm(CHIPM_ROLE, xy2pic(17, 9)) = MAP_CHIP_ROLE_WATER
 		chipm(CHIPM_ROLE, xy2pic(18, 9)) = MAP_CHIP_ROLE_WATER
 		chipm(CHIPM_ANIM, xy2pic(0, 17)) = 3
@@ -347,6 +365,9 @@
 		chipm(CHIPM_ROLE, xy2pic(19, 17)) = MAP_CHIP_ROLE_WATER
 		chipm(CHIPM_ROLE, xy2pic(20, 17)) = MAP_CHIP_ROLE_WATER
 		chipm(CHIPM_ROLE, xy2pic(21, 17)) = MAP_CHIP_ROLE_WATER
+		chipm(CHIPM_ATTRIB, xy2pic(17, 18)) = CHIPM_ATTRIB_CANT_PASS
+		chipm(CHIPM_ANIM, xy2pic(17, 18)) = 3
+		chipm(CHIPM_ANIM, xy2pic(20, 18)) = 3
 	}
 	if ( mdata(MDATA_TILE_FILE) == 2 ) {
 		repeat 11
@@ -984,6 +1005,8 @@
 	chipi(CHIPI_HEIGHT, xy2pic(32, 27)) = inf_tiles * 2, inf_tiles + 16
 	chipi(CHIPI_HEIGHT, xy2pic(8, 28)) = inf_tiles * 2, inf_tiles + 16
 	chipi(CHIPI_HEIGHT, xy2pic(17, 34)) = inf_tiles * 2, inf_tiles + 16
+	chipi(CHIPI_HEIGHT, xy2pic(0, 38)) = inf_tiles * 2, inf_tiles + 16
+	chipi(CHIPI_HEIGHT, xy2pic(1, 38)) = inf_tiles * 2, inf_tiles + 16
 	chipi(CHIPI_HEIGHT, xy2pic(30, 33)) = inf_tiles * 2, inf_tiles + 16, 40
 	chipi(CHIPI_HEIGHT, xy2pic(18, 36)) = inf_tiles * 2, inf_tiles + 16, 40
 	chipi(CHIPI_ANIM, xy2pic(4, 0)) = 2
@@ -1162,6 +1185,7 @@
 	chipc(CHIPC_HEIGHT, xy2pic(29, 31)) = inf_tiles * 2, inf_tiles + 16
 	chipc(CHIPC_HEIGHT, xy2pic(30, 31)) = inf_tiles * 2, inf_tiles + 16
 	chipc(CHIPC_HEIGHT, xy2pic(31, 31)) = inf_tiles * 2, inf_tiles + 16
+	chipc(CHIPC_HEIGHT, xy2pic(32, 31)) = inf_tiles * 2, inf_tiles + 16
 	chipc(CHIPC_HEIGHT, xy2pic(0, 35)) = inf_tiles * 2, inf_tiles + 16
 	chipc(CHIPC_HEIGHT, xy2pic(1, 35)) = inf_tiles * 2, inf_tiles + 16
 	chipc(CHIPC_HEIGHT, xy2pic(2, 35)) = inf_tiles * 2, inf_tiles + 16

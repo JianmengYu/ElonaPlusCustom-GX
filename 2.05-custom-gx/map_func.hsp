@@ -194,8 +194,14 @@
 		tile_upstairs = xy2pic(2, 7)
 	}
 	else {
-		tile_downstairs = xy2pic(0, 7)
-		tile_upstairs = xy2pic(1, 7)
+		if ( gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+			tile_downstairs = xy2pic(22, 8)
+			tile_upstairs = xy2pic(22, 8)
+		}
+		else {
+			tile_downstairs = xy2pic(0, 7)
+			tile_upstairs = xy2pic(1, 7)
+		}
 	}
 	if ( map_tileset_arg1 == 3 ) {
 		tile_room = 41
@@ -265,6 +271,9 @@
 	if ( map_tileset_arg1 == 96 ) {
 		tile_default = 541
 		tile_fog = 599
+		/********** CUSTOM - BEGINNING **********/ // Fixes Some Bugs made by Ano
+		tile_fog = 701
+		/********** CUSTOM - ENDING **********/
 		tile_tunnel = 351
 		tile_wall = 541
 		tile_room = 351
@@ -397,6 +406,10 @@
 		if ( chipm(CHIPM_ROLE, gdata(GDATA_WORLD_TILE)) == MAP_CHIP_ROLE_SAND | chipm(CHIPM_ROLE, gdata(GDATA_WORLD_TILE)) == MAP_CHIP_ROLE_SAND_HARD ) {
 			tile_fog = 533
 			tile_default = 23
+		}
+		if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
+			tile_fog = xy2pic(25, 16)
+			tile_default = xy2pic(16, 8)
 		}
 	}
 	if ( map_tileset_arg1 == 13 ) {

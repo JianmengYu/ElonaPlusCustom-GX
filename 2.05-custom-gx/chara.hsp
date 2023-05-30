@@ -398,11 +398,11 @@
 		}
 	}
 	if ( sorg(SKILL_NORMAL_STEALTH, CHARA_PLAYER) > 19 ) {
-		if ( spact(SKILL_SPACT_CURTAIN_OF_SMOKE - STARTING_SKILL_SPACT) == 0 ) {
-			spact(SKILL_SPACT_CURTAIN_OF_SMOKE - STARTING_SKILL_SPACT) = 1
+		if ( spact(SKILL_SPACT_SHADOW_HOP - STARTING_SKILL_SPACT) == 0 ) {
+			spact(SKILL_SPACT_SHADOW_HOP - STARTING_SKILL_SPACT) = 1
 			txtmore
 			txtef COLOR_YELLOW
-			txt lang("あなたは「" + skillname(SKILL_SPACT_CURTAIN_OF_SMOKE) + "」の能力を得た。", "You have learned a new ability, " + skillname(SKILL_SPACT_CURTAIN_OF_SMOKE) + ".")
+			txt lang("あなたは「" + skillname(SKILL_SPACT_SHADOW_HOP) + "」の能力を得た。", "You have learned new ability, " + skillname(SKILL_SPACT_SHADOW_HOP) + ".")
 		}
 	}
 	if ( sorg(SKILL_NORMAL_STEALTH, CHARA_PLAYER) > 29 ) {
@@ -411,6 +411,22 @@
 			txtmore
 			txtef COLOR_YELLOW
 			txt lang("あなたは「" + skillname(SKILL_SPACT_SHADOW_STEP) + "」の能力を得た。", "You have learned a new ability, " + skillname(SKILL_SPACT_SHADOW_STEP) + ".")
+		}
+	}
+	if ( sorg(SKILL_NORMAL_STEALTH, CHARA_PLAYER) > 39 ) {
+		if ( spact(SKILL_SPACT_SHADOW_JUMP - STARTING_SKILL_SPACT) == 0 ) {
+			spact(SKILL_SPACT_SHADOW_JUMP - STARTING_SKILL_SPACT) = 1
+			txtmore
+			txtef COLOR_YELLOW
+			txt lang("あなたは「" + skillname(SKILL_SPACT_SHADOW_JUMP) + "」の能力を得た。", "You have learned new ability, " + skillname(SKILL_SPACT_SHADOW_JUMP) + ".")
+		}
+	}
+	if ( sorg(SKILL_NORMAL_STEALTH, CHARA_PLAYER) > 49 ) {
+		if ( spact(SKILL_SPACT_CURTAIN_OF_SMOKE - STARTING_SKILL_SPACT) == 0 ) {
+			spact(SKILL_SPACT_CURTAIN_OF_SMOKE - STARTING_SKILL_SPACT) = 1
+			txtmore
+			txtef COLOR_YELLOW
+			txt lang("あなたは「" + skillname(SKILL_SPACT_CURTAIN_OF_SMOKE) + "」の能力を得た。", "You have learned new ability, " + skillname(SKILL_SPACT_CURTAIN_OF_SMOKE) + ".")
 		}
 	}
 	if ( sorg(SKILL_WEAPON_AXE, CHARA_PLAYER) > 9 ) {

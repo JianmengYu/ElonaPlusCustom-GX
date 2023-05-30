@@ -464,6 +464,7 @@
 					if ( qdata(QDATA_PARAM2, rq) == cdata(CDATA_ID, cnt) ) {
 						tc = cnt
 						cbitmod CHARA_BIT_BODYGUARD, cnt, 0
+						chatc@DP = tc
 						if ( cdata(CDATA_EXIST, tc) == CHAR_STATE_ALIVE ) {
 							s = lang("「おい、暗殺者が私の後ろにいるぞ」", cnvtalk("Hey, the assassins are killing me."))
 							p = DAMAGE_FROM_UNSEEN
@@ -851,6 +852,11 @@
 		}
 		if ( gdata(GDATA_FLAG_GUILD_THIEF_NORMA) > 0 ) {
 			gdata(GDATA_FLAG_GUILD_THIEF_NORMA) = 0
+		}
+	}
+	if ( gdata(GDATA_VERSION) < 6180 ) {
+		if ( gdata(GDATA_FLAG_SUB_DOGS_TAIL) >= 1000 ) {
+			kamen10 = 100
 		}
 	}
 	if ( gdata(GDATA_VERSION) != VERSION_NUMBER ) {

@@ -38,6 +38,7 @@
 	_biyori = lang("修行日和", "Training-day"), lang("戦闘日和", "Combat-day"), lang("仕事日和", "Jobs-day"), lang("探索日和", "Exploration-day"), lang("勉強日和", "Study-day")
 	_dengon = lang("なし", "none"), lang("協調", "Cooperation"), lang("招待", "Invitation"), lang("告白", "Confession"), lang("応援", "Cheering"), lang("侮辱", "Contempt")
 	_nefiatype = lang("洞窟", "Cave"), lang("塔", "Tower"), lang("森", "Forest"), lang("砦", "Fort"), lang("巣穴", "Nest"), lang("霊園", "Cemetery"), lang("鉱山", "Mine"), lang("湖", "Lake")
+	_shiphp = lang("航行不能", "Unnavigable"), lang("大破寸前", "About to Sink"), lang("ヤバい", "Dangerous"), lang("トラブル多発", "Major Damage"), lang("損傷は軽微", "Minor Damage"), lang("順風満帆", "Full Speed Ahead")
 	_seikaku = lang("未設定", "none"), lang("陽気", "Cheerful"), lang("慎重", "Carefully"), lang("献身的", "Devoted"), lang("豪快", "Lively"), lang("自信家", "Confident"), lang("謙虚", "Humility"), lang("寡黙", "Quiet"), lang("勤勉", "Diligence"), lang("純真", "Innocent"), lang("繊細", "Delicate"), lang("温厚", "Gentle"), lang("情熱的", "Passionate"), lang("意地悪", "Evil"), lang("スケベ", "Lewd"), lang("皮肉屋", "Cynic"), lang("冷徹", "Ruthless"), lang("好戦的", "Warlike"), lang("腹黒", "Corrupt"), lang("偏執的", "Paranodic"), lang("頑固", "Stubborn"), lang("守銭奴", "Miser"), lang("怠惰", "Lazy"), lang("アホ", "Stupid"), lang("能天気", "Carefree"), lang("気分屋", "Whimsical"), lang("卑怯", "Despicable"), lang("高慢", "Arrogance"), lang("臆病", "Cowardly"), lang("陰鬱", "Gloomy"), lang("猟奇的", "Bizarre"), lang("お茶目", "Playful"), lang("内気", "Shy"), lang("神経質", "Nervous"), lang("下品", "Vulgar"), lang("天邪鬼", "Perversity"), lang("気丈", "Courageous")
 	_homename = lang("洞窟", "cave"), lang("森のほったて小屋", "shack"), lang("住み心地のいい家", "cozy house"), lang("セレブ邸", "estate"), lang("サイバーハウス", "cyber house"), lang("小城", "small castle"), lang("宮殿", "palace")
 	_bookself = lang("紙屑同然の", "paper scraps"), lang("素人丸出しの", "noob"), lang("ありきたりな", "commonplace"), lang("光るものがある", "good sense"), lang("いい感じの", "cool"), lang("納得いく", "satisfied"), lang("至高の", "masterpiece")
@@ -2595,6 +2596,9 @@
 	if ( adata(ADATA_ID, mapname_mapid) == AREA_WEST_RASKILIS ) {
 		s = lang("ラスキリスの谷間・西", "West Raskilis valley"), lang("谷の奥に街道が見える。なぜか懐かしさと禍々しさを感じる。", "You see a pathway near the end of the valley. For some reason, you feel nostalgic and disquieted.")
 	}
+	if ( adata(ADATA_ID, mapname_mapid) == AREA_TEST_WORLD ) {
+		s = lang("海", "Sea")
+	}
 	if ( adata(ADATA_ID, mapname_mapid) == AREA_LOST_YLVA ) {
 		s = lang("ロストイルヴァ", "Lost Irva")
 	}
@@ -2643,7 +2647,7 @@
 	if ( adata(ADATA_ID, mapname_mapid) == AREA_IRMA_THALIA_WORKSHOP ) {
 		s = lang("隠れ工房イルマ・サリム", "Irma and Thalia's Workshop")
 	}
-	if ( adata(ADATA_ID, mapname_mapid) == AREA_TEST_WORLD ) {
+	if ( adata(ADATA_ID, mapname_mapid) == areatestworld ) {
 		s = lang("テストワールド", "Test World")
 	}
 	if ( adata(ADATA_ID, mapname_mapid) == AREA_TW_NORTH_BORDER ) {
@@ -7769,7 +7773,7 @@
 		buff += s3
 	}
 	if ( cdata(CDATA_MATERIAL1_COUNTER, CHARA_PLAYER) \ 1000 == 4 ) {
-		s3 = lang("・高レベルの相手を倒そう。", "I will defeat high level enemy.")
+		s3 = lang("・高レベルの相手を倒そう。", "I will defeat a higher level enemy.")
 		talk_conv s3, 40 - en * 4
 		buff += s3
 	}
@@ -7779,17 +7783,17 @@
 		buff += s3
 	}
 	if ( cdata(CDATA_MATERIAL1_COUNTER, CHARA_PLAYER) \ 1000 == 6 ) {
-		s3 = lang("・ランダムネフィアを訪れよう。", "I will visit Random Nefia.")
+		s3 = lang("・ランダムネフィアを訪れよう。", "I will visit a Random Nefia.")
 		talk_conv s3, 40 - en * 4
 		buff += s3
 	}
 	if ( cdata(CDATA_MATERIAL1_COUNTER, CHARA_PLAYER) \ 1000 == 7 ) {
-		s3 = lang("・野外を訪れよう。", "I will visit Wilderness.")
+		s3 = lang("・野外を訪れよう。", "I will visit the Wilderness.")
 		talk_conv s3, 40 - en * 4
 		buff += s3
 	}
 	if ( cdata(CDATA_MATERIAL1_COUNTER, CHARA_PLAYER) \ 1000 == 8 ) {
-		s3 = lang("・軽疲労になるまで運動しよう。", "I will exercise until I feel lightly tired.")
+		s3 = lang("・軽疲労になるまで運動しよう。", "I will exercise until I feel somewhat tired.")
 		talk_conv s3, 40 - en * 4
 		buff += s3
 	}
@@ -7800,7 +7804,7 @@
 		buff += s4
 	}
 	if ( cdata(CDATA_SPINDLE_COMBINATION_B, CHARA_PLAYER) \ 1000 == 1 ) {
-		s4 = lang("・肉を食べよう。", "I will eat a meat.")
+		s4 = lang("・肉を食べよう。", "I will eat some meat.")
 		talk_conv s4, 40 - en * 4
 		buff += s4
 	}
@@ -7810,32 +7814,32 @@
 		buff += s4
 	}
 	if ( cdata(CDATA_SPINDLE_COMBINATION_B, CHARA_PLAYER) \ 1000 == 3 ) {
-		s4 = lang("・野菜を食べよう。", "I will eat a vegetable.")
+		s4 = lang("・野菜を食べよう。", "I will eat some vegetable.")
 		talk_conv s4, 40 - en * 4
 		buff += s4
 	}
 	if ( cdata(CDATA_SPINDLE_COMBINATION_B, CHARA_PLAYER) \ 1000 == 4 ) {
-		s4 = lang("・果物を食べよう。", "I will eat a fruit.")
+		s4 = lang("・果物を食べよう。", "I will eat some fruit.")
 		talk_conv s4, 40 - en * 4
 		buff += s4
 	}
 	if ( cdata(CDATA_SPINDLE_COMBINATION_B, CHARA_PLAYER) \ 1000 == 5 ) {
-		s4 = lang("・パンを食べよう。", "I will eat a bread.")
+		s4 = lang("・パンを食べよう。", "I will eat some bread.")
 		talk_conv s4, 40 - en * 4
 		buff += s4
 	}
 	if ( cdata(CDATA_SPINDLE_COMBINATION_B, CHARA_PLAYER) \ 1000 == 6 ) {
-		s4 = lang("・木の実を食べよう。", "I will eat a nut.")
+		s4 = lang("・木の実を食べよう。", "I will eat some nuts.")
 		talk_conv s4, 40 - en * 4
 		buff += s4
 	}
 	if ( cdata(CDATA_SPINDLE_COMBINATION_B, CHARA_PLAYER) \ 1000 == 7 ) {
-		s4 = lang("・魚介を食べよう。", "I will eat a seafood.")
+		s4 = lang("・魚介を食べよう。", "I will eat some seafood.")
 		talk_conv s4, 40 - en * 4
 		buff += s4
 	}
 	if ( cdata(CDATA_SPINDLE_COMBINATION_B, CHARA_PLAYER) \ 1000 == 8 ) {
-		s4 = lang("・麺を食べよう。", "I will eat a noodle.")
+		s4 = lang("・麺を食べよう。", "I will eat some noodles.")
 		talk_conv s4, 40 - en * 4
 		buff += s4
 	}

@@ -56,7 +56,7 @@
 		goto *pc_turn
 	}
 	cell_featread cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER)
-	if ( feat(0) != 0 ) {
+	if ( feat(FEAT_CELL_PIC) != 0 | gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
 		txt lang("その場所には建てられない。", "You can't build it here.")
 		gosub *screen_draw
 		goto *pc_turn

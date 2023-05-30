@@ -1,8 +1,40 @@
+# 2.18.1.0
+
+## Added
+- Ported all changes from Elona+ 2.18.
+- Added chat pop ups.
+- Added a tweak option to disable "exp modifier based on Main Quest Progress".
+
+## Fixed
+- Fixed following bug from original 2.18
+  + Saving drifters not awarding karma.
+  + Shadow hop summoning hostile shades that drops loot.
+  + Using return/escape/aurtehom underwater stuck you inside another continent.
+  + Jukebox missing several music.
+  + Title plays World map music due to a mistake in settings.
+
+# 2.17.1.1
+
+## Added
+- Added "Percent Chance" condition for Custom AI.
+- Added Import/Export/Reset utility for Custom AI, added hint for swap rows.
+- Added a tweak option to "enable CNPC summoning using a summoning crystal and disable random CNPC spawn".
+
+## Changed
+- Custom Nefia Layouts: Reduced monsters in some map layouts.
+- Custom Pet Configuration: Raised "eat from your bag" hunger criteria to 10000, added options for drink and chat.
+
+## Fixed
+- Fixed a bug where uninitiated ammoproc causing the normal attack animation to be skipped.
+- Fixed a bug where NumLock button get spammed when the game starts in background.
+- Fixed a bug where "autodestroy_sound." config overwrites "sound." config.
+- "BARREL!" support for english speaking alchemists.
+
 # 2.17.1.0
 
 ## Added
 - Added a tweak for enabling different reward mechanic in quests.
-  + Delivery quests now require the exact item they give you to be delivered, but rewards more platinum coins. 
+  + Delivery quests now require the exact item they give you to be delivered, but rewards more platinum coins.
   + Harvest quests now give rewards based on how many crops you delivered. Added chances to spawn heavier crops in higher levels.
   + Conquer quest boss now uses breath attacks.
   + Exterminate quests spawn the enemies together instead.

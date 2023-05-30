@@ -165,33 +165,13 @@
 			}
 		}
 	}
+	if ( inv(INV_ITEM_ID, calcitemvalue_itemid) == ITEM_ID_JUICE | inv(INV_ITEM_ID, calcitemvalue_itemid) == ITEM_ID_COFFEE | inv(INV_ITEM_ID, calcitemvalue_itemid) == ITEM_ID_BLACK_TEA ) {
+		if ( ibit(ITEM_BIT_ACIDPROOF, calcitemvalue_itemid) == TRUE ) {
+			locvar_calcitemvalue_value = inv(INV_ITEM_VALUE, calcitemvalue_itemid) * 2
+		}
+	}
 	if ( locvar_calcitemvalue_reftype == FILTER_ITEM_FOOD ) {
-		if ( inv(INV_ITEM_LEVEL, calcitemvalue_itemid) != 0 ) {
-			if ( inv(INV_ITEM_PARAM1, calcitemvalue_itemid) == 2000 | inv(INV_ITEM_PARAM1, calcitemvalue_itemid) == 3000 ) {
-				locvar_calcitemvalue_value += inv(INV_ITEM_LEVEL, calcitemvalue_itemid) * 30
-			}
-		}
-		if ( inv(INV_ITEM_LEVEL, calcitemvalue_itemid) != 0 ) {
-			if ( inv(INV_ITEM_PARAM1, calcitemvalue_itemid) != 6000 ) {
-				if ( inv(INV_ITEM_ID, calcitemvalue_itemid) == ITEM_ID_CORPSE ) {
-					locvar_calcitemvalue_value = limit(locvar_calcitemvalue_value / 9 * (inv(INV_ITEM_LEVEL, calcitemvalue_itemid) + 8), 1, 20000)
-				}
-				else {
-					locvar_calcitemvalue_value = limit(locvar_calcitemvalue_value / 5 * (inv(INV_ITEM_LEVEL, calcitemvalue_itemid) + 4), 1, 20000)
-				}
-			}
-		}
-		if ( inv(INV_ITEM_PARAM1, calcitemvalue_itemid) == 6000 ) {
-			if ( inv(INV_ITEM_ID, calcitemvalue_itemid) == ITEM_ID_FISH ) {
-				if ( inv(INV_ITEM_LEVEL, calcitemvalue_itemid) < 1 ) {
-					locvar_calcitemvalue_value /= 2
-				}
-			}
-			if ( inv(INV_ITEM_LEVEL, calcitemvalue_itemid) > 0 ) {
-				locvar_calcitemvalue_value += inv(INV_ITEM_LEVEL, calcitemvalue_itemid) * 300 + 1000
-				locvar_calcitemvalue_value = limit(locvar_calcitemvalue_value / 15 * (inv(INV_ITEM_LEVEL, calcitemvalue_itemid) + 15), 1, 60000)
-			}
-		}
+		locvar_calcitemvalue_value += inv(INV_ITEM_LEVEL, calcitemvalue_itemid) * 300
 		if ( inv(INV_ITEM_PARAM2, calcitemvalue_itemid) > 0 ) {
 			locvar_calcitemvalue_value = inv(INV_ITEM_PARAM2, calcitemvalue_itemid) * locvar_calcitemvalue_value / 10 * inv(INV_ITEM_PARAM2, calcitemvalue_itemid)
 		}
@@ -587,6 +567,25 @@
 	}
 	if ( gdata(GDATA_FLAG_MOST_EXPENSIVE_WORLD_MAP_VEHICLE_THIS_MONTH) == VEHICLE_LAND_BATTLESHIP ) {
 		locvar_calccosthire_cost += 200000
+	}
+	// TODO Ano made a bug here? Ship doesn't cost anything for now.
+	if ( gdata(GDATA_FLAG_MOST_EXPENSIVE_SHIP_THIS_MONTH) == 11 ) {
+		locvar_calccosthire_cost += 100
+	}
+	if ( gdata(GDATA_FLAG_MOST_EXPENSIVE_SHIP_THIS_MONTH) == 12 ) {
+		locvar_calccosthire_cost += 3000
+	}
+	if ( gdata(GDATA_FLAG_MOST_EXPENSIVE_SHIP_THIS_MONTH) == 13 ) {
+		locvar_calccosthire_cost += 10000
+	}
+	if ( gdata(GDATA_FLAG_MOST_EXPENSIVE_SHIP_THIS_MONTH) == 14 ) {
+		locvar_calccosthire_cost += 50000
+	}
+	if ( gdata(GDATA_FLAG_MOST_EXPENSIVE_SHIP_THIS_MONTH) == 15 ) {
+		locvar_calccosthire_cost += 100000
+	}
+	if ( gdata(GDATA_FLAG_MOST_EXPENSIVE_SHIP_THIS_MONTH) == 16 ) {
+		locvar_calccosthire_cost += 150000
 	}
 	if ( locvar_calccostbuilding_hantei == 0 ) {
 		gdata(GDATA_RANK_MUSEUM) = 10000
@@ -1745,6 +1744,27 @@
 		loop
 		tarudmg = 0
 	}
+	if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD ) {
+		if ( gdata(GDATA_AREA) == AREA_WILDERNESS ) {
+			if ( cdata(CDATA_CONDITION_WET, r1) < 5 ) {
+				cdata(CDATA_CONDITION_WET, r1) = 5
+			}
+			if ( rnd(sdata(SKILL_NORMAL_SWIMMING, r1) + 5) < rnd(50) ) {
+				cdata(CDATA_CONDITION_SUFFOCATION, r1) += 3
+			}
+		}
+	}
+	if ( gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+		if ( gdata(GDATA_FLAG_SHIP_TYPE) == 0 ) {
+			if ( cdata(CDATA_CONDITION_WET, r1) < 5 ) {
+				cdata(CDATA_CONDITION_WET, r1) = 5
+			}
+			if ( rnd(sdata(SKILL_NORMAL_SWIMMING, r1) + 5) < rnd(20) ) {
+				cdata(CDATA_CONDITION_SUFFOCATION, r1) += 3
+			}
+			dmgsp r1, 1
+		}
+	}
 	regen = 1
 	if ( cdata(CDATA_CONDITION_SLEEP, r1) > 0 ) {
 		healcon r1, CONDITION_SLEEP, 1
@@ -1773,6 +1793,7 @@
 	if ( cdata(CDATA_CONDITION_SUFFOCATION, r1) > 0 ) {
 		if ( cdata(CDATA_CONDITION_SUFFOCATION, r1) \ 3 == 0 ) {
 			if ( synccheck(r1, -1) ) {
+				chatc@DP = r1
 				txt lang("「うぐぐ…！」", cnvtalk("Ughh...!"))
 			}
 		}
@@ -2177,6 +2198,7 @@
 						txt name(r1) + " start" + _s(r1) + " to take " + his(r1) + " clothes off.", name(r1) + " shout" + _s(r1) + ".", name(r1) + " dance" + _s(r1) + "."
 					}
 					if ( r2 == 1 ) {
+						chatc@DP = r1
 						txt cnvtalk("Wheeeeeee!"), cnvtalk("Forgive me! Forgive me!"), cnvtalk("P-P-Pika!"), cnvtalk("Shhhhhh!"), cnvtalk("So I have to kill."), cnvtalk("You snail!")
 					}
 				}

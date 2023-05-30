@@ -1119,10 +1119,45 @@
 			bmes "You can surrender by pressing the ESC key.", 235, 235, 235
 		}
 	}
-	if ( dbg_subAmurdad ) {
-		paraa = tlocx
-		parab = tlocy
-		parac = gdata(GDATA_FLAG_COLLECTED_WISHES)
+	if ( gdata(GDATA_AREA) == AREA_TEST_WORLD ) {
+		pos inf_clockw + 230, inf_clocky + 37
+		color 0, 0, 0
+		if ( jp ) {
+			bmes "船の状態：" + _shiphp(cdata(CDATA_CHARACTER_TIER, CHARA_PLAYER)) + " ", 35, 235, 235
+		}
+		if ( en ) {
+			bmes "Ship-Condition < " + _shiphp(cdata(CDATA_CHARACTER_TIER, CHARA_PLAYER)) + " > ", 35, 235, 235
+		}
+		if ( gdata(GDATA_FLAG_SHIP_TYPE) == 0 ) {
+			gdata(GDATA_FLAG_COLLECTED_WISHES) = 0
+			maxship = 0
+		}
+		if ( gdata(GDATA_FLAG_SHIP_TYPE) == 1 ) {
+			maxship = 2
+		}
+		if ( gdata(GDATA_FLAG_SHIP_TYPE) == 2 ) {
+			maxship = 5
+		}
+		if ( gdata(GDATA_FLAG_SHIP_TYPE) == 3 ) {
+			maxship = 10
+		}
+		if ( gdata(GDATA_FLAG_SHIP_TYPE) == 4 ) {
+			maxship = 100
+		}
+		if ( gdata(GDATA_FLAG_SHIP_TYPE) == 5 ) {
+			maxship = 20
+		}
+		if ( gdata(GDATA_FLAG_SHIP_TYPE) == 6 ) {
+			maxship = 5
+		}
+		pos inf_clockw + 230, inf_clocky + 57
+		color 0, 0, 0
+		if ( jp ) {
+			bmes "回収人数：" + gdata(GDATA_FLAG_COLLECTED_WISHES) + "/" + maxship + "人", 35, 235, 235
+		}
+		if ( en ) {
+			bmes "Drifters-Limit < " + gdata(GDATA_FLAG_COLLECTED_WISHES) + "/" + maxship + " > ", 35, 235, 235
+		}
 	}
 	if ( gdata(GDATA_AREA) == AREA_AMUR_CAGE ) {
 		if ( gdata(GDATA_LEVEL) >= 10 ) {
@@ -4922,17 +4957,22 @@
 	losmode = 0
 	screendrawhack = 5
 	if ( cfg_env ) {
-		if ( gdata(GDATA_WEATHER) == WEATHER_RAIN ) {
-			gosub *screen_rain
+		if ( gdata(GDATA_WORLD) != AREA_TEST_WORLD | gdata(GDATA_AREA) != AREA_WILDERNESS ) {
+			if ( gdata(GDATA_WEATHER) == WEATHER_RAIN ) {
+				gosub *screen_rain
+			}
+			if ( gdata(GDATA_WEATHER) == WEATHER_HARD_RAIN ) {
+				gosub *screen_ocean_overworld
+			}
+			if ( gdata(GDATA_WEATHER) == WEATHER_SNOW ) {
+				gosub *screen_snow
+			}
+			if ( gdata(GDATA_WEATHER) == WEATHER_ETHER ) {
+				gosub *screen_ether
+			}
 		}
-		if ( gdata(GDATA_WEATHER) == WEATHER_HARD_RAIN ) {
-			gosub *screen_hardRain
-		}
-		if ( gdata(GDATA_WEATHER) == WEATHER_SNOW ) {
-			gosub *screen_snow
-		}
-		if ( gdata(GDATA_WEATHER) == WEATHER_ETHER ) {
-			gosub *screen_ether
+		if ( gdata(GDATA_WORLD) == AREA_TEST_WORLD & gdata(GDATA_AREA) == AREA_WILDERNESS ) {
+			gosub *screen_ocean
 		}
 	}
 	if ( gdata(GDATA_AREA) == AREA_AMUR_CAGE ) {
@@ -5051,6 +5091,48 @@
 	weatherbk = gdata(GDATA_WEATHER)
 	return
 
+*screen_ocean_overworld
+
+	/********** ORIGINAL - BEGINNING **********
+
+	if ( mdata(MDATA_FIELD) != 2 ) {
+		return
+	}
+
+	 ********** ORIGINAL - ENDING **********/
+
+	/********** ANNA CUSTOM - BEGINNING **********/ // Display Weather Everywhere.
+
+	if ( mdata(MDATA_FIELD) != 2 & TweakData(TWEAK_MISC_WEATHER_EVERYWHERE, TWEAK_CATEGORY_MISC) == 0 ) {
+		return
+	}
+
+	/********** ANNA CUSTOM - ENDING **********/
+
+	repeat maxrain * (1 + (mdata(MDATA_TYPE) == MAP_TYPE_WORLD))
+		s_p = rnd(100)
+		color 170 - s_p, 200 - s_p, 250 - s_p
+		line rainx(cnt) - 40, rainy(cnt) - cnt \ 5 - 4, rainx(cnt) - 39 + cnt \ 2, rainy(cnt)
+		if ( rainx(cnt) == 0 ) {
+			rainx(cnt) = rnd(windoww) + 40
+		}
+		else {
+			rainx(cnt) += 1
+		}
+		if ( rainy(cnt) == 0 ) {
+			rainy(cnt) = rnd(windowh - inf_verh) - 6
+		}
+		else {
+			rainy(cnt) += 24 + cnt \ 8
+			if ( rainy(cnt) > windowh - inf_verh - 10 ) {
+				rainy(cnt) = 0
+				rainx(cnt) = 0
+			}
+		}
+	loop
+	weatherbk = gdata(GDATA_WEATHER)
+	return
+
 *screen_snow
 
 	/********** ORIGINAL - BEGINNING **********
@@ -5088,6 +5170,34 @@
 		}
 		pos rainx(cnt), rainy(cnt)
 		gcopy 3, rainx(cnt) \ 2 * 8, 600 + cnt \ 6 * 8
+	loop
+	weatherbk = gdata(GDATA_WEATHER)
+	gmode 2
+	return
+
+*screen_ocean
+	/********** ANNA CUSTOM - BEGINNING **********/ // Display Weather Everywhere.
+
+	if ( mdata(MDATA_FIELD) != 2 & TweakData(TWEAK_MISC_WEATHER_EVERYWHERE, TWEAK_CATEGORY_MISC) == 0 ) {
+		return
+	}
+
+	/********** ANNA CUSTOM - ENDING **********/
+	color 0, 0, 0
+	repeat maxrain
+		if ( cnt \ 20 == 0 ) {
+			gmode 4, 8, 8, 100 + cnt \ 150
+		}
+		if ( rainy(cnt) <= 0 | weatherbk != gdata(GDATA_WEATHER) ) {
+			rainy(cnt) = windowh - inf_verh - 8 - rnd(100)
+			rainx(cnt) = rnd(windoww)
+		}
+		else {
+			pos rainx(cnt), rainy(cnt)
+			gcopy BUFFER_INF, 1376 + rainx(cnt) \ 2 * 8, 525 + cnt \ 6 * 8
+			rainx(cnt) += rnd(3) - 1
+			rainy(cnt) -= rnd(2) + cnt \ 5
+		}
 	loop
 	weatherbk = gdata(GDATA_WEATHER)
 	gmode 2
@@ -6099,7 +6209,7 @@
 		evade += sdata(SKILL_NORMAL_SHIELD, tc) + sdata(SKILL_ATTR_CON, tc) / 6
 	}
 	if ( cdata(CDATA_CONDITION_WET, tc) > 0 ) {
-		if ( chipm(CHIPM_ROLE, map(cdata(CDATA_X, tc), cdata(CDATA_Y, tc), MAP_TILE_ID)) == MAP_CHIP_ROLE_WATER ) {
+		if ( chipm(CHIPM_ROLE, map(cdata(CDATA_X, tc), cdata(CDATA_Y, tc), MAP_TILE_ID)) == MAP_CHIP_ROLE_WATER | (gdata(GDATA_WORLD) == AREA_TEST_WORLD & gdata(GDATA_AREA) == AREA_WILDERNESS) ) {
 			if ( sdata(SKILL_NORMAL_SWIMMING, tc) < 50 ) {
 				evade -= (50 - sdata(SKILL_NORMAL_SWIMMING, tc)) * 2
 			}
