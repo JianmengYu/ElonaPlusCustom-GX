@@ -1526,61 +1526,61 @@
 	gosub *charaRefresh
 	return relocate_chara_arg1
 
-#deffunc hostileaction int hostileaction_target, int hostileaction_source
-	if ( hostileaction_target >= MAX_CHARA_FOLLOWER | hostileaction_source == CHARA_PLAYER ) {
+#deffunc hostileaction int hostileaction_source, int hostileaction_target
+	if ( hostileaction_source >= MAX_CHARA_FOLLOWER | hostileaction_target == CHARA_PLAYER ) {
 		return
 	}
-	if ( cdata(CDATA_ALLIED, hostileaction_target) == 0 ) {
-		if ( hostileaction_target != CHARA_PLAYER ) {
+	if ( cdata(CDATA_ALLIED, hostileaction_source) == 0 ) {
+		if ( hostileaction_source != CHARA_PLAYER ) {
 			return
 		}
 	}
-	if ( cdata(CDATA_RELATION, hostileaction_source) != (-3) ) {
-		cdata(CDATA_EMO_ICON, hostileaction_source) = 18 + 100 * 4
+	if ( cdata(CDATA_RELATION, hostileaction_target) != (-3) ) {
+		cdata(CDATA_EMO_ICON, hostileaction_target) = 18 + 100 * 4
 	}
-	if ( cdata(CDATA_RELATION, hostileaction_source) == 10 ) {
+	if ( cdata(CDATA_RELATION, hostileaction_target) == 10 ) {
 		txtmore
 		txtef COLOR_PURPLE
-		txt lang(name(hostileaction_source) + "は嫌な顔をした。", name(hostileaction_source) + " glares at you.")
+		txt lang(name(hostileaction_target) + "は嫌な顔をした。", name(hostileaction_target) + " glares at you.")
 	}
 	else {
-		if ( hostileaction_target <= MAX_CHARA_FOLLOWER ) {
-			if ( cdata(CDATA_RELATION, hostileaction_source) == 0 ) {
+		if ( hostileaction_source <= MAX_CHARA_FOLLOWER ) {
+			if ( cdata(CDATA_RELATION, hostileaction_target) == 0 ) {
 				modkarma CHARA_PLAYER, -2
 			}
 		}
-		if ( cdata(CDATA_ID, hostileaction_source) == CREATURE_ID_EBON_THE_FIRE_GIANT ) {
+		if ( cdata(CDATA_ID, hostileaction_target) == CREATURE_ID_EBON_THE_FIRE_GIANT ) {
 			if ( gdata(GDATA_FLAG_FIRE_GIANT) == 0 ) {
 				txtmore
 				txtef COLOR_PURPLE
-				txt lang(name(hostileaction_source) + "は嫌な顔をした。", name(hostileaction_source) + " glares at you.")
+				txt lang(name(hostileaction_target) + "は嫌な顔をした。", name(hostileaction_target) + " glares at you.")
 				return
 			}
 		}
-		if ( cdata(CDATA_RELATION, hostileaction_source) > (-2) ) {
+		if ( cdata(CDATA_RELATION, hostileaction_target) > (-2) ) {
 			txtmore
 			txtef COLOR_PURPLE
-			txt lang(name(hostileaction_source) + "は嫌な顔をした。", name(hostileaction_source) + " glares at you.")
-			cdata(CDATA_RELATION, hostileaction_source) = -2
+			txt lang(name(hostileaction_target) + "は嫌な顔をした。", name(hostileaction_target) + " glares at you.")
+			cdata(CDATA_RELATION, hostileaction_target) = -2
 		}
 		else {
-			if ( cdata(CDATA_RELATION, hostileaction_source) != (-3) ) {
+			if ( cdata(CDATA_RELATION, hostileaction_target) != (-3) ) {
 				txtef COLOR_PURPLE
 				txtmore
-				txt lang(name(hostileaction_source) + "は激怒した。", name(hostileaction_source) + " gets furious!")
+				txt lang(name(hostileaction_target) + "は激怒した。", name(hostileaction_target) + " gets furious!")
 			}
-			cdata(CDATA_RELATION, hostileaction_source) = -3
-			cdata(CDATA_AI_AGGRO, hostileaction_source) = 80
-			cdata(CDATA_TARGET, hostileaction_source) = hostileaction_target
+			cdata(CDATA_RELATION, hostileaction_target) = -3
+			cdata(CDATA_AI_AGGRO, hostileaction_target) = 80
+			cdata(CDATA_TARGET, hostileaction_target) = hostileaction_source
 		}
-		if ( cdata(CDATA_ID, hostileaction_source) != CREATURE_ID_RAIZEL_THE_OLD_WIZARD | cdata(CDATA_ALLIED, hostileaction_source) != 0 | gdata(GDATA_FLAG_MAIN) < 760 ) {
+		if ( cdata(CDATA_ID, hostileaction_target) != CREATURE_ID_RAIZEL_THE_OLD_WIZARD | cdata(CDATA_ALLIED, hostileaction_target) != 0 | gdata(GDATA_FLAG_MAIN) < 760 ) {
 			if ( gdata(GDATA_TEMPORARY_FLAGS2) < 1000 ) {
-				customtalk hostileaction_source, DBMODE_FLAVOR_ANGERED
+				customtalk hostileaction_target, DBMODE_FLAVOR_ANGERED
 				gosub *convert_word
 			}
 		}
 	}
-	if ( cbit(CHARA_BIT_LIVESTOCK, hostileaction_source) == 1 & gdata(GDATA_AREA) != AREA_DOJO ) {
+	if ( cbit(CHARA_BIT_LIVESTOCK, hostileaction_target) == 1 & gdata(GDATA_AREA) != AREA_DOJO ) {
 		if ( rnd(50) == 0 ) {
 			txtef COLOR_RED
 			txt lang("家畜は興奮した！", "The livestock got excited!")
@@ -1593,8 +1593,8 @@
 			loop
 		}
 	}
-	if ( cdata(CDATA_ROW_ACT, hostileaction_source) != ACTION_CHARGE ) {
-		rowactend hostileaction_source
+	if ( cdata(CDATA_ROW_ACT, hostileaction_target) != ACTION_CHARGE ) {
+		rowactend hostileaction_target
 	}
 	return
 
@@ -2832,7 +2832,7 @@
 				if ( cdata(CDATA_THIRST, dmgcon_charid) > 12000 ) {
 					if ( synccheck(dmgcon_charid, -1) ) {
 						snd SOUNDLIST_WATERM
-						txt lang(name(dmgcon_charid) + "は漏らした。", name(dmgcon_charid) + " is incontinent.")
+						txt lang(name(dmgcon_charid) + "は漏らした。", name(dmgcon_charid) + " " + is(dmgcon_charid) + " incontinent.")
 						if ( dmgcon_charid != CHARA_PLAYER ) {
 							chatc@DP = dmgcon_charid
 							txt lang("「…スッキリ！」", cnvtalk("Don't look at me!"))

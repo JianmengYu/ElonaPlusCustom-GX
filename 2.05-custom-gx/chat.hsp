@@ -129,7 +129,7 @@
 	chatesc = 1
 	if ( cbit(CHARA_BIT_LIVESTOCK, tc) == 1 & gdata(GDATA_AREA) == AREA_DOJO ) {
 		if ( evnum == 0 ) {
-			txt lang(name(tc) + "は修行で忙しい。", name(tc) + " is busy with training.")
+			txt lang(name(tc) + "は修行で忙しい。", name(tc) + " " + is(tc) + " busy with training.")
 			questteleport = 0
 			gosub *screen_draw
 			return
@@ -137,7 +137,7 @@
 	}
 	if ( cbit(CHARA_BIT_LIVESTOCK, tc) == 1 & adata(ADATA_ID, gdata(GDATA_AREA)) == AREA_DISCARDED_RANCH ) {
 		if ( evnum == 0 ) {
-			txt lang(name(tc) + "ははしゃいでいて話を聞かない。", name(tc) + " is ecstatic and doesn't hear you.")
+			txt lang(name(tc) + "ははしゃいでいて話を聞かない。", name(tc) + " " + is(tc) + " ecstatic and doesn't hear you.")
 			questteleport = 0
 			gosub *screen_draw
 			return
@@ -3159,7 +3159,7 @@
 				txt lang("仲間の最大数に達しているため、これ以上連れていけない…。", "Your party is already full. You can't invite someone anymore.")
 				goto *chat_end
 			}
-			txt lang(name(tc) + "を保護した。無事に連れて帰らなければ。", name(tc) + " is under your protection. He must be returned home safely.")
+			txt lang(name(tc) + "を保護した。無事に連れて帰らなければ。", name(tc) + " " + is(tc) + " under your protection. He must be returned home safely.")
 			rc = tc
 			gosub *add_ally
 			cbitmod CHARA_BIT_GUARD_TEMP, rc, 1
@@ -12761,7 +12761,7 @@
 				cbitmod CHARA_BIT_HEARTLOCK_DANGEROUS, rc, FALSE
 				if ( cdata(CDATA_EXIST, rc) == CHAR_STATE_ALIVE ) {
 					txtef COLOR_PURPLE
-					txt lang(name(rc) + "は、初めて会ったような顔であなたを見ている…。", name(rc) + " is looking at you as if you'd never met before...")
+					txt lang(name(rc) + "は、初めて会ったような顔であなたを見ている…。", name(rc) + " " + is(rc) + " looking at you as if you'd never met before...")
 				}
 				dmgsan CHARA_PLAYER, 100
 				chatMore lang("これで、またひとつ…。", "With this, I'm one step closer...")
@@ -18077,7 +18077,7 @@
 				chatMore lang("ふふん♪", "That's right!")
 				cdata(CDATA_EMO_ICON, tc) = 17 + 100 * 3
 				cdata(CDATA_EVOCHAT_POINTS, tc) = 10
-				chatMore lang("(" + name(tc) + "は上機嫌だ！)", "(" + name(tc) + " is a good mood!)")
+				chatMore lang("(" + name(tc) + "は上機嫌だ！)", "(" + name(tc) + " " + is(tc) + " a good mood!)")
 				goto *chat_end
 			}
 			if ( chatval == 1 ) {
@@ -18098,7 +18098,7 @@
 				chatesc = 0
 				gosub *chat_select
 				chatMore lang("もういい。", "Whatever, forget it.")
-				chatMore lang("(" + name(tc) + "は呆れている…)", "(" + name(tc) + " is disgusted with you...)")
+				chatMore lang("(" + name(tc) + "は呆れている…)", "(" + name(tc) + " " + is(tc) + " disgusted with you...)")
 				goto *chat_end
 			}
 			if ( chatval == 3 ) {
@@ -18241,7 +18241,7 @@
 		}
 		if ( hyouzyou == 3 ) {
 			if ( rnd(2) == 0 ) {
-				buff = lang("(" + name(tc) + "はやばい表情であなたをじっと見ている)", "(" + name(tc) + " is staring at you in a dangerous smile.)")
+				buff = lang("(" + name(tc) + "はやばい表情であなたをじっと見ている)", "(" + name(tc) + " " + is(tc) + " staring at you in a dangerous smile.)")
 			}
 			else {
 				buff = lang("あーあ…責任は取って" + _kure(3) + "。", "Ahh...You will take responsibility, right?")
@@ -18287,7 +18287,7 @@
 			}
 			else {
 				if ( rnd(2) == 0 ) {
-					buff = lang("(" + name(tc) + "は喜んでいる！)", "(" + name(tc) + " is pleased.)")
+					buff = lang("(" + name(tc) + "は喜んでいる！)", "(" + name(tc) + " " + is(tc) + " pleased.)")
 				}
 				else {
 					buff = lang("こういうの、すごく嬉しい" + _yo(3) + "…。", "This kind of thing is really nice...")
@@ -18302,7 +18302,7 @@
 			}
 			else {
 				if ( rnd(2) == 0 ) {
-					buff = lang("(" + name(tc) + "は幸せな表情であなたをじっと見ている)", "(" + name(tc) + " is staring at you with a happy expression.)")
+					buff = lang("(" + name(tc) + "は幸せな表情であなたをじっと見ている)", "(" + name(tc) + " " + is(tc) + " staring at you with a happy expression.)")
 				}
 				else {
 					buff = lang(cdatan(CDATAN_NAME, CHARA_PLAYER) + "…" + _ore(3) + "は今とても幸せ" + _da(3) + "。", cdatan(CDATAN_NAME, CHARA_PLAYER) + "... I am very happy now.")
@@ -18330,7 +18330,7 @@
 				}
 				else {
 					if ( rnd(3) == 0 ) {
-						txt lang("「甘えん坊さん！」", name(tc) + " is staring at you with a happy expression.")
+						txt lang("「甘えん坊さん！」", name(tc) + " " + is(tc) + " staring at you with a happy expression.")
 					}
 					else {
 						txt lang(name(tc) + "の鼓動が伝わってくる…。", name(tc) + " seems to be a little pounding.")
@@ -18357,7 +18357,7 @@
 				}
 				else {
 					if ( rnd(3) == 0 ) {
-						txt lang("「へへ…」", name(tc) + " is staring at you with a happy expression.")
+						txt lang("「へへ…」", name(tc) + " " + is(tc) + " staring at you with a happy expression.")
 					}
 					else {
 						txt lang(name(tc) + "はそっと撫で返してきた。", name(tc) + " gently strokes you.")
@@ -18380,14 +18380,14 @@
 			}
 			if ( gdata(GDATA_CUSTOM_TALK) == 100 ) {
 				if ( rnd(3) == 0 ) {
-					txt lang(name(tc) + "はうっとりしている…。", name(tc) + " is staring at you with a happy expression.")
+					txt lang(name(tc) + "はうっとりしている…。", name(tc) + " " + is(tc) + " staring at you with a happy expression.")
 				}
 				else {
 					if ( rnd(3) == 0 ) {
-						txt lang("「そんなにがっつかなくても…♪」", name(tc) + " is staring at you with a happy expression.")
+						txt lang("「そんなにがっつかなくても…♪」", name(tc) + " " + is(tc) + " staring at you with a happy expression.")
 					}
 					else {
-						txt lang("「キスだけでいい" + _noka(3) + "？」", name(tc) + " is staring at you with a happy expression.")
+						txt lang("「キスだけでいい" + _noka(3) + "？」", name(tc) + " " + is(tc) + " staring at you with a happy expression.")
 					}
 				}
 			}
@@ -18407,7 +18407,7 @@
 			}
 			if ( gdata(GDATA_CUSTOM_TALK) == 100 ) {
 				if ( rnd(3) == 0 ) {
-					txt lang(name(tc) + "は呆気にとられている。", name(tc) + " is taken aback.")
+					txt lang(name(tc) + "は呆気にとられている。", name(tc) + " " + is(tc) + " taken aback.")
 				}
 				else {
 					chatc@DP = tc
@@ -18435,14 +18435,14 @@
 			}
 			if ( gdata(GDATA_CUSTOM_TALK) == 100 ) {
 				if ( rnd(3) == 0 ) {
-					txt lang(name(tc) + "は悪戯っぽい表情を浮かべた。", name(tc) + " is staring at you with a happy expression.")
+					txt lang(name(tc) + "は悪戯っぽい表情を浮かべた。", name(tc) + " " + is(tc) + " staring at you with a happy expression.")
 				}
 				else {
 					if ( rnd(3) == 0 ) {
-						txt lang("「ちょっと落ち着いて！」", name(tc) + " is staring at you with a happy expression.")
+						txt lang("「ちょっと落ち着いて！」", name(tc) + " " + is(tc) + " staring at you with a happy expression.")
 					}
 					else {
-						txt lang("「もうっ…」", name(tc) + " is staring at you with a happy expression.")
+						txt lang("「もうっ…」", name(tc) + " " + is(tc) + " staring at you with a happy expression.")
 					}
 				}
 			}

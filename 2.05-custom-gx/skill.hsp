@@ -154,7 +154,7 @@
 
 	sdataref(SKILL_DATAREF_USE, SKILL_WEAPON_STAVE) = SKILL_ATTR_CON, SKILL_TYPE_SP, 0, TARGET_TYPE_NONE, 0
 	skillname(SKILL_WEAPON_STAVE) = lang("杖", "Stave")
-	skilldesc(SKILL_WEAPON_STAVE) = lang("杖を扱う技術", "Indicates your skill with staves.")
+	skilldesc(SKILL_WEAPON_STAVE) = lang("杖を扱う技術", "Indicates your skill with staves and whips.")
 	skillencdesc(SKILL_WEAPON_STAVE) = ""
 
 	sdataref(SKILL_DATAREF_USE, SKILL_WEAPON_MARTIAL_ARTS) = SKILL_ATTR_STR, SKILL_TYPE_SP, 0, TARGET_TYPE_NONE, 0

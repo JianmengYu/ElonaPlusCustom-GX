@@ -2035,7 +2035,7 @@
 		}
 		s = lang("添い寝", "Sleep Sharing")
 		file = "bg_re16"
-		buff = lang("添い寝中だ…。", "You notice that " + name(tc) + " is laying down beside you...")
+		buff = lang("添い寝中だ…。", "You notice that " + name(tc) + " " + is(tc) + " laying down beside you...")
 		chatList 1, lang("気にせず寝る", "(Go to sleep)")
 		chatList 2, lang("追い出す", "(Kick out)")
 		chatList 3, lang("優しく撫でる", "(Gently stroke)")
@@ -2127,7 +2127,7 @@
 					txt lang("「なんて大胆な」", cnvtalk("How bold.")), lang("「なっ…！？」", cnvtalk("Wow...!?")), lang("…" + cdatan(CDATAN_NAME, tc) + "はすごく恥ずかしそうだ。", "..." + cdatan(CDATAN_NAME, tc) + " seems very embarrassed.")
 						txtef COLOR_YELLOW
 				}
-				buff = lang("添い寝中だ…。", "You notice that " + name(tc) + " is laying down beside you...")
+				buff = lang("添い寝中だ…。", "You notice that " + name(tc) + " " + is(tc) + " laying down beside you...")
 			}
 			txtef COLOR_YELLOW
 			txt lang("あなた" + cdata(CDATA_POWER_GAUGE, CHARA_PLAYER) + "%　相手" + cdata(CDATA_POWER_GAUGE, tc) + "% ", "You" + cdata(CDATA_POWER_GAUGE, CHARA_PLAYER) + "%-Partner" + cdata(CDATA_POWER_GAUGE, tc) + "% ")

@@ -6580,7 +6580,7 @@
 				txt name(tc) + "は本気であなたの頭を心配している…。", "「早くそのチョコを洗い落としにいこう」"
 			}
 			else {
-				txt name(tc) + " is seriously worried about your head...", cnvtalk("Let's quickly wash out that chocolate.")
+				txt name(tc) + " " + is(tc) + " seriously worried about your head...", cnvtalk("Let's quickly wash out that chocolate.")
 			}
 		}
 	}
@@ -6975,7 +6975,7 @@
 	loop
 	if ( talkp != (-1) ) {
 		snd SOUNDLIST_OK1
-		txt lang(name(tc) + "の口調が変わった気がする。", name(tc) + " is somewhat different.")
+		txt lang(name(tc) + "の口調が変わった気がする。", name(tc) + " " + is(tc) + " somewhat different.")
 		if ( talkp == (-999) ) {
 			cbitmod CHARA_BIT_MSG_FILE, tc, 0
 			cdatan(CDATAN_MSG, tc) = ""
@@ -13450,7 +13450,7 @@
 				}
 			}
 			if ( cdata(CDATA_CONDITION_BRAINWASH, cc) != 0 ) {
-				txt lang(name(cc) + "は頭がぼんやりして装備を変更できない…。", name(cc) + " is confused and can't change their equipment.")
+				txt lang(name(cc) + "は頭がぼんやりして装備を変更できない…。", name(cc) + " " + is(cc) + " confused and can't change their equipment.")
 				goto *com_inventory_loop
 			}
 			r1 = cc

@@ -2139,7 +2139,7 @@
 						if ( tc != CHARA_PLAYER ) {
 							if ( synccheck(cc, -1) | synccheck(tc, -1) ) {
 								txtef COLOR_SKY_BLUE
-								txt lang(name(tc) + "はカチンときた。", name(tc) + " is pretty annoyed with the drunkard.")
+								txt lang(name(tc) + "はカチンときた。", name(tc) + " " + is(tc) + " pretty annoyed with the drunkard.")
 								chatc@DP = cc
 								txt lang("「酔っ払いにはうんざり！」", cnvtalk("Your time is over, drunk!"))
 							}
@@ -6700,11 +6700,11 @@
 			loop
 		}
 		else {
-			txt lang("死紋が刻まれていなかったので能力値の減少はないが…。", "There was no Death-Crest engraved on you, so there was no reduction in your status...")
+			txt lang("死紋が刻まれていなかったので能力値の減少はないが…。", "There was no Death-Crest engraved on you before death, so there was no reduction in your status...")
 			snd SOUNDLIST_CURSE2
 			cbitmod CHARA_BIT_DEATH_CREST, CHARA_PLAYER, TRUE
 			txtef COLOR_RED
-			txt lang("あなたの身体に死紋が刻まれた！", "Death-Crest was carved on your body!")
+			txt lang("あなたの身体に死紋が刻まれた！", "Death-Crest is carved on your body!")
 		}
 		txtef COLOR_RED2
 		txt lang("【 刻死紋状態で死亡すると能力値が永続低下する。睡眠を取るまで消えない。 】", "< If you die with the Death-Crest engraved, your stats will permanently drop. It doesn't go away until you sleep. >")

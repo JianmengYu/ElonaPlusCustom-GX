@@ -8705,7 +8705,7 @@
 		snd SOUNDLIST_ATK_ELEC
 		if ( cdata(CDATA_ROLE_SHOP_LEVEL, tc) == 0 ) {
 			cdata(CDATA_ROLE_SHOP_LEVEL, tc) = inv(INV_ITEM_PARAM1, ci)
-			txt lang(name(tc) + "は自分の" + _seikaku(inv(INV_ITEM_PARAM1, ci)) + "なところを自覚した！", name(tc) + " realized " + he(tc) + " was " + _seikaku(inv(INV_ITEM_PARAM1, ci)) + "!")
+			txt lang(name(tc) + "は自分の" + _seikaku(inv(INV_ITEM_PARAM1, ci)) + "なところを自覚した！", name(tc) + " realized " + he(tc) + " " + was(tc) + " " + _seikaku(inv(INV_ITEM_PARAM1, ci)) + "!")
 			goto *act_use_SWEND1
 		}
 		if ( cdata(CDATA_ROLE_RESTOCK, tc) == 0 ) {
@@ -8715,7 +8715,7 @@
 				goto *pc_turn
 			}
 			cdata(CDATA_ROLE_RESTOCK, tc) = inv(INV_ITEM_PARAM1, ci)
-			txt lang(name(tc) + "は自分の" + _seikaku(inv(INV_ITEM_PARAM1, ci)) + "なところを自覚した！", name(tc) + " realized " + he(tc) + " was " + _seikaku(inv(INV_ITEM_PARAM1, ci)) + "!")
+			txt lang(name(tc) + "は自分の" + _seikaku(inv(INV_ITEM_PARAM1, ci)) + "なところを自覚した！", name(tc) + " realized " + he(tc) + " " + was(tc) + " " + _seikaku(inv(INV_ITEM_PARAM1, ci)) + "!")
 			goto *act_use_SWEND1
 		}
 		if ( cdata(CDATA_ROLE_SHOP_LEVEL, tc) == inv(INV_ITEM_PARAM1, ci) ) {
@@ -8725,7 +8725,7 @@
 		}
 		cdata(CDATA_ROLE_RESTOCK, tc) = cdata(CDATA_ROLE_SHOP_LEVEL, tc)
 		cdata(CDATA_ROLE_SHOP_LEVEL, tc) = inv(INV_ITEM_PARAM1, ci)
-		txt lang(name(tc) + "は自分の" + _seikaku(inv(INV_ITEM_PARAM1, ci)) + "なところを自覚した！", name(tc) + " realized " + name(tc) + " was " + _seikaku(inv(INV_ITEM_PARAM1, ci)) + "!")
+		txt lang(name(tc) + "は自分の" + _seikaku(inv(INV_ITEM_PARAM1, ci)) + "なところを自覚した！", name(tc) + " realized " + name(tc) + " " + was(tc) + " " + _seikaku(inv(INV_ITEM_PARAM1, ci)) + "!")
 		goto *act_use_SWEND1
 		_switch_sw++
 	}
@@ -10770,7 +10770,7 @@
 					await 400
 					snd SOUNDLIST_GET2
 					txtef COLOR_YELLOW
-					txt lang("下ごしらえとして" + name(tc) + "に塩をすり込んだ。…" + name(tc) + "はわけがわからないといった顔をしている。", "You rubbed into him the salt as mise en place..." + name(tc) + " is stumped.")
+					txt lang("下ごしらえとして" + name(tc) + "に塩をすり込んだ。…" + name(tc) + "はわけがわからないといった顔をしている。", "You rubbed into him the salt as mise en place..." + name(tc) + " " + is(tc) + " stumped.")
 				}
 				if ( cdata(CDATA_BRUSH_LEVEL, tc) <= 3 ) {
 					cdata(CDATA_BRUSH_LEVEL, tc)++

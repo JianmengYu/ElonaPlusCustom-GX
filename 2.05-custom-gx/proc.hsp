@@ -1353,7 +1353,7 @@
 		}
 		else {
 			txtef COLOR_RED
-			txt lang(name(tc) + "は平然としている！", name(tc) + " is nonchalant!"), lang(name(tc) + "は真顔で" + name(cc) + "を見ている…。", name(tc) + " gives " + name(cc) + " a serious look.")
+			txt lang(name(tc) + "は平然としている！", name(tc) + " " + is(tc) + " nonchalant!"), lang(name(tc) + "は真顔で" + name(cc) + "を見ている…。", name(tc) + " gives " + name(cc) + " a serious look.")
 		}
 	loop
 	return
@@ -1891,7 +1891,7 @@
 	if ( cdata(CDATA_ACTION_PERIOD, cc) > 0 ) {
 		if ( cdata(CDATA_ACTION_PERIOD, cc) \ 5 == 0 ) {
 			if ( synccheck(cc, -1) ) {
-				txt lang(name(cc) + "は力をためている。", name(cc) + " is charging power.")
+				txt lang(name(cc) + "は力をためている。", name(cc) + " " + is(cc) + " charging power.")
 			}
 		}
 		return
@@ -1925,7 +1925,7 @@
 	if ( cdata(CDATA_ACTION_PERIOD, cc) > 0 ) {
 		if ( cdata(CDATA_ACTION_PERIOD, cc) \ 5 == 0 ) {
 			if ( synccheck(cc, -1) ) {
-				txt lang(name(cc) + "は空高く跳躍している。", name(cc) + " is flying high in the sky.")
+				txt lang(name(cc) + "は空高く跳躍している。", name(cc) + " " + is(cc) + " flying high in the sky.")
 			}
 		}
 		return
@@ -1976,7 +1976,7 @@
 	if ( cdata(CDATA_ACTION_PERIOD, cc) > 0 ) {
 		if ( cdata(CDATA_ACTION_PERIOD, cc) \ 5 == 0 ) {
 			if ( synccheck(cc, -1) ) {
-				txt lang(name(cc) + "は地中に潜っている。", name(cc) + " is underground.")
+				txt lang(name(cc) + "は地中に潜っている。", name(cc) + " " + is(cc) + " underground.")
 			}
 		}
 		return
@@ -2169,7 +2169,7 @@
 					cdata(CDATA_POWER_GAUGE, tc) = 0
 				}
 				if ( rnd(20) == 0 ) {
-					txt lang(name(tc) + "は動揺した。", name(tc) + " is upset.")
+					txt lang(name(tc) + "は動揺した。", name(tc) + " " + is(tc) + " upset.")
 					if ( cdata(CDATA_CONDITION_CONFUSE, tc) == 0 ) {
 						cdata(CDATA_CONDITION_CONFUSE, tc) = 1
 					}
@@ -8599,12 +8599,21 @@
 						dmgspt tc, rnd(6) + 5
 					}
 					refreshspeed tc
-					if ( cc == CHARA_PLAYER & tc < MAX_CHARA_FOLLOWER & (cdata(CDATA_IMPRESSION, tc) >= 150 | cdata(CDATA_MASTER_SERVANT, tc) >= 150) ) {
+					// Drain blood impression check rework, fixes pet squeeze enemy bug.
+					// Retain the custom change: allows pet to drain blood player / other pet while still using it as an attack.
+					squeezeimpressioncc@CGX = (cc != CHARA_PLAYER) * cdata(CDATA_IMPRESSION, cc) + (cc == CHARA_PLAYER) * 400
+					squeezeimpressiontc@CGX = (tc != CHARA_PLAYER) * cdata(CDATA_IMPRESSION, tc) + (tc == CHARA_PLAYER) * 400
+					squeezefriendly@CGX = ((cdata(CDATA_RELATION, cc) \ 10) == (cdata(CDATA_RELATION, tc) \ 10)) & squeezeimpressioncc@CGX >= 150 & squeezeimpressiontc@CGX >= 150
+					squeezedominancecc@CGX = (cc != CHARA_PLAYER) * cdata(CDATA_IMPRESSION, cc) + (cc == CHARA_PLAYER) * 400
+					squeezedominancetc@CGX = (tc != CHARA_PLAYER) * cdata(CDATA_IMPRESSION, tc) + (tc == CHARA_PLAYER) * 400
+					squeezefriendly@CGX += ((cdata(CDATA_RELATION, cc) \ 10) == (cdata(CDATA_RELATION, tc) \ 10)) & squeezedominancecc@CGX >= 150 & squeezedominancetc@CGX >= 150
+
+					if ( squeezefriendly@CGX >= 1 ) {
 						customtalk tc, DBMODE_FLAVOR_DRAIN
 						gosub *convert_word
 						if ( gdata(GDATA_CUSTOM_TALK) == 100 ) {
 							chatc@DP = tc
-							txt lang(name(tc) + "は大人しく血を吸われている。", name(tc) + " obediently allows you to suck " + his(tc, 1) + " blood."), lang("「どうぞ…」", cnvtalk("Here you go...")), lang("「美味しい？」", cnvtalk("Is it good?"))
+							txt lang(name(tc) + "は大人しく血を吸われている。", name(tc) + " obediently allows " + name(cc) + " to suck " + his(tc, 1) + " blood."), lang("「どうぞ…」", cnvtalk("Here you go...")), lang("「美味しい？」", cnvtalk("Is it good?"))
 						}
 						dmgcon tc, CONDITION_BLEED, 50
 					}
@@ -9222,7 +9231,7 @@
 
                     /********** RUIN0X11 CUSTOM - ENDING **********/
 
-						txt lang(name(cc) + "は悪戦苦闘している。縄がきつくて財布が抜き取れないようだ。", name(cc) + " is struggling. It seems that the rope is so tight that you can't pull out " + his(cc) + " wallet.")
+						txt lang(name(cc) + "は悪戦苦闘している。縄がきつくて財布が抜き取れないようだ。", name(cc) + " " + is(cc) + " struggling. It seems that the rope is so tight that you can't pull out " + his(cc) + " wallet.")
 						goto *effect_SWEND1
 					}
 					p = rnd(cdata(CDATA_GOLD, tc) / 10 + 1)
@@ -20625,7 +20634,7 @@
 			}
 			if ( en ) {
 				txtef COLOR_RED
-				txt name(tc) + " is nonchalant!"
+				txt name(tc) + " " + is(tc) + " nonchalant!"
 			}
 		}
 		goto *effect_end
@@ -21115,7 +21124,7 @@
 				goto *effect_end
 			}
 			if ( TweakData(54, 2) == 1 & cdata(CDATA_SPRITE_SIZE_MILK, tc) != 0 ) {
-				txt lang("乳を搾れるほど成長していない。", name(tc) + " is not old enough to produce milk.")
+				txt lang("乳を搾れるほど成長していない。", name(tc) + " " + is(tc) + " not old enough to produce milk.")
 				goto *effect_end
 			}
 			if ( sorg(SKILL_ATTR_LIFE, tc) <= 2 ) {
@@ -21271,20 +21280,30 @@
 				}
 			}
 		}
-		if ( ( cc == CHARA_PLAYER & cdata(CDATA_IMPRESSION, tc) < 100 ) | ( tc == CHARA_PLAYER & cdata(CDATA_IMPRESSION, cc) < 100 ) ) {
+		// Squeeze impression check rework, fixes pet squeeze enemy bug.
+		// Retain the custom change: allows pet to hug player / other pet while still using it as an attack.
+		squeezeimpressioncc@CGX = (cc != CHARA_PLAYER) * cdata(CDATA_IMPRESSION, cc) + (cc == CHARA_PLAYER) * 400
+		squeezeimpressiontc@CGX = (tc != CHARA_PLAYER) * cdata(CDATA_IMPRESSION, tc) + (tc == CHARA_PLAYER) * 400
+		squeezefriendly@CGX = ((cdata(CDATA_RELATION, cc) \ 10) == (cdata(CDATA_RELATION, tc) \ 10)) & squeezeimpressioncc@CGX >= 100 & squeezeimpressiontc@CGX >= 100
+		squeezefriendly@CGX += ((cdata(CDATA_RELATION, cc) \ 10) == (cdata(CDATA_RELATION, tc) \ 10)) & squeezeimpressioncc@CGX >= 200 & squeezeimpressiontc@CGX >= 200
+		// Original: cdata(CDATA_IMPRESSION, tc) < 100
+		if ( squeezefriendly@CGX == 0 ) {
 			txt lang(name(cc) + "は" + name(tc) + "をきつく締め上げた。", name(cc) + " squeezed " + name(tc) + ".")
 		}
-		if ( ( cc == CHARA_PLAYER & cdata(CDATA_IMPRESSION, tc) >= 100 ) | ( tc == CHARA_PLAYER & cdata(CDATA_IMPRESSION, cc) >= 100 ) ) {
+		// Original: cc == CHARA_PLAYER & cdata(CDATA_IMPRESSION, tc) >= 100
+		if ( squeezefriendly@CGX >= 1 ) {
 			txt lang(name(cc) + "は" + name(tc) + "をきつく抱きしめた。", name(cc) + " hugged " + name(tc) + " tightly.")
 		}
 		if ( cc == CHARA_PLAYER & tc == CHARA_PLAYER ) {
-			txt lang("痛い！", "What?")
+			chatc@DP = (-1)
+			txt lang("痛い！", "\"What?\"")
 			goto *effect_end
 		}
 		if ( cdata(CDATA_CONDITION_BIND, tc) == 0 ) {
 			cdata(CDATA_CONDITION_BIND, tc) = 1
 		}
-		if ( ( cc == CHARA_PLAYER & cdata(CDATA_IMPRESSION, tc) < 100 ) | ( tc == CHARA_PLAYER & cdata(CDATA_IMPRESSION, cc) < 100 ) ) {
+		// Original: cdata(CDATA_IMPRESSION, tc) < 100 | cc != CHARA_PLAYER
+		if ( squeezefriendly@CGX == 0 ) {
 			if ( cbit(CHARA_BIT_VINDALIAN_JIUJITSU_ACTIVE, cc) == TRUE ) {
 				txtef COLOR_RED
 				txt lang("さらに、" + name(tc) + "に極め技を仕掛けた。", "Further, " + name(cc) + " attacked " + name(tc) + " by kiwame-waza.")
@@ -21307,30 +21326,33 @@
 			hostileaction cc, tc
 			goto *effect_end
 		}
-		if ( ( cc == CHARA_PLAYER & cdata(CDATA_IMPRESSION, tc) >= 200 ) | ( tc == CHARA_PLAYER & cdata(CDATA_IMPRESSION, cc) >= 200 ) ) {
-			cdata(CDATA_EMO_ICON, tc) = 17 + 100 * 3
-			if ( cdata(CDATA_CONDITION_BRAINWASH, tc) > 1 ) {
-				cdata(CDATA_CONDITION_BRAINWASH, tc) = 1
-			}
-			if (tc != CHARA_PLAYER) {
-				customtalk tc, DBMODE_FLAVOR_HUG
-			}
-			else {
-				customtalk cc, DBMODE_FLAVOR_HUG
-			}
-			gosub *convert_word
-			if ( gdata(GDATA_CUSTOM_TALK) == 100 ) {
-				if ( jp ) {
-					txt name(tc) + "は無言で抱きしめ返してきた。", "「あたたかい…」", "「幸せな気分" + _dana(3) + "」"
+		// Original: cc == CHARA_PLAYER
+		if ( squeezefriendly@CGX >= 2 ) {
+			// Original: cdata(CDATA_IMPRESSION, tc) >= 200
+			if ( squeezefriendly@CGX >= 2 ) {
+				cdata(CDATA_EMO_ICON, tc) = 17 + 100 * 3
+				if ( cdata(CDATA_CONDITION_BRAINWASH, tc) > 1 ) {
+					cdata(CDATA_CONDITION_BRAINWASH, tc) = 1
+				}
+				if (tc != CHARA_PLAYER) {
+					customtalk tc, DBMODE_FLAVOR_HUG
+				}
+				else {
+					customtalk cc, DBMODE_FLAVOR_HUG
+				}
+				gosub *convert_word
+				if ( gdata(GDATA_CUSTOM_TALK) == 100 ) {
+					chatc@DP = tc
+					txt lang(name(tc) + "は無言で抱きしめ返してきた。", name(tc) + " silently hugs back."), lang("「あたたかい…」", cnvtalk("Warm..")), lang("「幸せな気分" + _dana(3) + "」", cnvtalk("I feel happy."))
 				}
 			}
-		}
-		if ( cdata(CDATA_HP, cc) > cdata(CDATA_MAX_HP, cc) / 10 + 1 ) {
-			if ( cdata(CDATA_HP, tc) != cdata(CDATA_MAX_HP, tc) ) {
-				animeid = ANIMATION_HEAL_FAST
-				gosub *anime
-				dmghp cc, limit(cdata(CDATA_MAX_HP, cc) / 10, 1, cdata(CDATA_MAX_HP, tc) - cdata(CDATA_HP, tc)),
-				healhp tc, cdata(CDATA_MAX_HP, cc) / 10
+			if ( cdata(CDATA_HP, cc) > cdata(CDATA_MAX_HP, cc) / 10 + 1 ) {
+				if ( cdata(CDATA_HP, tc) != cdata(CDATA_MAX_HP, tc) ) {
+					animeid = ANIMATION_HEAL_FAST
+					gosub *anime
+					dmghp cc, limit(cdata(CDATA_MAX_HP, cc) / 10, 1, cdata(CDATA_MAX_HP, tc) - cdata(CDATA_HP, tc)),
+					healhp tc, cdata(CDATA_MAX_HP, cc) / 10
+				}
 			}
 		}
 		goto *effect_end
@@ -21353,8 +21375,16 @@
 			txt lang("えっ。", "What?")
 			goto *effect_end
 		}
+		// Magic kiss impression check rework 
+		// Retain the custom change: allows pet to hug player / other pet while still using it as an attack.
+		squeezeimpressioncc@CGX = (cc != CHARA_PLAYER) * cdata(CDATA_IMPRESSION, cc) + (cc == CHARA_PLAYER) * 400
+		squeezeimpressiontc@CGX = (tc != CHARA_PLAYER) * cdata(CDATA_IMPRESSION, tc) + (tc == CHARA_PLAYER) * 400
+		squeezefriendly@CGX = ((cdata(CDATA_RELATION, cc) \ 10) == (cdata(CDATA_RELATION, tc) \ 10)) & squeezeimpressioncc@CGX >= 100 & squeezeimpressiontc@CGX >= 100
+		squeezefriendly@CGX += ((cdata(CDATA_RELATION, cc) \ 10) == (cdata(CDATA_RELATION, tc) \ 10)) & squeezeimpressioncc@CGX >= 200 & squeezeimpressiontc@CGX >= 200
+
 		txt lang(name(cc) + "は" + name(tc) + "に口づけした。", name(cc) + " kissed " + name(tc) + ".")
-		if ( ( cc == CHARA_PLAYER & cdata(CDATA_IMPRESSION, tc) >= 200 ) | ( tc == CHARA_PLAYER & cdata(CDATA_IMPRESSION, cc) >= 200 ) ) {
+		// Original: cc == CHARA_PLAYER
+		if ( squeezefriendly@CGX >= 2 ) {
 			cdata(CDATA_EMO_ICON, tc) = 17 + 100 * 3
 			if ( cdata(CDATA_CONDITION_BRAINWASH, tc) > 1 ) {
 				cdata(CDATA_CONDITION_BRAINWASH, tc) = 1
@@ -21367,19 +21397,18 @@
 			}
 			gosub *convert_word
 			if ( gdata(GDATA_CUSTOM_TALK) == 100 ) {
-				if ( jp ) {
-					txt "「大好き♪1」", "「んっ…♪」", "「もっと…して」", "「キスだけじゃいや…」"
-				}
+				chatc@DP = tc
+				txt lang("「大好き♪1」", cnvtalk("Love it♪1")), lang("「んっ…♪」", cnvtalk("Mwah..♪")), lang("「もっと…して」", cnvtalk("Give me.. more.")), lang("「キスだけじゃいや…」", cnvtalk("I don't want just a kiss..."))
 			}
 			dmgmp cc, sdata(SKILL_ATTR_CHA, cc) / 20 + 1
 			healmp tc, sdata(SKILL_ATTR_CHA, cc) / 10 + 1
 			goto *effect_end
 		}
 		if ( cc == CHARA_PLAYER ) {
-			if ( cdata(CDATA_IMPRESSION, tc) < 100 ) {
-				if ( jp ) {
-					txt "「ヘンタイ！」", "「殺してやる」", "「うげぇ…ぺっぺっ」", "「ひどい…」"
-				}
+			// Original:  cdata(CDATA_IMPRESSION, tc) < 100
+			if ( squeezefriendly@CGX == 0 ) {
+				chatc@DP = tc
+				txt lang("「ヘンタイ！」", cnvtalk("HENTAI!")), lang("「殺してやる」", cnvtalk("I will kill you!")), lang("「うげぇ…ぺっぺっ」", cnvtalk("Ugh! Pffft.")), lang("「ひどい…」", cnvtalk("Disgusting.."))
 				if ( cc < MAX_CHARA_FOLLOWER ) {
 					hostileaction cc, tc
 				}
@@ -21394,9 +21423,8 @@
 				healmp cc, sdata(SKILL_ATTR_CHA, cc) / 20 + 1
 				goto *effect_end
 			}
-			if ( jp ) {
-				txt "「いきなり何を！？」", "「冗談はやめてよ」", "「そういう関係になりたいの？」", "「責任とってよ！」"
-			}
+			chatc@DP = tc
+			txt lang("「いきなり何を！？」", cnvtalk("Wait.. what!?")), lang("「冗談はやめてよ」", cnvtalk("Hey, not funny.")), lang("「そういう関係になりたいの？」", cnvtalk("Do you want that kind of relationship?")), lang("「責任とってよ！」", cnvtalk("Take responsibility!"))
 			if ( cc < MAX_CHARA_FOLLOWER ) {
 				hostileaction cc, tc
 			}

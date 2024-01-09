@@ -2666,7 +2666,7 @@
 	}
 	if ( dbid == CREATURE_ID_AJETALIO_THE_SEMINAR_LECTURER ) {
 		cardreftype = 10
-		cardrefskill = lang("かつて冒険ゼミにお世話になった、いわば元卒業者。同じ講師のミトに不信感を持っており、いつ騙されて身ぐるみ剥がされるかわからない、と戦々恐々する毎日。一応、付けられたあだ名は気に入っている。", "He is a former graduate of the Adventure Seminar so to speak. He has a distrust of a fellow lecturer Mito and every day he is torn between fear and fear that he will be cheated and stripped to the ground at any moment. He likes the nicknames he's been given.")
+		cardrefskill = lang("かつて冒険ゼミにお世話になった、いわば元卒業者。同じ講師のミトに不信感を持っており、いつ騙されて身ぐるみ剥がされるかわからない、と戦々恐々する毎日。一応、付けられたあだ名は気に入っている。", "He is a former graduate of the Adventure Seminar so to speak. He has a distrust of a fellow lecturer Mito and every day he is torn between fear and fear that he will be duped and stripped to the ground at any moment. He likes the nicknames he's been given.")
 		cardrefdomain = 5
 		cardrefrare = 40
 		cardrefcost = 0

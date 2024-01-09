@@ -1597,7 +1597,7 @@
 		}
 	loop
 	cdata(CDATA_RELATION, rc) = -3
-	txt lang(name(rc) + "は興奮して襲い掛かってきた。", name(rc) + " is excited and attacks you.")
+	txt lang(name(rc) + "は興奮して襲い掛かってきた。", name(rc) + " " + is(rc) + " excited and attacks you.")
 	folder = exedir + "user\\"
 	gosub *del_userTemp
 	gosub *userNpc_update

@@ -1005,7 +1005,7 @@
 						p = refitem(inv(INV_ITEM_ID, ci), DBSPEC_TYPE)
 						if ( inv(INV_ITEM_ID, ci) == ITEM_ID_PUFF_PUFF_BREAD ) {
 							txtef COLOR_BLUE
-							txt lang(name(cc) + "は足元のふかふかパンに怯えている…。", name(cc) + " is frightned by the puff puff bread at " + his(cc) + " feet.")
+							txt lang(name(cc) + "は足元のふかふかパンに怯えている…。", name(cc) + " " + is(cc) + " frightned by the puff puff bread at " + his(cc) + " feet.")
 							dmgcon cc, CONDITION_FEAR, 500
 						}
 					}
@@ -1066,7 +1066,7 @@
 												if ( inv(INV_ITEM_STATUS, ci) >= ITEM_STATUS_NORMAL ) {
 													if ( rnd(5) == 0 ) {
 														txtef COLOR_BLUE
-														txt lang(name(cc) + "は切ない目で食べ物を見つめている…。", name(cc) + " is gazing at the food with a pained expression.")
+														txt lang(name(cc) + "は切ない目で食べ物を見つめている…。", name(cc) + " " + is(cc) + " gazing at the food with a pained expression.")
 													}
 												}
 											}
@@ -1668,7 +1668,7 @@
 						}
 						if ( sdata(SKILL_NORMAL_NEGOTIATION, cc) != 0 ) {
 							txtef COLOR_SKY_BLUE
-							txt lang(name(cc) + "は店主と値段交渉している…。", name(cc) + " is negotiating prices with the shopkeeper...")
+							txt lang(name(cc) + "は店主と値段交渉している…。", name(cc) + " " + is(cc) + " negotiating prices with the shopkeeper...")
 						}
 						p = (inv(INV_ITEM_VALUE, cnt) * 4 / 5 + 1 + sdata(SKILL_NORMAL_NEGOTIATION, cc) / 5) * inv(INV_ITEM_NUM, cnt) * limit(sdata(SKILL_NORMAL_JEWELER, cc) + 100, 100, 400) / 100 * (2 + tiep) / 2
 						sell += inv(INV_ITEM_NUM, cnt)

@@ -1964,7 +1964,7 @@
 			}
 		}
 		else {
-			txt lang(name(rc) + "は何かに潰されて息絶えた。", name(rc) + " is killed.")
+			txt lang(name(rc) + "は何かに潰されて息絶えた。", name(rc) + " " + is(rc) + " killed.")
 			cdata(CDATA_EXIST, rc) = CHAR_STATE_DEAD
 		}
 		if ( cdata(CDATA_ROLE, rc) != ROLE_NONE ) {
