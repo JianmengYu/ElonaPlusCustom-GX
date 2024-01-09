@@ -324,7 +324,7 @@
 		ioriginalnameref(ITEM_ID_WHITE_DARK_ORB) = "白魔神石"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_WHITE_DARK_ORB) = "White magic Orb "
+		ioriginalnameref(ITEM_ID_WHITE_DARK_ORB) = "White Magic Orb "
 		ioriginalnameref2(ITEM_ID_WHITE_DARK_ORB) = ""
 	}
 	ipicref(ITEM_ID_WHITE_DARK_ORB) = xy2pic(7, 35)
@@ -508,7 +508,7 @@
 		ioriginalnameref(ITEM_ID_B_DAMA) = "ビーダマ"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_B_DAMA) = "B-dama"
+		ioriginalnameref(ITEM_ID_B_DAMA) = "B-Dama"
 		ioriginalnameref2(ITEM_ID_B_DAMA) = ""
 	}
 	ipicref(ITEM_ID_B_DAMA) = xy2pic(0, 37)
@@ -547,7 +547,7 @@
 		ioriginalnameref(ITEM_ID_MASTER_OF_DIAMOND) = "ダイヤの宝札"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_MASTER_OF_DIAMOND) = "Master of diamond"
+		ioriginalnameref(ITEM_ID_MASTER_OF_DIAMOND) = "Master of Diamond"
 		ioriginalnameref2(ITEM_ID_MASTER_OF_DIAMOND) = ""
 	}
 	ipicref(ITEM_ID_MASTER_OF_DIAMOND) = xy2pic(6, 36)
@@ -560,7 +560,7 @@
 		ioriginalnameref(ITEM_ID_MASTER_OF_HEART) = "ハートの宝札"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_MASTER_OF_HEART) = "Master of heart"
+		ioriginalnameref(ITEM_ID_MASTER_OF_HEART) = "Master of Heart"
 		ioriginalnameref2(ITEM_ID_MASTER_OF_HEART) = ""
 	}
 	ipicref(ITEM_ID_MASTER_OF_HEART) = xy2pic(5, 36)
@@ -573,7 +573,7 @@
 		ioriginalnameref(ITEM_ID_MASTER_OF_CLUB) = "クラブの宝札"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_MASTER_OF_CLUB) = "Master of club"
+		ioriginalnameref(ITEM_ID_MASTER_OF_CLUB) = "Master of Club"
 		ioriginalnameref2(ITEM_ID_MASTER_OF_CLUB) = ""
 	}
 	ipicref(ITEM_ID_MASTER_OF_CLUB) = xy2pic(4, 36)
@@ -586,7 +586,7 @@
 		ioriginalnameref(ITEM_ID_MASTER_OF_SPADE) = "スペードの宝札"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_MASTER_OF_SPADE) = "Master of spade"
+		ioriginalnameref(ITEM_ID_MASTER_OF_SPADE) = "Master of Spade"
 		ioriginalnameref2(ITEM_ID_MASTER_OF_SPADE) = ""
 	}
 	ipicref(ITEM_ID_MASTER_OF_SPADE) = xy2pic(3, 36)
@@ -1327,7 +1327,7 @@
 		ioriginalnameref(ITEM_ID_FLOATING_FORTRESS_KEY) = "浮遊要塞の鍵"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_FLOATING_FORTRESS_KEY) = "Floating fortress key"
+		ioriginalnameref(ITEM_ID_FLOATING_FORTRESS_KEY) = "Floating Fortress Key"
 		ioriginalnameref2(ITEM_ID_FLOATING_FORTRESS_KEY) = "Mysterious Machine"
 	}
 	ipicref(ITEM_ID_FLOATING_FORTRESS_KEY) = xy2pic(24, 36)
@@ -1454,7 +1454,7 @@
 		ioriginalnameref(ITEM_ID_JADE_DARK_ORB) = "翠魔神石"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_JADE_DARK_ORB) = "Green dark orb"
+		ioriginalnameref(ITEM_ID_JADE_DARK_ORB) = "Green Dark Orb"
 		ioriginalnameref2(ITEM_ID_JADE_DARK_ORB) = ""
 	}
 	ipicref(ITEM_ID_JADE_DARK_ORB) = xy2pic(9, 35)
@@ -1467,7 +1467,7 @@
 		ioriginalnameref(ITEM_ID_AZURE_DARK_ORB) = "蒼魔神石"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_AZURE_DARK_ORB) = "Blue dark orb"
+		ioriginalnameref(ITEM_ID_AZURE_DARK_ORB) = "Blue Dark Orb"
 		ioriginalnameref2(ITEM_ID_AZURE_DARK_ORB) = ""
 	}
 	ipicref(ITEM_ID_AZURE_DARK_ORB) = xy2pic(10, 35)
@@ -1480,7 +1480,7 @@
 		ioriginalnameref(ITEM_ID_CRIMSON_DARK_ORB) = "紅魔神石"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_CRIMSON_DARK_ORB) = "Crimson dark orb"
+		ioriginalnameref(ITEM_ID_CRIMSON_DARK_ORB) = "Crimson Dark Orb"
 		ioriginalnameref2(ITEM_ID_CRIMSON_DARK_ORB) = ""
 	}
 	ipicref(ITEM_ID_CRIMSON_DARK_ORB) = xy2pic(11, 35)
@@ -1646,7 +1646,7 @@
 		iknownnameref(ITEM_ID_BAMBNIR) = "輝く爆竹槍"
 	}
 	else {
-		iknownnameref(ITEM_ID_BAMBNIR) = "Shining bamboo spear"
+		iknownnameref(ITEM_ID_BAMBNIR) = "Shining Bamboo Spear"
 	}
 	icolref(ITEM_ID_BAMBNIR) = COLOR_DEFAULT
 	ilight(ITEM_ID_KALPA_HAND) = LIGHT_TYPE_ITEM
@@ -1664,7 +1664,7 @@
 		iknownnameref(ITEM_ID_KALPA_HAND) = "巨大な長針"
 	}
 	else {
-		iknownnameref(ITEM_ID_KALPA_HAND) = "Shining long hand"
+		iknownnameref(ITEM_ID_KALPA_HAND) = "Shining Long Hand"
 	}
 	icolref(ITEM_ID_KALPA_HAND) = COLOR_DEFAULT
 	ilight(ITEM_ID_KEMURIDAMA) = LIGHT_TYPE_NONE
@@ -1752,7 +1752,7 @@
 		ioriginalnameref(ITEM_ID_MOKU_JIN) = "木人"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_MOKU_JIN) = "<moku-jin>"
+		ioriginalnameref(ITEM_ID_MOKU_JIN) = "<Moku-Jin>"
 		ioriginalnameref2(ITEM_ID_MOKU_JIN) = ""
 	}
 	ipicref(ITEM_ID_MOKU_JIN) = xy2pic(17, 34)
@@ -1770,7 +1770,7 @@
 		ioriginalnameref(ITEM_ID_CROP_MANAGEMENT_TOOLS) = "作物管理セット"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_CROP_MANAGEMENT_TOOLS) = "Crop management tools"
+		ioriginalnameref(ITEM_ID_CROP_MANAGEMENT_TOOLS) = "Crop Management Tools"
 		ioriginalnameref2(ITEM_ID_CROP_MANAGEMENT_TOOLS) = ""
 	}
 	ipicref(ITEM_ID_CROP_MANAGEMENT_TOOLS) = xy2pic(25, 7)
@@ -1847,7 +1847,7 @@
 		ioriginalnameref(ITEM_ID_KANI_KAMA) = "《カニカマ》"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_KANI_KAMA) = "<Kani-kama>"
+		ioriginalnameref(ITEM_ID_KANI_KAMA) = "<Kani-Kama>"
 		ioriginalnameref2(ITEM_ID_KANI_KAMA) = ""
 	}
 	ipicref(ITEM_ID_KANI_KAMA) = xy2pic(29, 35)
@@ -2009,7 +2009,7 @@
 		ioriginalnameref(ITEM_ID_NAZUNAS_SOX) = "《ナズナの靴下》"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_NAZUNAS_SOX) = "<Nazuna's Sox>"
+		ioriginalnameref(ITEM_ID_NAZUNAS_SOX) = "<Nazuna's Socks>"
 		ioriginalnameref2(ITEM_ID_NAZUNAS_SOX) = ""
 	}
 	ipicref(ITEM_ID_NAZUNAS_SOX) = 1183
@@ -2017,7 +2017,7 @@
 		iknownnameref(ITEM_ID_NAZUNAS_SOX) = "異臭放つ靴下"
 	}
 	else {
-		iknownnameref(ITEM_ID_NAZUNAS_SOX) = "Tabi"
+		iknownnameref(ITEM_ID_NAZUNAS_SOX) = "Socks"
 	}
 	icolref(ITEM_ID_NAZUNAS_SOX) = COLOR_DEFAULT
 	ilight(ITEM_ID_SCORPIERCE) = LIGHT_TYPE_ITEM
@@ -2045,7 +2045,7 @@
 		ioriginalnameref(ITEM_ID_YOMI_TO) = "《黄泉戸欠片》"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_YOMI_TO) = "<Yomi-to>"
+		ioriginalnameref(ITEM_ID_YOMI_TO) = "<Yomi-To>"
 		ioriginalnameref2(ITEM_ID_YOMI_TO) = ""
 	}
 	ipicref(ITEM_ID_YOMI_TO) = 924
@@ -2053,7 +2053,7 @@
 		iknownnameref(ITEM_ID_YOMI_TO) = "死臭纏う大岩"
 	}
 	else {
-		iknownnameref(ITEM_ID_YOMI_TO) = "Hell rock fragment"
+		iknownnameref(ITEM_ID_YOMI_TO) = "Hell Rock Fragment"
 	}
 	icolref(ITEM_ID_YOMI_TO) = COLOR_YELLOW
 	ilight(ITEM_ID_RINKHALS) = LIGHT_TYPE_ITEM
@@ -2442,7 +2442,7 @@
 		ioriginalnameref(ITEM_ID_CHEWED_UP_GUM) = "ガムの残骸"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_CHEWED_UP_GUM) = "Chewed-up gum"
+		ioriginalnameref(ITEM_ID_CHEWED_UP_GUM) = "Chewed-Up Gum"
 		ioriginalnameref2(ITEM_ID_CHEWED_UP_GUM) = ""
 	}
 	ipicref(ITEM_ID_CHEWED_UP_GUM) = xy2pic(24, 33)
@@ -2546,7 +2546,7 @@
 		ioriginalnameref(ITEM_ID_BUTLERS_DIARY) = "執事の日記"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_BUTLERS_DIARY) = "butler's diary"
+		ioriginalnameref(ITEM_ID_BUTLERS_DIARY) = "Butler's Diary"
 		ioriginalnameref2(ITEM_ID_BUTLERS_DIARY) = ""
 	}
 	ipicref(ITEM_ID_BUTLERS_DIARY) = xy2pic(0, 13)
@@ -2758,7 +2758,7 @@
 		ioriginalnameref(ITEM_ID_CHRISTMAS_CAKE_SET) = "クリスマスケーキセット"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_CHRISTMAS_CAKE_SET) = "Christmas cake set"
+		ioriginalnameref(ITEM_ID_CHRISTMAS_CAKE_SET) = "Christmas Cake Set"
 		ioriginalnameref2(ITEM_ID_CHRISTMAS_CAKE_SET) = ""
 	}
 	ipicref(ITEM_ID_CHRISTMAS_CAKE_SET) = xy2pic(23, 29)
@@ -2854,7 +2854,7 @@
 		ioriginalnameref(ITEM_ID_KUMIROMI_GURUMI) = "くみろみぐるみ"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_KUMIROMI_GURUMI) = "Kumiromi-gurumi"
+		ioriginalnameref(ITEM_ID_KUMIROMI_GURUMI) = "Kumiromi-Gurumi"
 		ioriginalnameref2(ITEM_ID_KUMIROMI_GURUMI) = ""
 	}
 	ipicref(ITEM_ID_KUMIROMI_GURUMI) = xy2pic(18, 29)
@@ -2880,7 +2880,7 @@
 		ioriginalnameref(ITEM_ID_YACATECTS_BANK) = "ヤカテクト預金箱"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_YACATECTS_BANK) = "Yacatect's bank"
+		ioriginalnameref(ITEM_ID_YACATECTS_BANK) = "Yacatect's Bank"
 		ioriginalnameref2(ITEM_ID_YACATECTS_BANK) = ""
 	}
 	ipicref(ITEM_ID_YACATECTS_BANK) = xy2pic(16, 29)
@@ -2940,7 +2940,7 @@
 		iknownnameref(ITEM_ID_SKILL_TICKET) = "何かのチケット"
 	}
 	else {
-		iknownnameref(ITEM_ID_SKILL_TICKET) = "Some kind of ticket"
+		iknownnameref(ITEM_ID_SKILL_TICKET) = "Some Kind of Ticket"
 	}
 	icolref(ITEM_ID_SKILL_TICKET) = COLOR_YELLOW
 	ilight(ITEM_ID_GOD_BINDER) = LIGHT_TYPE_ITEM
@@ -3046,7 +3046,7 @@
 		ioriginalnameref(ITEM_ID_12_MILLION_TAX_CERTIFICATE) = "1200万納税書"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_12_MILLION_TAX_CERTIFICATE) = "12 million tax certificate"
+		ioriginalnameref(ITEM_ID_12_MILLION_TAX_CERTIFICATE) = "12 Million Tax Certificate"
 		ioriginalnameref2(ITEM_ID_12_MILLION_TAX_CERTIFICATE) = ""
 	}
 	ipicref(ITEM_ID_12_MILLION_TAX_CERTIFICATE) = xy2pic(20, 11)
@@ -3059,7 +3059,7 @@
 		ioriginalnameref(ITEM_ID_1_2_MILLION_TAX_CERTIFICATE) = "120万納税書"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_1_2_MILLION_TAX_CERTIFICATE) = "1.2 million tax certificate"
+		ioriginalnameref(ITEM_ID_1_2_MILLION_TAX_CERTIFICATE) = "1.2 Million Tax Certificate"
 		ioriginalnameref2(ITEM_ID_1_2_MILLION_TAX_CERTIFICATE) = ""
 	}
 	ipicref(ITEM_ID_1_2_MILLION_TAX_CERTIFICATE) = xy2pic(20, 11)
@@ -3282,7 +3282,7 @@
 	}
 	else {
 		ioriginalnameref(ITEM_ID_HEART_OF_TWILIGHT) = "Heart of Twilight"
-		ioriginalnameref2(ITEM_ID_HEART_OF_TWILIGHT) = "Yellow gem stone"
+		ioriginalnameref2(ITEM_ID_HEART_OF_TWILIGHT) = "Yellow Gem Stone"
 	}
 	ipicref(ITEM_ID_HEART_OF_TWILIGHT) = xy2pic(30, 19)
 	if ( jp ) {
@@ -3405,7 +3405,7 @@
 		ioriginalnameref(ITEM_ID_CRAFT_REPAIR_KIT) = "名工のリペアキット"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_CRAFT_REPAIR_KIT) = "Craft repair kit"
+		ioriginalnameref(ITEM_ID_CRAFT_REPAIR_KIT) = "Craft Repair Kit"
 		ioriginalnameref2(ITEM_ID_CRAFT_REPAIR_KIT) = ""
 	}
 	ipicref(ITEM_ID_CRAFT_REPAIR_KIT) = xy2pic(0, 3)
@@ -3439,7 +3439,7 @@
 		iknownnameref(ITEM_ID_GULIWELZEN) = "風を割く戦斧"
 	}
 	else {
-		iknownnameref(ITEM_ID_GULIWELZEN) = "Axe tearing the wind"
+		iknownnameref(ITEM_ID_GULIWELZEN) = "Wind-Tearing War Axe"
 	}
 	icolref(ITEM_ID_GULIWELZEN) = COLOR_DEFAULT
 	ilight(ITEM_ID_TEA_LEAF) = LIGHT_TYPE_NONE
@@ -3540,7 +3540,7 @@
 		ioriginalnameref(ITEM_ID_B_JERKY) = "ビジャーキー"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_B_JERKY) = "B-jerky"
+		ioriginalnameref(ITEM_ID_B_JERKY) = "B-Jerky"
 		ioriginalnameref2(ITEM_ID_B_JERKY) = ""
 	}
 	ipicref(ITEM_ID_B_JERKY) = xy2pic(7, 10)
@@ -3680,7 +3680,7 @@
 		ioriginalnameref(ITEM_ID_SOUP_OF_WONDERLAND) = "不思議の国のキノコスープ"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SOUP_OF_WONDERLAND) = "Soup of wonderland"
+		ioriginalnameref(ITEM_ID_SOUP_OF_WONDERLAND) = "Soup of Wonderland"
 		ioriginalnameref2(ITEM_ID_SOUP_OF_WONDERLAND) = ""
 	}
 	ipicref(ITEM_ID_SOUP_OF_WONDERLAND) = xy2pic(8, 23)
@@ -3701,7 +3701,7 @@
 		iknownnameref(ITEM_ID_DOKURO_MIKADUKI) = "憎悪の骨弓"
 	}
 	else {
-		iknownnameref(ITEM_ID_DOKURO_MIKADUKI) = "Evill skull bow"
+		iknownnameref(ITEM_ID_DOKURO_MIKADUKI) = "Skull Bow of Hatred"
 	}
 	icolref(ITEM_ID_DOKURO_MIKADUKI) = COLOR_DEFAULT
 	ilight(ITEM_ID_HELTIARRE) = LIGHT_TYPE_ITEM
@@ -3860,7 +3860,7 @@
 		ioriginalnameref(ITEM_ID_PLEASANT_SLEEP_BLANKET) = "快眠ブランケット"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_PLEASANT_SLEEP_BLANKET) = "Pleasant sleep blanket"
+		ioriginalnameref(ITEM_ID_PLEASANT_SLEEP_BLANKET) = "Pleasant Sleep Blanket"
 		ioriginalnameref2(ITEM_ID_PLEASANT_SLEEP_BLANKET) = ""
 	}
 	ipicref(ITEM_ID_PLEASANT_SLEEP_BLANKET) = xy2pic(5, 10)
@@ -3934,7 +3934,7 @@
 		ioriginalnameref(ITEM_ID_FIRST_AID_KIT) = "ファーストエイド"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_FIRST_AID_KIT) = "First aid kit"
+		ioriginalnameref(ITEM_ID_FIRST_AID_KIT) = "First Aid Kit"
 		ioriginalnameref2(ITEM_ID_FIRST_AID_KIT) = ""
 	}
 	ipicref(ITEM_ID_FIRST_AID_KIT) = xy2pic(31, 30)
@@ -4144,7 +4144,7 @@
 		ioriginalnameref(ITEM_ID_VIOLENT_SKULL_SWORD) = "暴魔の大剣"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_VIOLENT_SKULL_SWORD) = "violent skull sword"
+		ioriginalnameref(ITEM_ID_VIOLENT_SKULL_SWORD) = "Violent Skull Sword"
 		ioriginalnameref2(ITEM_ID_VIOLENT_SKULL_SWORD) = ""
 	}
 	ipicref(ITEM_ID_VIOLENT_SKULL_SWORD) = xy2pic(32, 10)
@@ -4219,7 +4219,7 @@
 		ioriginalnameref(ITEM_ID_ALPHA_SHIFT_CORE) = "アルファ変異殻"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_ALPHA_SHIFT_CORE) = "Alpha shift core"
+		ioriginalnameref(ITEM_ID_ALPHA_SHIFT_CORE) = "Alpha Shift Core"
 		ioriginalnameref2(ITEM_ID_ALPHA_SHIFT_CORE) = ""
 	}
 	ipicref(ITEM_ID_ALPHA_SHIFT_CORE) = xy2pic(17, 30)
@@ -4232,7 +4232,7 @@
 		ioriginalnameref(ITEM_ID_BETA_SHIFT_CORE) = "ベータ変異殻"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_BETA_SHIFT_CORE) = "Beta shift core"
+		ioriginalnameref(ITEM_ID_BETA_SHIFT_CORE) = "Beta Shift Core"
 		ioriginalnameref2(ITEM_ID_BETA_SHIFT_CORE) = ""
 	}
 	ipicref(ITEM_ID_BETA_SHIFT_CORE) = xy2pic(17, 30)
@@ -4245,7 +4245,7 @@
 		ioriginalnameref(ITEM_ID_GAMMA_SHIFT_CORE) = "ガンマ変異殻"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_GAMMA_SHIFT_CORE) = "Gamma shift core"
+		ioriginalnameref(ITEM_ID_GAMMA_SHIFT_CORE) = "Gamma Shift Core"
 		ioriginalnameref2(ITEM_ID_GAMMA_SHIFT_CORE) = ""
 	}
 	ipicref(ITEM_ID_GAMMA_SHIFT_CORE) = xy2pic(17, 30)
@@ -4258,7 +4258,7 @@
 		ioriginalnameref(ITEM_ID_DELTA_SHIFT_CORE) = "デルタ変異殻"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_DELTA_SHIFT_CORE) = "Delta shift core"
+		ioriginalnameref(ITEM_ID_DELTA_SHIFT_CORE) = "Delta Shift Core"
 		ioriginalnameref2(ITEM_ID_DELTA_SHIFT_CORE) = ""
 	}
 	ipicref(ITEM_ID_DELTA_SHIFT_CORE) = xy2pic(17, 30)
@@ -4271,7 +4271,7 @@
 		ioriginalnameref(ITEM_ID_OMEGA_SHIFT_CORE) = "オメガ変異殻"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_OMEGA_SHIFT_CORE) = "Omega shift core"
+		ioriginalnameref(ITEM_ID_OMEGA_SHIFT_CORE) = "Omega Shift Core"
 		ioriginalnameref2(ITEM_ID_OMEGA_SHIFT_CORE) = ""
 	}
 	ipicref(ITEM_ID_OMEGA_SHIFT_CORE) = xy2pic(17, 30)
@@ -4369,7 +4369,7 @@
 		ioriginalnameref(ITEM_ID_LARGE_EMPTY_BASKET) = "空の大型バスケット"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_LARGE_EMPTY_BASKET) = "Large empty basket"
+		ioriginalnameref(ITEM_ID_LARGE_EMPTY_BASKET) = "Large Empty Basket"
 		ioriginalnameref2(ITEM_ID_LARGE_EMPTY_BASKET) = ""
 	}
 	ipicref(ITEM_ID_LARGE_EMPTY_BASKET) = xy2pic(7, 30)
@@ -4382,7 +4382,7 @@
 		ioriginalnameref(ITEM_ID_LARGE_PICNIC_BASKET) = "大型ピクニックバスケット"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_LARGE_PICNIC_BASKET) = "Large picnic basket"
+		ioriginalnameref(ITEM_ID_LARGE_PICNIC_BASKET) = "Large Picnic Basket"
 		ioriginalnameref2(ITEM_ID_LARGE_PICNIC_BASKET) = ""
 	}
 	ipicref(ITEM_ID_LARGE_PICNIC_BASKET) = xy2pic(7, 30)
@@ -4395,7 +4395,7 @@
 		ioriginalnameref(ITEM_ID_DD_CEMETERY_KEY) = "異界墓地の鍵"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_DD_CEMETERY_KEY) = "DD cemetery key"
+		ioriginalnameref(ITEM_ID_DD_CEMETERY_KEY) = "DD Cemetery Key"
 		ioriginalnameref2(ITEM_ID_DD_CEMETERY_KEY) = ""
 	}
 	ipicref(ITEM_ID_DD_CEMETERY_KEY) = xy2pic(12, 30)
@@ -4408,7 +4408,7 @@
 		ioriginalnameref(ITEM_ID_WONDER_BODY_FORMER) = "不思議な秘宝"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_WONDER_BODY_FORMER) = "Wonder body former"
+		ioriginalnameref(ITEM_ID_WONDER_BODY_FORMER) = "Wonder Body Former"
 		ioriginalnameref2(ITEM_ID_WONDER_BODY_FORMER) = ""
 	}
 	ipicref(ITEM_ID_WONDER_BODY_FORMER) = xy2pic(29, 19)
@@ -4468,7 +4468,7 @@
 		iknownnameref(ITEM_ID_HL_KRSW) = "蜃気楼の光子銃"
 	}
 	else {
-		iknownnameref(ITEM_ID_HL_KRSW) = "Gun of mirage"
+		iknownnameref(ITEM_ID_HL_KRSW) = "Gun of Mirage"
 	}
 	icolref(ITEM_ID_HL_KRSW) = COLOR_BLACK
 	ilight(ITEM_ID_LUCKY_ALMONDS) = LIGHT_TYPE_ITEM
@@ -4691,7 +4691,7 @@
 		ioriginalnameref(ITEM_ID_NINE_GOD_SIGN) = "九神の印"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_NINE_GOD_SIGN) = "Nine god sign"
+		ioriginalnameref(ITEM_ID_NINE_GOD_SIGN) = "Nine God Sign"
 		ioriginalnameref2(ITEM_ID_NINE_GOD_SIGN) = ""
 	}
 	ipicref(ITEM_ID_NINE_GOD_SIGN) = xy2pic(6, 14)
@@ -4704,7 +4704,7 @@
 		ioriginalnameref(ITEM_ID_TEAR_OF_GOD) = "神雫石"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_TEAR_OF_GOD) = "Tear of god"
+		ioriginalnameref(ITEM_ID_TEAR_OF_GOD) = "Tear of God"
 		ioriginalnameref2(ITEM_ID_TEAR_OF_GOD) = "Jewel"
 	}
 	ipicref(ITEM_ID_TEAR_OF_GOD) = xy2pic(23, 26)
@@ -4717,7 +4717,7 @@
 		ioriginalnameref(ITEM_ID_CORE_OF_NEFIA) = "ネフィアティア"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_CORE_OF_NEFIA) = "Core of nefia"
+		ioriginalnameref(ITEM_ID_CORE_OF_NEFIA) = "Core of Nefia"
 		ioriginalnameref2(ITEM_ID_CORE_OF_NEFIA) = "Jewel"
 	}
 	ipicref(ITEM_ID_CORE_OF_NEFIA) = xy2pic(23, 26)
@@ -4769,7 +4769,7 @@
 		ioriginalnameref(ITEM_ID_SMALL_STONE_GOLEM) = "ミニチュアゴーレム"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SMALL_STONE_GOLEM) = "Small stone golem"
+		ioriginalnameref(ITEM_ID_SMALL_STONE_GOLEM) = "Small Stone Golem"
 		ioriginalnameref2(ITEM_ID_SMALL_STONE_GOLEM) = ""
 	}
 	ipicref(ITEM_ID_SMALL_STONE_GOLEM) = xy2pic(12, 28)
@@ -4808,7 +4808,7 @@
 		ioriginalnameref(ITEM_ID_SMALL_WOODEN_GOLEM) = "ミニチュアゴーレム"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SMALL_WOODEN_GOLEM) = "Small wooden golem"
+		ioriginalnameref(ITEM_ID_SMALL_WOODEN_GOLEM) = "Small Wooden Golem"
 		ioriginalnameref2(ITEM_ID_SMALL_WOODEN_GOLEM) = ""
 	}
 	ipicref(ITEM_ID_SMALL_WOODEN_GOLEM) = xy2pic(9, 28)
@@ -4855,7 +4855,7 @@
 		iknownnameref(ITEM_ID_MELODYUS) = "心音の奏剣"
 	}
 	else {
-		iknownnameref(ITEM_ID_MELODYUS) = "Sword of melody"
+		iknownnameref(ITEM_ID_MELODYUS) = "Sword of Melody"
 	}
 	icolref(ITEM_ID_MELODYUS) = COLOR_DEFAULT
 	ilight(ITEM_ID_GRANDEL) = LIGHT_TYPE_ITEM
@@ -4914,7 +4914,7 @@
 		ioriginalnameref(ITEM_ID_SOCKS) = "ソックス"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SOCKS) = "Sox"
+		ioriginalnameref(ITEM_ID_SOCKS) = "Socks"
 		ioriginalnameref2(ITEM_ID_SOCKS) = ""
 	}
 	ipicref(ITEM_ID_SOCKS) = xy2pic(5, 28)
@@ -4974,7 +4974,7 @@
 		iknownnameref(ITEM_ID_N97_CANNON) = "対戦艦ライフル"
 	}
 	else {
-		iknownnameref(ITEM_ID_N97_CANNON) = "Anti-materiel rifle"
+		iknownnameref(ITEM_ID_N97_CANNON) = "Anti-Materiel Rifle"
 	}
 	icolref(ITEM_ID_N97_CANNON) = COLOR_DEFAULT
 	ilight(ITEM_ID_TRISHULA) = LIGHT_TYPE_ITEM
@@ -5010,7 +5010,7 @@
 		iknownnameref(ITEM_ID_HOUSENKA) = "怒涛の大太刀"
 	}
 	else {
-		iknownnameref(ITEM_ID_HOUSENKA) = "Red burst katana"
+		iknownnameref(ITEM_ID_HOUSENKA) = "Red Burst Katana"
 	}
 	icolref(ITEM_ID_HOUSENKA) = COLOR_DEFAULT
 	ilight(ITEM_ID_OTOGIRI) = LIGHT_TYPE_ITEM
@@ -5051,7 +5051,7 @@
 		ioriginalnameref(ITEM_ID_FOUR_LEAF_CLOVER) = "四つ葉のクローバー"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_FOUR_LEAF_CLOVER) = "Four-leaf clover"
+		ioriginalnameref(ITEM_ID_FOUR_LEAF_CLOVER) = "Four-Leaf Clover"
 		ioriginalnameref2(ITEM_ID_FOUR_LEAF_CLOVER) = ""
 	}
 	ipicref(ITEM_ID_FOUR_LEAF_CLOVER) = xy2pic(31, 1)
@@ -5137,7 +5137,7 @@
 		iknownnameref(ITEM_ID_ASTEROID_BELT) = "石装飾の腰当"
 	}
 	else {
-		iknownnameref(ITEM_ID_ASTEROID_BELT) = "Power stone belt"
+		iknownnameref(ITEM_ID_ASTEROID_BELT) = "Power Stone Belt"
 	}
 	icolref(ITEM_ID_ASTEROID_BELT) = COLOR_BLACK
 	ilight(ITEM_ID_ROCK) = LIGHT_TYPE_NONE
@@ -5251,8 +5251,8 @@
 		ioriginalnameref(ITEM_ID_WAKE_UP_OF_NEFIA) = "覚醒の宝玉"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_WAKE_UP_OF_NEFIA) = "Wake up of nefia"
-		ioriginalnameref2(ITEM_ID_WAKE_UP_OF_NEFIA) = "Black gem stone"
+		ioriginalnameref(ITEM_ID_WAKE_UP_OF_NEFIA) = "Wake Up of Nefia"
+		ioriginalnameref2(ITEM_ID_WAKE_UP_OF_NEFIA) = "Black Gem Stone"
 	}
 	ipicref(ITEM_ID_WAKE_UP_OF_NEFIA) = xy2pic(30, 19)
 	if ( jp ) {
@@ -5590,7 +5590,7 @@
 		ioriginalnameref(ITEM_ID_HANDMADE_CHOCOLATE_KIT) = "チョコレート手作りキット"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_HANDMADE_CHOCOLATE_KIT) = "Handmade chocolate kit"
+		ioriginalnameref(ITEM_ID_HANDMADE_CHOCOLATE_KIT) = "Handmade Chocolate Kit"
 		ioriginalnameref2(ITEM_ID_HANDMADE_CHOCOLATE_KIT) = ""
 	}
 	ipicref(ITEM_ID_HANDMADE_CHOCOLATE_KIT) = xy2pic(1, 3)
@@ -5652,7 +5652,7 @@
 		ioriginalnameref(ITEM_ID_COFFIN_OF_NECROMANCY) = "闇の棺"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_COFFIN_OF_NECROMANCY) = "Coffin of necromancy"
+		ioriginalnameref(ITEM_ID_COFFIN_OF_NECROMANCY) = "Coffin of Necromancy"
 		ioriginalnameref2(ITEM_ID_COFFIN_OF_NECROMANCY) = ""
 	}
 	ipicref(ITEM_ID_COFFIN_OF_NECROMANCY) = xy2pic(5, 8)
@@ -5693,7 +5693,7 @@
 		ioriginalnameref(ITEM_ID_ASTRAL_LIGHT_PEN) = "アストラル光筆"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_ASTRAL_LIGHT_PEN) = "Astral light pen"
+		ioriginalnameref(ITEM_ID_ASTRAL_LIGHT_PEN) = "Astral Light Pen"
 		ioriginalnameref2(ITEM_ID_ASTRAL_LIGHT_PEN) = ""
 	}
 	ipicref(ITEM_ID_ASTRAL_LIGHT_PEN) = xy2pic(12, 26)
@@ -6058,7 +6058,7 @@
 		iknownnameref(ITEM_ID_AA_12_ADVANCE) = "狂気の散弾銃"
 	}
 	else {
-		iknownnameref(ITEM_ID_AA_12_ADVANCE) = "Auto shot gun"
+		iknownnameref(ITEM_ID_AA_12_ADVANCE) = "Auto Shot Gun"
 	}
 	icolref(ITEM_ID_AA_12_ADVANCE) = COLOR_DEFAULT
 	ilight(ITEM_ID_SLASH_JOKER) = LIGHT_TYPE_ITEM
@@ -6094,7 +6094,7 @@
 		iknownnameref(ITEM_ID_MAG_ABYSS) = "紺色の魔法帽"
 	}
 	else {
-		iknownnameref(ITEM_ID_MAG_ABYSS) = "Deep blue hat"
+		iknownnameref(ITEM_ID_MAG_ABYSS) = "Deep Blue Hat"
 	}
 	icolref(ITEM_ID_MAG_ABYSS) = COLOR_BLUE
 	ilight(ITEM_ID_BLANK_BUSINESS_CARD) = LIGHT_TYPE_ITEM
@@ -6166,7 +6166,7 @@
 		iknownnameref(ITEM_ID_RAINBOW) = "虹色の弓"
 	}
 	else {
-		iknownnameref(ITEM_ID_RAINBOW) = "Seven light bow"
+		iknownnameref(ITEM_ID_RAINBOW) = "Seven Light Bow"
 	}
 	icolref(ITEM_ID_RAINBOW) = COLOR_DEFAULT
 	ilight(ITEM_ID_FLASH_CROSSBOW) = LIGHT_TYPE_ITEM
@@ -6194,7 +6194,7 @@
 		ioriginalnameref(ITEM_ID_KOMA_INU2) = "阿形の狛犬"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_KOMA_INU2) = "Koma-inu"
+		ioriginalnameref(ITEM_ID_KOMA_INU2) = "Koma-Inu"
 		ioriginalnameref2(ITEM_ID_KOMA_INU2) = ""
 	}
 	ipicref(ITEM_ID_KOMA_INU2) = xy2pic(13, 22)
@@ -6207,7 +6207,7 @@
 		ioriginalnameref(ITEM_ID_KOMA_INU) = "吽形の狛犬"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_KOMA_INU) = "Koma-inu"
+		ioriginalnameref(ITEM_ID_KOMA_INU) = "Koma-Inu"
 		ioriginalnameref2(ITEM_ID_KOMA_INU) = ""
 	}
 	ipicref(ITEM_ID_KOMA_INU) = xy2pic(12, 22)
@@ -6256,7 +6256,7 @@
 		iknownnameref(ITEM_ID_UNICORN_DRILL) = "一角獣の角槍"
 	}
 	else {
-		iknownnameref(ITEM_ID_UNICORN_DRILL) = "Black unicorn horn"
+		iknownnameref(ITEM_ID_UNICORN_DRILL) = "Black Unicorn Horn"
 	}
 	icolref(ITEM_ID_UNICORN_DRILL) = COLOR_DEFAULT
 	ilight(ITEM_ID_YITH_YAKI) = LIGHT_TYPE_NONE
@@ -6266,7 +6266,7 @@
 		ioriginalnameref(ITEM_ID_YITH_YAKI) = "イス焼き"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_YITH_YAKI) = "Yith-yaki"
+		ioriginalnameref(ITEM_ID_YITH_YAKI) = "Yith-Yaki"
 		ioriginalnameref2(ITEM_ID_YITH_YAKI) = ""
 	}
 	ipicref(ITEM_ID_YITH_YAKI) = xy2pic(29, 24)
@@ -6478,7 +6478,7 @@
 		iknownnameref(ITEM_ID_NAIL_STRADIVARIUS) = "艶やかな弦鈍器"
 	}
 	else {
-		iknownnameref(ITEM_ID_NAIL_STRADIVARIUS) = "Elegant string blunt"
+		iknownnameref(ITEM_ID_NAIL_STRADIVARIUS) = "Elegant String Blunt"
 	}
 	icolref(ITEM_ID_NAIL_STRADIVARIUS) = COLOR_RED
 	ilight(ITEM_ID_INSANE_BOOK) = LIGHT_TYPE_NONE
@@ -6532,7 +6532,7 @@
 		ioriginalnameref(ITEM_ID_AGE_RETURN_LUNCH) = "逆玉手弁当"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_AGE_RETURN_LUNCH) = "Age return lunch"
+		ioriginalnameref(ITEM_ID_AGE_RETURN_LUNCH) = "Age Return Lunch"
 		ioriginalnameref2(ITEM_ID_AGE_RETURN_LUNCH) = ""
 	}
 	ipicref(ITEM_ID_AGE_RETURN_LUNCH) = xy2pic(28, 11)
@@ -6799,7 +6799,7 @@
 		iknownnameref(ITEM_ID_STONE_COIN) = "古の石貨"
 	}
 	else {
-		iknownnameref(ITEM_ID_STONE_COIN) = "Old big coin"
+		iknownnameref(ITEM_ID_STONE_COIN) = "Old Big Coin"
 	}
 	icolref(ITEM_ID_STONE_COIN) = COLOR_DEFAULT
 	ilight(ITEM_ID_MAGIC_CANCELER) = LIGHT_TYPE_ITEM
@@ -6853,7 +6853,7 @@
 		iknownnameref(ITEM_ID_BLUE_SPIRIT) = "青のガントレット"
 	}
 	else {
-		iknownnameref(ITEM_ID_BLUE_SPIRIT) = "Gauntlets of blue"
+		iknownnameref(ITEM_ID_BLUE_SPIRIT) = "Gauntlets of Blue"
 	}
 	icolref(ITEM_ID_BLUE_SPIRIT) = COLOR_LIGHT_BLUE2
 	ilight(ITEM_ID_BLACK_MONKSHOOD) = LIGHT_TYPE_ITEM
@@ -6881,7 +6881,7 @@
 		ioriginalnameref(ITEM_ID_CARAMEL_OF_TERMINATION) = "ギャラメﾞル"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_CARAMEL_OF_TERMINATION) = "Caramel of termination"
+		ioriginalnameref(ITEM_ID_CARAMEL_OF_TERMINATION) = "Caramel of Termination"
 		ioriginalnameref2(ITEM_ID_CARAMEL_OF_TERMINATION) = ""
 	}
 	ipicref(ITEM_ID_CARAMEL_OF_TERMINATION) = xy2pic(19, 21)
@@ -7003,7 +7003,7 @@
 	}
 	else {
 		ioriginalnameref(ITEM_ID_GEMSTONE_MANI) = "Satellite Shooter"
-		ioriginalnameref2(ITEM_ID_GEMSTONE_MANI) = "Mani's gem stone"
+		ioriginalnameref2(ITEM_ID_GEMSTONE_MANI) = "Mani's Gem Stone"
 	}
 	ipicref(ITEM_ID_GEMSTONE_MANI) = xy2pic(30, 19)
 	if ( jp ) {
@@ -7041,7 +7041,7 @@
 		iknownnameref(ITEM_ID_VALKOINEN_KUOLEMA) = "死神の狙撃銃"
 	}
 	else {
-		iknownnameref(ITEM_ID_VALKOINEN_KUOLEMA) = "Sniper rifle of death"
+		iknownnameref(ITEM_ID_VALKOINEN_KUOLEMA) = "Sniper Rifle of Death"
 	}
 	icolref(ITEM_ID_VALKOINEN_KUOLEMA) = COLOR_DEFAULT
 	ilight(ITEM_ID_SAND_CASTLE) = LIGHT_TYPE_NONE
@@ -7113,7 +7113,7 @@
 		ioriginalnameref(ITEM_ID_DOG_SISTERS_DIARY) = "姉の秘密の日記"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_DOG_SISTERS_DIARY) = "dog sister's diary"
+		ioriginalnameref(ITEM_ID_DOG_SISTERS_DIARY) = "Dog Sister's Diary"
 		ioriginalnameref2(ITEM_ID_DOG_SISTERS_DIARY) = ""
 	}
 	ipicref(ITEM_ID_DOG_SISTERS_DIARY) = xy2pic(0, 13)
@@ -7146,7 +7146,7 @@
 		ioriginalnameref(ITEM_ID_OLDER_SISTERS_DIARY) = "姉の日記"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_OLDER_SISTERS_DIARY) = "older sister's diary"
+		ioriginalnameref(ITEM_ID_OLDER_SISTERS_DIARY) = "Older Sister's Diary"
 		ioriginalnameref2(ITEM_ID_OLDER_SISTERS_DIARY) = ""
 	}
 	ipicref(ITEM_ID_OLDER_SISTERS_DIARY) = xy2pic(0, 13)
@@ -7360,7 +7360,7 @@
 	}
 	else {
 		ioriginalnameref(ITEM_ID_GEMSTONE_YACATECT) = "God Medal"
-		ioriginalnameref2(ITEM_ID_GEMSTONE_YACATECT) = "Yacatect's gem stone"
+		ioriginalnameref2(ITEM_ID_GEMSTONE_YACATECT) = "Yacatect's Gem Stone"
 	}
 	ipicref(ITEM_ID_GEMSTONE_YACATECT) = xy2pic(30, 19)
 	if ( jp ) {
@@ -7470,7 +7470,7 @@
 		iknownnameref(ITEM_ID_DRAGON_SLAYER) = "両刃の大剣"
 	}
 	else {
-		iknownnameref(ITEM_ID_DRAGON_SLAYER) = "Two-edged great sword"
+		iknownnameref(ITEM_ID_DRAGON_SLAYER) = "Two-Edged Great Sword"
 	}
 	icolref(ITEM_ID_DRAGON_SLAYER) = COLOR_DEFAULT
 	ilight(ITEM_ID_POT_OF_ALCHEMIST) = LIGHT_TYPE_ITEM
@@ -7480,7 +7480,7 @@
 		ioriginalnameref(ITEM_ID_POT_OF_ALCHEMIST) = "《賢者の錬金釜》"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_POT_OF_ALCHEMIST) = "Pot of alchemist"
+		ioriginalnameref(ITEM_ID_POT_OF_ALCHEMIST) = "Pot of Alchemist"
 		ioriginalnameref2(ITEM_ID_POT_OF_ALCHEMIST) = ""
 	}
 	ipicref(ITEM_ID_POT_OF_ALCHEMIST) = xy2pic(27, 16)
@@ -7493,7 +7493,7 @@
 		ioriginalnameref(ITEM_ID_POT_FOR_FUSION) = "合成の壺"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_POT_FOR_FUSION) = "Pot for fusion"
+		ioriginalnameref(ITEM_ID_POT_FOR_FUSION) = "Pot for Fusion"
 		ioriginalnameref2(ITEM_ID_POT_FOR_FUSION) = ""
 	}
 	ipicref(ITEM_ID_POT_FOR_FUSION) = xy2pic(26, 16)
@@ -7519,7 +7519,7 @@
 		ioriginalnameref(ITEM_ID_PUFF_PUFF_BREAD) = "ふかふかパン"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_PUFF_PUFF_BREAD) = "Puff puff bread"
+		ioriginalnameref(ITEM_ID_PUFF_PUFF_BREAD) = "Puff Puff Bread"
 		ioriginalnameref2(ITEM_ID_PUFF_PUFF_BREAD) = ""
 	}
 	ipicref(ITEM_ID_PUFF_PUFF_BREAD) = xy2pic(24, 16)
@@ -7685,7 +7685,7 @@
 		ioriginalnameref(ITEM_ID_SPECIAL_STEAMED_MEAT_BUN) = "特製肉まんじゅう"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SPECIAL_STEAMED_MEAT_BUN) = "Special steamed meat bun"
+		ioriginalnameref(ITEM_ID_SPECIAL_STEAMED_MEAT_BUN) = "Special Steamed Meat Bun"
 		ioriginalnameref2(ITEM_ID_SPECIAL_STEAMED_MEAT_BUN) = ""
 	}
 	ipicref(ITEM_ID_SPECIAL_STEAMED_MEAT_BUN) = xy2pic(14, 16)
@@ -7737,7 +7737,7 @@
 		ioriginalnameref(ITEM_ID_BLUE_CAPSULE_DRAG) = "ブルーカプセルドラッグ"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_BLUE_CAPSULE_DRAG) = "Blue capsule drag"
+		ioriginalnameref(ITEM_ID_BLUE_CAPSULE_DRAG) = "Blue Capsule Drag"
 		ioriginalnameref2(ITEM_ID_BLUE_CAPSULE_DRAG) = ""
 	}
 	ipicref(ITEM_ID_BLUE_CAPSULE_DRAG) = xy2pic(19, 20)
@@ -7786,7 +7786,7 @@
 		ioriginalnameref(ITEM_ID_NEW_YEARS_DECORATION) = "正月飾り"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_NEW_YEARS_DECORATION) = "new year's decoration"
+		ioriginalnameref(ITEM_ID_NEW_YEARS_DECORATION) = "New Year's Decoration"
 		ioriginalnameref2(ITEM_ID_NEW_YEARS_DECORATION) = ""
 	}
 	ipicref(ITEM_ID_NEW_YEARS_DECORATION) = xy2pic(16, 20)
@@ -7799,7 +7799,7 @@
 		ioriginalnameref(ITEM_ID_JURES_BODY_PILLOW) = "ジュアの抱き枕"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_JURES_BODY_PILLOW) = "Jure's body pillow"
+		ioriginalnameref(ITEM_ID_JURES_BODY_PILLOW) = "Jure's Body Pillow"
 		ioriginalnameref2(ITEM_ID_JURES_BODY_PILLOW) = ""
 	}
 	ipicref(ITEM_ID_JURES_BODY_PILLOW) = xy2pic(15, 20)
@@ -7895,7 +7895,7 @@
 		ioriginalnameref(ITEM_ID_GAROKS_HAMMER) = "ガロクの槌"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_GAROKS_HAMMER) = "Garok's hammer"
+		ioriginalnameref(ITEM_ID_GAROKS_HAMMER) = "Garok's Hammer"
 		ioriginalnameref2(ITEM_ID_GAROKS_HAMMER) = ""
 	}
 	ipicref(ITEM_ID_GAROKS_HAMMER) = xy2pic(2, 19)
@@ -8014,7 +8014,7 @@
 		ioriginalnameref(ITEM_ID_NEW_YEARS_GIFT) = "お年玉"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_NEW_YEARS_GIFT) = "new year's gift"
+		ioriginalnameref(ITEM_ID_NEW_YEARS_GIFT) = "New Year's Gift"
 		ioriginalnameref2(ITEM_ID_NEW_YEARS_GIFT) = ""
 	}
 	ipicref(ITEM_ID_NEW_YEARS_GIFT) = xy2pic(6, 20)
@@ -8102,7 +8102,7 @@
 		ioriginalnameref(ITEM_ID_TAMERS_WHIP) = "調教鞭"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_TAMERS_WHIP) = "tamer's whip"
+		ioriginalnameref(ITEM_ID_TAMERS_WHIP) = "Tamer's Whip"
 		ioriginalnameref2(ITEM_ID_TAMERS_WHIP) = ""
 	}
 	ipicref(ITEM_ID_TAMERS_WHIP) = xy2pic(13, 21)
@@ -8169,7 +8169,7 @@
 		ioriginalnameref(ITEM_ID_LICENCE_THE_VOID_EXPLORER) = "すくつ探索許可証"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_LICENCE_THE_VOID_EXPLORER) = "The void explorer"
+		ioriginalnameref(ITEM_ID_LICENCE_THE_VOID_EXPLORER) = "The Void Explorer"
 		ioriginalnameref2(ITEM_ID_LICENCE_THE_VOID_EXPLORER) = "License"
 	}
 	ipicref(ITEM_ID_LICENCE_THE_VOID_EXPLORER) = xy2pic(11, 9)
@@ -8231,7 +8231,7 @@
 		iknownnameref(ITEM_ID_FRISIAS_TAIL) = "猫の尻尾"
 	}
 	else {
-		iknownnameref(ITEM_ID_FRISIAS_TAIL) = "cat's tail"
+		iknownnameref(ITEM_ID_FRISIAS_TAIL) = "Cat's Tail"
 	}
 	icolref(ITEM_ID_FRISIAS_TAIL) = COLOR_DEFAULT
 	ilight(ITEM_ID_FORTUNE_COOKIE) = LIGHT_TYPE_NONE
@@ -8297,7 +8297,7 @@
 		ioriginalnameref(ITEM_ID_SMALL_GAMBLE_CHEST) = "小さな宝くじ箱"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SMALL_GAMBLE_CHEST) = "Small gamble chest"
+		ioriginalnameref(ITEM_ID_SMALL_GAMBLE_CHEST) = "Small Gamble Chest"
 		ioriginalnameref2(ITEM_ID_SMALL_GAMBLE_CHEST) = ""
 	}
 	ipicref(ITEM_ID_SMALL_GAMBLE_CHEST) = xy2pic(22, 6)
@@ -8338,7 +8338,7 @@
 		ioriginalnameref(ITEM_ID_SPELLBOOK_4D_POCKET) = "四次元ポケットの魔法書"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SPELLBOOK_4D_POCKET) = "4 dimensional pocket"
+		ioriginalnameref(ITEM_ID_SPELLBOOK_4D_POCKET) = "4 Dimensional Pocket"
 		ioriginalnameref2(ITEM_ID_SPELLBOOK_4D_POCKET) = "Spellbook"
 	}
 	ipicref(ITEM_ID_SPELLBOOK_4D_POCKET) = xy2pic(0, 13)
@@ -8420,7 +8420,7 @@
 		ioriginalnameref(ITEM_ID_ALUD) = "《アル・ウード》"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_ALUD) = "<Al'ud>"
+		ioriginalnameref(ITEM_ID_ALUD) = "<Al'Ud>"
 		ioriginalnameref2(ITEM_ID_ALUD) = ""
 	}
 	ipicref(ITEM_ID_ALUD) = xy2pic(30, 11)
@@ -8464,7 +8464,7 @@
 		iknownnameref(ITEM_ID_MUSIC_TICKET) = "何かのチケット"
 	}
 	else {
-		iknownnameref(ITEM_ID_MUSIC_TICKET) = "Some kind of ticket"
+		iknownnameref(ITEM_ID_MUSIC_TICKET) = "Some Kind of Ticket"
 	}
 	icolref(ITEM_ID_MUSIC_TICKET) = COLOR_DEFAULT
 	ilight(ITEM_ID_TWIN_EDGE) = LIGHT_TYPE_ITEM
@@ -8559,7 +8559,7 @@
 		ioriginalnameref(ITEM_ID_SHENAS_PANTY) = "《シーナのパンティー》"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SHENAS_PANTY) = "<Shena's Panty>"
+		ioriginalnameref(ITEM_ID_SHENAS_PANTY) = "<Shena's Panties>"
 		ioriginalnameref2(ITEM_ID_SHENAS_PANTY) = ""
 	}
 	ipicref(ITEM_ID_SHENAS_PANTY) = xy2pic(3, 19)
@@ -8567,7 +8567,7 @@
 		iknownnameref(ITEM_ID_SHENAS_PANTY) = "かぐわしいぱんつ"
 	}
 	else {
-		iknownnameref(ITEM_ID_SHENAS_PANTY) = "Scentful Panty"
+		iknownnameref(ITEM_ID_SHENAS_PANTY) = "Fragrant Panties"
 	}
 	icolref(ITEM_ID_SHENAS_PANTY) = COLOR_RED
 	ilight(ITEM_ID_SECRET_EXP_LOMIAS) = LIGHT_TYPE_NONE
@@ -8807,7 +8807,7 @@
 		ioriginalnameref(ITEM_ID_RABBITS_TAIL) = "うさぎのしっぽ"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_RABBITS_TAIL) = "rabbit's tail"
+		ioriginalnameref(ITEM_ID_RABBITS_TAIL) = "Rabbit's Tail"
 		ioriginalnameref2(ITEM_ID_RABBITS_TAIL) = ""
 	}
 	ipicref(ITEM_ID_RABBITS_TAIL) = xy2pic(4, 9)
@@ -9102,7 +9102,7 @@
 	}
 	else {
 		ioriginalnameref(ITEM_ID_GEMSTONE_KUMIROMI) = "Rejuvenation"
-		ioriginalnameref2(ITEM_ID_GEMSTONE_KUMIROMI) = "Kumiromi's gem stone"
+		ioriginalnameref2(ITEM_ID_GEMSTONE_KUMIROMI) = "Kumiromi's Gem Stone"
 	}
 	ipicref(ITEM_ID_GEMSTONE_KUMIROMI) = xy2pic(30, 19)
 	if ( jp ) {
@@ -9120,7 +9120,7 @@
 	}
 	else {
 		ioriginalnameref(ITEM_ID_GEMSTONE_JURE) = "Holy Rain"
-		ioriginalnameref2(ITEM_ID_GEMSTONE_JURE) = "Jure's gem stone"
+		ioriginalnameref2(ITEM_ID_GEMSTONE_JURE) = "Jure's Gem Stone"
 	}
 	ipicref(ITEM_ID_GEMSTONE_JURE) = xy2pic(30, 19)
 	if ( jp ) {
@@ -9138,7 +9138,7 @@
 	}
 	else {
 		ioriginalnameref(ITEM_ID_GEMSTONE_LULWY) = "God Speed"
-		ioriginalnameref2(ITEM_ID_GEMSTONE_LULWY) = "Lulwy's gem stone"
+		ioriginalnameref2(ITEM_ID_GEMSTONE_LULWY) = "Lulwy's Gem Stone"
 	}
 	ipicref(ITEM_ID_GEMSTONE_LULWY) = xy2pic(30, 19)
 	if ( jp ) {
@@ -9253,7 +9253,7 @@
 		iknownnameref(ITEM_ID_WINCHESTER_PREMIUM) = "古の散弾銃"
 	}
 	else {
-		iknownnameref(ITEM_ID_WINCHESTER_PREMIUM) = "Ancient shot gun"
+		iknownnameref(ITEM_ID_WINCHESTER_PREMIUM) = "Ancient Shot Gun"
 	}
 	icolref(ITEM_ID_WINCHESTER_PREMIUM) = COLOR_RED
 	ilight(ITEM_ID_WIND_BOW) = LIGHT_TYPE_ITEM
@@ -9271,7 +9271,7 @@
 		iknownnameref(ITEM_ID_WIND_BOW) = "風をまとった長弓"
 	}
 	else {
-		iknownnameref(ITEM_ID_WIND_BOW) = "Bow surrounded by wind"
+		iknownnameref(ITEM_ID_WIND_BOW) = "Bow Surrounded By Wind"
 	}
 	icolref(ITEM_ID_WIND_BOW) = COLOR_LIGHT_BLUE
 	ilight(ITEM_ID_SECRET_TREASURE) = LIGHT_TYPE_NONE
@@ -9307,7 +9307,7 @@
 		iknownnameref(ITEM_ID_NUCLEAR_BOMB) = "とても危険な爆弾"
 	}
 	else {
-		iknownnameref(ITEM_ID_NUCLEAR_BOMB) = "Very dangerous bomb"
+		iknownnameref(ITEM_ID_NUCLEAR_BOMB) = "Very Dangerous Bomb"
 	}
 	icolref(ITEM_ID_NUCLEAR_BOMB) = COLOR_DEFAULT
 	ilight(ITEM_ID_CANVAS) = LIGHT_TYPE_NONE
@@ -9356,7 +9356,7 @@
 		ioriginalnameref(ITEM_ID_SISTERS_LOVE_FUELED_LUNCH) = "妹が愛を込めて作ったお弁当"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SISTERS_LOVE_FUELED_LUNCH) = "sister's love fueled lunch"
+		ioriginalnameref(ITEM_ID_SISTERS_LOVE_FUELED_LUNCH) = "Sister's Love Fueled Lunch"
 		ioriginalnameref2(ITEM_ID_SISTERS_LOVE_FUELED_LUNCH) = ""
 	}
 	ipicref(ITEM_ID_SISTERS_LOVE_FUELED_LUNCH) = xy2pic(28, 11)
@@ -9456,7 +9456,7 @@
 		ioriginalnameref(ITEM_ID_DAL_I_THALION) = "《ダル=イ=サリオン》"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_DAL_I_THALION) = "<Dal-i-thalion>"
+		ioriginalnameref(ITEM_ID_DAL_I_THALION) = "<Dal-I-Thalion>"
 		ioriginalnameref2(ITEM_ID_DAL_I_THALION) = ""
 	}
 	ipicref(ITEM_ID_DAL_I_THALION) = xy2pic(30, 13)
@@ -9982,7 +9982,7 @@
 		ioriginalnameref(ITEM_ID_GIRLS_DIARY) = "お嬢様の日記"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_GIRLS_DIARY) = "girl's diary"
+		ioriginalnameref(ITEM_ID_GIRLS_DIARY) = "Girl's Diary"
 		ioriginalnameref2(ITEM_ID_GIRLS_DIARY) = ""
 	}
 	ipicref(ITEM_ID_GIRLS_DIARY) = xy2pic(0, 13)
@@ -9997,7 +9997,7 @@
 		ioriginalnameref(ITEM_ID_CAT_SISTERS_DIARY) = "妹の秘密の日記"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_CAT_SISTERS_DIARY) = "cat sister's diary"
+		ioriginalnameref(ITEM_ID_CAT_SISTERS_DIARY) = "Cat Sister's Diary"
 		ioriginalnameref2(ITEM_ID_CAT_SISTERS_DIARY) = ""
 	}
 	ipicref(ITEM_ID_CAT_SISTERS_DIARY) = xy2pic(0, 13)
@@ -10105,7 +10105,7 @@
 		ioriginalnameref(ITEM_ID_TAX_MASTERS_TAX_BOX) = "徴税士の納税箱"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_TAX_MASTERS_TAX_BOX) = "tax master's tax box"
+		ioriginalnameref(ITEM_ID_TAX_MASTERS_TAX_BOX) = "Tax Master's Tax Box"
 		ioriginalnameref2(ITEM_ID_TAX_MASTERS_TAX_BOX) = ""
 	}
 	ipicref(ITEM_ID_TAX_MASTERS_TAX_BOX) = xy2pic(21, 11)
@@ -10154,7 +10154,7 @@
 		ioriginalnameref(ITEM_ID_KINGS_BED) = "王様ベッド"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_KINGS_BED) = "king's bed"
+		ioriginalnameref(ITEM_ID_KINGS_BED) = "King's Bed"
 		ioriginalnameref2(ITEM_ID_KINGS_BED) = ""
 	}
 	ipicref(ITEM_ID_KINGS_BED) = xy2pic(8, 17)
@@ -10284,7 +10284,7 @@
 		ioriginalnameref(ITEM_ID_PRESIDENTS_CHAIR) = "ボスチェア"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_PRESIDENTS_CHAIR) = "president's chair"
+		ioriginalnameref(ITEM_ID_PRESIDENTS_CHAIR) = "President's Chair"
 		ioriginalnameref2(ITEM_ID_PRESIDENTS_CHAIR) = ""
 	}
 	ipicref(ITEM_ID_PRESIDENTS_CHAIR) = xy2pic(10, 11)
@@ -10333,7 +10333,7 @@
 		ioriginalnameref(ITEM_ID_GIANTS_SHACKLE) = "巨人の足枷"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_GIANTS_SHACKLE) = "giant's shackle"
+		ioriginalnameref(ITEM_ID_GIANTS_SHACKLE) = "Giant's Shackle"
 		ioriginalnameref2(ITEM_ID_GIANTS_SHACKLE) = ""
 	}
 	ipicref(ITEM_ID_GIANTS_SHACKLE) = xy2pic(7, 11)
@@ -10390,7 +10390,7 @@
 		ioriginalnameref(ITEM_ID_STAINED_GLASS_WINDOW) = "ステンドグラス"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_STAINED_GLASS_WINDOW) = "Stained glass window"
+		ioriginalnameref(ITEM_ID_STAINED_GLASS_WINDOW) = "Stained Glass Window"
 		ioriginalnameref2(ITEM_ID_STAINED_GLASS_WINDOW) = ""
 	}
 	ipicref(ITEM_ID_STAINED_GLASS_WINDOW) = xy2pic(6, 11)
@@ -10455,7 +10455,7 @@
 		ioriginalnameref(ITEM_ID_MINI_SNOW_MAN) = "ミニ雪だるま"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_MINI_SNOW_MAN) = "Mini snow man"
+		ioriginalnameref(ITEM_ID_MINI_SNOW_MAN) = "Mini Snow Man"
 		ioriginalnameref2(ITEM_ID_MINI_SNOW_MAN) = ""
 	}
 	ipicref(ITEM_ID_MINI_SNOW_MAN) = xy2pic(3, 11)
@@ -10879,7 +10879,7 @@
 		ioriginalnameref(ITEM_ID_MASTERS_DELIVERY_CHEST) = "主の納入箱"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_MASTERS_DELIVERY_CHEST) = "master's delivery chest"
+		ioriginalnameref(ITEM_ID_MASTERS_DELIVERY_CHEST) = "Master's Delivery Chest"
 		ioriginalnameref2(ITEM_ID_MASTERS_DELIVERY_CHEST) = ""
 	}
 	ipicref(ITEM_ID_MASTERS_DELIVERY_CHEST) = xy2pic(1, 10)
@@ -10940,7 +10940,7 @@
 		ioriginalnameref(ITEM_ID_SEVEN_LEAGUE_BOOTS) = "セブンリーグブーツ"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SEVEN_LEAGUE_BOOTS) = "Seven league boots"
+		ioriginalnameref(ITEM_ID_SEVEN_LEAGUE_BOOTS) = "Seven League Boots"
 		ioriginalnameref2(ITEM_ID_SEVEN_LEAGUE_BOOTS) = ""
 	}
 	ipicref(ITEM_ID_SEVEN_LEAGUE_BOOTS) = xy2pic(31, 13)
@@ -11238,7 +11238,7 @@
 		ioriginalnameref(ITEM_ID_GIANT_FOLIAGE_PLANT) = "巨大な観葉植物"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_GIANT_FOLIAGE_PLANT) = "Giant foliage plant"
+		ioriginalnameref(ITEM_ID_GIANT_FOLIAGE_PLANT) = "Giant Foliage Plant"
 		ioriginalnameref2(ITEM_ID_GIANT_FOLIAGE_PLANT) = ""
 	}
 	ipicref(ITEM_ID_GIANT_FOLIAGE_PLANT) = xy2pic(21, 17)
@@ -11519,7 +11519,7 @@
 		iknownnameref(ITEM_ID_RAIL_GUN) = "虐殺の銃"
 	}
 	else {
-		iknownnameref(ITEM_ID_RAIL_GUN) = "Gun of genocide"
+		iknownnameref(ITEM_ID_RAIL_GUN) = "Gun of Genocide"
 	}
 	icolref(ITEM_ID_RAIL_GUN) = COLOR_DEFAULT
 	ilight(ITEM_ID_ENERGY_CELL) = LIGHT_TYPE_NONE
@@ -11581,7 +11581,7 @@
 		ioriginalnameref(ITEM_ID_SCROLL_GREATER_ENCHANT_ARMOR) = "*防具強化*の巻物"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SCROLL_GREATER_ENCHANT_ARMOR) = "Greater enchant armor"
+		ioriginalnameref(ITEM_ID_SCROLL_GREATER_ENCHANT_ARMOR) = "Greater Enchant Armor"
 		ioriginalnameref2(ITEM_ID_SCROLL_GREATER_ENCHANT_ARMOR) = "Scroll"
 	}
 	ipicref(ITEM_ID_SCROLL_GREATER_ENCHANT_ARMOR) = xy2pic(8, 14)
@@ -11611,7 +11611,7 @@
 		ioriginalnameref(ITEM_ID_SCROLL_GREATER_ENCHANT_WEAPON) = "*武器強化*の巻物"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SCROLL_GREATER_ENCHANT_WEAPON) = "Greater enchant weapon"
+		ioriginalnameref(ITEM_ID_SCROLL_GREATER_ENCHANT_WEAPON) = "Greater Enchant Weapon"
 		ioriginalnameref2(ITEM_ID_SCROLL_GREATER_ENCHANT_WEAPON) = "Scroll"
 	}
 	ipicref(ITEM_ID_SCROLL_GREATER_ENCHANT_WEAPON) = xy2pic(8, 14)
@@ -11641,7 +11641,7 @@
 		ioriginalnameref(ITEM_ID_LITTLE_SISTERS_DIARY) = "妹の日記"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_LITTLE_SISTERS_DIARY) = "little sister's diary"
+		ioriginalnameref(ITEM_ID_LITTLE_SISTERS_DIARY) = "Little Sister's Diary"
 		ioriginalnameref2(ITEM_ID_LITTLE_SISTERS_DIARY) = ""
 	}
 	ipicref(ITEM_ID_LITTLE_SISTERS_DIARY) = xy2pic(0, 13)
@@ -12848,7 +12848,7 @@
 		ioriginalnameref(ITEM_ID_RARE_TREASURE_BALL) = "ガシャポンの玉(レア)"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_RARE_TREASURE_BALL) = "Rare treasure ball"
+		ioriginalnameref(ITEM_ID_RARE_TREASURE_BALL) = "Rare Treasure Ball"
 		ioriginalnameref2(ITEM_ID_RARE_TREASURE_BALL) = ""
 	}
 	ipicref(ITEM_ID_RARE_TREASURE_BALL) = xy2pic(25, 9)
@@ -12874,7 +12874,7 @@
 		ioriginalnameref(ITEM_ID_BLUE_TREASURE_MACHINE) = "青のガシャポン"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_BLUE_TREASURE_MACHINE) = "Blue treasure machine"
+		ioriginalnameref(ITEM_ID_BLUE_TREASURE_MACHINE) = "Blue Treasure Machine"
 		ioriginalnameref2(ITEM_ID_BLUE_TREASURE_MACHINE) = ""
 	}
 	ipicref(ITEM_ID_BLUE_TREASURE_MACHINE) = xy2pic(24, 9)
@@ -12887,7 +12887,7 @@
 		ioriginalnameref(ITEM_ID_RED_TREASURE_MACHINE) = "赤のガシャポン"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_RED_TREASURE_MACHINE) = "Red treasure machine"
+		ioriginalnameref(ITEM_ID_RED_TREASURE_MACHINE) = "Red Treasure Machine"
 		ioriginalnameref2(ITEM_ID_RED_TREASURE_MACHINE) = ""
 	}
 	ipicref(ITEM_ID_RED_TREASURE_MACHINE) = xy2pic(23, 9)
@@ -13642,7 +13642,7 @@
 		ioriginalnameref(ITEM_ID_SHOPKEEPERS_TRUNK) = "商人のカバン"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SHOPKEEPERS_TRUNK) = "shopkeeper's trunk"
+		ioriginalnameref(ITEM_ID_SHOPKEEPERS_TRUNK) = "Shopkeeper's Trunk"
 		ioriginalnameref2(ITEM_ID_SHOPKEEPERS_TRUNK) = ""
 	}
 	ipicref(ITEM_ID_SHOPKEEPERS_TRUNK) = xy2pic(22, 7)
@@ -14036,7 +14036,7 @@
 		ioriginalnameref(ITEM_ID_TRAVELERS_FOOD) = "旅糧(荷車)"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_TRAVELERS_FOOD) = "traveler's food"
+		ioriginalnameref(ITEM_ID_TRAVELERS_FOOD) = "Traveler's Food"
 		ioriginalnameref2(ITEM_ID_TRAVELERS_FOOD) = ""
 	}
 	ipicref(ITEM_ID_TRAVELERS_FOOD) = xy2pic(0, 9)
@@ -14257,7 +14257,7 @@
 		ioriginalnameref(ITEM_ID_BIG_FOLIAGE_PLANT) = "特大の観葉植物"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_BIG_FOLIAGE_PLANT) = "Big foliage plant"
+		ioriginalnameref(ITEM_ID_BIG_FOLIAGE_PLANT) = "Big Foliage Plant"
 		ioriginalnameref2(ITEM_ID_BIG_FOLIAGE_PLANT) = ""
 	}
 	ipicref(ITEM_ID_BIG_FOLIAGE_PLANT) = xy2pic(16, 8)
@@ -14465,7 +14465,7 @@
 		ioriginalnameref(ITEM_ID_NEAT_BAR_TABLE) = "高収納バーテーブル"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_NEAT_BAR_TABLE) = "Neat bar table"
+		ioriginalnameref(ITEM_ID_NEAT_BAR_TABLE) = "Neat Bar Table"
 		ioriginalnameref2(ITEM_ID_NEAT_BAR_TABLE) = ""
 	}
 	ipicref(ITEM_ID_NEAT_BAR_TABLE) = xy2pic(0, 8)
@@ -14478,7 +14478,7 @@
 		ioriginalnameref(ITEM_ID_HIGH_GRADE_DRESSER) = "高級ミラー"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_HIGH_GRADE_DRESSER) = "High grade dresser"
+		ioriginalnameref(ITEM_ID_HIGH_GRADE_DRESSER) = "High Grade Dresser"
 		ioriginalnameref2(ITEM_ID_HIGH_GRADE_DRESSER) = ""
 	}
 	ipicref(ITEM_ID_HIGH_GRADE_DRESSER) = xy2pic(32, 7)
@@ -14582,7 +14582,7 @@
 		ioriginalnameref(ITEM_ID_WELL_KEPT_ARMOR) = "整備された武具"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_WELL_KEPT_ARMOR) = "Well kept armor"
+		ioriginalnameref(ITEM_ID_WELL_KEPT_ARMOR) = "Well Kept Armor"
 		ioriginalnameref2(ITEM_ID_WELL_KEPT_ARMOR) = ""
 	}
 	ipicref(ITEM_ID_WELL_KEPT_ARMOR) = xy2pic(24, 7)
@@ -15071,7 +15071,7 @@
 		ioriginalnameref(ITEM_ID_PORTABLE_COOKING_TOOL) = "携帯調理道具"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_PORTABLE_COOKING_TOOL) = "Portable cooking tool"
+		ioriginalnameref(ITEM_ID_PORTABLE_COOKING_TOOL) = "Portable Cooking Tool"
 		ioriginalnameref2(ITEM_ID_PORTABLE_COOKING_TOOL) = ""
 	}
 	ipicref(ITEM_ID_PORTABLE_COOKING_TOOL) = xy2pic(28, 6)
@@ -15128,7 +15128,7 @@
 		ioriginalnameref(ITEM_ID_SPELLBOOK_CURE_JURE) = "ジュアの癒しの魔法書"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SPELLBOOK_CURE_JURE) = "cure <Jure>"
+		ioriginalnameref(ITEM_ID_SPELLBOOK_CURE_JURE) = "Cure <Jure>"
 		ioriginalnameref2(ITEM_ID_SPELLBOOK_CURE_JURE) = "Spellbook"
 	}
 	ipicref(ITEM_ID_SPELLBOOK_CURE_JURE) = xy2pic(0, 13)
@@ -15143,7 +15143,7 @@
 		ioriginalnameref(ITEM_ID_SPELLBOOK_CURE_ERIS) = "エリスの癒しの魔法書"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SPELLBOOK_CURE_ERIS) = "cure <Eris>"
+		ioriginalnameref(ITEM_ID_SPELLBOOK_CURE_ERIS) = "Cure <Eris>"
 		ioriginalnameref2(ITEM_ID_SPELLBOOK_CURE_ERIS) = "Spellbook"
 	}
 	ipicref(ITEM_ID_SPELLBOOK_CURE_ERIS) = xy2pic(0, 13)
@@ -15158,7 +15158,7 @@
 		ioriginalnameref(ITEM_ID_SPELLBOOK_CURE_CRITICAL_WOUND) = "致命傷治癒の魔法書"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SPELLBOOK_CURE_CRITICAL_WOUND) = "Cure critical wound"
+		ioriginalnameref(ITEM_ID_SPELLBOOK_CURE_CRITICAL_WOUND) = "Cure Critical Wound"
 		ioriginalnameref2(ITEM_ID_SPELLBOOK_CURE_CRITICAL_WOUND) = "Spellbook"
 	}
 	ipicref(ITEM_ID_SPELLBOOK_CURE_CRITICAL_WOUND) = xy2pic(0, 13)
@@ -15173,7 +15173,7 @@
 		ioriginalnameref(ITEM_ID_SPELLBOOK_CURE_MINOR_WOUND) = "軽傷治癒の魔法書"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SPELLBOOK_CURE_MINOR_WOUND) = "Cure minor wound"
+		ioriginalnameref(ITEM_ID_SPELLBOOK_CURE_MINOR_WOUND) = "Cure Minor Wound"
 		ioriginalnameref2(ITEM_ID_SPELLBOOK_CURE_MINOR_WOUND) = "Spellbook"
 	}
 	ipicref(ITEM_ID_SPELLBOOK_CURE_MINOR_WOUND) = xy2pic(0, 13)
@@ -15726,7 +15726,7 @@
 		ioriginalnameref(ITEM_ID_WORTHLESS_FAKE_GOLD_BAR) = "途方も価値のない錆びた偽物の金塊"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_WORTHLESS_FAKE_GOLD_BAR) = "Worthless fake gold bar"
+		ioriginalnameref(ITEM_ID_WORTHLESS_FAKE_GOLD_BAR) = "Worthless Fake Gold Bar"
 		ioriginalnameref2(ITEM_ID_WORTHLESS_FAKE_GOLD_BAR) = ""
 	}
 	ipicref(ITEM_ID_WORTHLESS_FAKE_GOLD_BAR) = xy2pic(0, 1)
@@ -15734,7 +15734,7 @@
 		iknownnameref(ITEM_ID_WORTHLESS_FAKE_GOLD_BAR) = "途方もない価値の金塊"
 	}
 	else {
-		iknownnameref(ITEM_ID_WORTHLESS_FAKE_GOLD_BAR) = "Valuable gold bar"
+		iknownnameref(ITEM_ID_WORTHLESS_FAKE_GOLD_BAR) = "Valuable Gold Bar"
 	}
 	icolref(ITEM_ID_WORTHLESS_FAKE_GOLD_BAR) = COLOR_DEFAULT
 	ilight(ITEM_ID_BOW_OF_VINDALE) = LIGHT_TYPE_ITEM
@@ -15770,7 +15770,7 @@
 		iknownnameref(ITEM_ID_ETHER_DAGGER) = "風をまとった短剣"
 	}
 	else {
-		iknownnameref(ITEM_ID_ETHER_DAGGER) = "Dagger surrounded by wind"
+		iknownnameref(ITEM_ID_ETHER_DAGGER) = "Windcloaked Dagger"
 	}
 	icolref(ITEM_ID_ETHER_DAGGER) = COLOR_BLUE
 	ilight(ITEM_ID_BOTTLE_WHISKY) = LIGHT_TYPE_NONE
@@ -16127,7 +16127,7 @@
 		ioriginalnameref(ITEM_ID_EDIBLE_WILD_PLANT) = "山菜"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_EDIBLE_WILD_PLANT) = "Edible wild plant"
+		ioriginalnameref(ITEM_ID_EDIBLE_WILD_PLANT) = "Edible Wild Plant"
 		ioriginalnameref2(ITEM_ID_EDIBLE_WILD_PLANT) = ""
 	}
 	ipicref(ITEM_ID_EDIBLE_WILD_PLANT) = xy2pic(6, 5)
@@ -16287,7 +16287,7 @@
 		ioriginalnameref(ITEM_ID_BRAND_NEW_GRAVE) = "新品の墓"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_BRAND_NEW_GRAVE) = "Brand new grave"
+		ioriginalnameref(ITEM_ID_BRAND_NEW_GRAVE) = "Brand New Grave"
 		ioriginalnameref2(ITEM_ID_BRAND_NEW_GRAVE) = ""
 	}
 	ipicref(ITEM_ID_BRAND_NEW_GRAVE) = xy2pic(27, 4)
@@ -16300,7 +16300,7 @@
 		ioriginalnameref(ITEM_ID_GRAVE_ORNAMENTED_WITH_FLOWERS) = "花で飾られた墓"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_GRAVE_ORNAMENTED_WITH_FLOWERS) = "Ornamented with flowers"
+		ioriginalnameref(ITEM_ID_GRAVE_ORNAMENTED_WITH_FLOWERS) = "Ornamented with Flowers"
 		ioriginalnameref2(ITEM_ID_GRAVE_ORNAMENTED_WITH_FLOWERS) = "Grave"
 	}
 	ipicref(ITEM_ID_GRAVE_ORNAMENTED_WITH_FLOWERS) = xy2pic(26, 4)
@@ -16365,7 +16365,7 @@
 		ioriginalnameref(ITEM_ID_CARPENTERS_TOOL) = "工具"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_CARPENTERS_TOOL) = "carpenter's tool"
+		ioriginalnameref(ITEM_ID_CARPENTERS_TOOL) = "Carpenter's Tool"
 		ioriginalnameref2(ITEM_ID_CARPENTERS_TOOL) = ""
 	}
 	ipicref(ITEM_ID_CARPENTERS_TOOL) = xy2pic(21, 4)
@@ -16430,7 +16430,7 @@
 		ioriginalnameref(ITEM_ID_NARROW_DINING_TABLE) = "狭い食卓"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_NARROW_DINING_TABLE) = "Narrow dining table"
+		ioriginalnameref(ITEM_ID_NARROW_DINING_TABLE) = "Narrow Dining Table"
 		ioriginalnameref2(ITEM_ID_NARROW_DINING_TABLE) = ""
 	}
 	ipicref(ITEM_ID_NARROW_DINING_TABLE) = xy2pic(16, 4)
@@ -16495,7 +16495,7 @@
 		ioriginalnameref(ITEM_ID_CRAFT_BOOK_SHELF) = "名工本棚"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_CRAFT_BOOK_SHELF) = "Craft book shelf"
+		ioriginalnameref(ITEM_ID_CRAFT_BOOK_SHELF) = "Craft Book Shelf"
 		ioriginalnameref2(ITEM_ID_CRAFT_BOOK_SHELF) = ""
 	}
 	ipicref(ITEM_ID_CRAFT_BOOK_SHELF) = xy2pic(11, 4)
@@ -16651,7 +16651,7 @@
 		ioriginalnameref(ITEM_ID_FLOWER_ADORNED_PILLAR) = "花で飾られた柱"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_FLOWER_ADORNED_PILLAR) = "Flower adorned pillar"
+		ioriginalnameref(ITEM_ID_FLOWER_ADORNED_PILLAR) = "Flower Adorned Pillar"
 		ioriginalnameref2(ITEM_ID_FLOWER_ADORNED_PILLAR) = ""
 	}
 	ipicref(ITEM_ID_FLOWER_ADORNED_PILLAR) = xy2pic(31, 15)
@@ -16664,7 +16664,7 @@
 		ioriginalnameref(ITEM_ID_PLANT_ADORNED_PILLAR) = "植物で飾られた柱"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_PLANT_ADORNED_PILLAR) = "Plant adorned pillar"
+		ioriginalnameref(ITEM_ID_PLANT_ADORNED_PILLAR) = "Plant Adorned Pillar"
 		ioriginalnameref2(ITEM_ID_PLANT_ADORNED_PILLAR) = ""
 	}
 	ipicref(ITEM_ID_PLANT_ADORNED_PILLAR) = xy2pic(30, 15)
@@ -16755,7 +16755,7 @@
 		ioriginalnameref(ITEM_ID_LARGE_DECORATIVE_PLANT) = "大きい観葉植物"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_LARGE_DECORATIVE_PLANT) = "Large decorative plant"
+		ioriginalnameref(ITEM_ID_LARGE_DECORATIVE_PLANT) = "Large Decorative Plant"
 		ioriginalnameref2(ITEM_ID_LARGE_DECORATIVE_PLANT) = ""
 	}
 	ipicref(ITEM_ID_LARGE_DECORATIVE_PLANT) = xy2pic(24, 3)
@@ -16768,7 +16768,7 @@
 		ioriginalnameref(ITEM_ID_BANKS_ROSE) = "木香薔薇"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_BANKS_ROSE) = "banks' rose"
+		ioriginalnameref(ITEM_ID_BANKS_ROSE) = "Banks' Rose"
 		ioriginalnameref2(ITEM_ID_BANKS_ROSE) = ""
 	}
 	ipicref(ITEM_ID_BANKS_ROSE) = xy2pic(23, 3)
@@ -16781,7 +16781,7 @@
 		ioriginalnameref(ITEM_ID_SMALL_DECORATIVE_PLANT) = "小さい観葉植物"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SMALL_DECORATIVE_PLANT) = "Small decorative plant"
+		ioriginalnameref(ITEM_ID_SMALL_DECORATIVE_PLANT) = "Small Decorative Plant"
 		ioriginalnameref2(ITEM_ID_SMALL_DECORATIVE_PLANT) = ""
 	}
 	ipicref(ITEM_ID_SMALL_DECORATIVE_PLANT) = xy2pic(22, 3)
@@ -16921,7 +16921,7 @@
 		ioriginalnameref(ITEM_ID_ROD_CURE_MINOR_WOUND) = "軽傷治療の魔杖"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_ROD_CURE_MINOR_WOUND) = "Cure minor wound"
+		ioriginalnameref(ITEM_ID_ROD_CURE_MINOR_WOUND) = "Cure Minor Wound"
 		ioriginalnameref2(ITEM_ID_ROD_CURE_MINOR_WOUND) = "Rod"
 	}
 	ipicref(ITEM_ID_ROD_CURE_MINOR_WOUND) = xy2pic(9, 14)
@@ -17304,7 +17304,7 @@
 		ioriginalnameref(ITEM_ID_BAR_TABLE_BETA) = "バーテーブルβ"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_BAR_TABLE_BETA) = "Bar table beta"
+		ioriginalnameref(ITEM_ID_BAR_TABLE_BETA) = "Bar Table Beta"
 		ioriginalnameref2(ITEM_ID_BAR_TABLE_BETA) = ""
 	}
 	ipicref(ITEM_ID_BAR_TABLE_BETA) = xy2pic(14, 2)
@@ -17317,7 +17317,7 @@
 		ioriginalnameref(ITEM_ID_BAR_TABLE_ALPHA) = "バーテーブルα"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_BAR_TABLE_ALPHA) = "Bar table alpha"
+		ioriginalnameref(ITEM_ID_BAR_TABLE_ALPHA) = "Bar Table Alpha"
 		ioriginalnameref2(ITEM_ID_BAR_TABLE_ALPHA) = ""
 	}
 	ipicref(ITEM_ID_BAR_TABLE_ALPHA) = xy2pic(12, 2)
@@ -17486,7 +17486,7 @@
 		ioriginalnameref(ITEM_ID_POTION_SACRED_HEALER_JURE) = "聖なる癒し手ジュアのポーション"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_POTION_SACRED_HEALER_JURE) = "sacred healer <Jure>"
+		ioriginalnameref(ITEM_ID_POTION_SACRED_HEALER_JURE) = "Sacred Healer <Jure>"
 		ioriginalnameref2(ITEM_ID_POTION_SACRED_HEALER_JURE) = "Potion"
 	}
 	ipicref(ITEM_ID_POTION_SACRED_HEALER_JURE) = xy2pic(24, 10)
@@ -17501,7 +17501,7 @@
 		ioriginalnameref(ITEM_ID_POTION_WHITE_HEALER_ERIS) = "白き癒し手エリスのポーション"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_POTION_WHITE_HEALER_ERIS) = "white healer <Eris>"
+		ioriginalnameref(ITEM_ID_POTION_WHITE_HEALER_ERIS) = "White Healer <Eris>"
 		ioriginalnameref2(ITEM_ID_POTION_WHITE_HEALER_ERIS) = "Potion"
 	}
 	ipicref(ITEM_ID_POTION_WHITE_HEALER_ERIS) = xy2pic(24, 10)
@@ -17516,7 +17516,7 @@
 		ioriginalnameref(ITEM_ID_POTION_HEALER_ODINA) = "癒し手オディナのポーション"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_POTION_HEALER_ODINA) = "healer <Odina>"
+		ioriginalnameref(ITEM_ID_POTION_HEALER_ODINA) = "Healer <Odina>"
 		ioriginalnameref2(ITEM_ID_POTION_HEALER_ODINA) = "Potion"
 	}
 	ipicref(ITEM_ID_POTION_HEALER_ODINA) = xy2pic(24, 10)
@@ -17539,7 +17539,7 @@
 		iknownnameref(ITEM_ID_RAGNAROK) = "全てを終結させる剣"
 	}
 	else {
-		iknownnameref(ITEM_ID_RAGNAROK) = "Sword that ends all"
+		iknownnameref(ITEM_ID_RAGNAROK) = "Sword That Ends All"
 	}
 	icolref(ITEM_ID_RAGNAROK) = COLOR_BLACK
 	ilight(ITEM_ID_POTION_HEALER) = LIGHT_TYPE_NONE
@@ -17579,7 +17579,7 @@
 		ioriginalnameref(ITEM_ID_POTION_CURE_CRITICAL_WOUND) = "致命傷治癒のポーション"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_POTION_CURE_CRITICAL_WOUND) = "Cure critical wound"
+		ioriginalnameref(ITEM_ID_POTION_CURE_CRITICAL_WOUND) = "Cure Critical Wound"
 		ioriginalnameref2(ITEM_ID_POTION_CURE_CRITICAL_WOUND) = "Potion"
 	}
 	ipicref(ITEM_ID_POTION_CURE_CRITICAL_WOUND) = xy2pic(24, 10)
@@ -17594,7 +17594,7 @@
 		ioriginalnameref(ITEM_ID_POTION_CURE_MAJOR_WOUND) = "重傷治癒のポーション"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_POTION_CURE_MAJOR_WOUND) = "Cure major wound"
+		ioriginalnameref(ITEM_ID_POTION_CURE_MAJOR_WOUND) = "Cure Major Wound"
 		ioriginalnameref2(ITEM_ID_POTION_CURE_MAJOR_WOUND) = "Potion"
 	}
 	ipicref(ITEM_ID_POTION_CURE_MAJOR_WOUND) = xy2pic(24, 10)
@@ -17609,7 +17609,7 @@
 		ioriginalnameref(ITEM_ID_POTION_CURE_MINOR_WOUND) = "軽傷治癒のポーション"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_POTION_CURE_MINOR_WOUND) = "Cure minor wound"
+		ioriginalnameref(ITEM_ID_POTION_CURE_MINOR_WOUND) = "Cure Minor Wound"
 		ioriginalnameref2(ITEM_ID_POTION_CURE_MINOR_WOUND) = "Potion"
 	}
 	ipicref(ITEM_ID_POTION_CURE_MINOR_WOUND) = xy2pic(24, 10)
@@ -17683,7 +17683,7 @@
 		ioriginalnameref(ITEM_ID_SCYTHE_OF_THE_VOID) = "《虚無の大鎌》"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_SCYTHE_OF_THE_VOID) = "<Scythe of the Void>"
+		ioriginalnameref(ITEM_ID_SCYTHE_OF_THE_VOID) = "<Scythe of The Void>"
 		ioriginalnameref2(ITEM_ID_SCYTHE_OF_THE_VOID) = ""
 	}
 	ipicref(ITEM_ID_SCYTHE_OF_THE_VOID) = xy2pic(25, 12)
@@ -17691,7 +17691,7 @@
 		iknownnameref(ITEM_ID_SCYTHE_OF_THE_VOID) = "死を奏でる大鎌"
 	}
 	else {
-		iknownnameref(ITEM_ID_SCYTHE_OF_THE_VOID) = "Scythe that sings death"
+		iknownnameref(ITEM_ID_SCYTHE_OF_THE_VOID) = "Scythe That Sings Death"
 	}
 	icolref(ITEM_ID_SCYTHE_OF_THE_VOID) = COLOR_RED
 	ilight(ITEM_ID_BULLET) = LIGHT_TYPE_NONE
@@ -17774,7 +17774,7 @@
 		iknownnameref(ITEM_ID_ZANTETSUKEN) = "白銀の刀"
 	}
 	else {
-		iknownnameref(ITEM_ID_ZANTETSUKEN) = "Shining silver katana"
+		iknownnameref(ITEM_ID_ZANTETSUKEN) = "Shining Silver Katana"
 	}
 	icolref(ITEM_ID_ZANTETSUKEN) = COLOR_BLUE
 	ilight(ITEM_ID_DIABLOS) = LIGHT_TYPE_ITEM
@@ -17792,7 +17792,7 @@
 		iknownnameref(ITEM_ID_DIABLOS) = "漆黒の剣"
 	}
 	else {
-		iknownnameref(ITEM_ID_DIABLOS) = "Pure black sword"
+		iknownnameref(ITEM_ID_DIABLOS) = "Pure Black Sword"
 	}
 	icolref(ITEM_ID_DIABLOS) = COLOR_BLACK
 	ilight(ITEM_ID_PLATINUM_COIN) = LIGHT_TYPE_NONE
@@ -17971,7 +17971,7 @@
 		ioriginalnameref(ITEM_ID_RAW_DIAMOND_ORE) = "ダイヤモンドの原石"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_RAW_DIAMOND_ORE) = "Raw diamond ore"
+		ioriginalnameref(ITEM_ID_RAW_DIAMOND_ORE) = "Raw Diamond Ore"
 		ioriginalnameref2(ITEM_ID_RAW_DIAMOND_ORE) = ""
 	}
 	ipicref(ITEM_ID_RAW_DIAMOND_ORE) = xy2pic(15, 6)
@@ -17984,7 +17984,7 @@
 		ioriginalnameref(ITEM_ID_RAW_EMERALD_ORE) = "エメラルドの原石"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_RAW_EMERALD_ORE) = "Raw emerald ore"
+		ioriginalnameref(ITEM_ID_RAW_EMERALD_ORE) = "Raw Emerald Ore"
 		ioriginalnameref2(ITEM_ID_RAW_EMERALD_ORE) = ""
 	}
 	ipicref(ITEM_ID_RAW_EMERALD_ORE) = xy2pic(15, 6)
@@ -18010,7 +18010,7 @@
 		ioriginalnameref(ITEM_ID_RAW_RUBYNUS_ORE) = "ルビナスの原石"
 	}
 	else {
-		ioriginalnameref(ITEM_ID_RAW_RUBYNUS_ORE) = "Raw rubynus ore"
+		ioriginalnameref(ITEM_ID_RAW_RUBYNUS_ORE) = "Raw Rubynus Ore"
 		ioriginalnameref2(ITEM_ID_RAW_RUBYNUS_ORE) = ""
 	}
 	ipicref(ITEM_ID_RAW_RUBYNUS_ORE) = xy2pic(14, 6)
