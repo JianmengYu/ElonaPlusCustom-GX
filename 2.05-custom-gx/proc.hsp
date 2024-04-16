@@ -12201,7 +12201,7 @@
 		snd SOUNDLIST_BOLT1
 		animeload 29, cc
 		txtef COLOR_GREEN
-		txt lang(name(cc) + "は武器に強烈な回転をかけて投げつけた！", name(cc) + "threw the weapon with a strong spin!")
+		txt lang(name(cc) + "は武器に強烈な回転をかけて投げつけた！", name(cc) + " threw the weapon with a strong spin!")
 		if ( rnd(sdata(SKILL_NORMAL_GREATER_EVASION, tc) + 1000) > rnd(4000) ) {
 			if ( cbit(CHARA_BIT_SANDBAG, tc) != TRUE ) {
 				txtef COLOR_RED
