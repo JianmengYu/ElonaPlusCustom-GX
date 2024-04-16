@@ -259,7 +259,7 @@ Beauty and the beast:Such great beauty is a sin...My girl friend is followed by 
 %END
 
 %ESCORT,1,EN
-Before it's too late.:Terrible thing happened! My dad is affected by a deadly poison. Hurry! Please take him to his doctor in {map}. I'll let you have {reward} if you sucssed!
+Before it's too late.:Terrible thing happened! My dad is affected by a deadly poison. Hurry! Please take him to his doctor in {map}. I'll let you have {reward} if you succeed!
 %END
 
 %ESCORT,2,JP
