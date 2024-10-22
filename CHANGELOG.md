@@ -1,9 +1,19 @@
-# Upcoming
+# 2.24.2.0
+
+# Added
+- Tweak to allow your spells to trigger weapon enchantment.
+
+# Changed
+- Quest text file now supports {n}
+- Reduced CNPC summon piety cost to 1/3.
 
 # TCG
 - Uncapped win-streak ticket earning limit. (Still capped by target level)
 - Win-streak now provides a ticket bonus of 20% per win-streak above 10.
 - You can now view graveyard in game with `g`, and deck with `f`
+- Fixed a forced-combat crash.
+
+# Reminder: Elin Early Access 11/01.
 
 # 2.24.1.1
 
