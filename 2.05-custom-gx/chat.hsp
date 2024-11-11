@@ -19511,6 +19511,14 @@
 		if ( evid() == (-1) ) {
 			chatList 60, lang("暗い場所に移ろう", "I'll buy you.")
 		}
+		/********** ELIN - Prostitute Guide - BEGINNING **********/
+		clientguide
+		if ( stat != 0 ) {
+			repeat stat
+				chatList 10000 + cnt, lang(cdatan(CDATAN_NAME, rtval(cnt)) + "の居場所を聞く(100Gold)", "Where is " + cdatan(CDATAN_NAME, rtval(cnt)) + "?(100Gold)")
+			loop
+		}
+		/********** ELIN - Prostitute Guide - BEGINNING **********/
 	}
 	if ( cdata(CDATA_ROLE, tc) == ROLE_CARAVAN_MASTER ) {
 		if ( gdata(GDATA_AREA) != AREA_DOCK ) {
@@ -23982,10 +23990,42 @@
 			break
 		loop
 		buff = s
-		if ( cdata(CDATA_ROLE, tc) == ROLE_INFORMER ) {
+		if ( cdata(CDATA_ROLE, tc) == ROLE_INFORMER | cdata(CDATA_ID, tc) == CREATURE_ID_PROSTITUTE ) {
+			if ( cdata(CDATA_GOLD, CHARA_PLAYER) < 100 ) {
+				buff = lang("冷やかし" + _ka(1), "You kidding? ")
+				goto *chat_default
+			}
 			snd SOUNDLIST_PAYGOLD1
 			cdata(CDATA_GOLD, CHARA_PLAYER) -= 100
 		}
+		/********** OOMSESTepNC - TELEPORT TO CLIENT - BEGINNING **********/
+		if ( rc != tc & cdata(CDATA_EXIST, rc) == CHAR_STATE_ALIVE) {
+			s += lang(cdatan(0, rc) + "の所まで案内してあげよう" + _ka(3) + "？", " May I guide you to " + cdatan(0, rc) + "?")
+			buff = s
+			chatList 1, lang("はい", "Please.")
+			chatList 0, lang("いいえ", "No.")
+			chatesc = 0
+			gosub *chat_select
+			if ( chatval == 1 ) {
+				tc = rc
+				cc = CHARA_PLAYER
+				efid = SKILL_SPACT_SHADOW_STEP
+				client = tc
+				gosub *effect
+				if ( cdata(CDATA_EXIST, rc) == CHAR_STATE_ALIVE ) {
+					gosub *chat
+				}
+				if ( chatteleport == 1 ) {
+					chatteleport = 0
+					goto *map_exit
+				}
+				goto *turn_end
+			}
+		} else {
+			buff = s
+			goto *chat_default
+		}
+		/********** OOMSESTepNC - TELEPORT TO CLIENT - ENDING **********/
 		goto *chat_default
 	}
 	if ( evid() == EVENT_SHOP_WANDER ) {

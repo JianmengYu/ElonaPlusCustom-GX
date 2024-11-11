@@ -1,3 +1,12 @@
+# Upcoming
+
+# Added
+- (OOMSESTepNC) Guards can teleport you to client now.
+- (Elin) Prostitue can guide you to client now, they charge 100 gold like informer
+
+# Fixed
+- Informer guiding to client doesn't check if you have 100 gold
+
 # 2.24.2.0
 
 # Added
