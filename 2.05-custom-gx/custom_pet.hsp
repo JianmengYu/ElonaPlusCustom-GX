@@ -78,10 +78,10 @@
 		listn(0, 0) = "(Current: Do Eat) Don't eat items from your bag."
 	}
 	if ( CustomVal(1, tc) == 0 ) {
-		listn(0, 1) = "(Current: Do Drink) Drink potions in your bag if you are thirsty."
+		listn(0, 1) = "(Current: Do Not Drink) Drink potions in your bag if you are thirsty."
 	}
 	if ( CustomVal(1, tc) == 1 ) {
-		listn(0, 1) = "(Current: Do Not Drink) Don't drink potions in your bag."
+		listn(0, 1) = "(Current: Do Drink) Don't drink potions in your bag."
 	}
 	if ( CustomVal(2, tc) == 0 ) {
 		listn(0, 2) = "(Current: No Emote) Tell me if you want to chat with me."
