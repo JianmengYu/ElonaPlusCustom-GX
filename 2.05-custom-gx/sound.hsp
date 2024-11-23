@@ -31,6 +31,9 @@
 			if ( snd_arg1 == SOUNDLIST_BG_FIRE ) {
 				locvar_snd_sound = 7 + 6 + 3
 			}
+			if ( snd_arg1 == SOUNDLIST_BG_WIND & env != SOUNDLIST_BG_WIND ) {
+				locvar_snd_sound = 7 + 6 + 4
+			}
 		}
 		else {
 			locvar_snd_sound = 7
@@ -507,8 +510,8 @@
 		snd SOUNDLIST_BG_WIND, 1
 	}
 	else {
-		DSSTOP lpfilewind
-		DSRELEASE lpfilewind
+		DSSTOP 7 + 6 + 4
+		DSRELEASE 7 + 6 + 4
 	}
 	if ( gdata(GDATA_AREA) == AREA_OCEAN ) {
 		snd SOUNDLIST_BG_SEA, TRUE

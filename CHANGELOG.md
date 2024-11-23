@@ -6,6 +6,7 @@
 
 # Fixed
 - Informer guiding to client doesn't check if you have 100 gold
+- Ambient Sound of Etherwind doesn't stop after Lazasye main quest (removed lpfilewind variable)
 
 # 2.24.2.0
 

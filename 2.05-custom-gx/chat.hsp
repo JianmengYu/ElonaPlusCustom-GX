@@ -21011,8 +21011,8 @@
 		DSRELEASE 7 + 6 + 2
 		DSSTOP 7 + 6 + 3
 		DSRELEASE 7 + 6 + 3
-		DSSTOP lpfilewind
-		DSRELEASE lpfilewind
+		DSSTOP 7 + 6 + 4
+		DSRELEASE 7 + 6 + 4
 		goto *chat_default
 	}
 	if ( chatval == 77 ) {
@@ -21041,8 +21041,8 @@
 		DSRELEASE 7 + 6 + 2
 		DSSTOP 7 + 6 + 3
 		DSRELEASE 7 + 6 + 3
-		DSSTOP lpfilewind
-		DSRELEASE lpfilewind
+		DSSTOP 7 + 6 + 4
+		DSRELEASE 7 + 6 + 4
 		goto *chat_default
 	}
 	if ( chatval == 132 ) {
@@ -21073,8 +21073,8 @@
 		DSRELEASE 7 + 6 + 2
 		DSSTOP 7 + 6 + 3
 		DSRELEASE 7 + 6 + 3
-		DSSTOP lpfilewind
-		DSRELEASE lpfilewind
+		DSSTOP 7 + 6 + 4
+		DSRELEASE 7 + 6 + 4
 		goto *chat_default
 	}
 	if ( chatval == 102 ) {
