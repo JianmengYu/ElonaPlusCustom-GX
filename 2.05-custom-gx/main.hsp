@@ -56,6 +56,11 @@
 	; that when setting the executable directory.
 #ifdef _DEBUG
 	exedir = dir_cur + "\\..\\assets\\2.05-custom-gx\\"
+	exist exedir + "elonaplus.exe"
+	if ( strsize == (-1) ) {
+		dialog "Could not find an installation of Elona+. Please follow the install instructions to install Elona+ first before running this program."
+		end
+	}
 	exist exedir + "elona.dll"
 	if ( strsize == (-1) ) {
 		dialog "Could not find debug assets folder '" + exedir + "'. Please copy a full installation of Elona+ Custom-G to this folder first."
@@ -63,7 +68,7 @@
 	}
 #else
 	exedir = dir_exe + "\\"
-	exist exedir + "elona.dll"
+	exist exedir + "elonaplus.exe"
 	if ( strsize == (-1) ) {
 		dialog "Could not find an installation of Elona+. Please follow the install instructions to install Elona+ first before running this program."
 		end
