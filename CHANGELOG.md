@@ -1,12 +1,14 @@
-# Upcoming
+# 2.24.2.1
 
 # Added
+- (OOMSESTep) Added GuruGuruSMF4 music support. Now you can hear the original version of Elona MIDIs.
 - (OOMSESTepNC) Guards can teleport you to client now.
 - (Elin) Prostitue can guide you to client now, they charge 100 gold like informer
 
 # Fixed
 - Informer guiding to client doesn't check if you have 100 gold
 - Ambient Sound of Etherwind doesn't stop after Lazasye main quest (removed lpfilewind variable)
+- AI indepedent act tweak causes talking mode allies to stop acting.
 
 # 2.24.2.0
 

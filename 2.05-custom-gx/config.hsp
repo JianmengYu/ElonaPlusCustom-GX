@@ -792,7 +792,7 @@
 				mes s(cfg_sound2)
 			}
 			if ( cnt == 1 ) {
-				s = lang("なし", "None"), lang("direct music", "Direct music"), "MCI"
+				s = lang("なし", "None"), lang("direct music", "Direct music"), "MCI", "GuruGuruSMF4"
 				mes s(cfg_music2)
 			}
 			if ( cnt == 2 ) {
@@ -1301,8 +1301,8 @@
 			}
 			if ( cs == 1 ) {
 				cfg_music2 += p
-				if ( cfg_music2 > 2 ) {
-					cfg_music2 = 2
+				if ( cfg_music2 > 3 ) {
+					cfg_music2 = 3
 				}
 				else {
 					if ( cfg_music2 < 0 ) {

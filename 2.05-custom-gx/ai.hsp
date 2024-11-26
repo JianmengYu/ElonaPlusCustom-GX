@@ -553,7 +553,7 @@
 				}
 				// If using independent targeting, hired adventurer's won't attack, so let them find target.
 				if ( cdata(CDATA_TARGET, cc) == 0 & TweakData(TWEAK_AI_ALLY_INDEPENDENT_TARGETING, TWEAK_CATEGORY_AI) != FALSE & cbit(CHARA_BIT_NECRO, cc) != TRUE ) {
-					if ( cdata(CDATA_DIRECTIVE_MODE, cc) != DIRECTIVE_MODE_DEFENSIVE & cdata(CDATA_DIRECTIVE_MODE, cc) != DIRECTIVE_MODE_TALKING ) {
+					if ( cdata(CDATA_DIRECTIVE_MODE, cc) != DIRECTIVE_MODE_DEFENSIVE ) {
 						gosub *findTarget
 					}
 				}

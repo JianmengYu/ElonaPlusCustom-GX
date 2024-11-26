@@ -958,6 +958,9 @@
 			DMLOADFNAME exedir + "sound\\gm_on.mid", 0
 			DMPLAY 1, 0
 		}
+		if ( cfg_music == 3 ) {
+			GGS4Stop
+		}
 		if ( music != (-1) ) {
 			musicfolder = exedir + "user\\music\\"
 			exist musicfolder + musicfile(music)
@@ -1008,8 +1011,16 @@
 				}
 			}
 			else {
-				DMLOADFNAME musicfolder + musicfile(music), 0
-				DMPLAY musicloop, 0
+				if ( cfg_music == 1 ) {
+					DMLOADFNAME musicfolder + musicfile(music), 0
+					DMPLAY musicloop, 0
+				} else {
+					if ( cfg_music == 3 ) {
+						GGS4Stop
+						GGS4AddListFromFile musicfolder + musicfile(music), 0, 0
+						GGS4Play 1, 0
+					}
+				}
 			}
 		}
 

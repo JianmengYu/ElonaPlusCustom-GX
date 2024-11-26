@@ -114,3 +114,48 @@
 #func ImmReleaseContext "ImmReleaseContext" sptr, sptr
 #func ImmSetOpenStatus "ImmSetOpenStatus" sptr, sptr
 #cfunc ImmGetOpenStatus "ImmGetOpenStatus" sptr
+
+#regcmd "GuruGuruSMF4", "GuruGuruSMF4.hpi"
+#cmd GGS4OpenDevice			0
+#cmd GGS4CloseDevice		1
+#cmd GGS4AddDls				3
+#cmd GGS4Play				4
+#cmd GGS4Stop				5
+#cmd GGS4Pause				6
+#cmd GGS4Restart			7
+#cmd GGS4SetMasterTempo		8
+#cmd GGS4SetMasterVolume	9
+#cmd GGS4SetMasterPitch		10
+#cmd GGS4GetPlayerStatus	11
+#cmd GGS4AddListFromFile	13
+#cmd GGS4AddListFromMemory	14
+#cmd GGS4DeleteListItem		15
+#cmd GGS4ClearList			16
+#cmd GGS4EnumList			17
+#cmd GGS4GetSmfInformation	18
+; #define devDirectMusic -1100
+; #define ldBuffered 1
+; #define opLoop			1
+; #define opSkipBeginning	2
+; #define opSkipEnding	4
+; #define opMasterPitch	8
+; #define opNormalize		16
+; #define opExclusive		32
+; #define stStop		0
+; #define stPlay		1
+; #define stPause		2
+; #define stSuspended	3
+; #define smfTimeBase			0
+; #define smfTotalTick		1
+; #define smfTotalTime		2
+; #define smfFirstNoteTick	3
+; #define smfFirstNoteTime	4
+; #define smfLastNoteTick		5
+; #define smfLastNoteTime		6
+; #define smfLoopTick			7
+; #define smfLoopTime			8
+; #define psState		0
+; #define psTempo		1
+; #define psTick		2
+; #define psTime		3
+; #define psLoopCount	4

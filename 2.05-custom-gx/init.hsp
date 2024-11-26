@@ -2499,6 +2499,10 @@ if instr(s,0,%1)!-1{	%c\
 			cfg_music = 2
 		}
 	}
+	if ( cfg_music == 3 ) {
+		GGS4OpenDevice -1100
+		GGS4SetMasterVolume 0
+	}
 	if ( cfg_sound == 1 ) {
 		DSINIT
 		if ( stat == 0 ) {
@@ -2595,6 +2599,9 @@ if instr(s,0,%1)!-1{	%c\
 *exit_game
 	if ( cfg_music == 1 ) {
 		DMEND
+	}
+	if ( cfg_music == 3 ) {
+		GGS4CloseDevice
 	}
 	if ( cfg_sound == 1 ) {
 		DSEND
