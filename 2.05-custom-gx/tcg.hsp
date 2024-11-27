@@ -2311,7 +2311,7 @@
 		listmax = 0
 		if ( deck(CREATURE_ID_ITZPALT) > 0 ) { buff = "The Eternal League forbids Itzpalt from assisting participants of Termination Card Game (TCG)" }
 		if ( deck(CREATURE_ID_OPATOS) > 0 ) { buff = "The Eternal League forbids Opatos from assisting participants of Termination Card Game (TCG)" }
-		if ( deck(CREATURE_ID_MANI) > 0 ) { buff = "The Eternal League forbids Mani from assisting participants of Termination Card Game (TCG)" }
+		; if ( deck(CREATURE_ID_MANI) > 0 ) { buff = "The Eternal League forbids Mani from assisting participants of Termination Card Game (TCG)" }
 		if ( deck(CREATURE_ID_KUMIROMI) > 0 ) { buff = "The Eternal League forbids Kumiromi from assisting participants of Termination Card Game (TCG)" }
 		if ( deck(CREATURE_ID_EHEKATL) > 0 ) { buff = "The Eternal League forbids Ehekatl from assisting participants of Termination Card Game (TCG)" }
 		if ( deck(CREATURE_ID_JURE) > 0 ) { buff = "The Eternal League forbids Jure from assisting participants of Termination Card Game (TCG)" }
