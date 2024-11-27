@@ -2554,7 +2554,7 @@
 *phase_begin
 	phase@tcg = 0
 	turn@tcg++
-	if ( turn@tcg > 50 | specialruleusealwaysfatigue@tcg(ct@tcg) ) {
+	if ( specialruleusealwaysfatigue@tcg(ct@tcg) ) {
 		fatigueplayer ct@tcg
 	}
 	tcgdraw
