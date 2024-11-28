@@ -1553,6 +1553,12 @@
 	buffer 5, SPRITE_SHEET_COLS_CHARA * 48, (SPRITE_SHEET_ROWS_CHARA + (usernpcmax / SPRITE_SHEET_COLS_CHARA + 1) * 2) * 48
 	pos 0, 0
 	picload exedir + "\\graphic\\character" + devfile + ".bmp", 1
+	/********** OOMSESTEPNC - EXTRA CNPC CONFIG - BEGINNING *********/
+	dim userdata2, 11, usernpcmax + 1
+	dim userdata3, 5, usernpcmax + 1
+	sdim userdatan2, 40, 10, usernpcmax + 1
+	buffer 100, 16 * 80, (usernpcmax / 16 + 1) * 112
+	/********** OOMSESTEPNC - EXTRA CNPC CONFIG - ENDING *********/
 	gmode 0
 	fread = 1
 	proc "userNpc_update:1"
@@ -1599,6 +1605,19 @@
 			zRead txtbuff, hgz, userdata(1, tg)
 			zClose hgz
 		}
+		/********** OOMSESTEPNC - EXTRA CNPC CONFIG - BEGINNING *********/
+		proc "userNpc_update:2d:portrait"
+		if ( userdata(2, tg) != 0 ) {
+			dim facebuff, userdata(2, tg)
+			userdata2(0, tg) = 1
+		}
+		if ( userdata2(0, tg) == 1 ) {
+			proc "[Custom Npc] Load portrait. File length: " + userdata(2, tg)
+			zOpen hgz, exedir + "user\\npc4.t", 0
+			zRead facebuff, hgz, userdata(2, tg)
+			zClose hgz
+		}
+		/********** OOMSESTEPNC - EXTRA CNPC CONFIG - ENDING *********/
 		proc "userNpc_update:2e"
 		s = getnpctxt("name.", "unknown,unknown")
 		csvstr2 s, s
@@ -1669,6 +1688,38 @@
 		userdata(9, tg) = int(getnpctxt("aiDist.", "1"))
 		userdata(10, tg) = int(getnpctxt("aiHeal.", "0"))
 		unaiactsubfreq(tg) = int(getnpctxt("aiActSubFreq.", "0"))
+		/********** OOMSESTEPNC - EXTRA CNPC CONFIG - BEGINNING *********/
+		proc "userNpc_update:set ref nc"
+		userdata2(1, tg) = limit(int(getnpctxt("transmissivity.", "0")), 0, 256)
+		userdata2(2, tg) = int(getnpctxt("dropShadowType.", "0"))
+		userdata2(3, tg) = int(getnpctxt("cSetPos.", "16"))
+		userdata2(4, tg) = int(getnpctxt("noFoodOrDrink.", "0"))
+		userdata2(5, tg) = int(getnpctxt("cnpcRole.", "0"))
+		userdata2(6, tg) = int(getnpctxt("randomName.", "0"))
+		s = getnpctxt("counterElem.", "0,0")
+		csvstr2 s, s
+		userdata2(7, tg) = int(s) + int(s(1)) * 1000
+		userdata2(8, tg) = int(getnpctxt("chipref.", "0"))
+		userdata2(9, tg) = int(getnpctxt("colref.", "0"))
+		userdata2(10, tg) = int(getnpctxt("isGodServant.", "0"))
+		userdatan2(0, tg) = getnpctxt("raceAlias.", "")
+		if ( en ) {
+			userdatan2(0, tg) = getnpctxt("raceAlias_en.", userdatan2(0, tg))
+		}
+		userdatan2(1, tg) = getnpctxt("classAlias.", "")
+		if ( en ) {
+			userdatan2(0, tg) = getnpctxt("classAlias_en.", userdatan2(1, tg))
+		}
+		userdatan2(2, tg) = getnpctxt("initEquip.", "")
+		userdatan2(3, tg) = getnpctxt("fixFaith.", "")
+		userdatan2(4, tg) = getnpctxt("fixPortrait.", "-2")
+		userdata3(0, tg) = int(getnpctxt("genAge.", "-1"))
+		userdata3(1, tg) = int(getnpctxt("genHeight.", "-1"))
+		userdata3(2, tg) = int(getnpctxt("genWeight.", "-1"))
+		userdata3(3, tg) = int(getnpctxt("tone.", "-1"))
+		userdata3(4, tg) = int(getnpctxt("matpet.", "0"))
+		/********** OOMSESTEPNC - EXTRA CNPC CONFIG - ENDING *********/
+		// Npc-specific dialogs.
 		p = instr(txtbuff, 0, "%txt")
 		txtbuff = strmid(txtbuff, p, instr(txtbuff, 0, "%endTxt") - p)
 		usertxt(tg) = strmid(txtbuff, 0, 80 * 500 - 2)
@@ -1686,6 +1737,14 @@
 		gsel 5
 		pos tg \ SPRITE_SHEET_COLS_CHARA * inf_tiles, SPRITE_SHEET_ROWS_CHARA * inf_tiles + tg / SPRITE_SHEET_COLS_CHARA * (inf_tiles * 2)
 		gcopy 9, 0, 0, 48, 96
+		/********** OOMSESTEPNC - EXTRA CNPC CONFIG - BEGINNING *********/
+		if ( userdata2(0, tg) == 1 ) {
+			gsel 100
+			pos tg \ 16 * 80, tg / 16 * 112
+			memfile facebuff
+			picload "MEM:", 1
+		}
+		/********** OOMSESTEPNC - EXTRA CNPC CONFIG - ENDING *********/
 		tg++
 	loop
 	proc "userNpc_update:3"
@@ -1880,6 +1939,26 @@
 	userdata(0, cun) = strsize
 	dim bmpbuff, strsize
 	bload bmpfile, bmpbuff
+	/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CNPC PORTRAIT - BEGINNING **********/
+	userdata(2, cun) = 0
+	dialog lang("ポートレートを埋め込む？", "Embed portrait?"), 2
+	if ( stat == 6 ) {
+		txt lang("どの画像を埋め込む？(jpg推奨)", "Embed which picture?(.jpg recommended)")
+		redraw 1
+		dialog "bmp|jpg", 16, "BMP File|JPG File"
+		if ( stat != 0 ) {
+			facefile = refstr
+			exist facefile
+			if ( strsize > 30000 ) {
+				txt "The file size must be lower than 30KB. Aborting."
+				return 0
+			}
+			userdata(2, cun) = strsize
+			dim facebuff, strsize
+			bload facefile, facebuff
+		}
+	}
+	/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CNPC PORTRAIT - ENDING **********/
 	if ( fread == 0 ) {
 		zOpen hgz, exedir + "user\\npc1.t", 1, 3
 		zWrite userdata(0, cun), hgz, 70 * 4
@@ -1910,6 +1989,19 @@
 		zRead txtbuff, hgz, userdata(1, cun)
 		zClose hgz
 	}
+	/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CNPC PORTRAIT - BEGINNING **********/
+	if (facefile != "") {
+		if (fread == 0) {
+			zOpen hgz, exedir + "user\\npc4.t", 1, 3
+			zWrite facebuff, hgz, userdata(2, cun)
+			zClose hgz
+		} else {
+			zOpen hgz, exedir + "user\\npc4.t", 0
+			zRead facebuff, hgz, userdata(2, cun)
+			zClose hgz
+		}
+	}
+	/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CNPC PORTRAIT - ENDING **********/
 	s = getnpctxt("name.", "unknown,unknown")
 	csvstr2 s, s
 	cnv_filestr s
@@ -1929,6 +2021,11 @@
 	zipadd2 "npc1.t"
 	zipadd2 "npc2.t"
 	zipadd2 "npc3.t"
+	/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CNPC PORTRAIT - BEGINNING **********/
+	if ( facefile != "" ) {
+		zipadd2 "npc4.t"
+	}
+	/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CNPC PORTRAIT - ENDING **********/
 	zipend2
 	q = s
 	gosub *userNpc_update
@@ -4222,6 +4319,8 @@
         gsel cnt
         bmpsave exedir + "tmp\\" + cnt + ".bmp"
     loop
+	gsel 100 // CNPC portrait from Omake
+	bmpsave exedir + "tmp\\" + 100 + ".bmp"
     gsel BUFFER_SCREEN
     return
 

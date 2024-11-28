@@ -7415,8 +7415,8 @@
 				gosub *prompt_key
 				gosub *screen_draw
 				rtval@NE = rtval
-				if ( rtval@NE == 0 ) {
-					return 1
+				if ( rtval@NE == 0 | rtval@NE == (-1) ) {
+					goto *com_userNpcExisting_loop
 				}
 				if ( rtval@NE >= 1 & rtval@NE <= 3 ) {
 					if ( rtval@NE == 1 ) {
@@ -7647,6 +7647,8 @@
 	listmax = 0
 	pagesize = 13
 	page = 0
+	keyrange = 0
+	keyrange++
 	cc = tc
 	snd SOUNDLIST_POP2
 	knowCNPC = p
@@ -7672,6 +7674,11 @@
 		i = SPRITE_SHEET_COLS_CHARA * SPRITE_SHEET_ROWS_CHARA + knowCNPC
 		chara_preparepic SPRITE_SHEET_COLS_CHARA * SPRITE_SHEET_ROWS_CHARA + knowCNPC, 0
 		pos wx + 276, wy + 149
+		if ( userdata2(0, knowCNPC) ) {
+			pos wx + 238, wy + 94
+			gzoom 80, 112, 100, knowCNPC \ 16 * 80, knowCNPC / 16 * 112, 80, 112
+			pos wx + 295, wy + 177
+		}
 		gmode 2, chipc(CHIPC_WIDTH, i), chipc(CHIPC_HEIGHT, i)
 		grotate 5, 0, 960, 0, chipc(CHIPC_WIDTH, i), chipc(CHIPC_HEIGHT, i)
 		gmode 2
@@ -7831,6 +7838,14 @@
 	redraw 1
 	await cfg_wait1
 	key_check
+	/********** MMAHACK - MOUSE OPERATION - BEGINNING **********/
+	if ( cfg_mmah_mouseoperation ) {
+		cursor_check@MMAH wy + 66, 19
+		if ( key = key_list(0) ) {
+			key = key_enter
+		}
+	}
+	/********** MMAHACK - MOUSE OPERATION - ENDING **********/
 	// page_change *com_knowCNPC_loop
 	if ( key == key_next | key == key_pageup | key == key_east | key == key_south ) {
 		page++
@@ -9858,6 +9873,18 @@
 				}
 			}
 		}
+		/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CNPC PORTRAIT - BEGINNING **********/
+		if ( cdata(CDATA_PORTRAIT, cc) == (-1) ) {
+			if ( cdata(CDATA_ID, cc) == CREATURE_ID_USER ) {
+				if ( cdata(CDATA_USERNPC_ID, cc) >= 0 & cdata(CDATA_USERNPC_ID, cc) < usernpcmax ) {
+					if ( userdata2(0, cdata(CDATA_USERNPC_ID, cc)) ) {
+						pos wx + 560, wy + 27
+						gzoom 80, 112, 100, cdata(CDATA_USERNPC_ID, cc) \ 16 * 80, cdata(CDATA_USERNPC_ID, cc) / 16 * 112, 80, 112
+					}
+				}
+			}
+		}
+		/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CNPC PORTRAIT - ENDING **********/
 		window2 wx + 557, wy + 23, 87, 120, 1, 10
 		if ( cbit(CHARA_BIT_PCC, cc) == 1 ) {
 			pos wx + 596 + 22, wy + 86 + 24

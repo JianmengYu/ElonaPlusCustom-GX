@@ -24793,6 +24793,18 @@
 			}
 		}
 	}
+	/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CNPC PORTRAIT - BEGINNING **********/
+	if ( cdata(CDATA_PORTRAIT, tc) == (-1) ) {
+		if ( cdata(CDATA_ID, tc) == CREATURE_ID_USER ) {
+			if ( cdata(CDATA_USERNPC_ID, tc) >= 0 & cdata(CDATA_USERNPC_ID, tc) < usernpcmax ) {
+				if ( userdata2(0, cdata(CDATA_USERNPC_ID, tc)) ) {
+					pos wx + 42, wy + 42
+					gzoom 80, 112, 100, cdata(CDATA_USERNPC_ID, tc) \ 16 * 80, cdata(CDATA_USERNPC_ID, tc) / 16 * 112, 80, 112
+				}
+			}
+		}
+	}
+	/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CNPC PORTRAIT - ENDING **********/
 	if ( evorec == 1 ) {
 		font lang(cfg_font1, cfg_font2), 30 - en * 2, 1
 		pos inf_clockw + 6, inf_clocky + 70
