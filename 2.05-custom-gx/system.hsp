@@ -1721,7 +1721,7 @@
 		/********** OOMSESTEPNC - EXTRA CNPC CONFIG - ENDING *********/
 		// Npc-specific dialogs.
 		p = instr(txtbuff, 0, "%txt")
-		txtbuff = strmid(txtbuff, p, instr(txtbuff, 0, "%endTxt") - p)
+		txtbuff = strmid(txtbuff, p, instr(txtbuff, 0, "%endTxt") - p + 7)
 		usertxt(tg) = strmid(txtbuff, 0, 80 * 500 - 2)
 		proc "userNpc_update:2.1"
 		gsel 9

@@ -190,6 +190,7 @@
 	return
 
 #deffunc customtalk int customtalk_charid, int customtalk_dbmode
+	proc "customtalk:Begin"
 	locvar_customtalk_f = 0
 	gdata(GDATA_CUSTOM_TALK) = 100
 	chatc@DP = customtalk_charid
@@ -355,6 +356,385 @@
 		if ( customtalk_dbmode == DBMODE_FLAVOR_LEADING ) {
 			locvar_customtalk_s = "%txtLeading"
 		}
+		/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CUSTOM TALK - BEGINNING **********/
+		if ( customtalk_dbmode == 401 ) { locvar_customtalk_s = "%txtsorosu" }
+		if ( customtalk_dbmode == 402 ) { locvar_customtalk_s = "%txtturusu" }
+		if ( customtalk_dbmode == 403 ) { locvar_customtalk_s = "%txthodoku" }
+		if ( customtalk_dbmode == 404 ) { locvar_customtalk_s = "%txtsibaru" }
+		if ( customtalk_dbmode == 405 ) { locvar_customtalk_s = "%txtnikorose" }
+		if ( customtalk_dbmode == 406 ) { locvar_customtalk_s = "%txtsaite" }
+		if ( customtalk_dbmode == 407 ) { locvar_customtalk_s = "%txtbiyaku" }
+		if ( customtalk_dbmode == 408 ) { locvar_customtalk_s = "%txtsibui" }
+		if ( customtalk_dbmode == 409 ) { locvar_customtalk_s = "txtnamaniku" }
+		if ( customtalk_dbmode == 410 ) { locvar_customtalk_s = "%txtkona" }
+		if ( customtalk_dbmode == 411 ) { locvar_customtalk_s = "%txtnamamen" }
+		if ( customtalk_dbmode == 412 ) { locvar_customtalk_s = "%txtheibon" }
+		if ( customtalk_dbmode == 413 ) { locvar_customtalk_s = "txt1_2" }
+		if ( customtalk_dbmode == 414 ) { locvar_customtalk_s = "txt3_4" }
+		if ( customtalk_dbmode == 415 ) { locvar_customtalk_s = "txt5_6" }
+		if ( customtalk_dbmode == 416 ) { locvar_customtalk_s = "txt7_8" }
+		if ( customtalk_dbmode == 417 ) { locvar_customtalk_s = "%txt9saiko" }
+		if ( customtalk_dbmode == 418 ) { locvar_customtalk_s = "%txtkunren" }
+		if ( customtalk_dbmode == 419 ) { locvar_customtalk_s = "%txtonaka" }
+		if ( customtalk_dbmode == 420 ) { locvar_customtalk_s = "%txthinsi" }
+		if ( customtalk_dbmode == 421 ) { locvar_customtalk_s = "%txtsing" }
+		if ( customtalk_dbmode == 424 ) { locvar_customtalk_s = "%txtpornobookdefault" }
+		if ( customtalk_dbmode == 426 ) { locvar_customtalk_s = "%txtallykilleddefault" }
+		if ( customtalk_dbmode == 427 ) { locvar_customtalk_s = "%txtactbefore" + efid }
+		if ( customtalk_dbmode == 428 ) { locvar_customtalk_s = "%txtactafter" + efid }
+		if ( customtalk_dbmode == 429 ) { locvar_customtalk_s = "%txtmilkcurse" }
+		if ( customtalk_dbmode == 430 ) { locvar_customtalk_s = "%txtmilk" }
+		if ( customtalk_dbmode == 431 ) { locvar_customtalk_s = "%txtsakecurse" }
+		if ( customtalk_dbmode == 432 ) { locvar_customtalk_s = "%txtsake" }
+		if ( customtalk_dbmode == 433 ) { locvar_customtalk_s = "%txtyopparai" }
+		if ( customtalk_dbmode == 964 ) { locvar_customtalk_s = "%txtkuyasii2" }
+		if ( customtalk_dbmode == 965 ) { locvar_customtalk_s = "%txtcaststyle2" }
+		if ( customtalk_dbmode == 966 ) { locvar_customtalk_s = "%txtswarm" }
+		if ( customtalk_dbmode == 967 ) { locvar_customtalk_s = "%txtkisei" }
+		if ( customtalk_dbmode == 968 ) { locvar_customtalk_s = "%txtcaststyle" }
+		if ( customtalk_dbmode == 969 ) { locvar_customtalk_s = "%txtuzimushi" }
+		if ( customtalk_dbmode == 970 ) { locvar_customtalk_s = "%txttoketa" }
+		if ( customtalk_dbmode == 971 ) { locvar_customtalk_s = "%txttobidasi" }
+		if ( customtalk_dbmode == 972 ) { locvar_customtalk_s = "%txtumare" }
+		if ( customtalk_dbmode == 973 ) { locvar_customtalk_s = "%txtparasite" }
+		if ( customtalk_dbmode == 974 ) { locvar_customtalk_s = "%txtbatou" }
+		if ( customtalk_dbmode == 975 ) { locvar_customtalk_s = "%txtbravo" }
+		if ( customtalk_dbmode == 976 ) { locvar_customtalk_s = "%txtthrowrock" }
+		if ( customtalk_dbmode == 977 ) { locvar_customtalk_s = "%txturusai" }
+		if ( customtalk_dbmode == 978 ) { locvar_customtalk_s = "%txtakita" }
+		if ( customtalk_dbmode == 979 ) { locvar_customtalk_s = "%txtlayhand" }
+		if ( customtalk_dbmode == 980 ) { locvar_customtalk_s = "%txtkaradake" }
+		if ( customtalk_dbmode == 981 ) { locvar_customtalk_s = "%txttoriage" }
+		if ( customtalk_dbmode == 982 ) { locvar_customtalk_s = "%txtyubikubi" }
+		if ( customtalk_dbmode == 983 ) { locvar_customtalk_s = "%txtomiyage" }
+		if ( customtalk_dbmode == 984 ) { locvar_customtalk_s = "%txttyohazusu" }
+		if ( customtalk_dbmode == 985 ) { locvar_customtalk_s = "%txtsnaguru" }
+		if ( customtalk_dbmode == 989 ) { locvar_customtalk_s = "%txtkya" }
+		if ( customtalk_dbmode == 993 ) { locvar_customtalk_s = "%txtsand" }
+		if ( customtalk_dbmode == 994 ) { locvar_customtalk_s = "%txttiti" }
+		if ( customtalk_dbmode == 996 ) { locvar_customtalk_s = "%txtnoru" }
+		if ( customtalk_dbmode == 997 ) { locvar_customtalk_s = "%txtoriru" }
+		if ( customtalk_dbmode == 998 ) { locvar_customtalk_s = "%txtjigo" }
+		if ( customtalk_dbmode == 999 ) { locvar_customtalk_s = "%txtkuyasii" }
+		if ( customtalk_dbmode == 1000 ) { locvar_customtalk_s = "%txtabuse" }
+		if ( customtalk_dbmode == 1001 ) { locvar_customtalk_s = "%txtmarriage" }
+		if ( customtalk_dbmode == 1002 ) { locvar_customtalk_s = "%txtanata" }
+		if ( customtalk_dbmode == 1003 ) { locvar_customtalk_s = "%txtiyayo" }
+		if ( customtalk_dbmode == 1004 ) { locvar_customtalk_s = "%txtnakanaka" }
+		if ( customtalk_dbmode == 1005 ) { locvar_customtalk_s = "%txtikuyo" }
+		if ( customtalk_dbmode == 1006 ) { locvar_customtalk_s = "%txtkiyameru" }
+		if ( customtalk_dbmode == 1007 ) { locvar_customtalk_s = "%txtpbou" }
+		if ( customtalk_dbmode == 1008 ) { locvar_customtalk_s = "%txtexhiya" }
+		if ( customtalk_dbmode == 1009 ) { locvar_customtalk_s = "%txtexthank" }
+		if ( customtalk_dbmode == 1010 ) { locvar_customtalk_s = "%txtgoei" }
+		if ( customtalk_dbmode == 1011 ) { locvar_customtalk_s = "%txtyatou" }
+		if ( customtalk_dbmode == 1012 ) { locvar_customtalk_s = "%txthihiya" }
+		if ( customtalk_dbmode == 1013 ) { locvar_customtalk_s = "%txtumaku" }
+		if ( customtalk_dbmode == 1014 ) { locvar_customtalk_s = "%txttikara" }
+		if ( customtalk_dbmode == 1015 ) { locvar_customtalk_s = "%txt0free" }
+		if ( customtalk_dbmode == 1016 ) { locvar_customtalk_s = "%txtokoto" }
+		if ( customtalk_dbmode == 1017 ) { locvar_customtalk_s = "%txtyanwari" }
+		if ( customtalk_dbmode == 1018 ) { locvar_customtalk_s = "%txtkodukuri" }
+		if ( customtalk_dbmode == 1019 ) { locvar_customtalk_s = "%txthousecooking" }
+		if ( customtalk_dbmode == 1020 ) { locvar_customtalk_s = "%txthousecookingyes" }
+		if ( customtalk_dbmode == 1021 ) { locvar_customtalk_s = "%txthousecookingno" }
+		if ( customtalk_dbmode == 1022 ) { locvar_customtalk_s = "%txtmaid2" }
+		if ( customtalk_dbmode == 1023 ) { locvar_customtalk_s = "%txtnpcpos1" }
+		if ( customtalk_dbmode == 1024 ) { locvar_customtalk_s = "%txtnpcpos2" }
+		if ( customtalk_dbmode == 1025 ) { locvar_customtalk_s = "%txtnpcpos3" }
+		if ( customtalk_dbmode == 1026 ) { locvar_customtalk_s = "%txtnpcpos4" }
+		if ( customtalk_dbmode == 1027 ) { locvar_customtalk_s = "%txtnpcpos0" }
+		if ( customtalk_dbmode == 963 ) { locvar_customtalk_s = "%txtmidare" }
+		if ( customtalk_dbmode == 962 ) { locvar_customtalk_s = "%txtgodskill" + efid }
+		if ( customtalk_dbmode == 961 ) { locvar_customtalk_s = "%txtenchantelem" + efid }
+		if ( customtalk_dbmode == 960 ) { locvar_customtalk_s = "%txtnight" }
+		if ( customtalk_dbmode == 959 ) { locvar_customtalk_s = "%txtawake" }
+		if ( customtalk_dbmode == 956 ) { locvar_customtalk_s = "%txtdrunkkarami" }
+		if ( customtalk_dbmode == 955 ) { locvar_customtalk_s = "%txtdrunkkaramare" }
+		/* oomSEST begin */
+		if ( customtalk_dbmode == 1028 ) { locvar_customtalk_s = "%txtPutAwayEngagementAccessories" }
+		/* oomSEST end */
+		/* NC begin */
+		if ( customtalk_dbmode == 1100 ) { locvar_customtalk_s = "%txtmaid3" }
+		if ( customtalk_dbmode == 1101 ) { locvar_customtalk_s = "%txtmaid4" }
+		if ( customtalk_dbmode == 1102 ) { locvar_customtalk_s = "%txthomemaid" }
+		if ( customtalk_dbmode == 1103 ) { locvar_customtalk_s = "%txtbadcook" }
+		if ( customtalk_dbmode == 1104 ) { locvar_customtalk_s = "%txtitempickup" }
+		if ( customtalk_dbmode == 1105 ) { locvar_customtalk_s = "%txtitempickup" + inv(INV_ITEM_ID, ci) }
+		if ( customtalk_dbmode == 1106 ) { locvar_customtalk_s = "%txtitembreak" }
+		if ( customtalk_dbmode == 1107 ) { locvar_customtalk_s = "%txtitembreak" + inv(INV_ITEM_ID, ci) }
+		if ( customtalk_dbmode == 1108 ) { locvar_customtalk_s = "%txtwhipping" }
+		if ( customtalk_dbmode == 1109 ) { locvar_customtalk_s = "%txtlikewhipping" }
+		if ( customtalk_dbmode == 1110 ) { locvar_customtalk_s = "%txtwholeprice" }
+		if ( customtalk_dbmode == 1120 ) { locvar_customtalk_s = "%txtcustomai1" }
+		if ( customtalk_dbmode == 1121 ) { locvar_customtalk_s = "%txtcustomai2" }
+		if ( customtalk_dbmode == 1122 ) { locvar_customtalk_s = "%txtcustomai3" }
+		if ( customtalk_dbmode == 1123 ) { locvar_customtalk_s = "%txtcustomai4" }
+		if ( customtalk_dbmode == 1124 ) { locvar_customtalk_s = "%txtcustomai5" }
+		if ( customtalk_dbmode == 1125 ) { locvar_customtalk_s = "%txtcustomai6" }
+		if ( customtalk_dbmode == 1126 ) { locvar_customtalk_s = "%txtcustomai7" }
+		if ( customtalk_dbmode == 1127 ) { locvar_customtalk_s = "%txtcustomai8" }
+		if ( customtalk_dbmode == 1128 ) { locvar_customtalk_s = "%txtcustomai9" }
+		if ( customtalk_dbmode == 1129 ) { locvar_customtalk_s = "%txtcustomai10" }
+		if ( customtalk_dbmode == 1130 ) { locvar_customtalk_s = "%txthomeshop" }
+		if ( customtalk_dbmode == 1131 ) { locvar_customtalk_s = "%txtmaid5" }
+		if ( customtalk_dbmode == 1132 ) { locvar_customtalk_s = "%txtmaid6" }
+		if ( customtalk_dbmode == 1133 ) { locvar_customtalk_s = "%txtmaid7" }
+		if ( customtalk_dbmode == 1134 ) { locvar_customtalk_s = "%txtWinmessage" }
+		if ( customtalk_dbmode == 1135 ) { locvar_customtalk_s = "%txtNohungry" }
+		if ( customtalk_dbmode == 1136 ) { locvar_customtalk_s = "%txtCleanup" }
+		if ( customtalk_dbmode == 1137 ) { locvar_customtalk_s = "%txtEatStare" }
+		if ( customtalk_dbmode == 1138 ) { locvar_customtalk_s = "%txtHatchEgg" }
+		if ( customtalk_dbmode == 1139 ) { locvar_customtalk_s = "%txttakelovepotion" }
+		if ( customtalk_dbmode == 1140 ) { locvar_customtalk_s = "%txtnightfall" }
+		if ( customtalk_dbmode == 1141 ) { locvar_customtalk_s = "%txtnightfallsuccesssasayaki" }
+		if ( customtalk_dbmode == 1142 ) { locvar_customtalk_s = "%txtnightfallfailsasayaki" }
+		if ( customtalk_dbmode == 1143 ) { locvar_customtalk_s = "%txtnightfallsuccesskimotiiikoto" }
+		if ( customtalk_dbmode == 1144 ) { locvar_customtalk_s = "%txtnightfallfailkimotiiikoto" }
+		if ( customtalk_dbmode == 1145 ) { locvar_customtalk_s = "%txtnightfallsuccessaibu" }
+		if ( customtalk_dbmode == 1146 ) { locvar_customtalk_s = "%txtnightfallfailaibu" }
+		if ( customtalk_dbmode == 1147 ) { locvar_customtalk_s = "%txtnightfallsuccessdaku" }
+		if ( customtalk_dbmode == 1148 ) { locvar_customtalk_s = "%txtnightfallfaildaku" }
+		if ( customtalk_dbmode == 1149 ) { locvar_customtalk_s = "%txtcarddescription" }
+		if ( customtalk_dbmode == 1150 ) { locvar_customtalk_s = "%txtfigurinedescription" }
+		if ( customtalk_dbmode == 1151 ) { locvar_customtalk_s = "%txtdolldescription" }
+		if ( customtalk_dbmode == 1152 ) { locvar_customtalk_s = "%txtpornbookdescription" }
+		if ( customtalk_dbmode == 1155 ) { locvar_customtalk_s = "%txtgivejeweloflove" }
+		if ( customtalk_dbmode == 1156 ) { locvar_customtalk_s = "%txtgivegp" }
+		if ( customtalk_dbmode == 1157 ) { locvar_customtalk_s = "%txttakegp" }
+		if ( customtalk_dbmode == 1158 ) { locvar_customtalk_s = "%txtwakeup" }
+		if ( customtalk_dbmode == 1159 ) { locvar_customtalk_s = "%txtwakeup_consent" }
+		if ( customtalk_dbmode == 1160 ) { locvar_customtalk_s = "%txtwakeup_rejection" }
+		// NC MMA implantation
+		if ( customtalk_dbmode == 1200 ) { locvar_customtalk_s = "%txtLayHand" }
+		if ( customtalk_dbmode == 1201 ) { locvar_customtalk_s = "%txtBurn" }
+		if ( customtalk_dbmode == 1202 ) { locvar_customtalk_s = "%txtPregnant" }
+		if ( customtalk_dbmode == 1203 ) { locvar_customtalk_s = "%txtInsult" }
+		if ( customtalk_dbmode == 1204 ) { locvar_customtalk_s = "%txtInsane" }
+		if ( customtalk_dbmode == 1205 ) { locvar_customtalk_s = "%txtProstitution_Begin" }
+		if ( customtalk_dbmode == 1206 ) { locvar_customtalk_s = "%txtProstitution_Ongoing" }
+		if ( customtalk_dbmode == 1207 ) { locvar_customtalk_s = "%txtProstitution_Break" }
+		if ( customtalk_dbmode == 1208 ) { locvar_customtalk_s = "%txtProstitution_Done" }
+		if ( customtalk_dbmode == 1209 ) { locvar_customtalk_s = "%txtProstitution_Payment1" }
+		if ( customtalk_dbmode == 1210 ) { locvar_customtalk_s = "%txtProstitution_Payment2" }
+		if ( customtalk_dbmode == 1211 ) { locvar_customtalk_s = "%txtDrunk1" }
+		if ( customtalk_dbmode == 1212 ) { locvar_customtalk_s = "%txtDrunk2" }
+		if ( customtalk_dbmode == 1213 ) { locvar_customtalk_s = "%txtMilk1" }
+		if ( customtalk_dbmode == 1214 ) { locvar_customtalk_s = "%txtMilk2" }
+		if ( customtalk_dbmode == 1215 ) { locvar_customtalk_s = "%txtLoveMiracle_egg" }
+		if ( customtalk_dbmode == 1216 ) { locvar_customtalk_s = "%txtLoveMiracle_water" }
+		if ( customtalk_dbmode == 1217 ) { locvar_customtalk_s = "%txtLoveMiracle_shit" }
+		if ( customtalk_dbmode == 1218 ) { locvar_customtalk_s = "%txtLoveMiracle_milk" }
+		if ( customtalk_dbmode == 1219 ) { locvar_customtalk_s = "%txtRejectLovePotion" }
+		if ( customtalk_dbmode == 1220 ) { locvar_customtalk_s = "%txtAlienEgg" }
+		if ( customtalk_dbmode == 1221 ) { locvar_customtalk_s = "%txtLomiasKilled" }
+		if ( customtalk_dbmode == 1222 ) { locvar_customtalk_s = "%txtLomiasNuked" }
+		if ( customtalk_dbmode == 1223 ) { locvar_customtalk_s = "%txtGwenKilled" }
+		if ( customtalk_dbmode == 1224 ) { locvar_customtalk_s = "%txtPerformSing" }
+		if ( customtalk_dbmode == 1225 ) { locvar_customtalk_s = "%txtPerformBored" }
+		if ( customtalk_dbmode == 1226 ) { locvar_customtalk_s = "%txtPerformBooboo" }
+		if ( customtalk_dbmode == 1227 ) { locvar_customtalk_s = "%txtPerformBravo" }
+		if ( customtalk_dbmode == 1228 ) { locvar_customtalk_s = "%txtRideBegin1" }
+		if ( customtalk_dbmode == 1229 ) { locvar_customtalk_s = "%txtRideBegin2" }
+		if ( customtalk_dbmode == 1230 ) { locvar_customtalk_s = "%txtRideEnd1" }
+		if ( customtalk_dbmode == 1231 ) { locvar_customtalk_s = "%txtRideEnd2" }
+		if ( customtalk_dbmode == 1232 ) { locvar_customtalk_s = "%txtItemHeavy" }
+		if ( customtalk_dbmode == 1233 ) { locvar_customtalk_s = "%txtItemNoway" }
+		if ( customtalk_dbmode == 1234 ) { locvar_customtalk_s = "%txtItemDontwant" }
+		if ( customtalk_dbmode == 1235 ) { locvar_customtalk_s = "%txtItemNever" }
+		if ( customtalk_dbmode == 1236 ) { locvar_customtalk_s = "%txtItemCreepy" }
+		if ( customtalk_dbmode == 1237 ) { locvar_customtalk_s = "%txtItemCursed" }
+		if ( customtalk_dbmode == 1238 ) { locvar_customtalk_s = "%txtItemRotten" }
+		if ( customtalk_dbmode == 1239 ) { locvar_customtalk_s = "%txtCantdrinkmore" }
+		if ( customtalk_dbmode == 1240 ) { locvar_customtalk_s = "%txtAbortion" }
+		if ( customtalk_dbmode == 1241 ) { locvar_customtalk_s = "%txtDrinkbaby" }
+		if ( customtalk_dbmode == 1242 ) { locvar_customtalk_s = "%txtAnnoyeddrunk" }
+		if ( customtalk_dbmode == 1243 ) { locvar_customtalk_s = "%txtMochiChoke" }
+		if ( customtalk_dbmode == 1244 ) { locvar_customtalk_s = "%txtMochiSpit" }
+		if ( customtalk_dbmode == 1245 ) { locvar_customtalk_s = "%txtChoked" }
+		if ( customtalk_dbmode == 1246 ) { locvar_customtalk_s = "%txtSalty" }
+		if ( customtalk_dbmode == 1247 ) { locvar_customtalk_s = "%txtEatammoth" }
+		if ( customtalk_dbmode == 1248 ) { locvar_customtalk_s = "%txtEatRotten" }
+		if ( customtalk_dbmode == 1249 ) { locvar_customtalk_s = "%txtEatPoisoned" }
+		if ( customtalk_dbmode == 1250 ) { locvar_customtalk_s = "%txtPoisonedWeapon" }
+		if ( customtalk_dbmode == 1251 ) { locvar_customtalk_s = "%txtPoisonedFood" }
+		if ( customtalk_dbmode == 1252 ) { locvar_customtalk_s = "%txtAphrodisiacFood" }
+		if ( customtalk_dbmode == 1253 ) { locvar_customtalk_s = "%txtProstitutionAccept1" }
+		if ( customtalk_dbmode == 1254 ) { locvar_customtalk_s = "%txtProstitutionAccept2" }
+		if ( customtalk_dbmode == 1255 ) { locvar_customtalk_s = "%txtProstitutionFurious" }
+		if ( customtalk_dbmode == 1256 ) { locvar_customtalk_s = "%txtEngagementBlush" }
+		if ( customtalk_dbmode == 1257 ) { locvar_customtalk_s = "%txtEngagementSwallows" }
+		if ( customtalk_dbmode == 1258 ) { locvar_customtalk_s = "%txtGlare" }
+		if ( customtalk_dbmode == 1259 ) { locvar_customtalk_s = "%txtGuardCall" }
+		if ( customtalk_dbmode == 1260 ) { locvar_customtalk_s = "%txtGuardFreeze" }
+		if ( customtalk_dbmode == 1261 ) { locvar_customtalk_s = "%txtGuardSister" }
+		if ( customtalk_dbmode == 1262 ) { locvar_customtalk_s = "%txtGuardPassover" }
+		if ( customtalk_dbmode == 1263 ) { locvar_customtalk_s = "%txtResurrected" }
+		if ( customtalk_dbmode == 1264 ) { locvar_customtalk_s = "%txtIronmaiden" }
+		if ( customtalk_dbmode == 1265 ) { locvar_customtalk_s = "%txtGuillotine" }
+		if ( customtalk_dbmode == 1266 ) { locvar_customtalk_s = "%txtHangself" }
+		if ( customtalk_dbmode == 1267 ) { locvar_customtalk_s = "%txtWellFall" }
+		if ( customtalk_dbmode == 1268 ) { locvar_customtalk_s = "%txtWellPetFall" }
+		if ( customtalk_dbmode == 1269 ) { locvar_customtalk_s = "%txtWellFloat" }
+		if ( customtalk_dbmode == 1270 ) { locvar_customtalk_s = "%txtPray" }
+		if ( customtalk_dbmode == 1271 ) { locvar_customtalk_s = "%txtOffer" }
+		if ( customtalk_dbmode == 1272 ) { locvar_customtalk_s = "%txtLeashPull" }
+		if ( customtalk_dbmode == 1273 ) { locvar_customtalk_s = "%txtLeashUntangle" }
+		if ( customtalk_dbmode == 1274 ) { locvar_customtalk_s = "%txtItemMine" }
+		if ( customtalk_dbmode == 1275 ) { locvar_customtalk_s = "%txtEatCannibal" }
+		if ( customtalk_dbmode == 1276 ) { locvar_customtalk_s = "%txtCastConfusion" }
+		if ( customtalk_dbmode == 1277 ) { locvar_customtalk_s = "%txtItemChristmas" }
+		if ( customtalk_dbmode == 1278 ) { locvar_customtalk_s = "%txtBelieve" }
+		if ( customtalk_dbmode == 1279 ) { locvar_customtalk_s = "%txtBelieve_" + beforefaith }
+		if ( customtalk_dbmode == 1280 ) { locvar_customtalk_s = "%txtBelieveDomain" }
+		if ( customtalk_dbmode == 1281 ) { locvar_customtalk_s = "%txtBelieveDomain_" + beforefaith }
+		if ( customtalk_dbmode == 1282 ) { locvar_customtalk_s = "%txtGlarePerformance" }
+		if ( customtalk_dbmode == 1283 ) { locvar_customtalk_s = "%txtCallbackPet" }
+		if ( customtalk_dbmode == 1284 ) { locvar_customtalk_s = "%txtCallbackDead" }
+		if ( customtalk_dbmode == 1285 ) { locvar_customtalk_s = "%txtTimeStop" }
+		if ( customtalk_dbmode == 1286 ) { locvar_customtalk_s = "%txtTimeStart" }
+		if ( customtalk_dbmode == 1287 ) { locvar_customtalk_s = "%txtTimeTick" }
+		if ( customtalk_dbmode == 1288 ) { locvar_customtalk_s = "%txtTimeTick" + gdata(801) }
+		if ( customtalk_dbmode == 1289 ) { locvar_customtalk_s = "%txtItemGive" }
+		if ( customtalk_dbmode == 1290 ) { locvar_customtalk_s = "%txtItemGive" + inv(3, limitmin(ci, 0)) }
+		if ( customtalk_dbmode == 1291 ) { locvar_customtalk_s = "%txtItemTake" }
+		if ( customtalk_dbmode == 1292 ) { locvar_customtalk_s = "%txtItemTake" + inv(3, limitmin(ci, 0)) }
+		if ( customtalk_dbmode == 1293 ) { locvar_customtalk_s = "%txtVomit" }
+		if ( customtalk_dbmode == 1294 ) { locvar_customtalk_s = "%txtVomitAlien" }
+		if ( customtalk_dbmode == 1295 ) { locvar_customtalk_s = "%txtHeadOff" }
+		if ( customtalk_dbmode == 1296 ) { locvar_customtalk_s = "%txtAssignShopkeeper" }
+		if ( customtalk_dbmode == 1297 ) { locvar_customtalk_s = "%txtResignShopkeeper" }
+		if ( customtalk_dbmode == 1298 ) { locvar_customtalk_s = "%txtAssignBreeder" }
+		if ( customtalk_dbmode == 1299 ) { locvar_customtalk_s = "%txtResignBreeder" }
+		if ( customtalk_dbmode == 1300 ) { locvar_customtalk_s = "%txtInvoke" + efid }
+		if ( customtalk_dbmode == 1301 ) { locvar_customtalk_s = "%txtInvokeCounter" + efid }
+		if ( customtalk_dbmode == 1302 ) { locvar_customtalk_s = "%txtDigging" }
+		if ( customtalk_dbmode == 1303 ) { locvar_customtalk_s = "%txtReading" }
+		if ( customtalk_dbmode == 1304 ) { locvar_customtalk_s = "%txtReadingPornobook" }
+		if ( customtalk_dbmode == 1306 ) { locvar_customtalk_s = "%txtFinishPornobook" }
+		if ( customtalk_dbmode == 1308 ) { locvar_customtalk_s = "%txtDifficult" }
+		if ( customtalk_dbmode == 1309 ) { locvar_customtalk_s = "%txtConfusedMore" }
+		if ( customtalk_dbmode == 1310 ) { locvar_customtalk_s = "%txtBookFallapart" }
+		if ( customtalk_dbmode == 1311 ) { locvar_customtalk_s = "%txtStayHome" }
+		if ( customtalk_dbmode == 1312 ) { locvar_customtalk_s = "%txtStayHomeCancel" }
+		if ( customtalk_dbmode == 1313 ) { locvar_customtalk_s = "%txtGuardHome" }
+		if ( customtalk_dbmode == 1314 ) { locvar_customtalk_s = "%txtGuardHomeCancel" }
+		if ( customtalk_dbmode == 1315 ) { locvar_customtalk_s = "%txtAreaChanged" + gdata(20) }
+		if ( customtalk_dbmode == 1316 ) { locvar_customtalk_s = "%txtWelcomeGuard" }
+		if ( customtalk_dbmode == 1317 ) { locvar_customtalk_s = "%txtDismissed" }
+		if ( customtalk_dbmode == 1318 ) { locvar_customtalk_s = "%txtExpelledBurnt" }
+		if ( customtalk_dbmode == 1319 ) { locvar_customtalk_s = "%txtSaleSlave" }
+		if ( customtalk_dbmode == 1320 ) { locvar_customtalk_s = "%txtHarvesting" }
+		if ( customtalk_dbmode == 1321 ) { locvar_customtalk_s = "%txtLearning" }
+		if ( customtalk_dbmode == 1322 ) { locvar_customtalk_s = "%txtTraining" }
+		if ( customtalk_dbmode == 1323 ) { locvar_customtalk_s = "%txtSearchingMaterial" }
+		if ( customtalk_dbmode == 1325 ) { locvar_customtalk_s = "%txtItemValentinesday" }
+		if ( customtalk_dbmode == 1326 ) { locvar_customtalk_s = "%txtItemAfterValentinesday" }
+		if ( customtalk_dbmode == 1327 ) { locvar_customtalk_s = "%txtOmiyageChristmas" }
+		if ( customtalk_dbmode == 1328 ) { locvar_customtalk_s = "%txtOmiyageValentinesday" }
+		if ( customtalk_dbmode == 1329 ) { locvar_customtalk_s = "%txtOmiyageAfterValentinesday" }
+		if ( customtalk_dbmode == 1330 ) { locvar_customtalk_s = "%txtItemDollsfestival" }
+		if ( customtalk_dbmode == 1331 ) { locvar_customtalk_s = "%txtItemAfterDollsfestival" }
+		if ( customtalk_dbmode == 1332 ) { locvar_customtalk_s = "%txtOmiyageDollsfestival" }
+		if ( customtalk_dbmode == 1333 ) { locvar_customtalk_s = "%txtOmiyageAfterDollsfestival" }
+		if ( customtalk_dbmode == 1334 ) { locvar_customtalk_s = "%txtItemDollsfestivalMale" }
+		if ( customtalk_dbmode == 1335 ) { locvar_customtalk_s = "%txtPayTax" }
+		if ( customtalk_dbmode == 1336 ) { locvar_customtalk_s = "%txtCooking" }
+		if ( customtalk_dbmode == 1337 ) { locvar_customtalk_s = "%txtDrinkWater" }
+		if ( customtalk_dbmode == 1338 ) { locvar_customtalk_s = "%txtDrinkDirtywater" }
+		if ( customtalk_dbmode == 1339 ) { locvar_customtalk_s = "%txtDrinkSoda" }
+		if ( customtalk_dbmode == 1340 ) { locvar_customtalk_s = "%txtDrinkDrag" }
+		if ( customtalk_dbmode == 1341 ) { locvar_customtalk_s = "%txtDrinkJuice" }
+		if ( customtalk_dbmode == 1342 ) { locvar_customtalk_s = "%txtItemGeorgesday" }
+		if ( customtalk_dbmode == 1343 ) { locvar_customtalk_s = "%txtOmiyageGeorgesday" }
+		if ( customtalk_dbmode == 1344 ) { locvar_customtalk_s = "%txtCriticalHit" }
+		if ( customtalk_dbmode == 1345 ) { locvar_customtalk_s = "%txtPiercingAttack" }
+		if ( customtalk_dbmode == 1346 ) { locvar_customtalk_s = "%txtPiercingAmmo" }
+		if ( customtalk_dbmode == 1347 ) { locvar_customtalk_s = "%txtSwallowing" }
+		if ( customtalk_dbmode == 1348 ) { locvar_customtalk_s = "%txtSwallowed" }
+		if ( customtalk_dbmode == 1349 ) { locvar_customtalk_s = "%txtCaughtupSwallow" }
+		if ( customtalk_dbmode == 1350 ) { locvar_customtalk_s = "%txtItemIrisfestival" }
+		if ( customtalk_dbmode == 1351 ) { locvar_customtalk_s = "%txtItemThrowIrisfestival" }
+		if ( customtalk_dbmode == 1352 ) { locvar_customtalk_s = "%txtVisitAdvHappyNewYear" }
+		if ( customtalk_dbmode == 1353 ) { locvar_customtalk_s = "%txtVisitAdvNewYearGift" }
+		if ( customtalk_dbmode == 1354 ) { locvar_customtalk_s = "%txtVisitAdvGetAway" }
+		if ( customtalk_dbmode == 1355 ) { locvar_customtalk_s = "%txtVisitAdvEatThis" }
+		if ( customtalk_dbmode == 1356 ) { locvar_customtalk_s = "%txtVisitAdvTakeThis" }
+		if ( customtalk_dbmode == 1357 ) { locvar_customtalk_s = "%txtVisitAdvSkillTeach" }
+		if ( customtalk_dbmode == 1358 ) { locvar_customtalk_s = "%txtVisitAdvSkillTrain" }
+		if ( customtalk_dbmode == 1359 ) { locvar_customtalk_s = "%txtVisitAdvAskAgain" }
+		if ( customtalk_dbmode == 1360 ) { locvar_customtalk_s = "%txtVisitAdvSkillTaught" }
+		if ( customtalk_dbmode == 1361 ) { locvar_customtalk_s = "%txtVisitAdvSkillTrained" }
+		if ( customtalk_dbmode == 1362 ) { locvar_customtalk_s = "%txtVisitAdvFriendship" }
+		if ( customtalk_dbmode == 1363 ) { locvar_customtalk_s = "%txtVisitAdvJustStopped" }
+		if ( customtalk_dbmode == 1364 ) { locvar_customtalk_s = "%txtVisitAdvDuringJourney" }
+		if ( customtalk_dbmode == 1365 ) { locvar_customtalk_s = "%txtVisitAdvFavoriteSkill" }
+		if ( customtalk_dbmode == 1366 ) { locvar_customtalk_s = "%txtVisitAdvProudSkill" }
+		if ( customtalk_dbmode == 1367 ) { locvar_customtalk_s = "%txtVisitAdvBored" }
+		if ( customtalk_dbmode == 1368 ) { locvar_customtalk_s = "%txtVisitAdvDrinkBooze" }
+		if ( customtalk_dbmode == 1369 ) { locvar_customtalk_s = "%txtVisitAdvGoodBooze" }
+		if ( customtalk_dbmode == 1370 ) { locvar_customtalk_s = "%txtVisitAdvWantedSayHi" }
+		if ( customtalk_dbmode == 1371 ) { locvar_customtalk_s = "%txtAreaChanged" }
+		if ( customtalk_dbmode == 1372 ) { locvar_customtalk_s = "%txtMapChanged" }
+		if ( customtalk_dbmode == 1373 ) { locvar_customtalk_s = "%txtHour" }
+		if ( customtalk_dbmode == 1374 ) { locvar_customtalk_s = "%txtMapChangedDead" }
+		if ( customtalk_dbmode == 1375 ) { locvar_customtalk_s = "%txtHourDead" }
+		if ( customtalk_dbmode == 1376 ) { locvar_customtalk_s = "%txtCalmDead" }
+		if ( customtalk_dbmode == 1377 ) { locvar_customtalk_s = "%txtJoinParty" }
+		if ( customtalk_dbmode == 1378 ) { locvar_customtalk_s = "%txtResurrection" }
+		if ( customtalk_dbmode == 1379 ) { locvar_customtalk_s = "%txtNight" }
+		if ( customtalk_dbmode == 1380 ) { locvar_customtalk_s = "%txtAwake" }
+		if ( customtalk_dbmode == 1381 ) { locvar_customtalk_s = "%txtItemSilverwolfDays" }
+		if ( customtalk_dbmode == 1382 ) { locvar_customtalk_s = "%txtOmiyageSilverwolfDays" }
+		if ( customtalk_dbmode == 1383 ) { locvar_customtalk_s = "%txtHastalavistaBaby" }
+		if ( customtalk_dbmode == 1384 ) { locvar_customtalk_s = "%txtSummoned" }
+		if ( customtalk_dbmode == 1385 ) { locvar_customtalk_s = "%txtGainWeight" }
+		if ( customtalk_dbmode == 1386 ) { locvar_customtalk_s = "%txtLoseWeight" }
+		if ( customtalk_dbmode == 1387 ) { locvar_customtalk_s = "%txtGrowTaller" }
+		if ( customtalk_dbmode == 1388 ) { locvar_customtalk_s = "%txtGrowSmaller" }
+		if ( customtalk_dbmode == 1389 ) { locvar_customtalk_s = "%txtFairySeed" }
+		// System Message
+		// invctrl
+		if ( customtalk_dbmode == 10001 ) { locvar_customtalk_s = "%txtSysExamine" }
+		if ( customtalk_dbmode == 10002 ) { locvar_customtalk_s = "%txtSysDrop" }
+		if ( customtalk_dbmode == 10003 ) { locvar_customtalk_s = "%txtSysPick" }
+		if ( customtalk_dbmode == 10005 ) { locvar_customtalk_s = "%txtSysEat" }
+		if ( customtalk_dbmode == 10006 ) { locvar_customtalk_s = "%txtSysEquip" }
+		if ( customtalk_dbmode == 10007 ) { locvar_customtalk_s = "%txtSysRead" }
+		if ( customtalk_dbmode == 10008 ) { locvar_customtalk_s = "%txtSysDrink" }
+		if ( customtalk_dbmode == 10009 ) { locvar_customtalk_s = "%txtSysZap" }
+		if ( customtalk_dbmode == 10010 ) { locvar_customtalk_s = "%txtSysGive" }
+		if ( customtalk_dbmode == 10011 ) { locvar_customtalk_s = "%txtSysBuy" }
+		if ( customtalk_dbmode == 10012 ) { locvar_customtalk_s = "%txtSysSell" }
+		if ( customtalk_dbmode == 10013 ) { locvar_customtalk_s = "%txtSysIdentify" }
+		if ( customtalk_dbmode == 10014 ) { locvar_customtalk_s = "%txtSysUse" }
+		if ( customtalk_dbmode == 10015 ) { locvar_customtalk_s = "%txtSysOpen" }
+		if ( customtalk_dbmode == 10016 ) { locvar_customtalk_s = "%txtSysCook" }
+		if ( customtalk_dbmode == 10017 ) { locvar_customtalk_s = "%txtSysBlend" }
+		if ( customtalk_dbmode == 10018 ) { locvar_customtalk_s = "%txtSysBlendApply" }
+		if ( customtalk_dbmode == 10019 ) { locvar_customtalk_s = "%txtSysOffer" }
+		if ( customtalk_dbmode == 10020 ) { locvar_customtalk_s = "%txtSysTrade" }
+		if ( customtalk_dbmode == 10021 ) { locvar_customtalk_s = "%txtSysTradeOffer" }
+		if ( customtalk_dbmode == 10022 ) { locvar_customtalk_s = "%txtSysTake" }
+		if ( customtalk_dbmode == 10023 ) { locvar_customtalk_s = "%txtSysTarget" }
+		if ( customtalk_dbmode == 10024 ) { locvar_customtalk_s = "%txtSysPut" }
+		if ( customtalk_dbmode == 10025 ) { locvar_customtalk_s = "%txtSysWantTake" }
+		if ( customtalk_dbmode == 10026 ) { locvar_customtalk_s = "%txtSysThrow" }
+		if ( customtalk_dbmode == 10027 ) { locvar_customtalk_s = "%txtSysSteal" }
+		if ( customtalk_dbmode == 10028 ) { locvar_customtalk_s = "%txtSysTradeMedal" }
+		if ( customtalk_dbmode == 10029 ) { locvar_customtalk_s = "%txtSysReserve" }
+		// invctrl end
+		if ( customtalk_dbmode == 10100 ) { locvar_customtalk_s = "%txtSysSwap" }
+		if ( customtalk_dbmode == 10101 ) { locvar_customtalk_s = "%txtSysDropItemCheck" }
+		if ( customtalk_dbmode == 10102 ) { locvar_customtalk_s = "%txtSysSetItemCheck" }
+		if ( customtalk_dbmode == 10103 ) { locvar_customtalk_s = "%txtSysTownItemCheck" }
+		if ( customtalk_dbmode == 10104 ) { locvar_customtalk_s = "%txtSysManyItemCheck" }
+		if ( customtalk_dbmode == 10105 ) { locvar_customtalk_s = "%txtSysPickupItem" }
+		if ( customtalk_dbmode == 10106 ) { locvar_customtalk_s = "%txtSysPickContain" }
+		if ( customtalk_dbmode == 10107 ) { locvar_customtalk_s = "%txtSysContainItem" }
+		if ( customtalk_dbmode == 10108 ) { locvar_customtalk_s = "%txtSysDropItem" }
+		if ( customtalk_dbmode == 10109 ) { locvar_customtalk_s = "%txtSysDropItemFail" }
+		/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CUSTOM TALK - ENDING **********/
 		locvar_customtalk_p = instr(locvar_customtalk_buff, 0, locvar_customtalk_s + "," + lang("JP", "EN"))
 		// Incase someone deleted every talk dialog: Prevent npc stats being shown.
 		if ( locvar_customtalk_p == (-1) ) {
@@ -363,6 +743,10 @@
 			return 1
 		}
 		locvar_customtalk_buff = strmid(locvar_customtalk_buff, locvar_customtalk_p, instr(locvar_customtalk_buff, locvar_customtalk_p + 1, "%"))
+		/********** OOMSESTEPNC - ADDT - BEGINNING **********/
+		proc "customtalk:ADDT filter"
+		addt locvar_customtalk_buff, gdata, cdata, sdata, adata, mdata, cdatan, inv, addtlvar, addtgvar, unitid, tc, cc, filter_t
+		/********** OOMSESTEPNC - ADDT - ENDING **********/
 		if ( noteinfo(0) > 1 ) {
 			// Allow non-pet/non-adventurer CNPCs have ordered dialogues, it's disabled for pets because the cdata is used for Advance Casting (Player) / Obedience Training (Pet) / Send Message (Adventurers)
 			// gdata(GDATA_AREA) == AREA_SHOW_HOUSE & customtalk_dbmode == DBMODE_FLAVOR_DIALOG & customtalk_charid > MAX_CHARA_FOLLOWER & cdata(CDATA_ID, customtalk_charid) == CREATURE_ID_USER
@@ -7341,6 +7725,40 @@
 			}
 		}
 		gosub *exit_death
+
+		/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CNPC JOIN YOU UPON DEFEAT - BEGINNING **********/
+		if ( cdata(CDATA_QUALITY, dmghp_charid) == FIX_QUALITY_UNIQUE ) {
+			if ( dmghp_charid > MAX_CHARA_NC & dmghp_source >= 0 & dmghp_source < MAX_CHARA_NC ) {
+				// TODO - theres no faction system in plus so just use instr
+				if ( cdata(CDATA_ID, dmghp_charid) == CREATURE_ID_USER & cdata(CDATA_USERNPC_ID, dmghp_charid) >= 0 & cdata(CDATA_USERNPC_ID, dmghp_charid) < usernpcmax ) {
+					if ( instr(userdatan(4, cdata(CDATA_USERNPC_ID, dmghp_charid)), 0, "/wakeup/") != (-1) & instr(userdatan(4, cdata(CDATA_USERNPC_ID, dmghp_charid)), 0, "/petshop/") == (-1) ) {
+						if ( get_freeally() != 0 ) {
+							txtef COLOR_GREEN
+							customtalk dmghp_charid, 1158
+							gosub *convert_word
+							if ( stat == 0 ) {
+								txt lang("なんと　" + cdatan(0, dmghp_charid) + "が　おきあがり　なかまに　なりたそうに　こちらをみている！　なかまにしてあげますか？", "" + cdatan(0, dmghp_charid) + " stood up and offered to join you! Would you like to join " + cdatan(0, dmghp_charid) + "?")
+							}
+							promptYesNo
+							snd 20
+							if ( rtval == 0 ) {
+								customtalk dmghp_charid, 1159
+								gosub *convert_word
+								rc = dmghp_charid
+								gosub *add_ally
+							} else {
+								customtalk dmghp_charid, 1160
+								gosub *convert_word
+								if ( stat == 0 ) {
+									txt lang("" + cdatan(0, dmghp_charid) + "は　さびしそうに　さっていった", "" + cdatan(0, dmghp_charid) + " vanish" + _s(dmghp_charid, 1) + ".")
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CNPC JOIN YOU UPON DEFEAT - ENDING **********/
 
 		/********** ANNA CUSTOM - BEGINNING **********/ // Pets die permanently.
 

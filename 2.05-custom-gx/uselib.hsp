@@ -115,6 +115,13 @@
 #func ImmSetOpenStatus "ImmSetOpenStatus" sptr, sptr
 #cfunc ImmGetOpenStatus "ImmGetOpenStatus" sptr
 
+#uselib "ADDT.dll"
+#func addt "addt" pexinfo, nullptr, nullptr, nullptr
+#func txtmid "txtmid" var, str
+sdim addtlvar, 512, 245
+sdim addtgvar, 512
+filter_t = "/comparisonval-key/strcomparison/"
+
 #regcmd "GuruGuruSMF4", "GuruGuruSMF4.hpi"
 #cmd GGS4OpenDevice			0
 #cmd GGS4CloseDevice		1

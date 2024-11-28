@@ -6698,6 +6698,20 @@
 		}
 		s = strmid(buff, p + 1, p(1) - 1), strmid(buff, 0, p), strmid(buff, p + p(1) + 1, p(2) - p(1) - p)
 		repeat 1
+			/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CONVERT WORD PLAY SOUND - BEGINNING **********/
+			if ( strmid(s, 0, 4) == "snd:" ) {
+				s = strmid(s, -1, strlen(s) - 4)
+				playsound s
+				s = ""
+				break
+			}
+			if ( strmid(s, 0, 4) == "bgm:" ) {
+				s = strmid(s, -1, strlen(s) - 4)
+				playbgm s
+				s = ""
+				break
+			}
+			/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CONVERT WORD PLAY SOUND - ENDING **********/
 			if ( s == "ref" ) {
 				if ( talkref == 1 ) {
 					s = lang("" + gdata(GDATA_GUEST), "" + gdata(GDATA_GUEST) + " guest" + _s3(gdata(GDATA_GUEST)))

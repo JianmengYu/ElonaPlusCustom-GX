@@ -75,6 +75,38 @@
 	}
 	return
 
+/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CONVERT WORD PLAY SOUND - BEGINNING **********/
+#defcfunc mediafind str mediafind_arg1_folder, str mediafind_arg2_filename
+	mediafile = exedir + "user\\" + mediafind_arg1_folder + mediafind_arg2_filename
+	exist mediafile
+	if (strsize != (-1)) {
+		return 0
+	} else {
+		mediafile = exedir + mediafind_arg1_folder + mediafind_arg2_filename
+		exist mediafile
+		if (strsize != (-1)) {
+			return 0
+		}
+	}
+	mediafile = ""
+	return -1
+
+#deffunc playsound str playsound_arg1_filename, int playsound_arg2_define
+	if (mediafind("sound\\", playsound_arg1_filename) != (-1)) {
+		sndload mediafile, SOUNDLIST_MAX + playsound_arg2_define
+		snd SOUNDLIST_MAX + playsound_arg2_define, 0, 2
+	}
+	return
+
+#deffunc playbgm str playsound_arg1_filename
+	if (mediafind("sound\\", playsound_arg1_filename) != (-1)) {
+		musicfile(length(musicfile) - 1) = playsound_arg1_filename
+		music = length(musicfile) - 1
+		gosub *music_play
+	}
+	return
+/********** OOMSESTEPNC - EXTRA CNPC CONFIG - CONVERT WORD PLAY SOUND - ENDING **********/
+
 *sound_init
 	dim soundlist, 6
 	if ( cfg_sound == 1 ) {
