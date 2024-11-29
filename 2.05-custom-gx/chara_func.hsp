@@ -745,7 +745,11 @@
 		locvar_customtalk_buff = strmid(locvar_customtalk_buff, locvar_customtalk_p, instr(locvar_customtalk_buff, locvar_customtalk_p + 1, "%"))
 		/********** OOMSESTEPNC - ADDT - BEGINNING **********/
 		proc "customtalk:ADDT filter"
-		addt locvar_customtalk_buff, gdata, cdata, sdata, adata, mdata, cdatan, inv, addtlvar, addtgvar, unitid, tc, cc, filter_t
+		exist exedir + "ADDT.dll"
+		if ( strsize != (-1) ) {
+			unitid = customtalk_charid
+			addt locvar_customtalk_buff, gdata, cdata, sdata, adata, mdata, cdatan, inv, addtlvar, addtgvar, unitid, tc, cc, filter_t
+		}
 		/********** OOMSESTEPNC - ADDT - ENDING **********/
 		if ( noteinfo(0) > 1 ) {
 			// Allow non-pet/non-adventurer CNPCs have ordered dialogues, it's disabled for pets because the cdata is used for Advance Casting (Player) / Obedience Training (Pet) / Send Message (Adventurers)
@@ -7745,6 +7749,12 @@
 								customtalk dmghp_charid, 1159
 								gosub *convert_word
 								rc = dmghp_charid
+								gosub *resurrect
+								cxinit = cdata(CDATA_X, CHARA_PLAYER)
+								cyinit = cdata(CDATA_Y, CHARA_PLAYER)
+								gosub *place_chara
+								cdata(CDATA_AREA, rc) = AREA_NONE
+								gosub *charaRefresh
 								gosub *add_ally
 							} else {
 								customtalk dmghp_charid, 1160
