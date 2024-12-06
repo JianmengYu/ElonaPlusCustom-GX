@@ -15,7 +15,9 @@ This repository is an unofficial continuation of the above repository using Ruin
 2. Extract the contents of Custom-GX's archive to the `elonaplus2.24` folder, overwriting all existing files.
 3. Run `elonapluscgx.exe`.
 
-## Building
+![](installation.gif)
+
+## Building (You don't need this for playing.)
 
 1. Follow the installation instructions above. Rename the `elonaplus2.24` folder to `2.05-custom-gx` and move it to the `assets/` folder of this repository.
 2. Download the HSP3.4 SDK (`hsp34a.zip`) from [here](http://hsp.tv/make/downlist.html) and extract it somewhere.
