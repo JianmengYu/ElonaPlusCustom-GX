@@ -450,6 +450,8 @@
 #define global	TCG_SKILL_EFF_PAYLIFEGAINFIELDLIMIT 170
 #define global	TCG_SKILL_EFF_DISCOVER_CNPC_MOB_FILL 171
 #define global	TCG_SKILL_EFF_DISCOVER_CNPC_ELITE_SUMMON 172
+#define global	TCG_SKILL_EFF_DEAL_CREATURE_DAMAGE_DRAW1 173
+#define global	TCG_SKILL_EFF_PAPER_BOMB_TRANSFORM 174
 
 #define global	TCG_SKILL_FILTER_NONE 0
 #define global	TCG_SKILL_FILTER_MALE 1
@@ -787,6 +789,8 @@
 #define global	TCG_EFF_ONGOING_INCREASECOSTEACH3TOTALTURN 2915
 #define global	TCG_EFF_ONGOING_INCREASE5ATTACKWHENWOUNDED 2916
 
+#define global	TCG_EFF_HIDENSHIKIORIGAMI 447
+#define global	TCG_EFF_KAMIKAKUSHI 448
 #define global	TCG_EFF_RATPOWER 449
 #define global	TCG_EFF_RATFILL 450
 #define global	TCG_EFF_RATRUSH 451
@@ -2425,6 +2429,10 @@
 	effdesc@tcg(TCG_EFF_PAPERSHURIKEN) = "Begin Phase: Deal 2 Damage Split Among Enemies."
 	effref@tcg(TCG_SKILL_REF, TCG_EFF_PAPERPLANE) = 0, TCG_SKILL_TYPE_ONGAMESTART + TCG_SKILL_TYPE_BATTLECRY, TCG_SKILL_TARGET_PLAYER, TCG_SKILL_EFF_PAYLIFEGAINFIELDLIMIT, 3, 1, TCG_SKILL_FILTER_NONE, TCG_SKILL_AI_NONE
 	effdesc@tcg(TCG_EFF_PAPERPLANE) = "StartOfGame/Battlecry: Pay 3 Hp, Gain +1 Field Limit."
+	effref@tcg(TCG_SKILL_REF, TCG_EFF_KAMIKAKUSHI) = 0, TCG_SKILL_TYPE_BATTLECRY, TCG_SKILL_TARGET_PLAYER_HAND_ALL, TCG_SKILL_EFF_PAPER_BOMB_TRANSFORM, 1, 1, TCG_SKILL_FILTER_NONE, TCG_SKILL_AI_NONE
+	effdesc@tcg(TCG_EFF_KAMIKAKUSHI) = "Battlecry: Turn every Card in your Hand into kamikaze paper bombs - Battlecry: Deal 3 Dmg to Target and Draw 1 Card."
+	effref@tcg(TCG_SKILL_REF, TCG_EFF_HIDENSHIKIORIGAMI) = 0, TCG_SKILL_TYPE_BATTLECRY, TCG_SKILL_TARGET_ENEMY_FIELD_CHOOSE, TCG_SKILL_EFF_DEAL_CREATURE_DAMAGE_DRAW1, 3, 1
+	effdesc@tcg(TCG_EFF_HIDENSHIKIORIGAMI) = "Battlecry: Deal 3 Damage to an Enemy, and Draw 1 Card."
 	
 	effref@tcg(TCG_SKILL_REF, TCG_EFF_BISQUEDOLL) = 0, TCG_SKILL_TYPE_BATTLECRY, TCG_SKILL_TARGET_PLAYER_FIELD_RANDOM, TCG_SKILL_EFF_MERGEANDUPGRADE, 1, 1, TCG_SKILL_FILTER_DBID_NOTSELF + CREATURE_ID_BISQUE_DOLL, TCG_SKILL_AI_KEEPALIVE
 	effdesc@tcg(TCG_EFF_BISQUEDOLL) = "Battlecry: Merge with another Bisque Doll."
@@ -3103,7 +3111,7 @@
 		loop
 	loop
 	gmode 2
-	useitemimages@tcg = 333, 986, 34, 35, 37, 36, 41, 39, 40, 26
+	useitemimages@tcg = 333, 986, 34, 35, 37, 36, 41, 39, 40, 26, 1278
 	repeat length(useitemimages@tcg)
 		pos (cnt\22) * 72 + 12, (cnt/22) * 96 + 96 + 24 + (chipi(CHIPI_HEIGHT, useitemimages@tcg(cnt)) > 48) * 24
 		gcopy 1, useitemimages@tcg(cnt)\33*48, useitemimages@tcg(cnt)/33*48, 48, 48

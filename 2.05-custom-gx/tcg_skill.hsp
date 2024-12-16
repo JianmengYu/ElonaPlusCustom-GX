@@ -656,6 +656,21 @@
 		goto *actionproc_SWEND1
 		_switch_sw@tcg++
 	}
+	if ( _switch_val@tcg == TCG_SKILL_EFF_DEAL_CREATURE_DAMAGE_DRAW1 | _switch_sw@tcg ) {
+		_switch_sw@tcg = 0
+		if ( ac@tcg >= 0 & ac@tcg < maxcard@tcg ) {
+			repeat 1, ac@tcg
+				if ( aeft@tcg >= 0 & aeft@tcg < maxcard@tcg ) {
+					dmgcard aeft@tcg, effref@tcg(TCG_SKILL_POWER, aeff@tcg)
+				}
+				if ( cnt >= 0 & cnt < maxcard@tcg ) {
+					getrandomcard card@tcg(TCG_CARD_CONTROLLER, cnt)
+				}
+			loop	
+		}
+		goto *actionproc_SWEND1
+		_switch_sw@tcg++
+	}
 	if ( _switch_val@tcg == TCG_SKILL_EFF_SHELLKING | _switch_sw@tcg ) {
 		_switch_sw@tcg = 0
 		if ( aeft@tcg >= 0 & aeft@tcg < maxcard@tcg ) {
@@ -1523,6 +1538,37 @@
 				makecardlist
 				cardpos 0, -1
 				cardpos 1, -1
+			}
+		}
+		goto *actionproc_SWEND1
+		_switch_sw@tcg++
+	}
+	if ( _switch_val@tcg == TCG_SKILL_EFF_PAPER_BOMB_TRANSFORM | _switch_sw@tcg ) {
+		_switch_sw@tcg = 0
+		if ( aeft@tcg >= 0 & aeft@tcg < maxcard@tcg ) {
+			if ( ac@tcg >= 0 & ac@tcg < maxcard@tcg ) {
+				card@tcg(TCG_CARD_COST, aeft@tcg) = 1
+				card@tcg(TCG_CARD_HP, aeft@tcg) = 1
+				card@tcg(TCG_CARD_ATTACK, aeft@tcg) = 3
+				card@tcg(TCG_CARD_REF_COST, aeft@tcg) = 1
+				card@tcg(TCG_CARD_REF_HP, aeft@tcg) = 1
+				card@tcg(TCG_CARD_REF_ATTACK, aeft@tcg) = 3
+				card@tcg(TCG_CARD_EFFECT, aeft@tcg) = TCG_EFF_HIDENSHIKIORIGAMI
+				cdbitmod TCG_BIT_FACE_UP, aeft@tcg, 1
+				cdbitmod TCG_BIT_SUICIDE, aeft@tcg, 1
+				card@tcg(TCG_CARD_REF_PIC, aeft@tcg) = -32
+				card@tcg(TCG_CARD_REF_CHARA_PIC, aeft@tcg) = 0
+				carddetailneff@tcg(aeft@tcg) = "Paper Bomb  No.???   Paper  Rare: Common\n[Kamikaze]\nEffect: Battlecry: Deal 3 Damage to an Enemy, and Draw 1 Card."
+				reconstruct_card_text aeft@tcg
+
+				card@tcg(TCG_CARD_X_MOVETO, ac@tcg) = card@tcg(TCG_CARD_X, aeft@tcg) - 8, card@tcg(TCG_CARD_Y, aeft@tcg) + 40 - 80 * (ap@tcg != 0)
+				tcgpass 20
+				efllistaddcard 18, aeft@tcg
+				makecardlist
+				cardpos ap@tcg, -1
+				cardposhand ap@tcg, -1
+				tcgpass 15
+				efllistadd 2, 1, card@tcg(TCG_CARD_X, aeft@tcg), card@tcg(TCG_CARD_Y, aeft@tcg), card@tcg(TCG_CARD_X, aeft@tcg), card@tcg(TCG_CARD_Y, aeft@tcg)
 			}
 		}
 		goto *actionproc_SWEND1

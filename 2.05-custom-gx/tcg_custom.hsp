@@ -17212,6 +17212,19 @@
 		return 1
 	}
 	// spirit
+	if ( dbid == CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI ) {
+		cardrefrace = "spirit"
+		cardrefclass = "warmage"
+		cardreflvl = 10
+		cardrefquality = FIX_QUALITY_UNIQUE
+		cardrefdomain = 5
+		cardrefcost = 4
+		cardrefattack = 3
+		cardrefhp = 8
+		cardrefskillid = TCG_EFF_KAMIKAKUSHI
+		cardrefbits = "7,11,103"
+		return 1
+	}
 	if ( dbid == CREATURE_ID_KAMIHIKOUKI ) {
 		cardrefrace = "spirit"
 		cardrefclass = "warrior"
