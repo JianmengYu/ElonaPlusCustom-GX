@@ -1272,12 +1272,12 @@
 				inv(INV_ITEM_PARAM1, ci) = EVITEM_HEART_MAGIC
 			}
 		}
-		if ( rnd(20) == 0 ) {
+		if ( rnd(30) == 0 ) {
 			if ( gdata(GDATA_FLAG_RARE_DROP) == 100 ) {
 				flt
 				itemcreate -1, ITEM_ID_TRAINING_TICKET, cdata(CDATA_X, rc), cdata(CDATA_Y, rc), 0
 				if ( stat != 0 ) {
-					inv(INV_ITEM_PARAM2, ci) = limit(cdata(CDATA_LEVEL, rc) / 2 + rnd(cdata(CDATA_LEVEL, rc) / 2 + 1), 1, 50)
+					inv(INV_ITEM_PARAM2, ci) = limit((cdata(CDATA_LEVEL, rc) / 10 + 1) * 10, 10, 100)
 				}
 			}
 		}

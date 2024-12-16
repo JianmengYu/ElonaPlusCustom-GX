@@ -2427,57 +2427,49 @@
 	if ( _switch_val == ANIMATION_SAND_CANNON | _switch_sw ) {
 		_switch_sw = 0
 		anicol = 0
-		gsel BUFFER_ITEM
-		color 0
-		boxf 0, 960, chipi(CHIPI_WIDTH, xy2pic(5, 0)), chipi(CHIPI_HEIGHT, xy2pic(5, 0)) + 960
-		if ( 5 == 528 ) {
-			gmode 2
-			pos 0, 960
-			gcopy BUFFER_ITEM, 0, 768, inf_tiles, inf_tiles
-			pos 0, 1008
-			gzoom 22, 20, 5, chipc(CHIPC_X, anicol) + 8, chipc(CHIPC_Y, anicol) + 4 + (chipc(CHIPC_HEIGHT, anicol) > inf_tiles) * 8, chipc(CHIPC_WIDTH, anicol) - 16, chipc(CHIPC_HEIGHT, anicol) - 8 - (chipc(CHIPC_HEIGHT, anicol) > inf_tiles) * 10, 1
-			pos 6, 974
-			gcopy BUFFER_ITEM, 0, 1008, 22, 20
-			gsel selcur
-		}
-		else {
-			if ( 5 == 1119 ) {
-				pos 0, 1055 - chipc(CHIPC_HEIGHT, anicol)
-				gcopy BUFFER_CHR, chipc(CHIPC_X, anicol), chipc(CHIPC_Y, anicol), chipc(CHIPC_WIDTH, anicol), chipc(CHIPC_HEIGHT, anicol)
-				gmode 2
-				gsel selcur
-			}
-			else {
-				if ( 5 == 1206 ) {
-					pos 0, 1055 - chipc(CHIPC_HEIGHT, anicol)
-					gcopy BUFFER_CHR, chipc(CHIPC_X, anicol), chipc(CHIPC_Y, anicol), chipc(CHIPC_WIDTH, anicol), chipc(CHIPC_HEIGHT, anicol)
-					gfini chipi(CHIPI_WIDTH, xy2pic(5, 0)), chipi(CHIPI_HEIGHT, xy2pic(5, 0))
-					gfdec2 0, 0, 255
-					gsel selcur
-				}
-				else {
-					if ( 5 == 531 ) {
-						pos 8, 1058 - chipc(CHIPC_HEIGHT, anicol)
-						gcopy BUFFER_CHR, chipc(CHIPC_X, anicol) + 8, chipc(CHIPC_Y, anicol) + 2, chipc(CHIPC_WIDTH, anicol) - 16, chipc(CHIPC_HEIGHT, anicol) - 8
-						gmode 4, , , 150
-						color 0, 0, 0
-						pos 0, 960 + (chipc(CHIPC_HEIGHT, anicol) == inf_tiles) * 48
-						gcopy BUFFER_ITEM, 144, 768 + (chipc(CHIPC_HEIGHT, anicol) > inf_tiles) * 48, inf_tiles, chipc(CHIPC_HEIGHT, anicol) + (chipc(CHIPC_HEIGHT, anicol) > inf_tiles) * 48 * 0
-						gmode 2
-						gsel selcur
-					}
-					else {
-						pos 0, 960
-						gcopy BUFFER_ITEM, chipi(CHIPI_X, xy2pic(5, 0)), chipi(CHIPI_Y, xy2pic(5, 0)), chipi(CHIPI_WIDTH, xy2pic(5, 0)), chipi(CHIPI_HEIGHT, xy2pic(5, 0))
-						gfini chipi(CHIPI_WIDTH, xy2pic(5, 0)), chipi(CHIPI_HEIGHT, xy2pic(5, 0))
-						gfdec2 c_col(0, anicol), c_col(1, anicol), c_col(2, anicol)
-						gsel selcur
-					}
-				}
-			}
-		}
+		preparePicItem xy2pic(5, 0), anicol
 		gsel BUFFER_PIC
 		picload exedir + "graphic\\anime86.bmp"
+		pos 0, 0
+		gfini 480, 48
+		gfdec2 c_col(0, anicol), c_col(1, anicol), c_col(2, anicol)
+		gsel BUFFER_BUF
+		pos 0, 0
+		gmode 0
+		gcopy BUFFER_SCREEN, 0, 0, windoww, windowh
+		gsel BUFFER_SCREEN
+		repeat 6
+			cnt2 = cnt
+			redraw 0
+			pos 0, 0
+			gmode 0
+			gcopy BUFFER_BUF, 0, 0, windoww, windowh
+			repeat maxbreath
+				anidx = breathlist(0, cnt)
+				anidy = breathlist(1, cnt)
+				if ( fov_los(cdata(CDATA_X, cc), cdata(CDATA_Y, cc), anidx, anidy) == 0 ) {
+					continue
+				}
+				if ( (anidx - scx) * inf_tiles + inf_screenx + inf_tiles / 2 < windoww ) {
+					if ( (anidy - scy) * inf_tiles + inf_screeny + 16 < inf_screenh * inf_tiles + inf_screeny - inf_tiles / 2 ) {
+						pos (anidx - scx) * inf_tiles + inf_screenx + inf_tiles / 2, (anidy - scy) * inf_tiles + inf_screeny + 16
+						gmode 2, inf_tiles, inf_tiles
+						grotate BUFFER_PIC, cnt2 * 48, 0, atan(tlocx - cdata(CDATA_X, cc), cdata(CDATA_Y, cc) - tlocy), inf_tiles, inf_tiles
+					}
+				}
+			loop
+			await cfg_animewait
+			redraw 1
+		loop
+		goto *anime_SWEND1
+		_switch_sw++
+	}
+	if ( _switch_val == ANIMATION_SHIKIKAMI_BREATH | _switch_sw ) {
+		_switch_sw = 0
+		anicol = 0
+		preparePicItem xy2pic(5, 0), anicol
+		gsel BUFFER_PIC
+		picload exedir + "graphic\\anime91.bmp"
 		pos 0, 0
 		gfini 480, 48
 		gfdec2 c_col(0, anicol), c_col(1, anicol), c_col(2, anicol)
@@ -3012,56 +3004,7 @@
 			snd SOUNDLIST_BOLT1
 		}
 		if ( animeid == ANIMATION_HYPER_PLUG_BURST ) {
-			gsel BUFFER_ITEM
-			color 0
-			boxf 0, 960, chipi(CHIPI_WIDTH, xy2pic(8, 37)), chipi(CHIPI_HEIGHT, xy2pic(8, 37)) + 960
-			if ( 1229 == 528 ) {
-				gmode 2
-				pos 0, 960
-				gcopy BUFFER_ITEM, 0, 768, inf_tiles, inf_tiles
-				pos 0, 1008
-				gzoom 22, 20, 5, chipc(CHIPC_X, potionc) + 8, chipc(CHIPC_Y, potionc) + 4 + (chipc(CHIPC_HEIGHT, potionc) > inf_tiles) * 8, chipc(CHIPC_WIDTH, potionc) - 16, chipc(CHIPC_HEIGHT, potionc) - 8 - (chipc(CHIPC_HEIGHT, potionc) > inf_tiles) * 10, 1
-				pos 6, 974
-				gcopy BUFFER_ITEM, 0, 1008, 22, 20
-				gsel selcur
-			}
-			else {
-				if ( 1229 == 1119 ) {
-					pos 0, 1055 - chipc(CHIPC_HEIGHT, potionc)
-					gcopy BUFFER_CHR, chipc(CHIPC_X, potionc), chipc(CHIPC_Y, potionc), chipc(CHIPC_WIDTH, potionc), chipc(CHIPC_HEIGHT, potionc)
-					gmode 2
-					gsel selcur
-				}
-				else {
-					if ( 1229 == 1206 ) {
-						pos 0, 1055 - chipc(CHIPC_HEIGHT, potionc)
-						gcopy BUFFER_CHR, chipc(CHIPC_X, potionc), chipc(CHIPC_Y, potionc), chipc(CHIPC_WIDTH, potionc), chipc(CHIPC_HEIGHT, potionc)
-						gfini chipi(CHIPI_WIDTH, xy2pic(8, 37)), chipi(CHIPI_HEIGHT, xy2pic(8, 37))
-						gfdec2 0, 0, 255
-						gsel selcur
-					}
-					else {
-						if ( 1229 == 531 ) {
-							pos 8, 1058 - chipc(CHIPC_HEIGHT, potionc)
-							gcopy BUFFER_CHR, chipc(CHIPC_X, potionc) + 8, chipc(CHIPC_Y, potionc) + 2, chipc(CHIPC_WIDTH, potionc) - 16, chipc(CHIPC_HEIGHT, potionc) - 8
-							gmode 4, , , 150
-							color 0, 0, 0
-							pos 0, 960 + (chipc(CHIPC_HEIGHT, potionc) == inf_tiles) * 48
-							gcopy BUFFER_ITEM, 144, 768 + (chipc(CHIPC_HEIGHT, potionc) > inf_tiles) * 48, inf_tiles, chipc(CHIPC_HEIGHT, potionc) + (chipc(CHIPC_HEIGHT, potionc) > inf_tiles) * 48 * 0
-							gmode 2
-							gsel selcur
-						}
-						else {
-							pos 0, 960
-							gcopy BUFFER_ITEM, chipi(CHIPI_X, xy2pic(8, 37)), chipi(CHIPI_Y, xy2pic(8, 37)), chipi(CHIPI_WIDTH, xy2pic(8, 37)), chipi(CHIPI_HEIGHT, xy2pic(8, 37))
-							gfini chipi(CHIPI_WIDTH, xy2pic(8, 37)), chipi(CHIPI_HEIGHT, xy2pic(8, 37))
-							gfdec2 c_col(0, potionc), c_col(1, potionc), c_col(2, potionc)
-							gsel selcur
-							snd SOUNDLIST_BOLT1
-						}
-					}
-				}
-			}
+			preparePicItem xy2pic(8, 37), potionc
 		}
 		if ( animeid == ANIMATION_SHINING_THROW ) {
 			preparePicItem xy2pic(15, 36), COLOR_DEFAULT
@@ -3132,7 +3075,7 @@
 				preparePicItem inv(INV_ITEM_PIC, aniref), inv(INV_ITEM_COL, aniref)
 			}
 			kaiten = 0
-			if ( inv(INV_ITEM_ID, aniref) == ITEM_ID_ION_CAKRAM | inv(INV_ITEM_ID, aniref) == ITEM_ID_SLASH_JOKER | inv(INV_ITEM_ID, aniref) == ITEM_ID_GERBERA_CROSS | inv(INV_ITEM_ID, aniref) == ITEM_ID_SHENAS_PANTY | inv(INV_ITEM_ID, aniref) == ITEM_ID_SHURIKEN | inv(INV_ITEM_ID, aniref) == ITEM_ID_PANTY ) {
+			if ( inv(INV_ITEM_ID, aniref) == ITEM_ID_ION_CAKRAM | inv(INV_ITEM_ID, aniref) == ITEM_ID_SLASH_JOKER | inv(INV_ITEM_ID, aniref) == ITEM_ID_GERBERA_CROSS | inv(INV_ITEM_ID, aniref) == ITEM_ID_SHENAS_PANTY | inv(INV_ITEM_ID, aniref) == ITEM_ID_SHURIKEN | inv(INV_ITEM_ID, aniref) == ITEM_ID_PANTY | inv(INV_ITEM_ID, aniref) == ITEM_ID_HIDEN_MASHI ) {
 				kaiten = 1
 			}
 			if ( refitem(inv(INV_ITEM_ID, aniref), DBSPEC_TYPE_MINOR) == FILTER_SHIELD_SMALL | refitem(inv(INV_ITEM_ID, aniref), DBSPEC_TYPE_MINOR) == FILTER_WEAPON_SMALL_AXE | refitem(inv(INV_ITEM_ID, aniref), DBSPEC_TYPE_MINOR) == FILTER_WEAPON_LARGE_AXE | refitem(inv(INV_ITEM_ID, aniref), DBSPEC_TYPE_MINOR) == FILTER_WEAPON_SICKLE ) {
@@ -4201,7 +4144,7 @@
 		gcopy BUFFER_SCREEN, 0, 0, windoww, windowh
 		gsel BUFFER_SCREEN
 		am = 0
-		repeat 245
+		repeat MAX_CHARA_TOTAL
 			if ( cdata(CDATA_EXIST, cnt) != CHAR_STATE_ALIVE ) {
 				continue
 			}
@@ -4303,7 +4246,7 @@
 		gcopy BUFFER_SCREEN, 0, 0, windoww, windowh
 		gsel BUFFER_SCREEN
 		am = 0
-		repeat 245
+		repeat MAX_CHARA_TOTAL
 			if ( cdata(CDATA_EXIST, cnt) != CHAR_STATE_ALIVE ) {
 				continue
 			}
@@ -4623,6 +4566,10 @@
 			gsel BUFFER_PIC
 			picload exedir + "graphic\\anime89.bmp"
 		}
+		if ( animode == 6 ) {
+			gsel BUFFER_PIC
+			picload exedir + "graphic\\anime91.bmp"
+		}
 		gsel 4
 		pos 0, 0
 		gmode 0
@@ -4679,6 +4626,9 @@
 						}
 						if ( animode == 5 ) {
 							snd SOUNDLIST_ENC
+						}
+						if ( animode == 6 ) {
+							snd SOUNDLIST_SONIC
 						}
 					}
 				}
@@ -7235,10 +7185,10 @@
 		dmgfix = sdata(SKILL_ATTR_STR, cc) / 16 + sdata(SKILL_ATTR_DEX, cc) / 16 + sdata(SKILL_WEAPON_MARTIAL_ARTS, cc) / 16 + sdata(SKILL_ATTR_WIL, cc) / 20 + cdata(CDATA_DAMAGE, cc)
 		dice1 = 2
 		dice2 = limit(sdata(SKILL_WEAPON_MARTIAL_ARTS, cc) / 5 + 10, 10, 120)
-		dmgmulti = 0.5 + double(sdata(SKILL_ATTR_STR, cc) / 2 + sdata(SKILL_ATTR_WIL, cc) / 2 + sdata(attackskill, cc) / 5 + sdata(SKILL_NORMAL_TACTICS, cc) * 2) / 40
+		dmgmulti = 0.5 + double(sdata(SKILL_ATTR_STR, cc) / 2 + sdata(SKILL_ATTR_WIL, cc) / 2 + sdata(attackskill, cc) / 5 + sdata(SKILL_NORMAL_TACTICS, cc) * 3) / 40
 	}
 	else {
-		dmgfix = cdata(CDATA_DAMAGE, cc) + inv(INV_ITEM_DAMAGE, cw) + inv(INV_ITEM_LEVEL, cw) + (inv(INV_ITEM_STATUS, cw) == ITEM_STATUS_BLESSED) + sdata(SKILL_ATTR_WIL, cc) / 10 + sdata(SKILL_ATTR_STR, cc) / 30 + sdata(SKILL_ATTR_PER, cc) / 30 + limit((inv(INV_ITEM_WEIGHT, cw) + 1) / 5000, 0, 40)
+		dmgfix = cdata(CDATA_DAMAGE, cc) + inv(INV_ITEM_DAMAGE, cw) + inv(INV_ITEM_LEVEL, cw) + (inv(INV_ITEM_STATUS, cw) == ITEM_STATUS_BLESSED) + sdata(SKILL_ATTR_WIL, cc) / 10 + sdata(SKILL_ATTR_STR, cc) / 30 + sdata(SKILL_ATTR_PER, cc) / 30 + limit((inv(INV_ITEM_WEIGHT, cw) + 1) / 5000, 0, 40) + sdata(attackskill, cc) / 50 * 5
 		dice1 = inv(INV_ITEM_DICE1, cw)
 		dice2 = inv(INV_ITEM_DICE2, cw)
 		if ( iequiploc(cw) == 10 ) {
@@ -7267,16 +7217,16 @@
 		}
 		if ( ammo != (-1) ) {
 			dmgfix += inv(INV_ITEM_DAMAGE, ammo) + inv(INV_ITEM_LEVEL, ammo) + inv(INV_ITEM_DICE1, ammo) * inv(INV_ITEM_DICE2, ammo) / 2
-			dmgmulti = 0.5 + double(sdata(SKILL_ATTR_DEX, cc) / 2 + sdata(SKILL_ATTR_PER, cc) / 2 + sdata(inv(INV_ITEM_SKILL_REF, cw), cc) / 4 + sdata(attackskill, cc) / 4 + sdata(SKILL_NORMAL_MARKSMAN, cc) * 2) / 40
+			dmgmulti = 0.5 + double(sdata(SKILL_ATTR_DEX, cc) / 2 + sdata(SKILL_ATTR_PER, cc) / 2 + sdata(inv(INV_ITEM_SKILL_REF, cw), cc) / 4 + sdata(attackskill, cc) / 4 + sdata(SKILL_NORMAL_MARKSMAN, cc) * 3) / 40
 			if ( findbuff(cc, BUFF_SHOOTING_MODE) != (-1) ) {
 				dmgmulti *= 1.5
 				dmgmulti += 0.03 * sdata(carmor(cc), cc)
 			}
 		}
 		else {
-			dmgmulti = 0.6 + double(sdata(SKILL_ATTR_STR, cc) + sdata(inv(INV_ITEM_SKILL_REF, cw), cc) / 5 + sdata(attackskill, cc) / 5 + sdata(SKILL_NORMAL_TACTICS, cc) * 2) / 45
+			dmgmulti = 0.6 + double(sdata(SKILL_ATTR_STR, cc) + sdata(inv(INV_ITEM_SKILL_REF, cw), cc) / 5 + sdata(attackskill, cc) / 5 + sdata(SKILL_NORMAL_TACTICS, cc) * 3) / 45
 			if ( inv(INV_ITEM_SKILL_REF, cw) == SKILL_WEAPON_FIREARM | inv(INV_ITEM_SKILL_REF, cw) == SKILL_WEAPON_CROSSBOW | inv(INV_ITEM_SKILL_REF, cw) == SKILL_WEAPON_BOW | attackskill == SKILL_WEAPON_THROWING ) {
-				dmgmulti = 0.6 + double(sdata(SKILL_ATTR_STR, cc) + sdata(attackskill, cc) / 5 + sdata(attackskill, cc) / 5 + sdata(SKILL_NORMAL_TACTICS, cc) * 2) / 45
+				dmgmulti = 0.6 + double(sdata(SKILL_ATTR_STR, cc) + sdata(attackskill, cc) / 5 + sdata(attackskill, cc) / 5 + sdata(SKILL_NORMAL_TACTICS, cc) * 3) / 45
 			}
 			if ( attackrange ) {
 				if ( findbuff(cc, BUFF_OVERLIMIT_THROW) != (-1) ) {
@@ -7529,7 +7479,7 @@
 				}
 			}
 		}
-		if ( limit(cdata(CDATA_PIERCING_CHANCE, cc), 0, 30) > rnd(100) | sutemi == 100 ) {
+		if ( limit(cdata(CDATA_PIERCING_CHANCE, cc), 0, 20) + limit(sdata(attackskill, cc) / 100, 0, 15) > rnd(100) | sutemi == 100 ) {
 			pierce = 100
 			if ( synccheck(cc, -1) ) {
 				txtef COLOR_YELLOW
@@ -8195,7 +8145,7 @@
 	if ( cdata(CDATA_MAX_HP, r1) < 1 ) {
 		cdata(CDATA_MAX_HP, r1) = 1
 	}
-	if ( r1 >= 57 & cdata(CDATA_ALLIED, r1) == 0 & r1 != CHARA_PLAYER ) {
+	if ( r1 >= MAX_CHARA_SAVE & cdata(CDATA_ALLIED, r1) == 0 & r1 != CHARA_PLAYER & cdata(CDATA_ID, r1) != CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI ) {
 		if ( cdata(CDATA_GUARD_BREAK, r1) < 100 ) {
 			cdata(CDATA_DV, r1) += limit(cdata(CDATA_LEVEL, r1) / 2, 1, 200)
 		}

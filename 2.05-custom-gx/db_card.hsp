@@ -1,4 +1,17 @@
 *db_card
+	if ( dbid == CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI ) {
+		cardreftype = 10
+		cardrefskill = lang("秘伝の技によって高位の精霊を宿らせた折り紙。式折神の上位存在。周囲の式折神を一瞬で取り込み、強大な力を発揮する。", "Origami in which a higher spirit is imbued by a hidden technique. A higher level being of the Shiki-Origami. It instantly absorbs in the surrounding Shiki-Origami and displays its mighty power.")
+		cardrefdomain = 6
+		cardrefrare = 40
+		cardrefcost = 1
+		cardrefattack = 690
+		cardrefhp = 3
+		cardrefn = lang("秘伝式折神『紙隠』", "<Kamikakushi> the hiden ShikiOrigami")
+		cardrefpic = xy2pic(8, 35) + COLOR_DEFAULT * COLOR_TINT_MULT
+		cardrefrace = "1124 effect:" + skillname(cardrefattack) + " "
+		return 1
+	}
 	if ( dbid == CREATURE_ID_SAIKYO_NEZUMI ) {
 		cardreftype = 10
 		cardrefskill = lang("サイキョウという地方出身の妖怪ネズミ。特技は催眠や予言。頻繁に最強だと誤解されて面倒くさいトラブルに巻き込まれ、誤解を解いたら解いたでそのたびに勝手に失望されてきた。積年の屈辱から、実際に最強になってやろうと決意し努力を続けている。", "Yokai rats hail from a region called Saikyo. Its specialities are hypnosis and foretelling. They are frequently misunderstood due to Saikyo means the strongest and get into trouble, and each time they have been let down when their misunderstandings are cleared up. After years of humiliation, he has decided to actually become the strongest and is continuing his efforts.")
@@ -11142,13 +11155,15 @@
 	}
 	if ( dbid == CREATURE_ID_HARD_GAY ) {
 		cardreftype = 10
-		cardrefskill = lang("ゲイ種の中でもハードだった為、ハードゲイ種と定められた。逞しい筋肉に引き寄せられる習性がある。ソフトゲイ種の存在については学会で議論が展開されている。", "It was designated a hard gay species because it was the hardest of the gay species. They have a habit of being attracted to muscular muscles. The existence of soft gay species is debated in academic circles.")
+		; cardrefskill = lang("ゲイ種の中でもハードだった為、ハードゲイ種と定められた。逞しい筋肉に引き寄せられる習性がある。ソフトゲイ種の存在については学会で議論が展開されている。", "It was designated a hard gay species because it was the hardest of the gay species. They have a habit of being attracted to muscular muscles. The existence of soft gay species is debated in academic circles.")
+		cardrefskill = lang("テロリストが生化学文明の遺物を悪用して製造したクローン人間。人込みに紛れて爆発させるのが目的。テロリストが遺物の使い方をよく分かっていないため、みんな同じ姿で出力されてしまう。爆発に命を賭けることが芸術だと、本能的に刷り込まれている。", "Cloned human beings produced by terrorists exploiting relics of biochemical civilisations. The aim is to detonate them in crowded places. As the terrorists do not know how to use the relics well, they are all output in the same appearance. They are instinctively imprinted with the idea that risking their lives in an explosion is an art form.")
 		cardrefdomain = 2
 		cardrefrare = 15
 		cardrefcost = 0
 		cardrefattack = 690
 		cardrefhp = 3
-		cardrefn = lang("ハードゲイ", "hard gay")
+		; cardrefn = lang("ハードゲイ", "hard gay")
+		cardrefn = lang("エクスプロージョマン", "explosioman")
 		cardrefpic = xy2pic(15, 12) + COLOR_DEFAULT * COLOR_TINT_MULT
 		cardrefrace = "321 effect:" + skillname(cardrefattack) + " "
 		return 1

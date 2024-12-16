@@ -4,6 +4,39 @@
 	}
 	dbsum = 0
 	dbmax = 0
+	
+*db_creature_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI
+	if ( 10 > objlv ) {
+		goto *db_creature_SAIKYO_NEZUMI
+	}
+	if ( fltselect != 3 ) {
+		goto *db_creature_SAIKYO_NEZUMI
+	}
+	if ( flttypemajor != FILTER_NOTHING ) {
+		if ( flttypemajor != FILTER_NOTHING ) {
+			goto *db_creature_SAIKYO_NEZUMI
+		}
+	}
+	if ( fltnrace != "" ) {
+		if ( fltnrace != "spirit" ) {
+			goto *db_creature_SAIKYO_NEZUMI
+		}
+	}
+	if ( filtermax != 0 ) {
+		dbtmp = 1
+		repeat filtermax
+			if ( instr(filter_creature(CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI + 2), 0, filtern(cnt)) == (-1) ) {
+				dbtmp = 0
+				break
+			}
+		loop
+		if ( dbtmp == 0 ) {
+			goto *db_creature_SAIKYO_NEZUMI
+		}
+	}
+	dbsum += 40000 / (500 + abs(objlv - 10) * 400) + 1
+	dblist(0, dbmax) = CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI, dbsum
+	dbmax++
 
 *db_creature_SAIKYO_NEZUMI
 	if ( 185 > objlv ) {
@@ -36112,6 +36145,76 @@
 	return
 
 *db_creature2
+	if ( dbid == CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI ) {
+		if ( dbmode == DBMODE_REF_SPEC ) {
+			if ( dbspec == DBSPEC_CHARA_LOOT ) {
+				return 6
+			}
+			if ( dbspec == DBSPEC_CHARA_COL ) {
+				return 0
+			}
+			if ( dbspec == DBSPEC_CHARA_RARE ) {
+				return 40
+			}
+			if ( dbspec == DBSPEC_CHARA_NAME_ORG ) {
+				return lang("秘伝式折神『紙隠』", "<Kamikakushi> the hidden ShikiOrigami")
+			}
+			if ( dbspec == DBSPEC_CHARA_FILTER ) {
+				return "" + ""
+			}
+			return 0
+		}
+		if ( dbmode == DBMODE_REF ) {
+			dbidn = "spirit"
+			dbmode = DBMODE_REF
+			gosub *db_race
+			cpicref = 1163
+			cpicref += 0 * 1000
+			return
+		}
+		if ( dbmode == DBMODE_SET ) {
+			cdata(CDATA_ID, rc) = CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI
+			if ( initlv != 0 ) {
+				cdata(CDATA_LEVEL, rc) = initlv
+			}
+			else {
+				cdata(CDATA_LEVEL, rc) = 10
+			}
+			if ( voidlv != 0 ) {
+				cdata(CDATA_LEVEL, rc) = voidlv * (100 + cdata(CDATA_LEVEL, rc) * 2) / 100
+			}
+			cdata(CDATA_PORTRAIT, rc) = -1
+			cdata(CDATA_AI_CALM, rc) = 1
+			cdata(CDATA_AI_MOVE_FREQ, rc) = 10
+			cdata(CDATA_AI_DISTANCE, rc) = 1
+			cdata(CDATA_AI_SUB, rc) = 0
+			creaturepack = FILTER_NOTHING
+			cdata(STARTING_CDATA_ACT_MAIN, rc) = SKILL_SPACT_SHADOW_STEP, SKILL_SPACT_SHADOW_STEP, SKILL_SPACT_DECAPITATION, SKILL_SPELL_MIND_THORN, SKILL_SPACT_KAMIKAKUSHI
+			cdata(CDATA_ACT_INDEX, rc) = 5
+			cdata(CDATA_ACT_HEAL, rc) = 866
+			cdatan(CDATAN_NAME, rc) = lang("秘伝式折神『紙隠』", "<Kamikakushi> the hidden ShikiOrigami")
+			cdata(CDATA_RELATION, rc) = RELATION_ENEMY
+			cdata(CDATA_RELATION_ORG, rc) = RELATION_ENEMY
+			cdata(CDATA_ALIGNMENT, rc) = -10000
+			dbidn = "spirit"
+			dbmode = DBMODE_SET
+			gosub *db_race
+			dbidn = "warmage"
+			dbmode = DBMODE_SET
+			gosub *db_class
+			cdata(CDATA_PIC, rc) = xy2pic(8, 35)
+			cdata(CDATA_PIC, rc) += 0 * 1000
+			fixlv = FIX_QUALITY_UNIQUE
+			cspecialeq = 1
+			return
+		}
+		if ( dbmode == DBMODE_INITIAL_EQUIP ) {
+			eqtwohand = 1
+			eqweapon1 = 224
+			return
+		}
+		return 0
+	}
 	if ( dbid == CREATURE_ID_SAIKYO_NEZUMI ) {
 		if ( dbmode == DBMODE_FLAVOR_DEATH ) {
 			if ( jp ) {
@@ -102828,33 +102931,36 @@
 		if ( dbmode == DBMODE_FLAVOR_PASSIVE ) {
 			txtmore
 			txtef COLOR_SKY_BLUE
-			txt lang("「フーーーーｰｰ！」", cnvtalk("Foooooo!")), lang("「フーーー」", cnvtalk("Fooooo")), lang("「フゥーーーー！」", cnvtalk("Foooooo!"))
+			; txt lang("「フーーーーｰｰ！」", cnvtalk("Foooooo!")), lang("「フーーー」", cnvtalk("Fooooo")), lang("「フゥーーーー！」", cnvtalk("Foooooo!"))
+			txt lang("「爆発！爆発！」", cnvtalk("Explosion! Explosion!")), lang("「エクスプロォォォォォォジョン！！」", cnvtalk("Exploooooosion!!!")), lang("「俺は芸術になるーーーー！」", cnvtalk("I will become art!"))
 			return 1
 		}
 		if ( dbmode == DBMODE_FLAVOR_ANGERED ) {
 			txtmore
 			txtef COLOR_SKY_BLUE
-			txt lang("「フーーーーｰｰ！」", cnvtalk("Foooooo!")), lang("「フーーー」", cnvtalk("Fooooo")), lang("「フゥーーーー！」", cnvtalk("Foooooo!"))
+			; txt lang("「フーーーーｰｰ！」", cnvtalk("Foooooo!")), lang("「フーーー」", cnvtalk("Fooooo")), lang("「フゥーーーー！」", cnvtalk("Foooooo!"))
+			txt lang("「爆発！爆発！」", cnvtalk("Explosion! Explosion!")), lang("「エクスプロォォォォォォジョン！！」", cnvtalk("Exploooooosion!!!")), lang("「俺は芸術になるーーーー！」", cnvtalk("I will become art!"))
 			return 1
 		}
 		if ( dbmode == DBMODE_FLAVOR_DEATH ) {
 			txtmore
 			txtef COLOR_SKY_BLUE
-			txt lang("「フーーーーｰｰ！」", cnvtalk("Foooooo!")), lang("「フーーー」", cnvtalk("Fooooo")), lang("「フゥーーーー！」", cnvtalk("Foooooo!"))
+			; txt lang("「フーーーーｰｰ！」", cnvtalk("Foooooo!")), lang("「フーーー」", cnvtalk("Fooooo")), lang("「フゥーーーー！」", cnvtalk("Foooooo!"))
+			txt lang("「ばく…は…」", cnvtalk("Ex..plo...")), lang("「エクスプロージョン…」", cnvtalk("Explosion...")), lang("「こんなものが…芸術…？」", cnvtalk("Is this really...art...?"))
 			return 1
 		}
-		if ( dbmode == DBMODE_FLAVOR_WELCOME ) {
-			txtmore
-			txtef COLOR_SKY_BLUE
-			txt lang("「フーーーーｰｰ！」", cnvtalk("Foooooo!")), lang("「フーーー」", cnvtalk("Fooooo")), lang("「フゥーーーー！」", cnvtalk("Foooooo!"))
-			return 1
-		}
-		if ( dbmode == DBMODE_FLAVOR_KILL ) {
-			txtmore
-			txtef COLOR_SKY_BLUE
-			txt lang("「フーーーーｰｰ！」", cnvtalk("Foooooo!")), lang("「フーーー」", cnvtalk("Fooooo")), lang("「フゥーーーー！」", cnvtalk("Foooooo!"))
-			return 1
-		}
+		; if ( dbmode == DBMODE_FLAVOR_WELCOME ) {
+		; 	txtmore
+		; 	txtef COLOR_SKY_BLUE
+		; 	txt lang("「フーーーーｰｰ！」", cnvtalk("Foooooo!")), lang("「フーーー」", cnvtalk("Fooooo")), lang("「フゥーーーー！」", cnvtalk("Foooooo!"))
+		; 	return 1
+		; }
+		; if ( dbmode == DBMODE_FLAVOR_KILL ) {
+		; 	txtmore
+		; 	txtef COLOR_SKY_BLUE
+		; 	txt lang("「フーーーーｰｰ！」", cnvtalk("Foooooo!")), lang("「フーーー」", cnvtalk("Fooooo")), lang("「フゥーーーー！」", cnvtalk("Foooooo!"))
+		; 	return 1
+		; }
 		if ( dbmode == DBMODE_REF_SPEC ) {
 			if ( dbspec == DBSPEC_CHARA_LOOT ) {
 				return EQUIP_TYPE_ARCHER
@@ -102866,7 +102972,8 @@
 				return 15
 			}
 			if ( dbspec == DBSPEC_CHARA_NAME_ORG ) {
-				return lang("ハードゲイ", "hard gay")
+				; return lang("ハードゲイ", "hard gay")
+				return lang("エクスプロージョマン", "explosioman")
 			}
 			if ( dbspec == DBSPEC_CHARA_FILTER ) {
 				return "" + "/nefia0/"
@@ -102903,8 +103010,8 @@
 			cdata(CDATA_TXT, rc) += 1
 			cdata(CDATA_TXT, rc) += 1
 			cdata(CDATA_TXT, rc) += 1
-			cdata(CDATA_TXT, rc) += 1
-			cdatan(CDATAN_NAME, rc) = lang("ハードゲイ", "hard gay")
+			; cdatan(CDATAN_NAME, rc) = lang("ハードゲイ", "hard gay")
+			cdatan(CDATAN_NAME, rc) = lang("エクスプロージョマン", "explosioman")
 			cdata(CDATA_RELATION, rc) = -3
 			cdata(CDATA_RELATION_ORG, rc) = -3
 			cdata(CDATA_ALIGNMENT, rc) = -10000
@@ -122878,6 +122985,9 @@
 	// This causes weird bugs in almost every version of CGX, so if you don't want to change every reference to "filter_creature".
 	// Just change filter_creature(bullshit_number) to filter_creature(new_creature_id + 2) like the ones below.
 	// Make sure the filter matches or you will get bugs like fairys spawning in lake dungeons or something.
+
+	filter_creature(CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI + 2) = ""
+	HMMBITON cbitorg(CHARA_BIT_FLOAT / 32, CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI), CHARA_BIT_FLOAT \ 32
 	
 	filter_creature(CREATURE_ID_SAIKYO_NEZUMI + 2) = "/nefia7/"
 	HMMBITON cbitorg(CHARA_BIT_RES_CONFUSE / 32, CREATURE_ID_SAIKYO_NEZUMI), CHARA_BIT_RES_CONFUSE \ 32

@@ -1800,7 +1800,7 @@
 // Used by necromancy and CNPC summoning.
 #defcfunc get_freeallysum
 	locvar_get_freeally_np = 0
-	repeat 245
+	repeat MAX_CHARA_TOTAL
 		if ( cdata(CDATA_EXIST, cnt) != CHAR_STATE_ALIVE ) {
 			continue
 		}
@@ -2206,26 +2206,23 @@
 			return 0
 		}
 	}
+	locvar_addbuff_bpower = addbuff_arg3
 	locvar_addbuff_fixeddur = addbuff_arg4
-	if ( bdataref(0, addbuff_buffid) == 2 ) {
+	if ( bdataref(0, addbuff_buffid) == BUFF_TYPE_HEX ) {
 		locvar_addbuff_f = 0
-		if ( 0 ) {
-			txt lang("パワー" + addbuff_arg3 + "。", "But it produces no effect.")
+		if ( cdata(CDATA_QUALITY, addbuff_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, addbuff_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
+			locvar_addbuff_bpower = addbuff_arg3 / 4
 		}
-		if ( sdata(SKILL_NORMAL_FAITH, addbuff_charid) * 2 + 100 > rnd(addbuff_arg3 * 2 + 100) ) {
+		if ( debug ) {
+			txt lang("パワー" + locvar_addbuff_bpower + "。", "Buff Power:" + locvar_addbuff_bpower + ".")
+		}
+		if ( sdata(SKILL_NORMAL_FAITH, addbuff_charid) * 2 + 100 > rnd(locvar_addbuff_bpower * 2 + 100) ) {
 			if ( addbuff_buffid != BUFF_PUNISHMENT ) {
 				locvar_addbuff_f = 1
 			}
 		}
 		if ( cdata(CDATA_QUALITY, addbuff_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, addbuff_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
-			if ( rnd(4) ) {
-				locvar_addbuff_f = 1
-			}
-			else {
-				if ( addbuff_buffid != BUFF_DEATH_WORD ) {
-					locvar_addbuff_fixeddur = addbuff_arg4 / 5 + 1
-				}
-			}
+			locvar_addbuff_fixeddur = addbuff_arg4 / 4 + 1
 		}
 		if ( cdata(CDATA_ALLIED, addbuff_charid) == 0 & cdata(CDATA_QUALITY, addbuff_charid) > FIX_QUALITY_GREAT ) {
 			if ( addbuff_buffid == BUFF_DEATH_WORD ) {
@@ -2234,7 +2231,7 @@
 		}
 		if ( findbuff(addbuff_charid, BUFF_HOLY_VEIL) != (-1) ) {
 			if ( addbuff_buffid != BUFF_PUNISHMENT ) {
-				if ( cdata(STARTING_CDATA_BUFF + findbuff(addbuff_charid, BUFF_HOLY_VEIL) * ARRAY_CDATA_BUFF + 1, addbuff_charid) + 50 > addbuff_arg3 * 5 / 2 | rnd(cdata(STARTING_CDATA_BUFF + findbuff(addbuff_charid, BUFF_HOLY_VEIL) * ARRAY_CDATA_BUFF + 1, addbuff_charid) + 50) > rnd(addbuff_arg3 + 1) ) {
+				if ( cdata(STARTING_CDATA_BUFF + findbuff(addbuff_charid, BUFF_HOLY_VEIL) * ARRAY_CDATA_BUFF + 1, addbuff_charid) + 50 > locvar_addbuff_bpower * 5 / 2 | rnd(cdata(STARTING_CDATA_BUFF + findbuff(addbuff_charid, BUFF_HOLY_VEIL) * ARRAY_CDATA_BUFF + 1, addbuff_charid) + 50) > rnd(locvar_addbuff_bpower + 1) ) {
 					txt lang("ホーリーヴェイルが呪いを防いだ。", "The holy veil repels the hex.")
 					return
 				}
@@ -2350,7 +2347,7 @@
 		/********** RUIN0X11 CUSTOM - ENDING **********/
 
 	}
-	cdata(STARTING_CDATA_BUFF + locvar_addbuff_p * ARRAY_CDATA_BUFF, addbuff_charid) = addbuff_buffid, addbuff_arg3, locvar_addbuff_fixeddur
+	cdata(STARTING_CDATA_BUFF + locvar_addbuff_p * ARRAY_CDATA_BUFF, addbuff_charid) = addbuff_buffid, locvar_addbuff_bpower, locvar_addbuff_fixeddur
 	r1 = addbuff_charid
 	gosub *charaRefresh
 	return
@@ -2984,7 +2981,7 @@
 			f@con = 0
 		}
 		if ( cdata(CDATA_QUALITY, dmgcon_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, dmgcon_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
-			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) / 2 + 1) ) {
+			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) * 2 + 1) ) {
 				f@con = 0
 			}
 		}
@@ -3013,7 +3010,7 @@
 			f@con = 0
 		}
 		if ( cdata(CDATA_QUALITY, dmgcon_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, dmgcon_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
-			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) / 2 + 1) ) {
+			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) / 4 + 1) ) {
 				f@con = 0
 			}
 		}
@@ -3042,7 +3039,7 @@
 			f@con = 0
 		}
 		if ( cdata(CDATA_QUALITY, dmgcon_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, dmgcon_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
-			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) / 2 + 1) ) {
+			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) / 4 + 1) ) {
 				f@con = 0
 			}
 		}
@@ -3089,9 +3086,6 @@
 		if ( findbuff(dmgcon_charid, BUFF_HERO) != (-1) ) {
 			f@con = 0
 		}
-		if ( findbuff(dmgcon_charid, BUFF_JYUSOU_GOUSHIN) != (-1) ) {
-			f@con = 0
-		}
 		if ( findbuff(dmgcon_charid, BUFF_CONCENTRATION) != (-1) ) {
 			f@con = 0
 		}
@@ -3099,7 +3093,7 @@
 			f@con = 0
 		}
 		if ( cdata(CDATA_QUALITY, dmgcon_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, dmgcon_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
-			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) / 2 + 1) ) {
+			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) * 2 + 1) ) {
 				f@con = 0
 			}
 		}
@@ -3134,7 +3128,7 @@
 			f@con = 0
 		}
 		if ( cdata(CDATA_QUALITY, dmgcon_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, dmgcon_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
-			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) + 1) ) {
+			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) * 2 + 1) ) {
 				f@con = 0
 			}
 		}
@@ -3163,7 +3157,7 @@
 	}
 	if ( dmgcon_cond == CONDITION_MPOISON ) {
 		if ( cdata(CDATA_QUALITY, dmgcon_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, dmgcon_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
-			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) / 3 + 1) ) {
+			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) / 4 + 1) ) {
 				f@con = 0
 			}
 		}
@@ -3203,7 +3197,7 @@
 			f@con = 0
 		}
 		if ( cdata(CDATA_QUALITY, dmgcon_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, dmgcon_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
-			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) / 3 + 1) ) {
+			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) / 4 + 1) ) {
 				f@con = 0
 			}
 		}
@@ -3241,7 +3235,7 @@
 			f@con = 0
 		}
 		if ( cdata(CDATA_QUALITY, dmgcon_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, dmgcon_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
-			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) / 5 + 1) ) {
+			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) * 4 + 1) ) {
 				f@con = 0
 			}
 		}
@@ -3273,6 +3267,9 @@
 			f@con = 0
 		}
 		if ( findbuff(dmgcon_charid, BUFF_HERO) != (-1) ) {
+			f@con = 0
+		}
+		if ( findbuff(dmgcon_charid, BUFF_JYUSOU_GOUSHIN) != (-1) ) {
 			f@con = 0
 		}
 		if ( cdata(CDATA_QUALITY, dmgcon_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, dmgcon_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
@@ -3329,7 +3326,7 @@
 			f@con = 0
 		}
 		if ( cdata(CDATA_QUALITY, dmgcon_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, dmgcon_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
-			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) / 3 + 1) ) {
+			if ( rnd(cdata(CDATA_LEVEL, dmgcon_charid) * 2 + 1) ) {
 				f@con = 0
 			}
 		}
@@ -4927,6 +4924,22 @@
 			}
 		}
 	}
+	if ( dmghp_source >= DAMAGE_FROM_CHARA ) {
+		if ( locvar_dmghp_dmg > 0 ) {
+			if ( cdata(CDATA_LEVEL, dmghp_source) < 5 ) {
+				locvar_dmghp_dmg = locvar_dmghp_dmg / 2
+			}
+			if ( cdata(CDATA_LEVEL, dmghp_source) >= 5 & cdata(CDATA_LEVEL, dmghp_source) < 10 ) {
+				locvar_dmghp_dmg = locvar_dmghp_dmg * 2 / 3
+			}
+			if ( cdata(CDATA_LEVEL, dmghp_source) >= 10 & cdata(CDATA_LEVEL, dmghp_source) < 15 ) {
+				locvar_dmghp_dmg = locvar_dmghp_dmg * 3 / 4
+			}
+			if ( cdata(CDATA_LEVEL, dmghp_source) >= 15 & cdata(CDATA_LEVEL, dmghp_source) < 20 ) {
+				locvar_dmghp_dmg = locvar_dmghp_dmg * 4 / 5
+			}
+		}
+	}
 	if ( locvar_dmghp_ele ) {
 		if ( locvar_dmghp_ele == SKILL_RES_SOUND ) {
 			if ( cdatan(CDATAN_CLASS, dmghp_charid) == "pianist" ) {
@@ -5313,6 +5326,14 @@
 				locvar_dmghp_dmg = locvar_dmghp_dmg / 2
 			}
 		}
+		if ( findbuff(dmghp_charid, BUFF_MIST_OF_FRAILNESS) != (-1) ) {
+			if ( cdata(CDATA_QUALITY, dmghp_charid) > FIX_QUALITY_GREAT ) {
+				locvar_dmghp_dmg = locvar_dmghp_dmg / 10 * 11
+			}
+			else {
+				locvar_dmghp_dmg = locvar_dmghp_dmg / 5 * 6
+			}
+		}
 	}
 	if ( gdata(GDATA_TEMPORARY_FLAGS2) == 100 ) {
 		locvar_dmghp_dmg = locvar_dmghp_dmg * 3 / 5
@@ -5346,6 +5367,14 @@
 	}
 	if ( dmghp_source >= DAMAGE_FROM_CHARA ) {
 		if ( locvar_dmghp_dmg > 0 ) {
+			if ( findbuff(dmghp_source, BUFF_MIST_OF_FRAILNESS) != (-1) ) {
+				if ( cdata(CDATA_QUALITY, dmghp_source) > FIX_QUALITY_GREAT ) {
+					locvar_dmghp_dmg = locvar_dmghp_dmg / 10 * 9
+				}
+				else {
+					locvar_dmghp_dmg = locvar_dmghp_dmg / 5 * 4
+				}
+			}
 			if ( cdata(CDATA_QUALITY, dmghp_charid) >= FIX_QUALITY_MIRACLE ) {
 				locvar_dmghp_dmg = locvar_dmghp_dmg * 10 / limit(sdata(SKILL_ATTR_SPD, dmghp_source) * 10 / sdata(SKILL_ATTR_SPD, dmghp_charid), 10, 50)
 			}
@@ -6410,15 +6439,15 @@
 		// BEGINNING - Current behavior, apply changes here.
 		if ( locvar_dmghp_ele ) {
 			if ( locvar_dmghp_ele == SKILL_RES_CHAOS ) {
-				dmgcon dmghp_charid, CONDITION_WINCE, rnd(dmghp_element_power / 9 + 1)
-				dmgcon dmghp_charid, CONDITION_CHILLS, rnd(dmghp_element_power / 9 + 1)
-				dmgcon dmghp_charid, CONDITION_BLIND, rnd(dmghp_element_power / 9 + 1)
-				dmgcon dmghp_charid, CONDITION_PARALYZE, rnd(dmghp_element_power / 9 + 1)
-				dmgcon dmghp_charid, CONDITION_FEAR, rnd(dmghp_element_power / 9 + 1)
-				dmgcon dmghp_charid, CONDITION_DIM, rnd(dmghp_element_power / 9 + 1)
-				dmgcon dmghp_charid, CONDITION_POISON, rnd(dmghp_element_power / 9 + 1)
-				dmgcon dmghp_charid, CONDITION_CONFUSE, rnd(dmghp_element_power / 9 + 1)
-				dmgcon dmghp_charid, CONDITION_SLEEP, rnd(dmghp_element_power / 9 + 1)
+				dmgcon dmghp_charid, CONDITION_WINCE, limit(rnd(dmghp_element_power / 9 + 1), 1, 9000)
+				dmgcon dmghp_charid, CONDITION_CHILLS, limit(rnd(dmghp_element_power / 9 + 1), 1, 9000)
+				dmgcon dmghp_charid, CONDITION_BLIND, limit(rnd(dmghp_element_power / 18 + 1), 1, 4500)
+				dmgcon dmghp_charid, CONDITION_PARALYZE, limit(rnd(dmghp_element_power / 18 + 1), 1, 4500)
+				dmgcon dmghp_charid, CONDITION_FEAR, limit(rnd(dmghp_element_power / 36 + 1), 1, 2250)
+				dmgcon dmghp_charid, CONDITION_DIM, limit(rnd(dmghp_element_power / 36 + 1), 1, 2250)
+				dmgcon dmghp_charid, CONDITION_POISON, limit(rnd(dmghp_element_power / 18 + 1), 1, 4500)
+				dmgcon dmghp_charid, CONDITION_CONFUSE, limit(rnd(dmghp_element_power / 9 + 1), 1, 9000)
+				dmgcon dmghp_charid, CONDITION_SLEEP, limit(rnd(dmghp_element_power / 9 + 1), 1, 9000)
 			}
 			if ( locvar_dmghp_ele == SKILL_RES_FIRE | dmghp_source == DAMAGE_FROM_FIRE ) {
 				inv_find ITEM_ID_MAGATAMA, dmghp_source
@@ -6434,33 +6463,33 @@
  				}
 			}
 			if ( locvar_dmghp_ele == SKILL_RES_FIRE ) {
-				dmgcon dmghp_charid, CONDITION_WINCE, rnd(dmghp_element_power + 1)
+				dmgcon dmghp_charid, CONDITION_WINCE, limit(rnd(dmghp_element_power + 1), 1, 10000)
 			}
 			if ( locvar_dmghp_ele == SKILL_RES_COLD ) {
-				dmgcon dmghp_charid, CONDITION_CHILLS, rnd(dmghp_element_power + 1)
+				dmgcon dmghp_charid, CONDITION_CHILLS, limit(rnd(dmghp_element_power + 1), 1, 10000)
 			}
 			if ( locvar_dmghp_ele == SKILL_RES_DARKNESS ) {
-				dmgcon dmghp_charid, CONDITION_BLIND, rnd(dmghp_element_power + 1)
+				dmgcon dmghp_charid, CONDITION_BLIND, limit(rnd(dmghp_element_power + 1), 1, 5000)
 			}
 			if ( locvar_dmghp_ele == SKILL_RES_LIGHTNING ) {
-				dmgcon dmghp_charid, CONDITION_PARALYZE, rnd(dmghp_element_power + 1)
+				dmgcon dmghp_charid, CONDITION_PARALYZE, limit(rnd(dmghp_element_power + 1), 1, 5000)
 			}
 			if ( locvar_dmghp_ele == SKILL_RES_NERVE ) {
-				dmgcon dmghp_charid, CONDITION_SLEEP, rnd(dmghp_element_power + 1)
+				dmgcon dmghp_charid, CONDITION_SLEEP, limit(rnd(dmghp_element_power + 1), 1, 2500)
 			}
 			if ( locvar_dmghp_ele == SKILL_RES_MIND ) {
-				dmgcon dmghp_charid, CONDITION_FEAR, rnd(dmghp_element_power + 1)
+				dmgcon dmghp_charid, CONDITION_FEAR, limit(rnd(dmghp_element_power + 1), 1, 2500)
 			}
 			if ( locvar_dmghp_ele == SKILL_RES_SOUND ) {
-				dmgcon dmghp_charid, CONDITION_DIM, rnd(dmghp_element_power + 1)
+				dmgcon dmghp_charid, CONDITION_DIM, limit(rnd(dmghp_element_power + 1), 1, 5000)
 			}
 			if ( TweakData(TWEAK_GAMEPLAY_REVERT_POST_208_ELEMENT_CHANGE, TWEAK_CATEGORY_GAMEPLAY) != FALSE ) {
 			if ( locvar_dmghp_ele == SKILL_RES_NETHER ) {
-				dmgcon dmghp_charid, CONDITION_MPOISON, rnd(dmghp_element_power + 1)
+				dmgcon dmghp_charid, CONDITION_MPOISON, limit(rnd(dmghp_element_power + 1), 1, 10000)
 			}
 			}
 			if ( locvar_dmghp_ele == SKILL_RES_POISON ) {
-				dmgcon dmghp_charid, CONDITION_POISON, rnd(dmghp_element_power + 1)
+				dmgcon dmghp_charid, CONDITION_POISON, limit(rnd(dmghp_element_power + 1), 1, 10000)
 			}
 			if ( locvar_dmghp_ele == SKILL_RESDMG_CUT ) {
 				dmgcon dmghp_charid, CONDITION_BLEED, rnd(dmghp_element_power + 1)
@@ -6559,30 +6588,18 @@
 					}
 				}
 			}
-			if ( dmghp_source != DAMAGE_FROM_CHARA ) {
-				if ( cdata(CDATA_TARGET, dmghp_source) == dmghp_charid ) {
-					if ( rnd(3) == 0 ) {
-						locvar_dmghp_f = 1
-					}
+			if ( cdata(CDATA_TARGET, dmghp_charid) == 0 ) {
+				if ( cdata(CDATA_AI_AGGRO, dmghp_charid) == 0 ) {
+					cdata(CDATA_TARGET, dmghp_charid) = dmghp_source
 				}
 			}
 			if ( dmghp_charid != CHARA_PLAYER ) {
-				if ( cdata(CDATA_KARMA, dmghp_charid) > 0 ) {
-					if ( cdata(CDATA_EXIST, cdata(CDATA_TARGET, dmghp_charid)) == CHAR_STATE_ALIVE ) {
-						locvar_dmghp_f = 0
-					}
+				if ( cdata(CDATA_AI_AGGRO, dmghp_charid) == 0 ) {
+					cdata(CDATA_EMO_ICON, dmghp_charid) = 18 + 100 * 2
+					cdata(CDATA_AI_AGGRO, dmghp_charid) = 20
 				}
-			}
-			if ( locvar_dmghp_f ) {
-				if ( dmghp_charid != CHARA_PLAYER ) {
-					cdata(CDATA_TARGET, dmghp_charid) = dmghp_source
-					if ( cdata(CDATA_AI_AGGRO, dmghp_charid) == 0 ) {
-						cdata(CDATA_EMO_ICON, dmghp_charid) = 18 + 100 * 2
-						cdata(CDATA_AI_AGGRO, dmghp_charid) = 20
-					}
-					else {
-						cdata(CDATA_AI_AGGRO, dmghp_charid) += 2
-					}
+				else {
+					cdata(CDATA_AI_AGGRO, dmghp_charid) += 2
 				}
 			}
 		}

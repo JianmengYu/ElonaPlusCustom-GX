@@ -307,7 +307,7 @@
 	txtmore
 	if ( adata(ADATA_ID, gdata(GDATA_AREA)) == AREA_CAMP ) {
 		pet = 0
-		repeat 245
+		repeat MAX_CHARA_TOTAL
 			if ( cbit(CHARA_BIT_LABOR_CAMP, cnt) != TRUE ) {
 				continue
 			}
@@ -1088,7 +1088,7 @@
 	if ( _switch_val == 24 | _switch_sw ) {
 		_switch_sw = 0
 		pet = 0
-		repeat 245
+		repeat MAX_CHARA_TOTAL
 			if ( cbit(CHARA_BIT_LABOR_CAMP, cnt) == TRUE ) {
 				pet++
 			}

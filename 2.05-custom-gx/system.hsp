@@ -845,7 +845,7 @@
 				txt lang("あなたは「" + skillname(SKILL_SPACT_MAGNECOAT) + "」の能力を得た。", "You have learned new ability, " + skillname(SKILL_SPACT_MAGNECOAT) + ".")
 			}
 		}
-		repeat 245
+		repeat MAX_CHARA_TOTAL
 			if ( cdata(CDATA_CONDITION_JIU_JITSU, cnt) != 0 ) {
 				cdata(CDATA_CONDITION_JIU_JITSU, cnt) = 0
 				cbitmod CHARA_BIT_VINDALIAN_JIUJITSU_ACTIVE, cnt, TRUE
@@ -949,6 +949,18 @@
 			snd SOUNDLIST_ENC
 			if ( cdata(CDATA_ROCK_THROWING, cnt) > 0 ) {
 				cbitmod CHARA_BIT_ENHANCED_ROCK_THROWING, cnt, TRUE
+			}
+		loop
+	}
+	if ( gdata(GDATA_VERSION) < 6350 ) {
+		repeat 245
+			if ( cdata(CDATA_SEALED_MAGIC, cnt) == 1 ) {
+				cdata(CDATA_SEALED_MAGIC, cnt) = 0
+				cbitmod CHARA_BIT_SEALED_MAGIC, cnt, TRUE
+			}
+			if ( cdata(CDATA_SEALED_ABILITY, cnt) == 1 ) {
+				cdata(CDATA_SEALED_ABILITY, cnt) = 0
+				cbitmod CHARA_BIT_SEALED_ABILITY, cnt, TRUE
 			}
 		loop
 	}

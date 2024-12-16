@@ -12219,7 +12219,7 @@
 		cardrefattack = 0
 		cardrefhp = 5
 		cardrefskillid = TCG_EFF_UNGAGA
-		cardrefbits = "12"
+		cardrefbits = "12,20"
 		return 1
 	}
 	// kobolt
@@ -14750,10 +14750,10 @@
 		cardrefquality = FIX_QUALITY_GOOD
 		cardrefdomain = 2
 		cardrefcost = 0
-		cardrefattack = 1
-		cardrefhp = 1
-		cardrefskillid = TCG_EFF_HARDGAY
-		cardrefbits = ""
+		cardrefattack = 6
+		cardrefhp = 12
+		cardrefskillid = TCG_EFF_BATTLECRYDIE
+		cardrefbits = "11,19,20"
 		return 1
 	}
 	if ( dbid == CREATURE_ID_HOT_SPRING_MANIAC ) {

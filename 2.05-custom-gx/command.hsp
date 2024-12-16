@@ -139,6 +139,20 @@
 		locvar_txttargetnpc_dy++
 		bmes "Target: " + cdatan(CDATAN_NAME, cdata(CDATA_TARGET, txttargetnpc_arg_tc)) + "(" + cdata(CDATA_AI_AGGRO, txttargetnpc_arg_tc) + ")", 255, 2552, 255
 	}
+	color 0, 0, 0
+	pos 100, windowh - inf_verh - 45 - locvar_txttargetnpc_dy * 20
+	locvar_txttargetnpc_dy++
+	bmes lang("ｷｬﾗﾁｯﾌﾟ番号：" + cdata(CDATA_PIC, txttargetnpc_arg_tc) + " / 色番号：" + refchara(cdata(CDATA_ID, txttargetnpc_arg_tc), DBSPEC_CHARA_COL) * 1000 + " ", "SpriteID: " + cdata(CDATA_PIC, txttargetnpc_arg_tc) + " / ColorID: " + refchara(cdata(CDATA_ID, txttargetnpc_arg_tc), DBSPEC_CHARA_COL) * 1000 + " "), 255, 2552, 255
+	if ( trait(TRAIT_NORMAL_DISCERNMENT) != 0 ) {
+		tcbkinfo = tc
+		tc = txttargetnpc_arg_tc
+		txttargetsex
+		tc = tcbkinfo
+		color 0, 0, 0
+		pos 100, windowh - inf_verh - 45 - locvar_txttargetnpc_dy * 20
+		locvar_txttargetnpc_dy++
+		bmes lang("性別：" + s + "　年齢：" + calcage(txttargetnpc_arg_tc) + "歳　信仰：" + godname(cdata(CDATA_GOD, txttargetnpc_arg_tc)) + " ", "Gender: " + s + " / Age: " + calcage(txttargetnpc_arg_tc) + " / Religion: " + godname(cdata(CDATA_GOD, txttargetnpc_arg_tc)) + ""), 255, 2552, 255
+	}
 	if ( mdata(MDATA_TYPE) != MAP_TYPE_TOWN & mdata(MDATA_TYPE) != MAP_TYPE_VILLAGE & trait(TRAIT_NORMAL_DISCERNMENT) != 0 ) {
 		// Resistance from MMAH
 		sx = 0
@@ -189,16 +203,6 @@
 		locvar_txttargetnpc_dy++
 		bmes s, 255, 2552, 255
 	}
-	if ( trait(TRAIT_NORMAL_DISCERNMENT) != 0 ) {
-		tcbkinfo = tc
-		tc = txttargetnpc_arg_tc
-		txttargetsex
-		tc = tcbkinfo
-		color 0, 0, 0
-		pos 100, windowh - inf_verh - 45 - locvar_txttargetnpc_dy * 20
-		locvar_txttargetnpc_dy++
-		bmes lang("性別：" + s + "　年齢：" + calcage(txttargetnpc_arg_tc) + "歳　信仰：" + godname(cdata(CDATA_GOD, txttargetnpc_arg_tc)) + " ", "Sex:" + s + " / Age:" + calcage(txttargetnpc_arg_tc) + " / Religion:" + godname(cdata(CDATA_GOD, txttargetnpc_arg_tc)) + ""), 255, 2552, 255
-	}
 	return
 
 #deffunc txttargetnpc int txttargetnpc_arg1, int txttargetnpc_arg2, int txttargetnpc_arg3
@@ -240,6 +244,10 @@
 				locvar_txttargetnpc_dy++
 				bmes s, 255, 2552, 255
 			loop
+			color 0, 0, 0
+			pos 100, windowh - inf_verh - 45 - locvar_txttargetnpc_dy * 20
+			locvar_txttargetnpc_dy++
+			bmes lang("ｷｬﾗﾁｯﾌﾟ番号：" + cdata(CDATA_PIC, locvar_txttargetnpc_i) + " / 色番号：" + refchara(cdata(CDATA_ID, locvar_txttargetnpc_i), DBSPEC_CHARA_COL) * 1000 + " ", "SpriteID：" + cdata(CDATA_PIC, locvar_txttargetnpc_i) + " / ColorID：" + refchara(cdata(CDATA_ID, locvar_txttargetnpc_i), DBSPEC_CHARA_COL) * 1000 + " "), 255, 2552, 255
 			if ( trait(TRAIT_NORMAL_DISCERNMENT) != 0 ) {
 				txttargetsex
 				color 0, 0, 0
@@ -1106,11 +1114,6 @@
 				}
 			}
 		}
-		if ( allyctrl == 9 ) {
-			if ( cbit(CHARA_BIT_LOCKED_UP, cnt) != TRUE ) {
-				continue
-			}
-		}
 		if ( allyctrl == 8 ) {
 			if ( cnt == tc ) {
 				continue
@@ -1127,6 +1130,12 @@
 		}
 		if ( allyctrl == 9 ) {
 			if ( cbit(CHARA_BIT_LOCKED_UP, cnt) != TRUE ) {
+				continue
+			}
+			if ( cdata(CDATA_EXIST, cnt) != CHAR_STATE_ALIVE ) {
+				continue
+			}
+			if ( cdata(CDATA_AREA, cnt) != 0 ) {
 				continue
 			}
 		}
@@ -2418,12 +2427,12 @@
 		listn(0, listmax) = lang("[覚醒]", "[AWAKE]") + lang("あなたは矢系魔法を好む", "You prefer the magic arrows.")
 		listmax++
 	}
-	if ( cdata(CDATA_SEALED_MAGIC, tc) == 1 ) {
+	if ( cbit(CHARA_BIT_SEALED_MAGIC, tc) == TRUE ) {
 		list(0, listmax) = 1, 99998
 		listn(0, listmax) = lang("[覚醒]", "[AWAKE]") + lang("あなたは魔法を封印している", "Your magic is sealed.")
 		listmax++
 	}
-	if ( cdata(CDATA_SEALED_ABILITY, tc) == 1 ) {
+	if ( cbit(CHARA_BIT_SEALED_ABILITY, tc) == TRUE ) {
 		list(0, listmax) = 1, 99998
 		listn(0, listmax) = lang("[覚醒]", "[AWAKE]") + lang("あなたは技能を封印している", "Your ability is sealed.")
 		listmax++
@@ -9766,7 +9775,7 @@
 		}
 	}
 	if ( csctrl == 1 ) {
-		s = lang("決定ｷｰ [リロール]  " + strhint6 + "Shift,Esc [最終確認]", "Enter Key [Reroll]  " + strhint6 + "Shift,Esc [Confirm]")
+		s = lang("決定ｷｰ [再抽選]  " + strhint6 + "Shift,Esc [最終確認]", "Enter Key [Reroll]  " + strhint6 + "Shift,Esc [Confirm]")
 	}
 	if ( csctrl == 2 ) {
 		if ( page == 0 ) {

@@ -396,9 +396,37 @@
 		txt lang("街属性値が5上昇した（現在" + mdata(MDATA_CITY_PROPERTY_VALUE) + "）", "City property value was increased 5. (Total: " + mdata(MDATA_CITY_PROPERTY_VALUE) + ")")
 		s = lang("処刑の時間", "Time of execution")
 		file = "bg_re7"
-		buff = lang("街のどこかから、処刑対象の微かな悲鳴が聞こえてきた。", "Suddenly, a painful shriek rises from somewhere in the town.")
+		buff = lang("街のどこかから、処刑対象の微かな悲鳴が聞こえてきた。", "From somewhere in the town, a faint painful shriek of execution could be heard.")
 		chatList 1, lang("南無", "Sorry for you.")
 		gosub *re_select
+		wolf = 0
+		repeat MAX_CHARA_TOTAL
+			if ( cdata(CDATA_EXIST, cnt) != CHAR_STATE_ALIVE ) {
+				continue
+			}
+			if ( cnt == 0 ) {
+				continue
+			}
+			if ( cnt < MAX_CHARA_FOLLOWER ) {
+				continue
+			}
+			if ( cbit(CHARA_BIT_NECRO, cnt) ) {
+				continue
+			}
+			if ( cdata(CDATA_ID, cnt) == CREATURE_ID_WEREWOLF | cdata(CDATA_ID, cnt) == CREATURE_ID_WEREWOLF_DETECTIVE ) {
+				wolf++
+				break
+			}
+		loop
+		if ( wolf == 0 ) {
+			mdata(MDATA_WEREWOLF_PROGRESS) = 0
+			snd SOUNDLIST_COMPLETE1
+			txtef COLOR_GREEN
+			txt lang("【人狼遊儀が失敗:" + mdata(MDATA_WEREWOLF_PROGRESS) + "/200】", "< Werewolf-RitualGame in progress: " + mdata(MDATA_WEREWOLF_PROGRESS) + "/200> ")
+			txtef COLOR_GREEN
+			txt lang("狼たちの儀式の失敗が確認されました。市民陣営の勝利です。", "The wolves' ritual failure was confirmed. It's a victory for the citizens.")
+		}
+		wolf = 0
 		goto *random_eventProc_SWEND1
 	}
 	if ( _switch_val == RANDOM_EVENT_WEREWOLF | _switch_sw ) {
@@ -433,12 +461,13 @@
 					}
 				}
 				if ( cdata(CDATA_EXIST, p) == CHAR_STATE_ALIVE ) {
-					if ( cdata(CDATA_ID, p) == CREATURE_ID_FOX_SPIRIT | cdata(CDATA_QUALITY, p) > FIX_QUALITY_GREAT ) {
+					if ( cdata(CDATA_ID, p) == CREATURE_ID_FOX_SPIRIT | cdata(CDATA_QUALITY, p) > FIX_QUALITY_GREAT | cbit(CHARA_BIT_NECRO, p) == TRUE ) {
 						kitune = 100
 						break
 					}
 				}
 				if ( cdata(CDATA_EXIST, p) == CHAR_STATE_ALIVE ) {
+					mdata(MDATA_WEREWOLF_PROGRESS) += cdata(CDATA_LEVEL, p)
 					chatc@DP = p
 					txt lang(name(p) + "「ぎゃぁーー！」", name(p) + " screams, " + cnvtalk("Ahhhhhhh!"))
 					dmghp p, 99999, DAMAGE_FROM_UNSEEN
@@ -446,6 +475,9 @@
 					break
 				}
 			loop
+		}
+		if ( mdata(MDATA_WEREWOLF_PROGRESS) > 200 ) {
+			mdata(MDATA_WEREWOLF_PROGRESS) = 200
 		}
 		if ( kitune == 0 ) {
 			goto *random_eventProc_SWEND1
@@ -457,13 +489,45 @@
 		snd SOUNDLIST_SCREAM
 		mdata(MDATA_WEREWOLF_STAGE) = 1
 		txtef COLOR_RED2
-		txt lang("[人狼による被害が出ました。有権者の皆さんは怪しい人物に処刑投票してください]", "[A werewolf has caused havoc. People should vote on whom they suspect it being.]")
+		txt lang("[人狼による被害が出ました。有権者の皆さんは怪しい人物に処刑投票してください] ", "[A werewolf has caused havoc. People should vote on whom they suspect it being.] ")
 		s = lang("狼の襲撃", "Werewolf")
 		file = "bg_re9"
-		buff = lang("街のどこかから、狼の遠吠えと微かな悲鳴が聞こえてきた。", "Suddenly, a painful shriek rises from somewhere in the town. You see several guards hastily run by.")
-		chatList 1, lang("狼が出たぞー！", "The werewolf showed up!")
+		buff = lang("街のどこかから、狼の遠吠えと微かな悲鳴が聞こえてきた。", "Suddenly, a painful shriek and the howling of a wolf rises from somewhere in the town. You see several guards hastily running by.")
+		chatList 1, lang("狼が出たぞー！", "The werewolf had murdered someone in cold blood!")
 		gosub *re_select
 		kitune = 0
+		txtef COLOR_RED
+		txt lang("【人狼遊儀が進行:" + mdata(MDATA_WEREWOLF_PROGRESS) + "/200】", "< Werewolf-RitualGame in progress: " + mdata(MDATA_WEREWOLF_PROGRESS) + "/200 > ")
+		if ( mdata(MDATA_WEREWOLF_PROGRESS) == 200 ) {
+			kitune = 0
+			repeat MAX_CHARA_TOTAL
+				if ( cdata(CDATA_EXIST, cnt) != CHAR_STATE_ALIVE ) {
+					continue
+				}
+				if ( cnt == 0 ) {
+					continue
+				}
+				if ( cnt < MAX_CHARA_FOLLOWER ) {
+					continue
+				}
+				if ( cbit(CHARA_BIT_NECRO, cnt) ) {
+					continue
+				}
+				if ( cdata(CDATA_ID, cnt) == CREATURE_ID_FOX_SPIRIT ) {
+					kitune++
+					break
+				}
+			loop
+			if ( kitune == 0 ) {
+				txtef COLOR_RED
+				txt lang("合計レベルが200以上になるように生贄が捧げられたことにより、神狼が降臨（未実装）。狼陣営の勝利です。", "The sacrifice of 200 levels was made, so a wolfgod descended (not implemented). It's a victory for the wolves.")
+			}
+			if ( kitune > 0 ) {
+				txtef COLOR_RED
+				txt lang("潜伏していた妖狐が人狼遊儀を乗っ取ったことにより、九尾が降臨（未実装）。狐陣営の勝利です。", "A fox that had been hiding out takes over Werewolf-RitualGame, so a foxgod descended (not yet implemented). It's a victory for the fox.")
+			}
+			kitune = 0
+		}
 		goto *random_eventProc_SWEND1
 	}
 	if ( _switch_val == RANDOM_EVENT_MURDER | _switch_sw ) {

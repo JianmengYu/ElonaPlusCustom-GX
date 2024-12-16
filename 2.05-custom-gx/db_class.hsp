@@ -554,7 +554,7 @@
 			skillinit SKILL_NORMAL_NEGOTIATION, rc, 4
 			skillinit SKILL_WEAPON_FIREARM, rc, 5
 			skillinit SKILL_NORMAL_EVASION, rc, 4
-			skillinit SKILL_NORMAL_LITERACY, rc, 3
+			skillinit SKILL_NORMAL_CARPENTRY, rc, 3
 			skillinit SKILL_NORMAL_HEALING, rc, 4
 			skillinit SKILL_NORMAL_MARKSMAN, rc, 5
 			skillinit SKILL_NORMAL_SHIELD, rc, 5
@@ -666,7 +666,7 @@
 			skillinit SKILL_NORMAL_GREATER_EVASION, rc, 4
 			skillinit SKILL_NORMAL_HEALING, rc, 6
 			skillinit SKILL_NORMAL_LIGHT_ARMOR, rc, 5
-			skillinit SKILL_NORMAL_LITERACY, rc, 4
+			skillinit SKILL_NORMAL_ALCHEMY, rc, 4
 		}
 	}
 	return

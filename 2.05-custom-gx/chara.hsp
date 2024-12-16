@@ -63,6 +63,14 @@
 			txt lang("あなたは「" + skillname(SKILL_SPACT_SWARM) + "」の能力を得た。", "You have learned a new ability, " + skillname(SKILL_SPACT_SWARM) + ".")
 		}
 	}
+	if ( sorg(SKILL_NORMAL_TACTICS, CHARA_PLAYER) > 49 & sorg(SKILL_WEAPON_MARTIAL_ARTS, CHARA_PLAYER) > 29 ) {
+		if ( spact(SKILL_SPACT_HIP_ATTACK - STARTING_SKILL_SPACT) == 0 ) {
+			spact(SKILL_SPACT_HIP_ATTACK - STARTING_SKILL_SPACT) = 1
+			txtmore
+			txtef COLOR_YELLOW
+			txt lang("あなたは「" + skillname(SKILL_SPACT_HIP_ATTACK) + "」の能力を得た。", "You have learned new ability, " + skillname(SKILL_SPACT_HIP_ATTACK) + ".")
+		}
+	}
 	if ( trait(TRAIT_NORMAL_SPACT_VINDALIAN_JIUJITSU) != 0 ) {
 		if ( spact(SKILL_SPACT_VINDALIAN_JIUJITSU - STARTING_SKILL_SPACT) == 0 ) {
 			spact(SKILL_SPACT_VINDALIAN_JIUJITSU - STARTING_SKILL_SPACT) = 1
@@ -2834,32 +2842,101 @@
 	flt
 	itemcreate 0, ITEM_ID_BOTTLE_CRIM_ALE, -1, -1, 0
 	inv(INV_ITEM_NUM, ci) = 2
-	if ( sdata(SKILL_NORMAL_LITERACY, CHARA_PLAYER) == 0 ) {
+	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "warrior" ) {
 		flt
-		itemcreate 0, ITEM_ID_POTION_CURE_MINOR_WOUND, -1, -1, 0
+		itemcreate CHARA_PLAYER, ITEM_ID_BRONZE_COIN, -1, -1, 0
 		inv(INV_ITEM_NUM, ci) = 3
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
 	}
-	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "pianist" ) {
+	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "thief" ) {
 		flt
-		itemcreate 0, ITEM_ID_GRAND_PIANO, -1, -1, 0
+		itemcreate CHARA_PLAYER, ITEM_ID_LOCKPICK, -1, -1, 0
+		inv(INV_ITEM_NUM, ci) = 3
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_KEMURIDAMA, -1, -1, 0
+		inv(INV_ITEM_NUM, ci) = 3
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+	}
+	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "wizard" ) {
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_SPELLBOOK_MAGIC_ARROW, -1, -1, 0
+		inv(INV_ITEM_NUM, ci) = 3
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_SPELLBOOK_MINOR_TELEPORTATION, -1, -1, 0
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
 	}
 	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "farmer" ) {
 		flt
-		itemcreate 0, ITEM_ID_PORTABLE_COOKING_TOOL, -1, -1, 0
+		itemcreate CHARA_PLAYER, ITEM_ID_STOMAFILLIA, -1, -1, 0
+		inv(INV_ITEM_NUM, ci) = 2
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
 	}
-	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "wizard" | cdatan(CDATAN_CLASS, CHARA_PLAYER) == "warmage" ) {
+	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "predator" ) {
 		flt
-		itemcreate 0, ITEM_ID_SPELLBOOK_MINOR_TELEPORTATION, -1, -1, 0
-		flt
-		itemcreate 0, ITEM_ID_SPELLBOOK_MAGIC_ARROW, -1, -1, 0
+		itemcreate CHARA_PLAYER, ITEM_ID_BRONZE_COIN, -1, -1, 0
 		inv(INV_ITEM_NUM, ci) = 3
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+	}
+	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "archer" ) {
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_SCROLL_TELEPORTATION, -1, -1, 0
+		inv(INV_ITEM_NUM, ci) = 5
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_SEWING_KIT, -1, -1, 0
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+	}
+	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "warmage" ) {
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_SPELLBOOK_HERO, -1, -1, 0
+		inv(INV_ITEM_NUM, ci) = 3
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_SPELLBOOK_CONCENTRATION, -1, -1, 0
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+	}
+	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "tourist" ) {
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_FISHING_POLE, -1, -1, 0
+		inv(INV_ITEM_CHARGE, ci) = 50
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+	}
+	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "pianist" ) {
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_GRAND_PIANO, -1, -1, 0
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_LUTE, -1, -1, 0
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+	}
+	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "gunner" ) {
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_SCROLL_TELEPORTATION, -1, -1, 0
+		inv(INV_ITEM_NUM, ci) = 5
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_CARPENTERS_TOOL, -1, -1, 0
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
 	}
 	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "priest" ) {
 		flt
-		itemcreate 0, ITEM_ID_SPELLBOOK_CURE_MINOR_WOUND, -1, -1, 0
+		itemcreate CHARA_PLAYER, ITEM_ID_SPELLBOOK_CURE_MINOR_WOUND, -1, -1, 0
 		inv(INV_ITEM_NUM, ci) = 3
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
 		flt
-		itemcreate 0, ITEM_ID_SPELLBOOK_HERO, -1, -1, 0
+		itemcreate CHARA_PLAYER, ITEM_ID_SPELLBOOK_GEM, -1, -1, 0
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+	}
+	if ( cdatan(CDATAN_CLASS, CHARA_PLAYER) == "claymore" ) {
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_POTION_CURE_MINOR_WOUND, -1, -1, 0
+		inv(INV_ITEM_NUM, ci) = 5
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
+		flt
+		itemcreate CHARA_PLAYER, ITEM_ID_POTION_CURE_MUTATION, -1, -1, 0
+		inv(INV_ITEM_STATUS, ci) = ITEM_STATUS_NORMAL
 	}
 	gosub *cm_putTrait
 	cdata(CDATA_SKILLPOINT, r1) = 5 + trait(TRAIT_RACE_BONUS_SKILLPOINT), 5 + trait(TRAIT_RACE_BONUS_SKILLPOINT)
@@ -3101,7 +3178,7 @@
 				}
 			}
 			if ( cnt == 0 ) {
-				listn(0, cnt) = lang("リロール", "Reroll")
+				listn(0, cnt) = lang("再抽選", "Reroll")
 			}
 			pos wx + 38, wy + 66 + cnt * 19 - 2
 			gcopy 3, cnt * 24 + 72, 30, 24, 18
@@ -3183,13 +3260,13 @@
 	listn(0, 1) = lang("内緒にする", "Keep it secret")
 	listmax++
 	list(0, 2) = 0
-	listn(0, 2) = lang("全リロール", "Reroll all")
+	listn(0, 2) = lang("全て再抽選", "Reroll all")
 	listmax++
 	list(0, 3) = 0
-	listn(0, 3) = lang("前半リロール", "Reroll first half")
+	listn(0, 3) = lang("前半再抽選", "Reroll first half")
 	listmax++
 	list(0, 4) = 0
-	listn(0, 4) = lang("後半リロール", "Reroll second half")
+	listn(0, 4) = lang("後半再抽選", "Reroll second half")
 	listmax++
 	windowshadow = 1
 *cm_past_loop
@@ -3881,7 +3958,7 @@
 	listn(0, 0) = lang("決定する", "Proceed")
 	listmax++
 	list(0, 1) = 0
-	listn(0, 1) = lang("リロール", "Reroll")
+	listn(0, 1) = lang("再抽選", "Reroll")
 	listmax++
 	repeat MAX_SKILL_ATTR_BASIC, STARTING_SKILL_ATTR
 		chatList cmstats(cnt - STARTING_SKILL_ATTR), skillname(cnt)
@@ -4263,7 +4340,7 @@
 	pos 0, 0
 	gcopy 4, 0, 0, windoww, windowh
 	gmode 2
-	s = lang("決定ｷｰを押すことで、年齢・体格をリロールできる。", "Hit the enter key to reroll your background.")
+	s = lang("決定ｷｰを押すことで、年齢・体格を再抽選できる。", "Hit the enter key to reroll your background.")
 	gosub *screen_drawMsg2
 	del_chara 0
 	dbidn = cmrace

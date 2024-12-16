@@ -295,15 +295,28 @@
 								txt lang(name(tc) + "は戦慄した。", name(tc) + " " + was(tc) + " overwhelmed.")
 							}
 						}
-						inv(INV_ITEM_NUM, ci)--
-						flt
-						itemcreate -1, ITEM_ID_BAIT, cdata(CDATA_X, tc), cdata(CDATA_Y, tc), 0
-						inv(INV_ITEM_PARAM1, ci) = 4
-						inv(INV_ITEM_PIC, ci) = xy2pic(26, 11)
-						inv(INV_ITEM_VALUE, ci) = 4 * 4 * 500 + 200
-						cell_refresh inv(INV_ITEM_X, ci), inv(INV_ITEM_Y, ci)
+						cibk = ci
 						dmg = (sdata(SKILL_ATTR_PER, cc) / 5 + 5) * ((sdata(SKILL_WEAPON_THROWING, CHARA_PLAYER) + 1) / 5 + 5) + rnd(sdata(SKILL_WEAPON_THROWING, cc) * 2 + 5) + calcLevelDmg(cc)
 						dmghp tc, dmg, CHARA_PLAYER, SKILL_RES_SOUND, 1000
+						if ( rnd(10) == 0 ) {
+							txtef COLOR_RED
+							chatc@DP = tc
+							txt lang("「死ぬなら…せめて前のめりで…！」喪蝉は絶命した。", "The cicada dies!")
+							ci = cibk
+							inv(INV_ITEM_NUM, ci)--
+							flt
+							itemcreate -1, ITEM_ID_BAIT, cdata(CDATA_X, tc), cdata(CDATA_Y, tc), 0
+							inv(INV_ITEM_PARAM1, ci) = 4
+							inv(INV_ITEM_PIC, ci) = xy2pic(26, 11)
+							inv(INV_ITEM_VALUE, ci) = 4 * 4 * 500 + 200
+						}
+						cell_refresh inv(INV_ITEM_X, ci), inv(INV_ITEM_Y, ci)
+						tcbk = tc
+						efpori = (sdata(SKILL_WEAPON_THROWING, CHARA_PLAYER) + sdata(SKILL_NORMAL_GENE_ENGINEER, CHARA_PLAYER) + cdata(CDATA_LEVEL, CHARA_PLAYER)) * 6 + 5
+						efid = SKILL_SPELL_RAGING_ROAR
+						efp = (sdata(SKILL_WEAPON_THROWING, CHARA_PLAYER) + sdata(SKILL_NORMAL_GENE_ENGINEER, CHARA_PLAYER) + cdata(CDATA_LEVEL, CHARA_PLAYER)) * 6 + 5
+						gosub *effect
+						tc = tcbk
 						goto *turn_end
 					}
 					if ( inv(INV_ITEM_ID, ci) == ITEM_ID_NATTO ) {
@@ -1142,6 +1155,36 @@
 				cdata(CDATA_GOLD, tc) = 0
 			}
 			inv(INV_ITEM_KNOWN, ti) = ITEM_KNOWN_FULL
+			yaca = 0
+			p = sellgold / limit(5000 - sqrt(cdata(CDATA_ROLE_SHOP_LEVEL, tc) + 1) * 20, 3000, 5000)
+			px = (3000 - (sqrt(cdata(CDATA_ROLE_SHOP_LEVEL, tc) + 1) + 1000)) / 200
+			if ( p > 10 ) {
+				p = 10
+			}
+			if ( p > 0 ) {
+				repeat p
+					if ( rnd(px) == 0 ) {
+						yaca++
+						if ( gdata(GDATA_MONTH) == 12 ) {
+							yaca += 4
+						}
+					}
+				loop
+			}
+			if ( gdata(GDATA_FLAG_YACA_POINTS) >= 100000 ) {
+				yaca = 0
+			}
+			if ( yaca > 0 ) {
+				snd SOUNDLIST_ENC
+				txtef COLOR_YELLOW
+				txt lang("店のキャンペーン対象になり、" + yaca + "ヤカポイントを獲得した。", " You got " + yaca + " yaca point through shop campaigns.")
+			}
+			gdata(GDATA_FLAG_YACA_POINTS) += yaca
+			if ( gdata(GDATA_FLAG_YACA_POINTS) >= 100000 ) {
+				gdata(GDATA_FLAG_YACA_POINTS) = 100000
+			}
+			p = 0
+			px = 0
 		}
 		if ( invctrl == 22 | invctrl == 24 ) {
 			snd SOUNDLIST_GET1 + rnd(2)
@@ -5553,7 +5596,7 @@
 						if ( attackrange ) {
 							if ( ammoproc == ENCHANT_AMMO_NONE ) {
 								if ( cdatan(CDATAN_CLASS, cc) == "gunner" ) {
-									if ( rnd(100) < rnd(cdata(CDATA_EXTRA_SHOOT, cc) * 2 + 1) + 5 ) {
+									if ( rnd(100) < limit(cdata(CDATA_EXTRA_SHOOT, cc), 0, 50) + limit(sdata(attackskill, cc) / 50, 0, 40) + 5 ) {
 										ammoproc = -1
 										extraattack++
 										ele = SKILL_NONE
@@ -5561,7 +5604,7 @@
 									}
 								}
 								if ( cdatan(CDATAN_CLASS, cc) != "gunner" ) {
-									if ( rnd(100) < rnd(cdata(CDATA_EXTRA_SHOOT, cc) * 2 + 1) ) {
+									if ( rnd(100) < limit(cdata(CDATA_EXTRA_SHOOT, cc), 0, 50) + limit(sdata(attackskill, cc) / 50, 0, 40) ) {
 										ammoproc = -1
 										extraattack++
 										ele = SKILL_NONE
@@ -5572,14 +5615,14 @@
 						}
 						else {
 							if ( cdatan(CDATAN_CLASS, cc) == "warrior" ) {
-								if ( rnd(100) < rnd(cdata(CDATA_EXTRA_MELEE, cc) * 2 + 1) + 5 ) {
+								if ( rnd(100) < limit(cdata(CDATA_EXTRA_MELEE, cc), 0, 50) + limit(sdata(attackskill, cc) / 50, 0, 40) + 5 ) {
 									extraattack++
 									ele = SKILL_NONE
 									goto *act_attack
 								}
 							}
 							else {
-								if ( rnd(100) < rnd(cdata(CDATA_EXTRA_MELEE, cc) * 2 + 1) ) {
+								if ( rnd(100) < limit(cdata(CDATA_EXTRA_MELEE, cc), 0, 50) + limit(sdata(attackskill, cc) / 50, 0, 40) ) {
 									extraattack++
 									ele = SKILL_NONE
 									goto *act_attack
@@ -10997,6 +11040,81 @@
 			txt_impossible
 		}
 		goto *act_use_SWEND1
+	}
+	if ( _switch_val == 149 | _switch_sw ) {
+		_switch_sw = 0
+		if ( cdata(CDATA_POWER_GAUGE, CHARA_PLAYER) < 100 ) {
+			txt lang("パワーゲージが100％必要だ。", "You need 100% power gauge.")
+			goto *act_use_SWEND1
+		}
+		if ( trait(TRAIT_NORMAL_SPACT_SHIKI_ORIGAMI) == 0 ) {
+			txt lang("使う方法を知らない…。", "You don't know how to use it...")
+			goto *act_use_SWEND1
+		}
+		dead1 = -1
+		repeat MAX_CHARA_TOTAL
+			if ( cdata(CDATA_EXIST, cnt) != CHAR_STATE_ALIVE ) {
+				continue
+			}
+			if ( cc == cnt ) {
+				continue
+			}
+			tc = cnt
+			if ( tc < MAX_CHARA_FOLLOWER ) {
+				continue
+			}
+			if ( cbit(CHARA_BIT_NECRO, tc) != TRUE ) {
+				continue
+			}
+			if ( cdata(CDATA_ID, tc) == CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI ) {
+				dead1 = -2
+			}
+		loop
+		if ( dead1 == (-2) ) {
+			txt lang("生成中は追加できない。", "You can not control more.")
+			goto *act_use_SWEND1
+		}
+		repeat 8
+			snd SOUNDLIST_CARD1
+			await 20
+		loop
+		necrolv = sdata(SKILL_NORMAL_LITERACY, CHARA_PLAYER) + (sdata(SKILL_NORMAL_CONTROL_MAGIC, CHARA_PLAYER) + 10) / 2
+		necrolv = necrolv * 14 / 10
+		if ( necrolv > gdata(GDATA_DEEPEST_LEVEL) * 3 / 2 ) {
+			necrolv = gdata(GDATA_DEEPEST_LEVEL) * 3 / 2
+		}
+		if ( necrolv > 2000 ) {
+			necrolv = 2000
+		}
+		if ( necrolv > gdata(GDATA_DEEPEST_LEVEL) * 3 / 2 ) {
+			necrolv = gdata(GDATA_DEEPEST_LEVEL) * 3 / 2
+		}
+		flt
+		initlv = necrolv
+		novoidlv = 1
+		characreate -1, CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI, cdata(CDATA_X, CHARA_PLAYER) - 1, cdata(CDATA_Y, CHARA_PLAYER)
+		cdata(CDATA_RELATION, rc) = RELATION_ALLY
+		cdata(CDATA_RELATION_ORG, rc) = RELATION_ALLY
+		cbitmod CHARA_BIT_NECRO, rc, TRUE
+		cbitmod CHARA_BIT_SHADOW_CLONE, rc, TRUE
+		cdatan(CDATAN_NAME, rc) += " Lv" + cdata(CDATA_LEVEL, rc)
+		cdata(CDATA_PIC, rc) = xy2pic(8, 35)
+		flt
+		initlv = necrolv
+		novoidlv = 1
+		characreate -1, CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI, cdata(CDATA_X, CHARA_PLAYER) + 1, cdata(CDATA_Y, CHARA_PLAYER)
+		cdata(CDATA_RELATION, rc) = RELATION_ALLY
+		cdata(CDATA_RELATION_ORG, rc) = RELATION_ALLY
+		cbitmod CHARA_BIT_NECRO, rc, TRUE
+		cbitmod CHARA_BIT_SHADOW_CLONE, rc, TRUE
+		cdatan(CDATAN_NAME, rc) += " Lv" + cdata(CDATA_LEVEL, rc)
+		cdata(CDATA_PIC, rc) = xy2pic(9, 35)
+		animeid = ANIMATION_GENE
+		anic = 0
+		gosub *anime
+		cdata(CDATA_POWER_GAUGE, CHARA_PLAYER) -= 100
+		goto *act_use_SWEND1
+		_switch_sw++
 	}
 	if ( _switch_val == EFFECT_UNDEAD_FUSION | _switch_sw ) {
 		_switch_sw = 0

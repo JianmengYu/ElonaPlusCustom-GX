@@ -102,7 +102,7 @@
 	_conash = lang("灰　化", "Ash body")
 	_conovergods = lang("神智超越", "OverGods")
 	_confatigue = lang("軽疲労", "Tired"), lang("疲　労", "Very tired"), lang("過　労", "VERY tired")
-	_quality = "", lang("粗悪", "bad"), lang("良質", "good"), lang("高品質", "great"), lang("奇跡", "miracle"), lang("神器", "godly"), lang("特別", "special")
+	_quality = "", lang("粗悪", "bad"), lang("平凡", "common"), lang("高品質", "great"), lang("奇跡", "miracle"), lang("神器", "godly"), lang("特別", "special")
 	_resist = lang("致命的な弱点", "Criticaly Weak"), lang("弱点", "Weak"), lang("耐性なし", "No Resist"), lang("弱い耐性", "Little"), lang("普通の耐性", "Normal"), lang("強い耐性", "Strong"), lang("素晴らしい耐性", "Superb"), lang("凄まじい耐性", "Amazing"), lang("至上の耐性", "Supreme")
 	_mark = lang("。", "."), lang("？", "?"), lang("！", "!"), ""
 	_sex = lang("男", "Male"), lang("女", "Female")
@@ -900,7 +900,7 @@
 	repeat txtsetquiz15_arg1
 		if ( p(cnt) == 0 ) {
 			seitou = cnt
-			s(cnt) = lang("店の権利書", "shop deed")
+			s(cnt) = lang("牧場の権利書", "ranch deed")
 		}
 		if ( p(cnt) == 1 ) {
 			s(cnt) = lang("博物館の権利書", "museum deed")
@@ -909,7 +909,7 @@
 			s(cnt) = lang("畑の権利書", "farm deed")
 		}
 		if ( p(cnt) == 3 ) {
-			s(cnt) = lang("牧場の権利書", "ranch deed")
+			s(cnt) = lang("店の権利書", "shop deed")
 		}
 	loop
 	return

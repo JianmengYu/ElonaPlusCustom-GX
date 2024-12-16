@@ -101,6 +101,9 @@
 	if ( inv(INV_ITEM_ID, calcmusicticketvalue_itemid) == ITEM_ID_BAMAGICAR ) {
 		return 5000
 	}
+	if ( inv(INV_ITEM_ID, calcmusicticketvalue_itemid) == ITEM_ID_HIDEN_MASHI ) {
+		return 5500
+	}
 	if ( inv(INV_ITEM_ID, calcmusicticketvalue_itemid) == ITEM_ID_DOG_SISTERS_DIARY ) {
 		return 6000
 	}
@@ -225,6 +228,9 @@
 	}
 	if ( inv(INV_ITEM_ID, calcitemvalue_itemid) == ITEM_ID_AWAKE_DESTONE ) {
 		locvar_calcitemvalue_value += (inv(INV_ITEM_PARAM2, calcitemvalue_itemid) + inv(INV_ITEM_PARAM3, calcitemvalue_itemid) + inv(INV_ITEM_AMUR_CAGE, calcitemvalue_itemid)) * 5
+	}
+	if ( inv(INV_ITEM_ID, calcitemvalue_itemid) == ITEM_ID_TRAINING_TICKET ) {
+		locvar_calcitemvalue_value += inv(INV_ITEM_PARAM2, calcitemvalue_itemid) * 90
 	}
 	if ( inv(INV_ITEM_KNOWN, calcitemvalue_itemid) >= ITEM_KNOWN_FULL ) {
 		if ( inv(INV_ITEM_STATUS, calcitemvalue_itemid) == ITEM_STATUS_BLESSED ) {
@@ -872,28 +878,22 @@
 
 #defcfunc calcspellfail int calcspellfail_skillid, int calcspellfail_charid
 	if ( calcspellfail_charid != CHARA_PLAYER ) {
+		locvar_calcspellfail_p = 95
+		if ( cdatan(CDATAN_CLASS, calcspellfail_charid) == "warmage" ) {
+			locvar_calcspellfail_p += 5
+		}
 		if ( findbuff(calcspellfail_charid, BUFF_DISTRACTED) != (-1) ) {
-			if ( gdata(GDATA_RIDER) == calcspellfail_charid ) {
-				return 92 - limit(30 - sdata(SKILL_ACTIVE_RIDING, CHARA_PLAYER) / 2, 0, 30)
-			}
-			if ( cdatan(CDATAN_CLASS, calcspellfail_charid) == "warmage" ) {
-				return 97
+			locvar_calcspellfail_p -= 3
+		}
+		if ( findbuff(calcspellfail_charid, BUFF_MIST_OF_SILENCE) != (-1) ) {
+			if ( cdata(CDATA_QUALITY, calcspellfail_charid) > FIX_QUALITY_GREAT ) {
+				locvar_calcspellfail_p -= 35
 			}
 			else {
-				return 92
+				locvar_calcspellfail_p -= 70
 			}
 		}
-		else {
-			if ( gdata(GDATA_RIDER) == calcspellfail_charid ) {
-				return 95 - limit(30 - sdata(SKILL_ACTIVE_RIDING, CHARA_PLAYER) / 2, 0, 30)
-			}
-			if ( cdatan(CDATAN_CLASS, calcspellfail_charid) == "warmage" ) {
-				return 100
-			}
-			else {
-				return 95
-			}
-		}
+		return locvar_calcspellfail_p
 	}
 	locvar_calcspellfail_i = 4
 	locvar_calcspellfail_f = carmor(calcspellfail_charid)
@@ -949,6 +949,14 @@
 	}
 	if ( findbuff(calcspellfail_charid, BUFF_DISTRACTED) != (-1) ) {
 		locvar_calcspellfail_p -= 3
+	}
+	if ( findbuff(calcspellfail_charid, BUFF_MIST_OF_SILENCE) != (-1) ) {
+		if ( cdata(CDATA_QUALITY, calcspellfail_charid) > FIX_QUALITY_GREAT ) {
+			locvar_calcspellfail_p -= 35
+		}
+		else {
+			locvar_calcspellfail_p -= 70
+		}
 	}
 	if ( locvar_calcspellfail_p > 100 ) {
 		locvar_calcspellfail_p = 100
@@ -1749,7 +1757,7 @@
 			if ( cdata(CDATA_CONDITION_WET, r1) < 5 ) {
 				cdata(CDATA_CONDITION_WET, r1) = 5
 			}
-			if ( rnd(sdata(SKILL_NORMAL_SWIMMING, r1) + 5) < rnd(50) ) {
+			if ( rnd(sdata(SKILL_NORMAL_SWIMMING, r1) * 10 + 5) < rnd(50) ) {
 				cdata(CDATA_CONDITION_SUFFOCATION, r1) += 3
 			}
 		}
@@ -1759,7 +1767,7 @@
 			if ( cdata(CDATA_CONDITION_WET, r1) < 5 ) {
 				cdata(CDATA_CONDITION_WET, r1) = 5
 			}
-			if ( rnd(sdata(SKILL_NORMAL_SWIMMING, r1) + 5) < rnd(20) ) {
+			if ( rnd(sdata(SKILL_NORMAL_SWIMMING, r1) * 10 + 5) < rnd(20) ) {
 				cdata(CDATA_CONDITION_SUFFOCATION, r1) += 3
 			}
 			dmgsp r1, 1
@@ -2551,4 +2559,4 @@
 	return
 
 #defcfunc calcLevelDmg int calcleveldmg_arg1_cc
-	return (limit(cdata(CDATA_LEVEL, calcleveldmg_arg1_cc) - 50, 1, 2000) + limit(cdata(CDATA_LEVEL, calcleveldmg_arg1_cc) - 100, 1, 2000)) * 2 * sqrt(limit(cdata(CDATA_LEVEL, calcleveldmg_arg1_cc), 1, 2000) * 3) + 30
+	return (limit(cdata(CDATA_LEVEL, calcleveldmg_arg1_cc) - 50, 1, 2000) + limit(cdata(CDATA_LEVEL, calcleveldmg_arg1_cc) - 100, 1, 2000)) * 4 * sqrt(limit(cdata(CDATA_LEVEL, calcleveldmg_arg1_cc), 1, 2000) * 3) + 30

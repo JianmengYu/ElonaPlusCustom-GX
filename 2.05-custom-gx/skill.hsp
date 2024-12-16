@@ -858,7 +858,7 @@
 	// Special actions
 	sdataref(SKILL_DATAREF_USE, SKILL_SPACT_DRAIN_BLOOD) = SKILL_ATTR_DEX, SKILL_TYPE_HAND, 7, TARGET_TYPE_ENEMY, 0
 	skillname(SKILL_SPACT_DRAIN_BLOOD) = lang("吸血の牙", "Drain Blood")
-	skilldesc(SKILL_SPACT_DRAIN_BLOOD) = lang("体力・sp吸収", "Drain HP")
+	skilldesc(SKILL_SPACT_DRAIN_BLOOD) = lang("出血付与・sp吸収", "Apply Bleed/Drain HP")
 
 	sdataref(SKILL_DATAREF_USE, SKILL_SPACT_FIRE_BREATH) = SKILL_ATTR_CON, SKILL_TYPE_BREATH, 5, TARGET_TYPE_BOTH + SKILL_TYPE_FOV_BOLT, 0
 	skillname(SKILL_SPACT_FIRE_BREATH) = lang("火炎放射", "Fire Breath")
@@ -1498,7 +1498,7 @@
 
 	sdataref(SKILL_DATAREF_USE, SKILL_SPACT_VORACITY_FANG) = SKILL_ATTR_STR, SKILL_TYPE_HAND, 12, TARGET_TYPE_ENEMY, 0
 	skillname(SKILL_SPACT_VORACITY_FANG) = lang("貪食の牙", "Voracity Fang")
-	skilldesc(SKILL_SPACT_VORACITY_FANG) = lang("体力吸収・満腹時無効", "Drain HP")
+	skilldesc(SKILL_SPACT_VORACITY_FANG) = lang("出血付与/耐久弱化", "Apply Bleeding/Weaken END")
 
 	sdataref(SKILL_DATAREF_USE, SKILL_SPACT_SHARK_TRADE) = SKILL_ATTR_WIL, SKILL_TYPE_SP, 8, TARGET_TYPE_ENEMY, 0
 	skillname(SKILL_SPACT_SHARK_TRADE) = lang("シャークトレード", "Shark Trade")
@@ -1595,6 +1595,10 @@
 	sdataref(SKILL_DATAREF_USE, SKILL_SPACT_ADVANCED_CASTING) = SKILL_ATTR_LER, SKILL_TYPE_SP, 1, TARGET_TYPE_SELF + SKILL_TYPE_HAND, 0
 	skillname(SKILL_SPACT_ADVANCED_CASTING) = lang("高度詠唱陣", "Advanced Casting")
 	skilldesc(SKILL_SPACT_ADVANCED_CASTING) = lang("味方魔法の消費MP威力経験値を増加", "Increase casting MP and power and EXP")
+
+	sdataref(SKILL_DATAREF_USE, SKILL_SPACT_HIP_ATTACK) = SKILL_ATTR_STR, SKILL_TYPE_SP, 10, TARGET_TYPE_DIRECTION, 0
+	skillname(SKILL_SPACT_HIP_ATTACK) = lang("ヒップアタック", "Hip Attack")
+	skilldesc(SKILL_SPACT_HIP_ATTACK) = lang("戦術筋力依存攻撃/転倒付与", "Melee attack that topples target")
 
 	sdataref(SKILL_DATAREF_USE, SKILL_SPACT_BLADE_STRINGS) = SKILL_ATTR_DEX, SKILL_TYPE_SP, 10, TARGET_TYPE_DIRECTION, 0
 	skillname(SKILL_SPACT_BLADE_STRINGS) = lang("ブレードストリングス", "Blade Strings")
@@ -1900,6 +1904,10 @@
 	skillname(SKILL_SPACT_ANGEL_HALO) = lang("エンジェルハイロゥ", "Angel Halo")
 	skilldesc(SKILL_SPACT_ANGEL_HALO) = lang("無差別ゲージ変動/ゲージ15％消費", "Indiscriminate gauge fluctuation/gauge15")
 	
+	sdataref(SKILL_DATAREF_USE, SKILL_SPACT_KAMIKAKUSHI) = SKILL_ATTR_MAG, SKILL_TYPE_SP, 1, 9000 + 6, 500
+	skillname(SKILL_SPACT_KAMIKAKUSHI) = lang("紙隠し", "Kamikakushi")
+	skilldesc(SKILL_SPACT_KAMIKAKUSHI) = lang("式折神を消して放射/回復", "Breath(END) or Heal/erasing ShikiOrigami")
+
 	sdataref(SKILL_DATAREF_USE, SKILL_SPACT_REPRIMAND) = SKILL_ATTR_WIL, SKILL_TYPE_SP, 20, 3000 + 6, 0
 	skillname(SKILL_SPACT_REPRIMAND) = lang("懲罰の光", "Reprimand")
 	skilldesc(SKILL_SPACT_REPRIMAND) = lang("全域味方殺害罰する/ゲージ80％消費", "Punish killing of allies field/gauge80")

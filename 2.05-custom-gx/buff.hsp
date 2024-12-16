@@ -337,13 +337,13 @@
 		return
 	}
 	if ( calcbuff_buffid == BUFF_MIST_OF_SILENCE ) {
-		dur = 5 + calcbuff_power / 40
+		dur = 8 + calcbuff_power / 20
 		if ( calcbuff_charid < CHARA_PLAYER ) {
 			if ( calcbuff_charid == (-1) ) {
 				return
 			}
 			else {
-				buffdesc = lang("魔法の使用を禁止", "Inhibits casting")
+				buffdesc = lang("魔法の詠唱成功率低下", "Decreased success rate of spellcasting")
 				return
 			}
 		}
@@ -592,14 +592,19 @@
 		return
 	}
 	if ( calcbuff_buffid == BUFF_SLOW ) {
-		locvar_calcbuff_p = 20 + calcbuff_power / 5
+		locvar_calcbuff_p = 40
+		if ( calcbuff_charid >= CHARA_PLAYER ) {
+			if ( cdata(CDATA_QUALITY, calcbuff_charid) > FIX_QUALITY_GREAT ) {
+				locvar_calcbuff_p = 20
+			}
+		}
 		dur = 8 + calcbuff_power / 20
 		if ( calcbuff_charid < CHARA_PLAYER ) {
 			if ( calcbuff_charid == (-1) ) {
 				return
 			}
 			else {
-				buffdesc = lang("" + locvar_calcbuff_p + "の鈍足", "Speed -" + locvar_calcbuff_p)
+				buffdesc = lang("" + locvar_calcbuff_p + "割合の鈍足", "Speed Decrease by " + locvar_calcbuff_p + "%")
 				return
 			}
 		}
@@ -855,15 +860,13 @@
 		return
 	}
 	if ( calcbuff_buffid == BUFF_MIST_OF_FRAILNESS ) {
-		locvar_calcbuff_p = 30 + calcbuff_power / 10, 5 + calcbuff_power / 15
-		locvar_calcbuff_p2 = limit(20 + calcbuff_power / 70, 20, 300)
-		dur = 6 + calcbuff_power / 10
+		dur = 8 + calcbuff_power / 20
 		if ( calcbuff_charid < CHARA_PLAYER ) {
 			if ( calcbuff_charid == (-1) ) {
 				return
 			}
 			else {
-				buffdesc = lang("PVを半減", "Halves PV")
+				buffdesc = lang("被ダメージ割合増加/与ダメージ割合減少", "Reduced ATK and DEF")
 				return
 			}
 		}

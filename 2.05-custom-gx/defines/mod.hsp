@@ -615,8 +615,10 @@
 #define global	SKILL_SPACT_SHIKIORIGAMI_SHURIKEN	863
 #define global	SKILL_SPACT_SHIKIORIGAMI_AIRPLANE	864
 #define global	SKILL_SPACT_BRAIN_PARASITIZE	865
+#define global	SKILL_SPACT_KAMIKAKUSHI	866
+#define global	SKILL_SPACT_HIP_ATTACK	867
 
-#define global	MAX_SKILL	(SKILL_SPACT_BRAIN_PARASITIZE + 1)
+#define global	MAX_SKILL	(SKILL_SPACT_HIP_ATTACK + 1)
 
 // Absolute skill limits
 #define global	MAX_SPACT_COUNT	500 // Maximum number of spact slots available in the array, beginning at STARTING_SKILL_SPACT, meaning the effective max skillid is 1099 (1100 if you really push it)
@@ -1408,6 +1410,7 @@
 #define global	EFFECT_FLOAT_CAGE	146
 #define global	EFFECT_SLAVE_SPINNER	147
 #define global	EFFECT_SLAVE_WHEEL	148
+#define global	EFFECT_HIDEN_MASHI	149
 
 // Traits (feats)
 #define global	TRAIT_NORMAL_OTHER_MUTANT	0
@@ -2215,6 +2218,8 @@
 #define global	CHARA_BIT_QUICK_RESTORE	1043
 #define global	CHARA_BIT_ENHANCED_ROCK_THROWING	1044
 #define global	CHARA_BIT_BRAIN_PARASITE	1045
+#define global	CHARA_BIT_SEALED_MAGIC	1046
+#define global	CHARA_BIT_SEALED_ABILITY	1047
 
 // Database modes
 #define global	DBMODE_NONE	0
@@ -2908,6 +2913,8 @@
 #define global	ANIMATION_LASER_BAZOOKA	62
 #define global	ANIMATION_HYPER_PLUG_BURST	63
 #define global	ANIMATION_GOD_CHARGE_ROD	64
+// Ano didn't allocate an anim for this one, use 65 for it
+#define global	ANIMATION_SHIKIKAMI_BREATH	65
 
 #define global	ANIMATION_UNUSED1	108
 #define global	ANIMATION_UNUSED2	109
@@ -3202,6 +3209,7 @@
 #define global	MDATA_CITY_TAXES	31
 #define global	MDATA_CITY_BUDGET	32
 #define global	MDATA_WEREWOLF_STAGE	33
+#define global	MDATA_WEREWOLF_PROGRESS	34
 
 #define global	MDATAN_NAME	0
 
@@ -5973,8 +5981,9 @@
 #define global	ITEM_ID_TOIL_ENERGY_DRINK	1298
 #define global	ITEM_ID_POTION_PLUG	1299
 #define global	ITEM_ID_TRAINING_TICKET	1300
+#define global	ITEM_ID_HIDEN_MASHI	1301
 
-#define global	MAX_ITEM_ID	(ITEM_ID_TRAINING_TICKET + 3)
+#define global	MAX_ITEM_ID	(ITEM_ID_HIDEN_MASHI + 3)
 
 // Creatures
 #define global	CREATURE_ID_BUG	0 // Also doubles as RANDOM
@@ -7101,8 +7110,9 @@
 #define global	CREATURE_ID_MOUNTAIN_SHAKER	1121
 #define global	CREATURE_ID_ULTIMATE_EXPERIMENTAL	1122
 #define global	CREATURE_ID_SAIKYO_NEZUMI	1123
+#define global	CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI	1124
 
-#define global	MAX_CREATURE_ID	(CREATURE_ID_SAIKYO_NEZUMI + 3)
+#define global	MAX_CREATURE_ID	(CREATURE_ID_KAMIKAKUSHI_THE_HIDDEN_SHIKIORIGAMI + 3)
 
 // Buffer
 #define global	BUFFER_SCREEN	0

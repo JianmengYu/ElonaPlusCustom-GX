@@ -1,3 +1,15 @@
+# 2.25.1.0
+
+# Added
+- Ported all changes from Elona+ 2.25.
+
+# Fixed
+- (Plus) Throwing Cicada deleting the wrong item in 2.25.
+- (Plus) Buff strength variable not initialized in 2.25.
+- (Plus) Persuation skills not effective in 2.25.
+- (Plus) Bolt animation missing in 2.25.
+- Jyusou Goushin resisting wrong ailment.
+
 # 2.24.2.1
 
 # Added

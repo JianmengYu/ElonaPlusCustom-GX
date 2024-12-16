@@ -1550,7 +1550,7 @@
 						continue
 					}
 					if ( cdata(CDATA_ALLIED, cc) == 100 ) {
-						if ( cnt < 16 ) {
+						if ( cnt < MAX_CHARA_FOLLOWER ) {
 							continue
 						}
 					}
@@ -3764,6 +3764,13 @@
 			}
 		}
 	}
+	if ( cdata(CDATA_ID, cc) == CREATURE_ID_SHENA_THE_DRAW ) {
+		if ( dist(cdata(CDATA_X, cc), cdata(CDATA_Y, cc), cdata(CDATA_X, tc), cdata(CDATA_Y, tc)) == 1 ) {
+			if ( rnd(3) == 0 ) {
+				act = SKILL_SPACT_HIP_ATTACK
+			}
+		}
+	}
 	if ( cdata(CDATA_ID, cc) == CREATURE_ID_GUARD | cdata(CDATA_ID, cc) == CREATURE_ID_GUARD2 ) {
 		if ( cdata(CDATA_ALLIED, cc) == 0 ) {
 			if ( tc == CHARA_PLAYER ) {
@@ -4105,7 +4112,7 @@
 	}
 	if ( act >= STARTING_SKILL_SPELL ) {
 		if ( act < MAX_SPELL ) {
-			if ( cdata(CDATA_SEALED_MAGIC, cc) == 0 ) {
+			if ( cbit(CHARA_BIT_SEALED_MAGIC, cc) != TRUE ) {
 				efid = act
 				if ( cdata(CDATA_MP, cc) < cdata(CDATA_MAX_MP, cc) / 7 ) {
 					if ( rnd(3) | cc < MAX_CHARA_FOLLOWER | cdata(CDATA_QUALITY, cc) >= FIX_QUALITY_MIRACLE | cbit(CHARA_BIT_AI_SAVE_MANA, cc) ) {
@@ -4122,7 +4129,7 @@
 		}
 	}
 	if ( act >= STARTING_SKILL_SPACT ) {
-		if ( act == SKILL_SPACT_DISTURBANCE | cdata(CDATA_SEALED_ABILITY, cc) == 0 ) {
+		if ( act == SKILL_SPACT_DISTURBANCE | cbit(CHARA_BIT_SEALED_ABILITY, cc) != TRUE ) {
 			efid = act
 			gosub *action
 			if ( stat == 1 ) {
