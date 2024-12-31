@@ -1052,8 +1052,10 @@
 			if (deck_opponent(CREATURE_ID_SAILOR) < 2 ) { deck_opponent(CREATURE_ID_SAILOR) = 2 }
 		}
 	loop
-	create_card MAX_CARD_DECK_TOTAL, cdata(CDATA_ID, tc)
-	cc@tcg = MAX_CARD_DECK_TOTAL + 1
+	if ( deck_opponent(cdata(CDATA_ID, tc)) <= 0 ) {
+		deck_opponent(cdata(CDATA_ID, tc)) = 1
+	}
+	cc@tcg = MAX_CARD_DECK_TOTAL
 	repeat MAX_CREATURE_ID - 3, 1
 		cnt2@tcg = cnt
 		if ( deck_opponent(cnt2@tcg) > 0 ) {
@@ -3106,6 +3108,29 @@
 			cardrefpic = rnd(RANGE_PLAYER_PIC / 2) * 2 + (cardrefsex == "female") + 1
 		}
 	}
+	if ( dbid == CREATURE_ID_USER ) {
+		cardrefpicchar = pet@tcg
+		if ( pet@tcg > 0 & pet@tcg < MAX_CHARA_TOTAL ) {
+			cardrefn = cdatan(CDATAN_NAME, pet@tcg)
+			cardrefrace = cdatan(CDATAN_RACE, pet@tcg)
+			cardrefclass = cdatan(CDATAN_CLASS, pet@tcg)
+			cardrefsex = cdatan(CDATAN_NEWSEX, pet@tcg)
+			cardrefdomain = 4 + (cdata(CDATA_QUALITY, pet@tcg) == FIX_QUALITY_MIRACLE)
+			cardrefcost = 1 + (cdata(CDATA_QUALITY, pet@tcg) == FIX_QUALITY_MIRACLE)
+			cardrefattack = 1 + (cdata(CDATA_QUALITY, pet@tcg) == FIX_QUALITY_MIRACLE)
+			cardrefhp = 1 + (cdata(CDATA_QUALITY, pet@tcg) == FIX_QUALITY_MIRACLE)
+			cnpclevel@tcg = 10
+			repeat 8
+				if ( cdata(CDATA_LEVEL, pet@tcg) >= cnpclevel@tcg ) {
+					cardrefcost += 1
+					cardrefattack += 1 + (cnt \ 2)
+					cardrefhp += 1 + (cnt \ 2 == 0)
+				}
+				cnpclevel@tcg *= 2
+			loop
+		}
+		pet@tcg = 0
+	}
 	if ( cnpc@tcg > 0 ) {
 		cardrefno = "???"
 		cardrefn = userdatan(1, (cnpc@tcg - 1))
@@ -3116,7 +3141,6 @@
 		cardreflvl = userdata(2, (cnpc@tcg - 1))
 		cardrefquality = userdata(5, (cnpc@tcg - 1))
 		cardrefdomain = 4 + (userdata(5, (cnpc@tcg - 1)) == 6)
-		cardrefcost = 1 + (userdata(5, (cnpc@tcg - 1)) == 6)
 		cardrefattack = 1 + (userdata(5, (cnpc@tcg - 1)) == 6)
 		cardrefhp = 1 + (userdata(5, (cnpc@tcg - 1)) == 6)
 		cnpclevel@tcg = 10
@@ -3163,89 +3187,89 @@
 		}
 		if ( cardrefclass == "warrior" ) { 
 			cardrefhp += 1 
-			if ( dbid == CREATURE_ID_USER ) {
+			if ( dbid == CREATURE_ID_USER & cardrefdomain == 5 ) {
 				cardrefhp += 1 
 				cardrefskillid = TCG_EFF_TURN_START_GAIN1ATK1HP
-				cardrefbits += ",6" 
+				cardrefbits += ",6,21" 
 			}
 		}
 		if ( cardrefclass == "thief" ) { 
 			cardrefskillid = TCG_EFF_BATTLECRY_DRAW1OPPONENTCARD
-			if ( dbid == CREATURE_ID_USER ) {
+			if ( dbid == CREATURE_ID_USER & cardrefdomain == 5 ) {
 				cardrefattack += 1 
 				cardrefskillid = TCG_EFF_USERTHIEF
 			}
 		}
 		if ( cardrefclass == "wizard" ) { 
 			cardrefskillid = TCG_EFF_BATTLECRY_DRAW1CARD 
-			if ( dbid == CREATURE_ID_USER ) { 
+			if ( dbid == CREATURE_ID_USER & cardrefdomain == 5 ) { 
 				cardrefbits += ",30" 
 				cardrefskillid = TCG_EFF_BATTLECRY_COPYTARGETCARDONFIELDNOLIMIT 
 			}
 		}
 		if ( cardrefclass == "farmer" ) { 
 			cardrefskillid = TCG_EFF_ONKILL_DRAW1CARD 
-			if ( dbid == CREATURE_ID_USER ) { 
+			if ( dbid == CREATURE_ID_USER & cardrefdomain == 5 ) { 
 				cardrefattack = 1
+				cardrefhp += 2
 				cardrefbits += ",10,17" 
 			}
 		}
 		if ( cardrefclass == "priest" ) { 
 			cardrefskillid = TCG_EFF_BATTLECRY_HEALPLAYER2DAMAGE 
-			if ( dbid == CREATURE_ID_USER ) { 
+			if ( dbid == CREATURE_ID_USER & cardrefdomain == 5 ) { 
 				cardrefskillid = TCG_EFF_BATTLECRY_TARGETFIELDCREATUREGET22
 				cardrefbits += ",5,10" 
 			}
 		}
 		if ( cardrefclass == "archer" ) { 
 			cardrefskillid = TCG_EFF_BATTLECRY_DEALOPPONENT2DAMAGE 
-			if ( dbid == CREATURE_ID_USER ) { 
-				cardrefskillid = TCG_EFF_BATTLECRY_DEALRANDOMENEMY6DAMAGE 
+			if ( dbid == CREATURE_ID_USER & cardrefdomain == 5 ) { 
+				cardrefskillid = TCG_EFF_BATTLECRY_DEALCHOSENENEMY6DAMAGE 
 				cardrefbits += ",9,21" 
 			}
 		}
 		if ( cardrefclass == "warmage" ) { 
 			cardrefskillid = TCG_EFF_TURN_START_DRAW1CARD
-			if ( dbid == CREATURE_ID_USER ) {
+			if ( dbid == CREATURE_ID_USER & cardrefdomain == 5 ) {
 				cardrefskillid = TCG_EFF_BATTLECRY_PARALYSEALLENEMY
-				cardrefbits += ",21" 
+				cardrefbits += ",8" 
 			}
 		}
 		if ( cardrefclass == "claymore" ) { 
 			cardrefattack += 2
 			cardrefhp -= 1
-			if ( dbid == CREATURE_ID_USER ) { 
+			if ( dbid == CREATURE_ID_USER & cardrefdomain == 5 ) { 
 				cardrefattack -= 3
 				cardrefbits += ",15,19" 
 				cardrefskillid = TCG_EFF_AFTERCOMBAT_DEALENEMY2DAMAGE
 			}
 		}
-		if ( cardrefclass == "predator" ) { 
-			cardrefattack -= 1
+		if ( cardrefclass == "predator" ) {
 			cardrefhp += 2
-			if ( dbid == CREATURE_ID_USER ) { 
+			if ( dbid == CREATURE_ID_USER & cardrefdomain == 5 ) { 
 				cardrefbits += ",11,12" 
-				cardrefskillid = TCG_EFF_TURN_START_GAIN1ATK
+				cardrefskillid = TCG_EFF_TURN_START_GAIN2ATK
 			}
 		}
 		if ( cardrefclass == "gunner" ) { 
 			cardrefattack += cardrefhp / 2
 			cardrefhp /= 2
-			if ( dbid == CREATURE_ID_USER ) { 
-				cardrefskillid = TCG_EFF_BATTLECRY_DEAL2RANDOMENEMY2DAMAGE 
+			if ( dbid == CREATURE_ID_USER & cardrefdomain == 5 ) { 
+				cardrefskillid = TCG_EFF_BATTLECRY_DEALALLENEMY2DAMAGE 
 				cardrefbits += ",19,21" 
 			}
 		}
 		if ( cardrefclass == "pianist" ) { 
 			cardrefhp += cardrefattack - 1
-			cardrefattack = 1
-			if ( dbid == CREATURE_ID_USER ) { cardrefskillid = TCG_EFF_TURN_START_DRAW1CARD }
+			cardrefattack /= 2
+			if ( dbid == CREATURE_ID_USER & cardrefdomain == 5 ) { cardrefskillid = TCG_EFF_USERPIANIST }
 		}
 		if ( cardrefclass == "tourist" ) { 
 			cardrefhp -= 1
 			cardrefattack -= 1
 			cardrefskillid = TCG_EFF_SACRIFICE_DRAW1CARD
-			if ( dbid == CREATURE_ID_USER ) { cardrefskillid = TCG_EFF_SACRIFICE_TARGETCREATUREGETDEATHWORD }
+			if ( dbid == CREATURE_ID_USER & cardrefdomain == 5 ) { cardrefskillid = TCG_EFF_USERTOURIST }
 		}
 	}
 	if ( cnpc@tcg > 0 ) {
@@ -8022,7 +8046,7 @@
 		cardrefcost = 2
 		cardrefattack = 2
 		cardrefhp = 2
-		cardrefskillid = TCG_EFF_LEND
+		cardrefskillid = TCG_EFF_LENDTAKER
 		cardrefbits = ""
 		return 1
 	}

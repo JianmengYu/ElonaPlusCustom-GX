@@ -17960,7 +17960,7 @@
 		txt lang(name(cc) + "は強烈な精神波を放った！", name(cc) + " " + was(cc) + " emitted intense spiritual wave!")
 		snd SOUNDLIST_ATK_MIND
 		animeload ANIMATION_GARDEN, tc
-		repeat MAX_CHARA_TOTALt
+		repeat MAX_CHARA_TOTAL
 			if ( cdata(CDATA_EXIST, cnt) != CHAR_STATE_ALIVE ) {
 				continue
 			}

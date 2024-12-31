@@ -1,3 +1,26 @@
+# 2.25.1.1
+
+# Added
+- Ported all changes from Elona+ 2.25R.
+
+# Fixed
+- Phychic Wave not working properly
+
+# TCG
+- Changed starting hand calculation (max 7 with 1 domain and min 5 with 3+ domain.)
+- Changed starting hp calculation (max 40 with 1 domain and min 20 with 5+ domain.)
+- Fixed enemy character card getting created in your deck.
+- Changed Lend the Taker effect: Shuffle all your pets into your deck at the start of game.
+- Buffed player/pet effect:
+  - Warrior: now have vigilance.
+  - Archer: deal 6 damage to chosen target instead of random enemy.
+  - Warmage: now have intimidate instead of vigilance
+  - Predator: gain +2 atk at turn start.
+  - Gunner: deal 2 damage to all enemies instead of 2 random enemy.
+  - Pianist: increased atk, now draw 1 card after combat.
+  - Tourist: effect now activate on summon/death
+- Nerfed Hard Gay because it's too strong when used with spaghetti monster.
+
 # 2.25.1.0
 
 # Added

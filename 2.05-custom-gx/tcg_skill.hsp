@@ -1380,6 +1380,7 @@
 		if ( aeft@tcg == 0 | aeft@tcg == 1 ) {
 			if ( hasholdspace(aeft@tcg) ) {
 				discovercount@tcg = limit(MAX_CARD_EXTRA - cpdata@tcg(TCG_PLAYER_EXTRACARD, aeft@tcg), 0, limit(usernpcmax, 0, 240))
+				discovercount@tcg = limit(discovercount@tcg, 0, aefp@tcg)
 				if ( discovercount@tcg > 0 ) {
 					repeat usernpcmax
 						discover@tcg(cnt) = cnt + 1
@@ -1414,6 +1415,7 @@
 		if ( aeft@tcg == 0 | aeft@tcg == 1 ) {
 			if ( hasholdspace(aeft@tcg) ) {
 				discovercount@tcg = limit(MAX_CARD_EXTRA - cpdata@tcg(TCG_PLAYER_EXTRACARD, aeft@tcg), 0, limit(usernpcmax, 0, 240))
+				discovercount@tcg = limit(discovercount@tcg, 0, aefp@tcg)
 				if ( discovercount@tcg > 0 ) {
 					cntuse@tcg = 0
 					repeat usernpcmax
@@ -2714,6 +2716,51 @@
 			repeat maxcard@tcg
 				if ( card@tcg(TCG_CARD_CONTROLLER, cnt) != ap@tcg ) { continue }
 				if ( card@tcg(TCG_CARD_REF_DBID, cnt) != cardidbk@tcg ) { continue }
+				cdbitmod TCG_BIT_FACE_UP, cnt, 0
+				card@tcg(TCG_CARD_LOCATION, cnt) = TCG_LOCATION_DECK
+			loop
+		}
+		goto *actionproc_SWEND1
+		_switch_sw@tcg++
+	}
+	if ( _switch_val@tcg == TCG_SKILL_EFF_SHUFFLEPETS | _switch_sw@tcg ) {
+		_switch_sw@tcg = 0
+		if ( aeft@tcg == 0 | aeft@tcg == 1 ) {
+			aeftbk@tcg = aeft@tcg
+			card@tcg(TCG_CARD_X_MOVETO, effac@tcg) = basex@tcg + 455 - 36, basey@tcg + 270 - 48
+			card@tcg(TCG_CARD_LOCATION, effac@tcg) = TCG_LOCATION_ANIM
+			cdbitmod TCG_BIT_FACE_UP, effac@tcg, 1
+			tcgpass 20
+			repeat MAX_CHARA_FOLLOWER - 1, 1
+				if ( cdata(CDATA_EXIST, cnt) = CHAR_STATE_ALIVE | cdata(CDATA_EXIST, cnt) = CHAR_STATE_ALLY_WAIT ) {
+					pet@tcg = cnt
+					create_extra_card aeftbk@tcg, CREATURE_ID_USER
+					if ( cextra@tcg >= 0 ) {
+						if ( angle@tcg == 0 ) {
+							angle@tcg = double(rnd(628)) / 100.0
+						} else {
+							angle@tcg += double(60 + rnd(80)) / 100.0
+						}
+						card@tcg(TCG_CARD_X, cextra@tcg) = basex@tcg + 455 - 36, basey@tcg + 270 - 48
+						card@tcg(TCG_CARD_X_MOVETO, cextra@tcg) = int(basex@tcg + 455 - 36 + cos(angle@tcg) * 100), int(basey@tcg + 270 - 48 + sin(angle@tcg) * 100)
+						card@tcg(TCG_CARD_ANIM, cextra@tcg) = TCG_ANIM_NONE
+						card@tcg(TCG_CARD_LOCATION, cextra@tcg) = TCG_LOCATION_ANIM
+						cdbitmod TCG_BIT_FACE_UP, cextra@tcg, 1
+						tcgpass 10 - cnt * 2
+					}
+				}
+			loop
+			tcgpass 45
+			repeat maxcard@tcg
+				if ( card@tcg(TCG_CARD_CONTROLLER, cnt) != ap@tcg ) { continue }
+				if ( card@tcg(TCG_CARD_LOCATION, cnt) != TCG_LOCATION_ANIM ) { continue }
+				card@tcg(TCG_CARD_X_MOVETO, cnt) = deckix@tcg(ap@tcg), deckiy@tcg(ap@tcg)
+				tcgpass 2
+			loop
+			tcgpass 15
+			repeat maxcard@tcg
+				if ( card@tcg(TCG_CARD_CONTROLLER, cnt) != ap@tcg ) { continue }
+				if ( card@tcg(TCG_CARD_LOCATION, cnt) != TCG_LOCATION_ANIM ) { continue }
 				cdbitmod TCG_BIT_FACE_UP, cnt, 0
 				card@tcg(TCG_CARD_LOCATION, cnt) = TCG_LOCATION_DECK
 			loop

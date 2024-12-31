@@ -765,18 +765,32 @@
 					}
 				}
 			if ( card@tcg(TCG_CARD_REF_PIC, tcgdrawcard_arg1) > 0 ) {
+				usepcc@tcg = 0
 				if ( card@tcg(TCG_CARD_REF_DBID, tcgdrawcard_arg1) != CREATURE_ID_USER ) {
 					p@tcg = card@tcg(TCG_CARD_REF_PIC, tcgdrawcard_arg1) \ COLOR_TINT_MULT + card@tcg(TCG_CARD_REF_CHARA_PIC, tcgdrawcard_arg1) * COLOR_TINT_MULT
 					chara_preparepic p@tcg, (card@tcg(TCG_CARD_REF_PIC, tcgdrawcard_arg1) - card@tcg(TCG_CARD_REF_CHARA_PIC, tcgdrawcard_arg1) * COLOR_TINT_MULT) / COLOR_TINT_MULT
 				}
 				else {
-					p@tcg = 1
-					chara_preparepic p@tcg, 0
+					usepcc@tcg = 10
+					locvar_cell_draw_col = 0
+					locvar_cell_draw_p = 1
+					petuse@tcg = card@tcg(TCG_CARD_REF_CHARA_PIC, tcgdrawcard_arg1)
+					if ( petuse@tcg > 0 & petuse@tcg < MAX_CHARA_TOTAL ) {
+						usepcc@tcg = (cbit(CHARA_BIT_PCC, petuse@tcg) == TRUE) * (BUFFER_PCC + petuse@tcg)
+						locvar_cell_draw_col = (cdata(CDATA_PIC, petuse@tcg) - cdata(CDATA_CHARA_PIC, petuse@tcg) * COLOR_TINT_MULT) / COLOR_TINT_MULT
+						locvar_cell_draw_p = cdata(CDATA_PIC, petuse@tcg) \ COLOR_TINT_MULT + cdata(CDATA_CHARA_PIC, petuse@tcg) * COLOR_TINT_MULT
+						if ( cdata(CDATA_PIC, petuse@tcg) >= xy2pic(1, 21) & cdata(CDATA_PIC, petuse@tcg) <= xy2pic(31, 21) ) {
+							locvar_cell_draw_col = 0
+							locvar_cell_draw_p = cdata(CDATA_PIC, petuse@tcg)
+						}
+					}
+					p@tcg = locvar_cell_draw_p
+					chara_preparepic p@tcg, locvar_cell_draw_col
 				}
-				if ( card@tcg(TCG_CARD_REF_DBID, tcgdrawcard_arg1) == CREATURE_ID_USER ) {
+				if ( usepcc@tcg > 0 ) {
 					gmode 2, 32, 48
 					pos x@tcg + 21, y@tcg + 24
-					gcopy 10, 0, 0, 32, 48
+					gcopy usepcc@tcg, 0, 0, 32, 48
 				} else {
 					color 0, 0, 0
 					pos x@tcg + 13, y@tcg + 32 - chipc(CHIPC_F, p@tcg) + chipc(CHIPC_HEIGHT, p@tcg) / 6
@@ -2121,10 +2135,14 @@
 	return
 
 #defcfunc calcstartcard int calcstartcard_arg1
-	return 9 - (cpdata@tcg(TCG_PLAYER_DOMAIN, calcstartcard_arg1) > 2) - (cpdata@tcg(TCG_PLAYER_DOMAIN, calcstartcard_arg1) > 3) - (cpdata@tcg(TCG_PLAYER_DOMAIN, calcstartcard_arg1) > 4) - (cpdata@tcg(TCG_PLAYER_DOMAIN, calcstartcard_arg1) > 5) - (cpdata@tcg(TCG_PLAYER_DOMAIN, calcstartcard_arg1) > 6) - (cpdata@tcg(TCG_PLAYER_DOMAIN, calcstartcard_arg1) > 7) - (cpdata@tcg(TCG_PLAYER_DOMAIN, calcstartcard_arg1) > 8) - (cpdata@tcg(TCG_PLAYER_DOMAIN, calcstartcard_arg1) > 8)
+	startinghand@tcg = 7
+	if ( cpdata@tcg(TCG_PLAYER_DOMAIN, calcstartcard_arg1) > 1 ) { startinghand@tcg-- }
+	if ( cpdata@tcg(TCG_PLAYER_DOMAIN, calcstartcard_arg1) > 2 ) { startinghand@tcg-- }
+	if ( calcstartcard_arg1 != 0 ) { startinghand@tcg++ }
+	return startinghand@tcg
 
 #deffunc calcstartattb int calcstartattb_arg1
-	cpdata@tcg(TCG_PLAYER_LIFE, calcstartattb_arg1) = limit(40 - cpdata@tcg(TCG_PLAYER_DOMAIN, calcstartattb_arg1) * 5, 25, 40)
+	cpdata@tcg(TCG_PLAYER_LIFE, calcstartattb_arg1) = limit(45 - cpdata@tcg(TCG_PLAYER_DOMAIN, calcstartattb_arg1) * 5, 20, 40)
 	cpdata@tcg(TCG_PLAYER_MAX_MANA, calcstartattb_arg1) = 0
 	specialrulenextturnmana@tcg(calcstartattb_arg1) = 0
 	return
@@ -2917,20 +2935,34 @@
 				pos x@tcg, y@tcg
 				gcopy 7, 72 + card@tcg(TCG_CARD_REF_BG, m@tcg) * 72, 0, 72, 96
 				if ( gravesum@tcg(cnt2@tcg) <= 3 | cnt == gravesum@tcg(cnt2@tcg) - 1 ) {
+					usepcc@tcg = 0
 					if ( card@tcg(TCG_CARD_REF_DBID, m@tcg) != CREATURE_ID_USER ) {
 						n@tcg = card@tcg(TCG_CARD_REF_PIC, m@tcg) \ COLOR_TINT_MULT + card@tcg(TCG_CARD_REF_CHARA_PIC, m@tcg) * COLOR_TINT_MULT
 						chara_preparepic n@tcg, (card@tcg(TCG_CARD_REF_PIC, m@tcg) - card@tcg(TCG_CARD_REF_CHARA_PIC, m@tcg) * COLOR_TINT_MULT) / COLOR_TINT_MULT
 						gsel 4
 					}
 					else {
-						n@tcg = 1
-						chara_preparepic n@tcg, 0
+						usepcc@tcg = 10
+						locvar_cell_draw_col = 0
+						locvar_cell_draw_p = 1
+						petuse@tcg = card@tcg(TCG_CARD_REF_CHARA_PIC, m@tcg)
+						if ( petuse@tcg > 0 & petuse@tcg < MAX_CHARA_TOTAL ) {
+							usepcc@tcg = (cbit(CHARA_BIT_PCC, petuse@tcg) == TRUE) * (BUFFER_PCC + petuse@tcg)
+							locvar_cell_draw_col = (cdata(CDATA_PIC, petuse@tcg) - cdata(CDATA_CHARA_PIC, petuse@tcg) * COLOR_TINT_MULT) / COLOR_TINT_MULT
+							locvar_cell_draw_p = cdata(CDATA_PIC, petuse@tcg) \ COLOR_TINT_MULT + cdata(CDATA_CHARA_PIC, petuse@tcg) * COLOR_TINT_MULT
+							if ( cdata(CDATA_PIC, petuse@tcg) >= xy2pic(1, 21) & cdata(CDATA_PIC, petuse@tcg) <= xy2pic(31, 21) ) {
+								locvar_cell_draw_col = 0
+								locvar_cell_draw_p = cdata(CDATA_PIC, petuse@tcg)
+							}
+						}
+						n@tcg = locvar_cell_draw_p
+						chara_preparepic n@tcg, locvar_cell_draw_col
 						gsel 4
 					}
-					if ( card@tcg(TCG_CARD_REF_DBID, m@tcg) == CREATURE_ID_USER ) {
+					if ( usepcc@tcg > 0 ) {
 						gmode 2, 32, 48
 						pos x@tcg + 21, y@tcg + 24
-						gcopy 10, 0, 0, 32, 48
+						gcopy usepcc@tcg, 0, 0, 32, 48
 					} else {
 						color 0, 0, 0
 						pos x@tcg + 13, y@tcg + 32 - chipc(CHIPC_F, n@tcg) + chipc(CHIPC_HEIGHT, n@tcg) / 6
