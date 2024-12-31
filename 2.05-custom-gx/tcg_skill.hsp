@@ -1385,7 +1385,7 @@
 					repeat usernpcmax
 						discover@tcg(cnt) = cnt + 1
 						if ( cnt >= discovercount@tcg ) {
-							discover@tcg(rnd(discovercount@tcg)) = cnt + 1
+							discover@tcg(rnd(cnt + 1)) = cnt + 1
 						}
 					loop
 					cextrabk@tcg = cpdata@tcg(TCG_PLAYER_EXTRACARD, aeft@tcg)
@@ -1415,7 +1415,6 @@
 		if ( aeft@tcg == 0 | aeft@tcg == 1 ) {
 			if ( hasholdspace(aeft@tcg) ) {
 				discovercount@tcg = limit(MAX_CARD_EXTRA - cpdata@tcg(TCG_PLAYER_EXTRACARD, aeft@tcg), 0, limit(usernpcmax, 0, 240))
-				discovercount@tcg = limit(discovercount@tcg, 0, aefp@tcg)
 				if ( discovercount@tcg > 0 ) {
 					cntuse@tcg = 0
 					repeat usernpcmax
@@ -1425,6 +1424,7 @@
 						cntuse@tcg++
 					loop
 					discovercount@tcg = limit(MAX_CARD_EXTRA - cpdata@tcg(TCG_PLAYER_EXTRACARD, aeft@tcg), 0, limit(cntuse@tcg, 0, 240))
+					discovercount@tcg = limit(discovercount@tcg, 0, aefp@tcg)
 					if ( discovercount@tcg > 0 ) {
 						cntuse@tcg = 0
 						repeat usernpcmax
@@ -1433,7 +1433,7 @@
 							}
 							discover@tcg(cntuse@tcg) = cnt + 1
 							if ( cntuse@tcg >= discovercount@tcg ) {
-								discover@tcg(rnd(discovercount@tcg)) = cnt + 1
+								discover@tcg(rnd(cnt + 1)) = cnt + 1
 							}
 							cntuse@tcg++
 						loop
@@ -1483,12 +1483,9 @@
 								continue
 							}
 							discover@tcg(cntuse@tcg) = cnt + 1
-							if ( cntuse@tcg >= discovercount@tcg ) {
-								discover@tcg(rnd(discovercount@tcg)) = cnt + 1
-							}
 							cntuse@tcg++
 						loop
-						cnpc@tcg = discover@tcg(rnd(discovercount@tcg))
+						cnpc@tcg = discover@tcg(rnd(cntuse@tcg))
 						create_extra_card aeft@tcg, CREATURE_ID_NOVICE
 						if ( cextra@tcg >= 0 ) {
 							putcard cextra@tcg, card@tcg(TCG_CARD_CONTROLLER, cextra@tcg)
