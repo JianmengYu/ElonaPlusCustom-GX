@@ -6368,6 +6368,9 @@
 		return
 	}
 	hoseib = 0
+	if ( cdata(CDATA_ADVANCED_CASTING_ENABLED, CHARA_PLAYER) == 1 & (cdata(CDATA_ALLIED, r1) == 100 | r1 == CHARA_PLAYER) ) {
+        hoseib = 2
+    }
 	if ( r1 == 0 ) {
 		skillexp r2, r1, (sdataref(SKILL_DATAREF_COST, r2) + 10) * 2, 5
 		skillexp SKILL_NORMAL_CASTING, r1, (sdataref(SKILL_DATAREF_COST, r2) + 10) * 2 * (1 + hoseib), 5

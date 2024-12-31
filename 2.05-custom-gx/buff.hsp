@@ -649,7 +649,7 @@
 				return
 			}
 			else {
-				buffdesc = lang("筋力耐久器用感覚意志魔力速度を" + locvar_calcbuff_p + "上昇/耐恐怖/魔法耐性上昇", "Increases STR,DEX by 10% and " + locvar_calcbuff_p + "/RES+ fear,confusion")
+				buffdesc = lang("筋力耐久器用感覚意志魔力速度を" + locvar_calcbuff_p + "上昇/耐恐怖/魔法耐性上昇", "Increases attribute by 10% and " + locvar_calcbuff_p + "/RES+ fear,confusion")
 				return
 			}
 		}

@@ -271,6 +271,7 @@
 						goto *turn_end
 					}
 					if ( inv(INV_ITEM_ID, ci) == ITEM_ID_DYING_CICADA ) {
+						cibks = ci
 						chatc@DP = (-1)
 						txt lang("「死ぬなら…せめて前のめりで…！」", "This cicada hasn't died yet!")
 						txtef COLOR_BLUE
@@ -295,14 +296,13 @@
 								txt lang(name(tc) + "は戦慄した。", name(tc) + " " + was(tc) + " overwhelmed.")
 							}
 						}
-						cibk = ci
 						dmg = (sdata(SKILL_ATTR_PER, cc) / 5 + 5) * ((sdata(SKILL_WEAPON_THROWING, CHARA_PLAYER) + 1) / 5 + 5) + rnd(sdata(SKILL_WEAPON_THROWING, cc) * 2 + 5) + calcLevelDmg(cc)
 						dmghp tc, dmg, CHARA_PLAYER, SKILL_RES_SOUND, 1000
 						if ( rnd(10) == 0 ) {
 							txtef COLOR_RED
 							chatc@DP = tc
 							txt lang("「死ぬなら…せめて前のめりで…！」喪蝉は絶命した。", "The cicada dies!")
-							ci = cibk
+							ci = cibks
 							inv(INV_ITEM_NUM, ci)--
 							flt
 							itemcreate -1, ITEM_ID_BAIT, cdata(CDATA_X, tc), cdata(CDATA_Y, tc), 0

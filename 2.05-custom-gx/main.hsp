@@ -1127,10 +1127,10 @@
 	if ( gdata(GDATA_MONTH) \ 3 != 0 ) {
 		if ( gdata(GDATA_DAY) >= 15 & gdata(GDATA_DAY) <= 24 ) {
 			if ( rnd(14) < gdata(GDATA_DAY) - 10 ) {
-				if ( gdata(STARTING_GDATA_FLAG + 354) != gdata(GDATA_MONTH) ) {
-					gdata(STARTING_GDATA_FLAG + 354) = gdata(GDATA_MONTH)
-					gdata(STARTING_GDATA_FLAG + 353) = 100
-					gdata(STARTING_GDATA_FLAG + 355) = rnd(24) + 96
+				if ( gdata(GDATA_FLAG_NEFIA_FEVER_MONTH) != gdata(GDATA_MONTH) ) {
+					gdata(GDATA_FLAG_NEFIA_FEVER_MONTH) = gdata(GDATA_MONTH)
+                    gdata(GDATA_FLAG_NEFIA_FEVER_ACTIVE) = 100
+                    gdata(GDATA_FLAG_NEFIA_FEVER_HOURS_REMAINING) = rnd(12) + 48
 					snd SOUNDLIST_FIRE1
 					snd SOUNDLIST_ATK_FIRE
 					txtef COLOR_GREEN
@@ -1178,7 +1178,7 @@
 							txtef COLOR_RED
 							txt lang("エーテルの風が吹き始めた。すぐに避難しなくては。", "Etherwind starts to blow. You need to find a shelter!")
 							gdata(GDATA_LAST_ETHER) = gdata(GDATA_MONTH)
-							gdata(GDATA_NEXT_WEATHER) = rnd(24) + limit(24 - gdata(GDATA_YEARS_AFTER_VICTORY) * 2, 1, 24)
+                            gdata(GDATA_NEXT_WEATHER) = rnd(12) + limit(12 - gdata(GDATA_YEARS_AFTER_VICTORY) * 2, 1, 12)
 							break
 						}
 					}
@@ -1245,7 +1245,7 @@
 					break
 				}
 				/********** JAMES CUSTOM - CHALLENGE - PERMANENT ETHERWIND - ENDING **********/
-				if ( rnd(2) == 0 ) {
+				if ( rnd(4) != 0 ) {
 					gdata(GDATA_WEATHER) = WEATHER_CLEAR
 					txt lang("エーテルの風は止んだ。", "The Etherwind dissipates.")
 					break
@@ -1529,17 +1529,15 @@
 			loop
 			if ( kitune == 10 ) {
 				if ( detect < 2 ) {
-					if ( rnd(2) == 0 ) {
-						txtef COLOR_YELLOW
-						txt lang("探偵がやってきたようだ。「クン…こ、これは事件の匂い！！！」", "A detective seems to have come." + cnvtalk("*Sniff*... I smell a case!!"))
-						if ( rnd(3) == 0 ) {
-							flt
-							characreate -1, CREATURE_ID_WEREWOLF_DETECTIVE, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER)
-						}
-						else {
-							flt
-							characreate -1, CREATURE_ID_DETECTIVE, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER)
-						}
+					txtef COLOR_YELLOW
+					txt lang("探偵がやってきたようだ。「クン…こ、これは事件の匂い！！！」", "A detective seems to have come." + cnvtalk("*Sniff*... I smell a case!!"))
+					if ( rnd(3) == 0 ) {
+						flt
+						characreate -1, CREATURE_ID_WEREWOLF_DETECTIVE, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER)
+					}
+					else {
+						flt
+						characreate -1, CREATURE_ID_DETECTIVE, cdata(CDATA_X, CHARA_PLAYER), cdata(CDATA_Y, CHARA_PLAYER)
 					}
 				}
 			}

@@ -981,7 +981,7 @@
 		// locvar_calcspellcostmp_cost = sdataref(SKILL_DATAREF_COST, calcspellcostmp_skillid) * (100 + sdata(calcspellcostmp_skillid, calcspellcostmp_charid) * 3) / 100 + sdata(calcspellcostmp_skillid, calcspellcostmp_charid) / 8
 	}
 	else {
-		locvar_calcspellcostmp_cost = sdataref(SKILL_DATAREF_COST, calcspellcostmp_skillid) * (50 + cdata(CDATA_LEVEL, calcspellcostmp_charid) * 3) / 100
+        locvar_calcspellcostmp_cost = sdataref(SKILL_DATAREF_COST, calcspellcostmp_skillid) * (50 + sdata(SKILL_NORMAL_CASTING, calcspellcostmp_charid) * 2) / 100
 	}
 	if ( cdatan(CDATAN_CLASS, locvar_calcspellcostmp_cc) == "wizard" ) {
 		locvar_calcspellcostmp_cost = locvar_calcspellcostmp_cost * 90 / 100

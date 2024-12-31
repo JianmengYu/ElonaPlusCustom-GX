@@ -2134,7 +2134,7 @@
 				s = lang("[先天]", "[Race]")
 			}
 			if ( traitref == 3 ) {
-				s = lang("[ｴｰﾃﾙ病]", "[Disease]")
+				s = lang("[ｴｰﾃﾙ病]", "[Ether]")
 			}
 			s += traitrefn(2 + abs(trait(tid)))
 		}

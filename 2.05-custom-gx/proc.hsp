@@ -740,7 +740,7 @@
 				if ( cdata(CDATA_RELATION, tc) == (-3) ) {
 					if ( cdata(CDATA_AI_AGGRO, tc) == 0 ) {
 						if ( synccheck(tc, -1) ) {
-							txt lang(name(tc) + "は激怒した。", name(tc) + " get" + _s(tc) + " angry.")
+                            txt lang(name(tc) + "は" + name(cc) + "に気づいた。", name(tc) + " has noticed " + name(cc) + ".")
 						}
 					}
 					cdata(CDATA_AI_AGGRO, tc) = 30
@@ -1182,7 +1182,7 @@
 				if ( cdata(CDATA_RELATION, tc) == RELATION_ENEMY ) {
 					if ( cdata(CDATA_AI_AGGRO, tc) == 0 ) {
 						if ( synccheck(tc, -1) ) {
-							txt lang(name(tc) + "は激怒した。", name(tc) + " get" + _s(tc) + " angry.")
+                            txt lang(name(tc) + "は" + name(cc) + "に気づいた。", name(tc) + " has noticed " + name(cc) + ".")
 						}
 					}
 					cdata(CDATA_AI_AGGRO, tc) = 30
@@ -1455,7 +1455,7 @@
 				if ( cdata(CDATA_RELATION, tc) == RELATION_ENEMY ) {
 					if ( cdata(CDATA_AI_AGGRO, tc) == 0 ) {
 						if ( synccheck(tc, -1) ) {
-							txt lang(name(tc) + "は激怒した。", name(tc) + " get" + _s(tc) + " angry.")
+                            txt lang(name(tc) + "は" + name(cc) + "に気づいた。", name(tc) + " has noticed " + name(cc) + ".")
 						}
 					}
 					cdata(CDATA_AI_AGGRO, tc) = 30
@@ -1637,7 +1637,7 @@
 				if ( cdata(CDATA_RELATION, tc) == (-3) ) {
 					if ( cdata(CDATA_AI_AGGRO, tc) == 0 ) {
 						if ( synccheck(tc, -1) ) {
-							txt lang(name(tc) + "は激怒した。", name(tc) + " get" + _s(tc) + " angry.")
+                            txt lang(name(tc) + "は" + name(cc) + "に気づいた。", name(tc) + " has noticed " + name(cc) + ".")
 						}
 					}
 					cdata(CDATA_AI_AGGRO, tc) = 30
@@ -2160,7 +2160,7 @@
 			if ( cdata(CDATA_RELATION, tc) == RELATION_ENEMY ) {
 				if ( cdata(CDATA_AI_AGGRO, tc) == 0 ) {
 					if ( synccheck(tc, -1) ) {
-						txt lang(name(tc) + "は激怒した。", name(tc) + " get" + _s(tc) + " angry.")
+						txt lang(name(tc) + "は" + name(cc) + "に気づいた。", name(tc) + " has noticed " + name(cc) + ".")
 					}
 				}
 				cdata(CDATA_AI_AGGRO, tc) = 30
@@ -2344,7 +2344,7 @@
 			if ( cdata(CDATA_RELATION, tc) == RELATION_ENEMY ) {
 				if ( cdata(CDATA_AI_AGGRO, tc) == 0 ) {
 					if ( synccheck(tc, -1) ) {
-						txt lang(name(tc) + "は激怒した。", name(tc) + " get" + _s(tc) + " angry.")
+						txt lang(name(tc) + "は" + name(cc) + "に気づいた。", name(tc) + " has noticed " + name(cc) + ".")
 					}
 				}
 				cdata(CDATA_AI_AGGRO, tc) = 30
@@ -2519,7 +2519,7 @@
 			if ( cdata(CDATA_RELATION, tc) == RELATION_ENEMY ) {
 				if ( cdata(CDATA_AI_AGGRO, tc) == 0 ) {
 					if ( synccheck(tc, -1) ) {
-						txt lang(name(tc) + "は激怒した。", name(tc) + " get" + _s(tc) + " angry.")
+						txt lang(name(tc) + "は" + name(cc) + "に気づいた。", name(tc) + " has noticed " + name(cc) + ".")
 					}
 				}
 				cdata(CDATA_AI_AGGRO, tc) = 30
@@ -2718,7 +2718,7 @@
 			if ( cdata(CDATA_RELATION, tc) == RELATION_ENEMY ) {
 				if ( cdata(CDATA_AI_AGGRO, tc) == 0 ) {
 					if ( synccheck(tc, -1) ) {
-						txt lang(name(tc) + "は激怒した。", name(tc) + " get" + _s(tc) + " angry.")
+						txt lang(name(tc) + "は" + name(cc) + "に気づいた。", name(tc) + " has noticed " + name(cc) + ".")
 					}
 				}
 				cdata(CDATA_AI_AGGRO, tc) = 30
@@ -2917,7 +2917,7 @@
 			if ( cdata(CDATA_RELATION, tc) == RELATION_ENEMY ) {
 				if ( cdata(CDATA_AI_AGGRO, tc) == 0 ) {
 					if ( synccheck(tc, -1) ) {
-						txt lang(name(tc) + "は激怒した。", name(tc) + " get" + _s(tc) + " angry.")
+						txt lang(name(tc) + "は" + name(cc) + "に気づいた。", name(tc) + " has noticed " + name(cc) + ".")
 					}
 				}
 				cdata(CDATA_AI_AGGRO, tc) = 30
@@ -23052,6 +23052,7 @@
 		}
 		bvar = 0
 		efid = SKILL_SPACT_FIRE_BREATH + cdata(CDATA_ATTRIBUTE_ELE, cc)
+		kouiki = 0
 		gosub *effect
 		goto *effect_end
 	}

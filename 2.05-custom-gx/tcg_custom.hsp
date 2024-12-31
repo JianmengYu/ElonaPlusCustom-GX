@@ -14750,8 +14750,8 @@
 		cardrefquality = FIX_QUALITY_GOOD
 		cardrefdomain = 2
 		cardrefcost = 0
-		cardrefattack = 6
-		cardrefhp = 12
+		cardrefattack = 4
+		cardrefhp = 9
 		cardrefskillid = TCG_EFF_BATTLECRYDIE
 		cardrefbits = "11,19,20"
 		return 1

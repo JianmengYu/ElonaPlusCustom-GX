@@ -2913,7 +2913,6 @@
 #define global	ANIMATION_LASER_BAZOOKA	62
 #define global	ANIMATION_HYPER_PLUG_BURST	63
 #define global	ANIMATION_GOD_CHARGE_ROD	64
-// Ano didn't allocate an anim for this one, use 65 for it
 #define global	ANIMATION_SHIKIKAMI_BREATH	65
 
 #define global	ANIMATION_UNUSED1	108

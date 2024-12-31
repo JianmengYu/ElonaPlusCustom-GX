@@ -19559,6 +19559,9 @@
 					if ( cdata(CDATA_VOTES_RECEIVED, tc) == 0 ) {
 						if ( gdata(GDATA_AREA) != AREA_HOME ) {
 							chatList 69, lang("汝は人狼なりや？", "Are you a werewolf?")
+							if ( tc > MAX_CHARA_FOLLOWER ) {
+								chatList 143, lang("人狼の目的について", "About the purpose of werewolves")
+							}
 						}
 					}
 				}
@@ -23467,7 +23470,7 @@
 	}
 	if ( chatval == 69 ) {
 		if ( cdata(CDATA_ID, tc) == CREATURE_ID_DETECTIVE | cdata(CDATA_ID, tc) == CREATURE_ID_WEREWOLF_DETECTIVE ) {
-			buff = lang("この" + _ore(3) + "が人狼？なかなか面白い推理" + _da(3) + "。", "You think I'm a werewolf? That's an interesting deduction.")
+            buff = lang("この" + _ore(3) + "が人狼？なかなか面白い推理" + _da(3) + "。小説家にでもなったらどう" + _kana(3) + "？", "That's an interesting deduction. I recommend you to become a novelist.")
 		}
 		else {
 			if ( cdata(CDATA_TONE, tc) == 0 ) {
@@ -24005,6 +24008,13 @@
 		}
 		goto *chat_end
 	}
+	if ( chatval == 143 ) {
+        chatMore lang("状況から見て、太古の昔より伝わる儀式…「人狼遊儀」で間違いない" + _daro(3) + "。", "Judging from the current situation, this is undoubtedly the works of an ancient ritual... \ncalled the <Werewolf-Ritual-Game>."), strmore
+        chatMore lang("儀式の内容はこう" + _da(3) + "。狼が人間に化けて人里に潜り込み、深夜に一人ずつ住人を生贄として捧げていく。強い者を捧げるほど儀式はより早く進行し、一定段階に到達すると神狼が降臨。その後は狼たちの支配する餌場となり果てるってわけ" + _da(3) + "。狼が数匹でそのまま暴れてもあっという間に駆除されてしまうから、こういう手段を取っているの" + _daro(3) + "。", "The procedure of the ritual are as follows: \nA wolf disguises itself as a human, sneaks into a human village, and sacrifices the residents one by one in the middle of the night. \nThe more powerful the sacrifice is, the faster the ritual progresses, and when a critical mass of sacrifice is offered, the wolf-god will be summoned. After that, the town will become a feeding ground dominated by wolves. If a few wolves assault the town, they would be exterminated in no time, so they probably took this method instead."), strmore
+        chatMore lang("この儀式の厄介なところは、普通の方法で人狼を全滅させても終わらないこと" + _da(3) + "。儀式の進行手段の反対…真昼に一匹ずつ人狼を特殊な方法で処刑していき、全滅させることでのみ、儀式が相殺されるらしい" + _nda(3) + "。", "The troublesome thing about this ritual is that it doesn't end even if you wipe out all the werewolves using normal methods. It is said that we have to go for the opposite of the ritual's method... It is said that the ritual is offset by executing the werewolves one by one in the middle of the day using a special method."), strmore
+        chatMore lang("怪しい人物を一日中見張って" + _ore(3) + "も人狼を見つけようとしている" + _ga(3) + "、おそらく日数が足りない" + _daro(3) + "。紛らわしいことに、妖狐が人狼遊儀の乗っ取りを目論んで混ざっていることもあるそう" + _da(3) + "。とにかく、" + _kimi(3) + "の冒険者の勘にも期待している" + _yo(3) + "。", "I've been watching all day for suspicious people, trying to find the werewolf, but I probably won't have enough time. Confusingly, foxes are sometimes mixed in with the intention of taking over the ritual. Anyway, I have high hopes for your adventurer's intuition."), strmore
+        goto *chat_end
+    }
 	if ( chatval == 70 ) {
 		if ( cdata(CDATA_ROLE_SHOP_LEVEL, tc) <= 0 ) {
 			repeat 50

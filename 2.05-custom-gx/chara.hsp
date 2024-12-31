@@ -302,19 +302,19 @@
 		}
 	}
 	if ( sorg(SKILL_NORMAL_LITERACY, CHARA_PLAYER) > 19 & trait(TRAIT_NORMAL_SPACT_SHIKI_ORIGAMI) != 0 ) {
-		if ( spact(SKILL_SPACT_SHIKIORIGAMI_SHURIKEN - STARTING_SKILL_SPACT) == 0 ) {
-			spact(SKILL_SPACT_SHIKIORIGAMI_SHURIKEN - STARTING_SKILL_SPACT) = 1
-			txtmore
-			txtef COLOR_YELLOW
-			txt lang("あなたは「" + skillname(SKILL_SPACT_SHIKIORIGAMI_SHURIKEN) + "」の能力を得た。", "You have learned new ability, " + skillname(SKILL_SPACT_SHIKIORIGAMI_SHURIKEN) + ".")
-		}
-	}
-	if ( sorg(SKILL_NORMAL_LITERACY, CHARA_PLAYER) > 59 & trait(TRAIT_NORMAL_SPACT_SHIKI_ORIGAMI) != 0 ) {
 		if ( spact(SKILL_SPACT_SHIKIORIGAMI_AIRPLANE - STARTING_SKILL_SPACT) == 0 ) {
 			spact(SKILL_SPACT_SHIKIORIGAMI_AIRPLANE - STARTING_SKILL_SPACT) = 1
 			txtmore
 			txtef COLOR_YELLOW
 			txt lang("あなたは「" + skillname(SKILL_SPACT_SHIKIORIGAMI_AIRPLANE) + "」の能力を得た。", "You have learned new ability, " + skillname(SKILL_SPACT_SHIKIORIGAMI_AIRPLANE) + ".")
+		}
+	}
+	if ( sorg(SKILL_NORMAL_LITERACY, CHARA_PLAYER) > 59 & trait(TRAIT_NORMAL_SPACT_SHIKI_ORIGAMI) != 0 ) {
+		if ( spact(SKILL_SPACT_SHIKIORIGAMI_CRANE - STARTING_SKILL_SPACT) == 0 ) {
+			spact(SKILL_SPACT_SHIKIORIGAMI_CRANE - STARTING_SKILL_SPACT) = 1
+			txtmore
+			txtef COLOR_YELLOW
+			txt lang("あなたは「" + skillname(SKILL_SPACT_SHIKIORIGAMI_CRANE) + "」の能力を得た。", "You have learned new ability, " + skillname(SKILL_SPACT_SHIKIORIGAMI_CRANE) + ".")
 		}
 	}
 	if ( sorg(SKILL_NORMAL_LITERACY, CHARA_PLAYER) > 29 ) {
@@ -2609,15 +2609,7 @@
 		cbitmod CHARA_BIT_EXCLUSIVE_SKILL_CHARGE, rc, 1
 	}
 	if ( cdata(CDATA_ID, rc) == CREATURE_ID_WEREWOLF & mdata(MDATA_TYPE) == MAP_TYPE_TOWN ) {
-		evname = lang("市民", "citizen")
-		evold = lang("人狼", "werewolf")
-		if ( strmid(cdatan(CDATAN_NAME, rc), 0, strlen(evold)) == evold ) {
-			cdatan(CDATAN_NAME, rc) = evname + strmid(cdatan(CDATAN_NAME, rc), strlen(evold), strlen(cdatan(CDATAN_NAME, rc)) - strlen(evold))
-		} else {
-			if ( strmid(cdatan(CDATAN_NAME, rc), strlen(cdatan(CDATAN_NAME, rc)) - strlen(evold), strlen(evold)) == evold ) {
-				cdatan(CDATAN_NAME, rc) = strmid(cdatan(CDATAN_NAME, rc), 0, strlen(cdatan(CDATAN_NAME, rc)) - strlen(evold)) + evname
-			}
-		}
+		cdatan(CDATAN_NAME, rc) = lang("市民の" + randomname(), randomname() + " the citizen")
 		gosub *supplyEquip
 		repeat 2
 			if ( inv_sum(rc) < 8 ) {
@@ -2661,30 +2653,14 @@
 		}
 	}
 	if ( cdata(CDATA_ID, rc) == CREATURE_ID_WEREWOLF_DETECTIVE & mdata(MDATA_TYPE) == MAP_TYPE_TOWN ) {
-		evname = lang("探偵", "detective")
-		evold = lang("人狼探偵", "werewolf detective")
-		if ( strmid(cdatan(CDATAN_NAME, rc), 0, strlen(evold)) == evold ) {
-			cdatan(CDATAN_NAME, rc) = evname + strmid(cdatan(CDATAN_NAME, rc), strlen(evold), strlen(cdatan(CDATAN_NAME, rc)) - strlen(evold))
-		} else {
-			if ( strmid(cdatan(CDATAN_NAME, rc), strlen(cdatan(CDATAN_NAME, rc)) - strlen(evold), strlen(evold)) == evold ) {
-				cdatan(CDATAN_NAME, rc) = strmid(cdatan(CDATAN_NAME, rc), 0, strlen(cdatan(CDATAN_NAME, rc)) - strlen(evold)) + evname
-			}
-		}
+		cdatan(CDATAN_NAME, rc) = lang("探偵の" + randomname(), randomname() + " the detective")
 		gosub *supplyEquip
 		cdata(CDATA_RELATION_ORG, rc) = 0
 		cdata(CDATA_RELATION, rc) = 0
 		cdata(CDATA_PIC, rc) = xy2pic(22, 23)
 	}
 	if ( cdata(CDATA_ID, rc) == CREATURE_ID_FOX_SPIRIT & mdata(MDATA_TYPE) == MAP_TYPE_TOWN ) {
-		evname = lang("市民", "citizen")
-		evold = lang("妖狐", "fox spirit")
-		if ( strmid(cdatan(CDATAN_NAME, rc), 0, strlen(evold)) == evold ) {
-			cdatan(CDATAN_NAME, rc) = evname + strmid(cdatan(CDATAN_NAME, rc), strlen(evold), strlen(cdatan(CDATAN_NAME, rc)) - strlen(evold))
-		} else {
-			if ( strmid(cdatan(CDATAN_NAME, rc), strlen(cdatan(CDATAN_NAME, rc)) - strlen(evold), strlen(evold)) == evold ) {
-				cdatan(CDATAN_NAME, rc) = strmid(cdatan(CDATAN_NAME, rc), 0, strlen(cdatan(CDATAN_NAME, rc)) - strlen(evold)) + evname
-			}
-		}
+		cdatan(CDATAN_NAME, rc) = lang("市民の" + randomname(), randomname() + " the citizen")
 		gosub *supplyEquip
 		repeat 3
 			if ( inv_sum(rc) < 8 ) {
@@ -2718,15 +2694,7 @@
 		}
 	}
 	if ( cdata(CDATA_ID, rc) == CREATURE_ID_SUNBARARIAN & mdata(MDATA_TYPE) == MAP_TYPE_TOWN ) {
-		evname = lang("市民", "citizen")
-		evold = lang("スンバラリア星人", "sunbararian")
-		if ( strmid(cdatan(CDATAN_NAME, rc), 0, strlen(evold)) == evold ) {
-			cdatan(CDATAN_NAME, rc) = evname + strmid(cdatan(CDATAN_NAME, rc), strlen(evold), strlen(cdatan(CDATAN_NAME, rc)) - strlen(evold))
-		} else {
-			if ( strmid(cdatan(CDATAN_NAME, rc), strlen(cdatan(CDATAN_NAME, rc)) - strlen(evold), strlen(evold)) == evold ) {
-				cdatan(CDATAN_NAME, rc) = strmid(cdatan(CDATAN_NAME, rc), 0, strlen(cdatan(CDATAN_NAME, rc)) - strlen(evold)) + evname
-			}
-		}
+		cdatan(CDATAN_NAME, rc) = lang("市民の" + randomname(), randomname() + " the citizen")
 		gosub *supplyEquip
 		repeat 2
 			if ( inv_sum(rc) < 8 ) {

@@ -2206,8 +2206,8 @@
 			return 0
 		}
 	}
-	locvar_addbuff_bpower = addbuff_arg3
 	locvar_addbuff_fixeddur = addbuff_arg4
+	locvar_addbuff_bpower = addbuff_arg3
 	if ( bdataref(0, addbuff_buffid) == BUFF_TYPE_HEX ) {
 		locvar_addbuff_f = 0
 		if ( cdata(CDATA_QUALITY, addbuff_charid) > FIX_QUALITY_GREAT | cdata(CDATA_ID, addbuff_charid) == CREATURE_ID_AILE_THE_ATTENDANT ) {
@@ -6573,24 +6573,18 @@
 			}
 		}
 		if ( dmghp_source >= DAMAGE_FROM_CHARA ) {
-			locvar_dmghp_f = 0
-			if ( cdata(CDATA_RELATION, dmghp_charid) <= (-3) ) {
-				if ( cdata(CDATA_RELATION_ORG, dmghp_source) > (-3) ) {
-					if ( cdata(CDATA_AI_AGGRO, dmghp_charid) == 0 | rnd(4) == 0 ) {
-						locvar_dmghp_f = 1
-					}
-				}
-			}
-			else {
-				if ( cdata(CDATA_RELATION_ORG, dmghp_source) <= (-3) ) {
-					if ( cdata(CDATA_AI_AGGRO, dmghp_charid) == 0 | rnd(4) == 0 ) {
-						locvar_dmghp_f = 1
-					}
-				}
-			}
 			if ( cdata(CDATA_TARGET, dmghp_charid) == 0 ) {
 				if ( cdata(CDATA_AI_AGGRO, dmghp_charid) == 0 ) {
-					cdata(CDATA_TARGET, dmghp_charid) = dmghp_source
+					if ( cdata(CDATA_RELATION, dmghp_charid) <= RELATION_ENEMY ) {
+                        if ( cdata(CDATA_RELATION_ORG, dmghp_source) > RELATION_ENEMY ) {
+                            cdata(CDATA_TARGET, dmghp_charid) = dmghp_source
+                        }
+                    }
+                    if ( cdata(CDATA_RELATION, dmghp_charid) > RELATION_ENEMY ) {
+                        if ( cdata(CDATA_RELATION_ORG, dmghp_source) <= RELATION_ENEMY ) {
+                            cdata(CDATA_TARGET, dmghp_charid) = dmghp_source
+                        }
+                    }
 				}
 			}
 			if ( dmghp_charid != CHARA_PLAYER ) {
