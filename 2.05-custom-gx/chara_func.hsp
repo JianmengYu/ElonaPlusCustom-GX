@@ -6573,28 +6573,45 @@
 			}
 		}
 		if ( dmghp_source >= DAMAGE_FROM_CHARA ) {
+			locvar_dmghp_f = FALSE
 			if ( cdata(CDATA_TARGET, dmghp_charid) == 0 ) {
 				if ( cdata(CDATA_AI_AGGRO, dmghp_charid) == 0 ) {
 					if ( cdata(CDATA_RELATION, dmghp_charid) <= RELATION_ENEMY ) {
                         if ( cdata(CDATA_RELATION_ORG, dmghp_source) > RELATION_ENEMY ) {
                             cdata(CDATA_TARGET, dmghp_charid) = dmghp_source
+							locvar_dmghp_f = TRUE
                         }
                     }
                     if ( cdata(CDATA_RELATION, dmghp_charid) > RELATION_ENEMY ) {
                         if ( cdata(CDATA_RELATION_ORG, dmghp_source) <= RELATION_ENEMY ) {
                             cdata(CDATA_TARGET, dmghp_charid) = dmghp_source
+							locvar_dmghp_f = TRUE
                         }
                     }
+					if ( dmghp_source != CHARA_PLAYER ) {
+						if ( cdata(CDATA_TARGET, dmghp_source) == dmghp_charid & rnd(3) == 0 ) {
+							cdata(CDATA_TARGET, dmghp_charid) = dmghp_source
+							locvar_dmghp_f = TRUE
+						}
+					}
 				}
 			}
-			if ( dmghp_charid != CHARA_PLAYER ) {
-				if ( cdata(CDATA_AI_AGGRO, dmghp_charid) == 0 ) {
-					cdata(CDATA_EMO_ICON, dmghp_charid) = 18 + 100 * 2
-					cdata(CDATA_AI_AGGRO, dmghp_charid) = 20
+			if ( cdata(CDATA_AI_AGGRO, dmghp_charid) > 0 & cdata(CDATA_TARGET, dmghp_charid) == dmghp_source ) {
+				locvar_dmghp_f = TRUE
+			}
+			if ( locvar_dmghp_f == TRUE ) {
+				if ( dmghp_charid != CHARA_PLAYER ) {
+					if ( cdata(CDATA_AI_AGGRO, dmghp_charid) == 0 ) {
+						cdata(CDATA_EMO_ICON, dmghp_charid) = 18 + 100 * 2
+						cdata(CDATA_AI_AGGRO, dmghp_charid) = 20
+					}
+					else {
+						cdata(CDATA_AI_AGGRO, dmghp_charid) += 2
+					}
 				}
-				else {
-					cdata(CDATA_AI_AGGRO, dmghp_charid) += 2
-				}
+				// DamagePopupAdd "Aggroed: " + cdatan(CDATAN_NAME, cdata(CDATA_TARGET, dmghp_charid)) + "/" + cdata(CDATA_AI_AGGRO, dmghp_charid), dmghp_charid, DMGPOPUP_MISS, 0
+			} else {
+				// DamagePopupAdd "Ignored: " + cdatan(CDATAN_NAME, cdata(CDATA_TARGET, dmghp_charid)) + "/" + cdata(CDATA_AI_AGGRO, dmghp_charid), dmghp_charid, DMGPOPUP_MISS, 0
 			}
 		}
 	}

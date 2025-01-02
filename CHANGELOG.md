@@ -5,6 +5,7 @@
 
 # Fixed
 - Phychic Wave not working properly
+- (2025/1/3) NPCs aggroed toward player when attacked by NPCs of same alignment/relation.
 
 # TCG
 - Changed starting hand calculation (max 7 with 1 domain and min 5 with 3+ domain.)
@@ -20,6 +21,7 @@
   - Pianist: increased atk, now draw 1 card after combat.
   - Tourist: effect now activate on summon/death
 - Nerfed Hard Gay because it's too strong when used with spaghetti monster.
+- (2025/1/1) CNPC discovery not working properly.
 
 # 2.25.1.0
 
