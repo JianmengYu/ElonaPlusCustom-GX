@@ -2514,6 +2514,8 @@
 		lifestakeend@tcg = cpdata@tcg(TCG_PLAYER_LIFE, TCG_CONTROLLER_PLAYER), cpdata@tcg(TCG_PLAYER_LIFE, TCG_CONTROLLER_OPPONENT)
 	}
 	listmax = 0
+	s = "Draw!"
+	file = "bg_re9"
 	if ( gameresult@tcg == -1 ) {
 		s = "Surrendered!"
 		file = "bg_re12"
@@ -2533,6 +2535,9 @@
 		s = "You Lose!"
 		file = "bg_re7"
 		chatList 1, lang("また今度ね", "Noooooooooooooo!")
+	}
+	if ( listmax == 0 ) {
+		chatList 1, lang("また今度ね", "Maybe next time.")
 	}
 	buff = "Unexpected outcome, report to developer."
 	if ( gameresult@tcg == -1 ) { buff = "You flipped the table and leave the game." }

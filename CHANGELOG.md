@@ -1,3 +1,8 @@
+# Upcoming
+
+# TCG
+- Fixed crash after winning lethal tcg with 0 hp.
+
 # 2.25.1.1
 
 # Added

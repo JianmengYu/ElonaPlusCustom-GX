@@ -1097,6 +1097,9 @@
 				TweakData(TWEAK_TCG_WIN_LETHAL, TWEAK_CATEGORY_TCG)++
 				txtef COLOR_YELLOW
 				txt "" + TweakData(TWEAK_TCG_WIN_LETHAL, TWEAK_CATEGORY_TCG) + " consecutive lethal game victory!"
+				if ( lifestakeend@tcg(0) <= 0 ) {
+					lifestakeend@tcg(0) = 1
+				} 
 				healthrate@tcg = limit(lifestakestart@tcg(0) * 10 / lifestakeend@tcg(0), 10, 300)
 				cdata(CDATA_HP, CHARA_PLAYER) = cdata(CDATA_HP, CHARA_PLAYER) * 10 / healthrate@tcg
 				cdata(CDATA_HP, tc) = (-1)
@@ -1119,6 +1122,9 @@
 					cell_refresh inv(INV_ITEM_X, ci), inv(INV_ITEM_Y, ci)
 				}
 			} else {
+				if ( lifestakeend@tcg(1) <= 0 ) {
+					lifestakeend@tcg(1) = 1
+				} 
 				healthrate@tcg = limit(lifestakestart@tcg(1) * 10 / lifestakeend@tcg(1), 10, 300)
 				cdata(CDATA_HP, tc) = cdata(CDATA_HP, tc) * 10 / healthrate@tcg
 				txtef COLOR_RED
