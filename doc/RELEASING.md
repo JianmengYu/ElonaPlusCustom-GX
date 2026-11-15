@@ -10,7 +10,7 @@ These are the steps taken when releasing a new version of Custom-GX.
 git tag -a 2.05.1.1 -m 2.05.1.1
 git push origin 2.05.1.1
 ```
-5. Build a new .exe with `hsed3.exe` as detailed in `README.md`. Use [Resource Hacker](https://www.angusj.com/resourcehacker/) to replace its icon with `2.05-custom-gx/icon.ico`.
+5. Build a new .exe with `hsed3.exe` as detailed in `README.md`. Use [Resource Hacker](https://www.angusj.com/resourcehacker/) or [Resource Cracker](https://www.pelock.com/products/resource-cracker) to replace its icon with `2.05-custom-gx/icon.ico`.
 6. Download the latest CGX release archive from [here](https://github.com/Ruin0x11/ElonaPlusCustom-GX/releases). Rename the archive with the new version number.
 7. Copy
 - `elonapluscgx.exe`, `README.md`, `CHANGELOG.md`,
